@@ -1,0 +1,137 @@
+<div class="row">
+  <div class="col-12">
+    <h2 class="text-center">Réservez votre créneau</h2>
+  </div>
+</div>
+
+<div class="row">
+  <form class="col-8 offset-2">
+    <div class="row d-flex flex-column">
+      <div class="input-field d-flex flex-row">
+        <div class="input-field col-6">
+          <input required type="date" class="validate" id="dateBooking" formControlName="dateBooking">
+          <label for="dateBooking">Date de prise en charge</label>
+          <div class="messageError">
+              SVP entrez une date
+          </div>
+        </div>
+        <div class="input-field col-6">
+          <input required type="time" class="validate" id="hoursBooking" formControlName="hoursBooking">
+          <label for="hoursBooking">Heure de prise en charge</label>
+          <div class="messageError">
+              SVP entrez une heure
+          </div>
+        </div>
+      </div>
+      <div class="input-field d-flex flex-row">
+        <div class="input-field col-4">
+          <input required type="text" class="validate" id="numberTakingCare" formControlName="numberTakingCare">
+          <label for="numberTakingCare">N°de voie</label>
+          <div class="messageError">
+              SVP entrez un numéro de voie
+          </div>
+        </div>
+        <div class="input-field col-4">
+          <input required type="text" class="validate" id="typeTakingCare" formControlName="typeTakingCare">
+          <label for="typeTakingCare">Type de voie</label>
+          <div class="messageError">
+              SVP entrez un type de voie
+          </div>
+        </div>
+        <div class="input-field col-4">
+          <input required type="text" class="validate" id="nameTakingCare" formControlName="nameTakingCare">
+          <label for="nameTakingCare">Nom de voie</label>
+          <div class="messageError">
+              SVP entrez un nom de voie
+          </div>
+        </div>
+      </div>
+      <div class="input-field d-flex flex-row">
+        <div class="input-field col-4">
+          <input type="text" class="validate" id="complementTakingCare" formControlName="complementTakingCare">
+          <label for="complementTakingCare">Complément d'adresse</label>
+        </div>
+        <div class="input-field col-4">
+          <input required type="text" class="validate" id="zipTakingCare" formControlName="zipTakingCare">
+          <label for="zipTakingCare">Code Postale</label>
+          <div class="messageError">
+              SVP entrez un code postale
+          </div>
+        </div>
+        <div class="input-field col-4">
+          <input required type="text" class="validate" id="cityTakingCare" formControlName="cityTakingCare">
+          <label for="cityTakingCare">Ville</label>
+          <div class="messageError">
+              SVP entrez une ville
+          </div>
+        </div>
+      </div>
+      <div class="input-field d-flex flex-row">
+        <div class="input-field col-6">
+          <input required type="date" class="validate" id="dateReturn" formControlName="dateReturn">
+          <label for="dateReturn">Date de restitution</label>
+          <div class="messageError">
+              SVP entrez une date
+          </div>
+        </div>
+        <div class="input-field col-6">
+          <input required type="time" class="validate" id="hoursReturn" formControlName="hoursReturn">
+          <label for="hoursReturn">Heure de restitution</label>
+          <div class="messageError">
+              SVP entrez une heure
+          </div>
+        </div>
+      </div>
+      <div class="input-field d-flex flex-row">
+        <div class="input-field col-12">
+          <input type="checkbox">
+          <span>Adresse de restitution différent de l'adresse de prise en charge</span>
+        </div>
+      </div>
+      <div class="input-field d-flex flex-row">
+        <div class="input-field col-4">
+          <input required type="text" class="validate" id="numberReturn" formControlName="numberReturn">
+          <label for="numberReturn">N°de voie</label>
+          <div class="messageError">
+              SVP entrez un numéro de voie
+          </div>
+        </div>
+        <div class="input-field col-4">
+          <input required type="text" class="validate" id="typeReturn" formControlName="typeReturn">
+          <label for="typeReturn">Type de voie</label>
+          <div class="messageError">
+              SVP entrez un type de voie
+          </div>
+        </div>
+        <div class="input-field col-4">
+          <input required type="text" class="validate" id="nameReturn" formControlName="nameReturn">
+          <label for="nameReturn">Nom de voie</label>
+          <div class="messageError">
+              SVP entrez un nom de voie
+          </div>
+        </div>
+      </div>
+      <div class="input-field d-flex flex-row">
+        <div class="input-field col-4">
+          <input type="text" class="validate" id="complementReturn" formControlName="complementReturn">
+          <label for="complementReturn">Complément d'adresse</label>
+        </div>
+        <div class="input-field col-4">
+          <input required type="text" class="validate" id="zipReturn" formControlName="zipReturn">
+          <label for="zipReturn">Code Postale</label>
+          <div class="messageError">
+              SVP entrez un code postale
+          </div>
+        </div>
+        <div class="input-field col-4">
+          <input required type="text" class="validate" id="cityReturn" formControlName="cityReturn">
+          <label for="cityReturn">Ville</label>
+          <div class="messageError">
+              SVP entrez une ville
+          </div>
+        </div>
+      </div>
+      <button class="btn-primary m-auto" id="btn" type="submit" routerLink="../auth">Valider ma réservation</button>
+    </div>
+  </form>
+</div>

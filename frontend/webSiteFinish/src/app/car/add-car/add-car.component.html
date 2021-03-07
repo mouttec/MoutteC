@@ -1,0 +1,55 @@
+<div class="row pt">
+  <div class="col-12">
+    <h2 class="text-center">Votre véhicule</h2>
+  </div>
+</div>
+
+<div class="row">
+  <form class="col-8 offset-2">
+    <div class="row d-flex flex-column">
+      <div class="input-field d-flex flex-row">
+        <div class="input-field col-12">
+          <input required type="text" class="validate" id="licensePlateCar" formControlName="licensePlateCar">
+          <label for="licensePlateCar">Plaque d'immatriculation</label>
+          <div class="messageError">
+              SVP entrez une plaque d'immatriculation
+          </div>
+        </div>
+      </div>
+      <button class="btn-primary m-auto" id="btn" type="submit">Valider ma plaque</button>
+      <div class="input-field d-flex flex-row">
+        <div class="input-field col-6">
+          <input required type="text" class="validate" id="brandCar" formControlName="brandCar">
+          <label for="brandCar">Marque</label>
+          <div class="messageError">
+              SVP entrez une marque
+          </div>
+        </div>
+        <div class="input-field col-6">
+          <input required type="text" class="validate" id="modelCar" formControlName="modelCar">
+          <label for="modelCar">Modèle</label>
+          <div class="messageError">
+              SVP entrez une modèle
+          </div>
+        </div>
+      </div>
+      <div class="input-field d-flex flex-row">
+        <div class="input-field col-6">
+          <input required type="date" class="validate" id="dateOfCirculationCar" formControlName="dateOfCirculationCar">
+          <label for="dateOfCirculationCar">Date de mise en circulation</label>
+          <div class="messageError">
+              SVP entrez une date
+          </div>
+        </div>
+        <div class="input-field col-6">
+          <input required type="text" class="validate" id="motorizationCar" formControlName="motorizationCar">
+          <label for="motorizationCar">Motorisation</label>
+          <div class="messageError">
+              SVP entrez une motorisation
+          </div>
+        </div>
+      </div>
+      <button class="btn-primary m-auto" id="btn" type="submit" routerLink="../order">Valider mon véhicule</button>
+    </div>
+  </form>
+</div>

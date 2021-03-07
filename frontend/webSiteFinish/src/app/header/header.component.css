@@ -1,0 +1,34 @@
+nav{
+  position: fixed;
+  background-color: rgba(255, 255, 255, 0.51);
+  padding: 0;
+  z-index: 1;
+}
+
+.nav-link, .nav-item.active .nav-link{
+  font-weight: bold;
+}
+
+.nav-link{
+  color: #333;
+}
+
+.nav-item.active .nav-link, .navbar-light .navbar-nav .nav-link:hover, .navbar-light .navbar-nav .nav-link:focus {
+  color: #FA6904;
+}
+
+li.active,
+.nav-link:hover,
+.nav-link:focus {
+    background: none!important;
+}
+
+li.active a,
+.nav-link:hover {
+    color: #FA6904!important;
+    font-weight: bold!important;
+}
+
+nav .img {
+    width: 100px!important;
+}

@@ -1,0 +1,28 @@
+<div class="col-2">
+
+</div>
+<div class="col-8 m-auto">
+  <form class="d-flex flex-column align-items-center mt-2">
+    <h2>Vous avez déjà un compte, connectez-vous</h2>
+    <div class="input-field d-flex flex-column w-100">
+      <div class="input-field">
+        <input required type="text" class="validate" id="mailCustomer" formControlName="mailCustomer">
+        <label for="mailCustomer">Adresse mail</label>
+        <div class="messageError">
+            SVP entrez une adresse mail
+        </div>
+      </div>
+      <div class="input-field">
+        <input required type="text" class="validate" id="passwordCustomer" formControlName="passwordCustomer">
+        <label for="passwordCustomer">Mot de passe</label>
+        <div class="messageError">
+            SVP entrez un mot de passe
+        </div>
+      </div>
+    </div>
+    <button class="btn-primary m-auto" id="btn" type="submit" routerLink="../car">Connexion</button>
+  </form>
+</div>
+<div class="col-2">
+
+</div>

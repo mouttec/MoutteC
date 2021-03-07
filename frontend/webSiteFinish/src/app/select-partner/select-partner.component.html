@@ -1,0 +1,23 @@
+<div class="container pt">
+  <div class="row mb-5">
+    <div class="text-center col-12">
+        <h2>Rechercher votre garage</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field d-flex flex-row col-12">
+      <div class="input-field col-6 offset-1">
+        <input type="text" class="validate" id="searchPartner" formControlName="searchPartner">
+        <label for="searchPartner">Code postal ou Ville</label>
+      </div>
+      <div class="col-4 m-auto text-center">
+        <button class="btn-primary m-auto" id="btn" type="submit">Rechercher</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  <app-list-partner></app-list-partner>
+</div>

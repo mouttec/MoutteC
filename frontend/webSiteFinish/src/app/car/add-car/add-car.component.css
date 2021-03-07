@@ -1,0 +1,75 @@
+h2{
+  color: #FA6904;
+}
+
+button {
+  background-color: #FA6904!important;
+  text-transform: uppercase!important;
+  border-radius: 50px!important;
+  border: #FA6904 1px solid!important;
+  padding: 10px 20px!important;
+  font-size: 20px!important;
+  font-weight: bold!important;
+  width: fit-content!important;
+  transition: 0.3s ease!important;
+  color: white!important;
+}
+
+button:hover {
+  background-color: #FA6904!important;
+  border: #FA6904 1px solid!important;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22)!important;
+  transform: translateY(-10px)!important;
+}
+
+button:active,
+button:focus,
+button:visited {
+  background-color: #FA6904!important;
+  border: #FA6904 1px solid!important;
+}
+
+
+.input-field>label.active{
+  color: #FA6904!important;
+}
+
+.messageError {
+  color: red;
+}
+
+.btn-primary.disabled,
+.btn-primary:disabled {
+  background-color: #b1b1b1!important;
+  border: #b1b1b1 1px solid!important;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0.25), 0 0 0 rgba(0, 0, 0, 0.22)!important;
+  transform: translateY(0px)!important;
+}
+
+input {
+  border-bottom: #b1b1b1;
+}
+
+input:focus,
+input.valid {
+  border-bottom: black 2px!important;
+  box-shadow: 0 2px 0 0 black!important;
+}
+
+input.invalid {
+  border-bottom: red 3px!important;
+  box-shadow: 0 3px 0 0 red!important;
+}
+
+select {
+  background-color: rgba(255, 255, 255, 0.9)!important;
+  width: 100%!important;
+  padding: 5px!important;
+  border: 1px solid #f2f2f2!important;
+  border-radius: 2px!important;
+  height: 3rem!important;
+}
+
+.pt{
+  padding-top: 100px;
+}

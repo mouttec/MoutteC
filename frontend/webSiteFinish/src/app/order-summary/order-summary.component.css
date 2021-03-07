@@ -1,0 +1,54 @@
+.top{
+  padding-top: 110px;
+}
+
+h2{
+  color: #FA6904;
+}
+
+button {
+  background-color: #FA6904;
+  text-transform: uppercase;
+  border-radius: 50px;
+  border: #FA6904 1px solid;
+  padding: 15px 30px;
+  font-size: 20px;
+  font-weight: bold;
+  width: fit-content;
+  transition: 0.3s ease;
+  color: white;
+}
+
+button:hover {
+  background-color: #FA6904;
+  border: #FA6904 1px solid;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+button:active,
+button:focus,
+button:visited {
+  background-color: #FA6904;
+  border: #FA6904 1px solid;
+}
+
+img {
+  width: 45px!important;
+}
+
+.succes {
+  background-color: white;
+}
+
+.failure {
+  background-color: #b1b1b161;
+}
+
+
+p {
+  font-size: 20px;
+}
+
+span {
+  color: #b1b1b1;
+}

@@ -1,0 +1,18 @@
+.bgHeader{
+  background-image: url("../../assets/images/header.png");
+  background-position: center;
+  background-size: cover;
+  padding-bottom: 110px;
+}
+
+.logoHeader {
+  width: 30%!important;
+  margin: auto;
+  margin-top: 75px;
+}
+
+.bgWhite{
+  background-color: #ffffff80;
+  border-radius: 25px;
+  height: 100%;
+}

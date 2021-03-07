@@ -1,0 +1,62 @@
+button {
+    background-color: #FA6904;
+    text-transform: uppercase;
+    border-radius: 50px;
+    border: #FA6904 1px solid;
+    padding: 10px 20px;
+    font-size: 20px;
+    font-weight: bold;
+    width: fit-content;
+    transition: 0.3s ease;
+    color: white;
+}
+
+button:hover {
+    background-color: #FA6904;
+    border: #FA6904 1px solid;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+button:active,
+button:focus,
+button:visited {
+    background-color: #FA6904;
+    border: #FA6904 1px solid;
+}
+
+img {
+    width: 95px!important;
+}
+
+.succes {
+    background-color: white;
+}
+
+.failure {
+    background-color: #b1b1b161;
+}
+
+.list-group-flush {
+    border-bottom: 2px solid #b1b1b1;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+}
+
+.info {
+    font-size: 20px;
+}
+
+.info span {
+    color: #b1b1b1;
+}
+
+.plus {
+    font-size: 15px;
+    color: #FA6904;
+}
+
+.plus:hover {
+    font-size: 18px;
+    font-weight: bold;
+}

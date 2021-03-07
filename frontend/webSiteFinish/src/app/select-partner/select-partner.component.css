@@ -1,0 +1,60 @@
+button {
+  background-color: #FA6904;
+  text-transform: uppercase;
+  border-radius: 50px;
+  border: #FA6904 1px solid;
+  padding: 10px 20px;
+  font-size: 20px;
+  font-weight: bold;
+  width: fit-content;
+  transition: 0.3s ease;
+  color: white;
+}
+
+button:hover {
+  background-color: #FA6904;
+  border: #FA6904 1px solid;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+button:active,
+button:focus,
+button:visited {
+  background-color: #FA6904;
+  border: #FA6904 1px solid;
+}
+
+h2{
+  color: #FA6904;
+}
+
+.pt{
+  padding-top: 100px;
+}
+
+input {
+  border-bottom: #b1b1b1;
+}
+
+input:focus,
+input.valid {
+  border-bottom: black 2px!important;
+  box-shadow: 0 2px 0 0 black!important;
+}
+
+input.invalid {
+  border-bottom: red 3px!important;
+  box-shadow: 0 3px 0 0 red!important;
+}
+
+select {
+  background-color: rgba(255, 255, 255, 0.9)!important;
+  width: 100%!important;
+  padding: 5px!important;
+  border: 1px solid #f2f2f2!important;
+  border-radius: 2px!important;
+  height: 3rem!important;
+}
+.input-field>label.active{
+  color: #FA6904!important;
+}

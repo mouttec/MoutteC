@@ -1,0 +1,10 @@
+<div class="row mt-5 mb-5">
+  <div class="text-center col-9">
+      <h2>Liste des factures mensuelles</h2>
+  </div>
+</div>
+
+<div class="container">
+  <app-monthly-payment *ngFor="let monthlyPayment of monthlyPayments; let i = index" [IndexOfMonthlyPayment]="i" [idMonthlyPayment]="monthlyPayment.idMonthlyPayment" [monthMonthlyPayment]="monthlyPayment.monthMonthlyPayment" [urlMonthlyPayment]="monthlyPayment.urlMonthlyPayment" [dateMonthlyPayment]="monthlyPayment.dateMonthlyPayment">
+  </app-monthly-payment>
+</div>
