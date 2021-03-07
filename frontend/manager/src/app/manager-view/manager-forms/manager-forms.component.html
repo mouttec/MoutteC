@@ -1,0 +1,69 @@
+<div class="row mt-5 mb-5">
+    <div class="col-12 text-center">
+        <h2>Ajouter un voiturier</h2>
+    </div>
+</div>
+
+<div class="row">
+    <form class="col-8 offset-2" [formGroup]="managerForm" (ngSubmit)="onSubmitFormManager()">
+        <div class="row d-flex flex-column">
+            <div class="input-field d-flex flex-row">
+                <div class="input-field col-6">
+                    <input required type="text" class="validate" id="firstNameManager" formControlName="firstNameManager">
+                    <label for="firstNameManager">Nom</label>
+                    <div class="messageError">
+                        SVP entrez un nom
+                    </div>
+                </div>
+                <div class="input-field col-6">
+                    <input required type="text" class="validate" id="lastNameManager" formControlName="lastNameManager">
+                    <label for="lastNameManager">Prénom</label>
+                    <div class="messageError">
+                        SVP entrez un prénom
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-field d-flex flex-row">
+                <div class="input-field col-6">
+                    <input required type="text" class="validate" id="usernameManager" formControlName="usernameManager">
+                    <label for="usernameManager">Identifiant</label>
+                    <div class="messageError">
+                        SVP entrez un identifiant
+                    </div>
+                </div>
+                <div class="input-field col-6">
+                    <input required type="text" class="validate" id="mailManager" formControlName="mailManager">
+                    <label for="mailManager">E-mail</label>
+                    <div class="messageError">
+                        SVP entrez un e-mail
+                    </div>
+                </div>
+            </div>
+            <div class="input-field d-flex flex-row">
+                <div class="input-field col-6">
+                    <input required type="text" class="validate" id="phoneManager" formControlName="phoneManager">
+                    <label for="phoneManager">Téléphone</label>
+                    <div class="messageError">
+                        SVP entrez un téléphone
+                    </div>
+                </div>
+                <div class="input-field col-6">
+                    <input required type="text" class="validate" id="passwordManager" formControlName="passwordManager">
+                    <label for="passwordManager">Mot de passe</label>
+                    <div class="messageError">
+                        SVP entrez un mot de passe
+                    </div>
+                </div>
+            </div>
+            <div class="input-field col-12">
+                <input required type="text" class="validate" id="statusManager" formControlName="statusManager">
+                <label for="statusManager">Activer ou Désactiver</label>
+                <div class="messageError">
+                    SVP entrez un status
+                </div>
+            </div>
+            <button class="btn-primary m-auto" id="btn" type="submit" [disabled]="managerForm.invalid">Ajouter un voiturier</button>
+        </div>
+    </form>
+</div>

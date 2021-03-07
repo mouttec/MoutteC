@@ -1,0 +1,21 @@
+<div class="row list-group list-group-flush d-flex flex-row">
+  <div class="col-1 m-auto">
+      <img src="../../assets/images/profile.png">
+  </div>
+  <div class="col-7">
+      <div class="m-auto">
+          <p class="m-auto p-2 info"><span>Nom du client : </span>{{ firstNameContract }}</p>
+      </div>
+      <div class="m-auto">
+          <p class="m-auto p-2 info"><span>Prénom du client : </span>{{ lastNameContract }}</p>
+      </div>
+  </div>
+  <div class="col-4 d-flex flex-column">
+      <div class="m-auto">
+          <a [routerLink]="[idContract]" class="mr-3 plus">Détails</a>
+      </div>
+      <div class="m-auto">
+          <button style="font-size: 12px;">Supprimer</button>
+      </div>
+  </div>
+</div>
