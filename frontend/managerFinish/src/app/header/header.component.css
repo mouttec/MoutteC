@@ -1,0 +1,15 @@
+li.active,
+.nav-link:hover,
+.nav-link:focus {
+    background: none!important;
+}
+
+li.active a,
+.nav-link:hover {
+    color: #FA6904!important;
+    font-weight: bold!important;
+}
+
+nav img {
+    width: 80px!important;
+}
