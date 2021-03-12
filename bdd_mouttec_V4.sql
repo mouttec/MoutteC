@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
--- Généré le :  jeu. 11 mars 2021 à 19:26
+-- Généré le :  ven. 12 mars 2021 à 13:53
 -- Version du serveur :  5.7.26
 -- Version de PHP :  7.4.2
 
@@ -38,8 +38,7 @@ CREATE TABLE `bookings` (
   `hoursReturn` time NOT NULL,
   `idCar` int(11) NOT NULL,
   `idPickupAddress` int(11) NOT NULL,
-  `idReturnAddress` int(11) NOT NULL,
-  `typeBooking` varchar(50) NOT NULL
+  `idReturnAddress` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -69,8 +68,7 @@ CREATE TABLE `carsProcessing` (
   `idProcess` int(11) NOT NULL,
   `idCar` int(11) NOT NULL,
   `idPartner` int(11) NOT NULL,
-  `carStatus` varchar(255) NOT NULL,
-  `carLent` tinyint(1) NOT NULL
+  `carStatus` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -133,6 +131,7 @@ CREATE TABLE `dailyPayments` (
   `idPaymentOfDay` int(11) NOT NULL,
   `idCustomer` int(11) NOT NULL,
   `statusPaymentOfDay` varchar(50) NOT NULL,
+  `priceDailyPayment` int(11) NOT NULL,
   `idPartner` int(11) NOT NULL,
   `datePaymentOfDay` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
