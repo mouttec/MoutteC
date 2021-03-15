@@ -1,16 +1,22 @@
-### Hi there 👋
+# Google Maps JavaScript API Sample Application
 
-<!--
-**mouttec/MoutteC** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+This sample is generated from @googlemaps/js-samples located at
+https://github.com/googlemaps/js-samples.
 
-Here are some ideas to get you started:
+## Setup
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+```sh
+npm i
+npm run dev  # development
+npm run build  # production
+```
+
+The application is currently using the `.env` file to embed the API key in the
+HTML document. This is a temporary key and is not valid for production usage. It
+can be replaced by following these instructions to
+[get an api key](https://developers.google.com/maps/documentation/javascript/get-api-key).
+
+## Feedback
+
+For feedback related to this sample, please open a new issue on
+[GitHub](https://github.com/googlemaps/js-samples/issues).
