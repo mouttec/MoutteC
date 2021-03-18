@@ -9,7 +9,7 @@ class Customer {
     public $lastNameCustomer;
     public $phoneCustomer;
     public $mailCustomer;
-    public $passwordCustomer;
+    public $mixedPassword;
     public $idPartner;
     public $dateCustomer;
 
@@ -19,7 +19,7 @@ class Customer {
     }
 
     // Récupérer la liste des clients
-    public function readCustomer() {
+    public function listCustomers() {
         // création de la requête
         $query = "
             SELECT *
@@ -36,23 +36,22 @@ class Customer {
     }
 
     // Récupérer un client
-    public function readSingleCustomer() {
+    public function listCustomer($mailCustomer) {
         // création de la requête
         $query = "
         SELECT *
         FROM "
         . $this->table . " 
-        WHERE idCustomer = :idCustomer
+        WHERE mailCustomer = :mailCustomer
         LIMIT 0,1";
         // préparation de la requête
         $stmt = $this->conn->prepare($query);
-        // tableau associatif qui lie :id à l'id reçue en paramètre
-        $params = ["idCustomer" => $this->idCustomer];
+        // tableau associatif qui lie :mailCustomer à l'email reçu en paramètre
+        $params = ["mailCustomer" => $this->mailCustomer];
         // excécution de la requête
         if($stmt->execute($params)) {
             // on récupère le résultat et on le stocke dans une variable (type: array)
             $row = $stmt->fetch();
-    
             return $row;
         }
         return false;
@@ -69,7 +68,7 @@ class Customer {
             lastNameCustomer = :lastNameCustomer,
             phoneCustomer = :phoneCustomer, 
             mailCustomer = :mailCustomer,
-            passwordCustomer = :passwordCustomer
+            mixedPassword = :mixedPassword
         ";
         // on prépare la requête
         $stmt = $this->conn->prepare($query);
@@ -80,14 +79,14 @@ class Customer {
         $this->lastNameCustomer = htmlspecialchars(strip_tags($this->lastNameCustomer));
         $this->phoneCustomer = htmlspecialchars(strip_tags($this->phoneCustomer));
         $this->mailCustomer = htmlspecialchars(strip_tags($this->mailCustomer));
-        $this->passwordCustomer = htmlspecialchars(strip_tags($this->passwordCustomer));
+        $this->mixedPassword = password_hash(htmlspecialchars(strip_tags($this->passwordCustomer)), PASSWORD_DEFAULT);
         // tableau associatif pour lier les paramètres reçus à la requête
         $params = [
             "firstNameCustomer" => $this->firstNameCustomer,
             "lastNameCustomer" => $this->lastNameCustomer,
             "phoneCustomer" => $this->phoneCustomer,
             "mailCustomer" => $this->mailCustomer,
-            "passwordCustomer" => $this->passwordCustomer
+            "mixedPassword" => $this->mixedPassword,
         ];
         // on exécute la requête et on vérifie si elle s'est bien déroulée 
         if($stmt->execute($params)) {
@@ -109,7 +108,7 @@ class Customer {
         lastNameCustomer = :lastNameCustomer,
         phoneCustomer = :phoneCustomer,    
         mailCustomer = :mailCustomer,
-        passwordCustomer = :passwordCustomer,
+        mixedPassword = :passwordCustomer,
         idPartner = :idPartner
         WHERE
         idCustomer = :idCustomer       
@@ -123,17 +122,17 @@ class Customer {
     $this->lastNameCustomer = htmlspecialchars(strip_tags($this->lastNameCustomer));
     $this->phoneCustomer = htmlspecialchars(strip_tags($this->phoneCustomer));
     $this->mailCustomer = htmlspecialchars(strip_tags($this->mailCustomer));
-    $this->passwordCustomer = htmlspecialchars(strip_tags($this->passwordCustomer));
+    $this->mixedPassword = password_hash(htmlspecialchars(strip_tags($this->passwordCustomer)), PASSWORD_DEFAULT);;
     $this->idPartner = htmlspecialchars(strip_tags($this->idPartner));
     $this->idCustomer = htmlspecialchars(strip_tags($idCustomer));
-var_dump($this->firstNameCustomer);
+    //var_dump($this->firstNameCustomer);
     // tableau associatif pour lier les paramètres reçus à la requête
     $params = [
         "firstNameCustomer" => $this->firstNameCustomer,
         "lastNameCustomer" => $this->lastNameCustomer,
         "phoneCustomer" => $this->phoneCustomer,
         "mailCustomer" => $this->mailCustomer,
-        "passwordCustomer" => $this->passwordCustomer,
+        "mixedPassword" => $this->mixedPassword,
         "idPartner" => $this->idPartner,
         "idCustomer" => $this->idCustomer
     ];
