@@ -10,7 +10,7 @@ foreach ($decodedData as $key => $value) {
 
 //On créé un objet teammate pour chercher le teammate qui correspond à l'email donné
 $teammateRequest = new Teammate;
-$teammateExists = $teammateRequest->searchTeammate($usernameTeammate);
+$teammateExists = $teammateRequest->searchTeammate($teammate['usernameTeammate']);
 //Vérification du mot de passe
 (!empty($teammateExists) && password_verify($teammate['password'], $teammateExists['mixedPassword'])) : echo json_encode($teammateExists) ? http_response_code(404);
 

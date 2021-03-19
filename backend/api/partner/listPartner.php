@@ -10,7 +10,6 @@ header("Access-Control-Allow-Methods: GET");
 include_once "../../config/Database.php";
 include_once "../../models/Partner.php";
 
-//!\\ Est-ce que l'on récupère une $data ?
 $decodedData = json_decode(file_get_contents("php://input"));
 $partner = array();
 foreach ($decodedData as $key => $value) {
