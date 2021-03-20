@@ -42,30 +42,57 @@ class Partner
         $query = "
             INSERT INTO "
             . $this->table .
-            " SET
-            usernamePartner = :usernamePartner,
-            mixedPassword = :mixedPassword,
-            namePartner = :namePartner,
-            numberAddressPartner = :numberAddressPartner,
-            typeAddressPartner = :typeAddressPartner,
-            nameAddressPartner = :nameAddressPartner,
-            complementAddressPartner = :complementAddressPartner,
-            zipAddressPartner = :zipAddressPartner,
-            cityAddressPartner = :cityAddressPartner,
-            phonePartner = :phonePartner,
-            statusPartner = :statusPartner,
-            typeGarage = :typeGarage,
-            typeTechnicalControl = :typeTechnicalControl,
-            mailPartner = :mailPartner,        
-            nameBilling = :nameBilling,
-            siretPartner = :siretPartner,
-            numberAddrerssBilling = :numberAddressBilling,
-            typeAddressBilling = :typeAddressBilling,
-            nameAddressBilling = :nameAddressBilling,
-            complementAddressBilling = :complementAddressBilling,
-            zipAddressBilling = :zipAddressBilling,
-            cityAddressBilling = :cityAddressBilling
-        ";
+            " (usernamePartner, 
+            mixedPassword, 
+            namePartner,
+            numberAddressPartner,
+            typeAddressPartner,
+            nameAddressPartner,
+            complementAddressPartner,
+            zipAddressPartner,
+            cityAddressPartner,
+            phonePartner,
+            statusPartner,
+            typeGarage,
+            typeTechnicalControl,
+            mailPartner,        
+            nameBilling,
+            siretPartner,
+            numberAddrerssBilling,
+            typeAddressBilling,
+            nameAddressBilling,
+            complementAddressBilling,
+            zipAddressBilling,
+            cityAddressBilling) 
+            VALUES ("$params");
+            ";
+        // $query = "
+        //     INSERT INTO "
+        //     . $this->table .
+        //     " SET 
+        //     usernamePartner = :usernamePartner,
+        //     mixedPassword = :mixedPassword,
+        //     namePartner = :namePartner,
+        //     numberAddressPartner = :numberAddressPartner,
+        //     typeAddressPartner = :typeAddressPartner,
+        //     nameAddressPartner = :nameAddressPartner,
+        //     complementAddressPartner = :complementAddressPartner,
+        //     zipAddressPartner = :zipAddressPartner,
+        //     cityAddressPartner = :cityAddressPartner,
+        //     phonePartner = :phonePartner,
+        //     statusPartner = :statusPartner,
+        //     typeGarage = :typeGarage,
+        //     typeTechnicalControl = :typeTechnicalControl,
+        //     mailPartner = :mailPartner,        
+        //     nameBilling = :nameBilling,
+        //     siretPartner = :siretPartner,
+        //     numberAddrerssBilling = :numberAddressBilling,
+        //     typeAddressBilling = :typeAddressBilling,
+        //     nameAddressBilling = :nameAddressBilling,
+        //     complementAddressBilling = :complementAddressBilling,
+        //     zipAddressBilling = :zipAddressBilling,
+        //     cityAddressBilling = :cityAddressBilling
+        // ";
         // on prépare la requête
         $stmt = $this->conn->prepare($query);
         $mixedPassword = password_hash($this->passwordPartner, PASSWORD_DEFAULT);
