@@ -64,7 +64,7 @@ class Partner
             complementAddressBilling,
             zipAddressBilling,
             cityAddressBilling) 
-            VALUES ("$params");
+            VALUES (". $params .");
             ";
         // $query = "
         //     INSERT INTO "
