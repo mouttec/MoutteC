@@ -12,7 +12,7 @@ header("Access-Control-Allow-Headers: Access-Control-Allow-Headers, Access-Contr
 
 // On inclus les objets (ou classes) nécessaires
 include_once "../../config/Database.php";
-include_once "../../models/Partner.php";
+include_once "../../models/PartnerV0.php";
 
 // Si données en json
 $decodedData = json_decode(file_get_contents("php://input"));
