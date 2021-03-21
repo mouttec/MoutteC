@@ -36,7 +36,7 @@ class Partner
         $this->conn = $db;
     }
 
-    public function createPartner() 
+    public function createPartner($partnerData) 
     {
 
 //            mixedPassword = :mixedPassword,
@@ -48,7 +48,7 @@ class Partner
             . $this->table .
             " SET 
             usernamePartner = 'usernameduPartner',
-            namePartner = '". $this->namePartner ."',
+            namePartner = 'nameDuPartner',
             numberAddressPartner = :numberAddressPartner,
             typeAddressPartner = :typeAddressPartner,
             nameAddressPartner = :nameAddressPartner,
