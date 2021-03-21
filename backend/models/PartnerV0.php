@@ -71,7 +71,7 @@ class Partner
         $mixedPassword = password_hash($this->passwordPartner, PASSWORD_DEFAULT);
         // tableau associatif pour lier les paramètres reçus à la requête
         $params = [
-            "usernamePartner" => $this->usernamePartner,
+            // "usernamePartner" => $this->usernamePartner,
             "mixedPassword" => $mixedPassword,
             "namePartner" => $this->namePartner,
             "numberAddressPartner" => $this->numberAddressPartner,
