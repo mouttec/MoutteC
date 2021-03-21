@@ -15,7 +15,8 @@ class Partner {
     public $cityAddressPartner;
     public $phonePartner;
     public $statusPartner;
-    public $typePartner;
+    public $typeGarage;
+    public $typeTechnicalControl;
     public $mailPartner;
     public $nameBilling;
     public $siretPartner;
@@ -85,7 +86,8 @@ class Partner {
             cityAddressPartner = :cityAddressPartner,
             phonePartner = :phonePartner,
             statusPartner = :statusPartner,
-            typePartner = :typePartner,
+            typeGarage = :typeGarage,
+            typeTechnicalControl = :typeTechnicalControl,
             mailPartner = :mailPartner,        
             nameBilling = :nameBilling,
             siretPartner = :siretPartner,
@@ -133,7 +135,8 @@ class Partner {
             "cityAddressPartner" => $this->cityAddressPartner,
             "phonePartner" => $this->phonePartner,
             "statusPartner" => $this->statusPartner,
-            "typePartner" => $this->typePartner,
+            "typeGarage" => $this->typeGarage,
+            "typeTechnicalControl" => $this->typeTechnicalControl, 
             "mailPartner" => $this->mailPartner,
             "nameBilling" => $this->nameBilling,
             "siretPartner" => $this->siretPartner,
