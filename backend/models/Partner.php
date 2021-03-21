@@ -42,57 +42,30 @@ class Partner
         $query = "
             INSERT INTO "
             . $this->table .
-            " (usernamePartner, 
-            mixedPassword, 
-            namePartner,
-            numberAddressPartner,
-            typeAddressPartner,
-            nameAddressPartner,
-            complementAddressPartner,
-            zipAddressPartner,
-            cityAddressPartner,
-            phonePartner,
-            statusPartner,
-            typeGarage,
-            typeTechnicalControl,
-            mailPartner,        
-            nameBilling,
-            siretPartner,
-            numberAddrerssBilling,
-            typeAddressBilling,
-            nameAddressBilling,
-            complementAddressBilling,
-            zipAddressBilling,
-            cityAddressBilling) 
-            VALUES (". $params .");
-            ";
-        // $query = "
-        //     INSERT INTO "
-        //     . $this->table .
-        //     " SET 
-        //     usernamePartner = :usernamePartner,
-        //     mixedPassword = :mixedPassword,
-        //     namePartner = :namePartner,
-        //     numberAddressPartner = :numberAddressPartner,
-        //     typeAddressPartner = :typeAddressPartner,
-        //     nameAddressPartner = :nameAddressPartner,
-        //     complementAddressPartner = :complementAddressPartner,
-        //     zipAddressPartner = :zipAddressPartner,
-        //     cityAddressPartner = :cityAddressPartner,
-        //     phonePartner = :phonePartner,
-        //     statusPartner = :statusPartner,
-        //     typeGarage = :typeGarage,
-        //     typeTechnicalControl = :typeTechnicalControl,
-        //     mailPartner = :mailPartner,        
-        //     nameBilling = :nameBilling,
-        //     siretPartner = :siretPartner,
-        //     numberAddrerssBilling = :numberAddressBilling,
-        //     typeAddressBilling = :typeAddressBilling,
-        //     nameAddressBilling = :nameAddressBilling,
-        //     complementAddressBilling = :complementAddressBilling,
-        //     zipAddressBilling = :zipAddressBilling,
-        //     cityAddressBilling = :cityAddressBilling
-        // ";
+            " SET 
+            usernamePartner = usernameduPartner,
+            mixedPassword = :mixedPassword,
+            namePartner = ". $this->namePartner .",
+            numberAddressPartner = :numberAddressPartner,
+            typeAddressPartner = :typeAddressPartner,
+            nameAddressPartner = :nameAddressPartner,
+            complementAddressPartner = :complementAddressPartner,
+            zipAddressPartner = :zipAddressPartner,
+            cityAddressPartner = :cityAddressPartner,
+            phonePartner = :phonePartner,
+            statusPartner = :statusPartner,
+            typeGarage = :typeGarage,
+            typeTechnicalControl = :typeTechnicalControl,
+            mailPartner = :mailPartner,        
+            nameBilling = :nameBilling,
+            siretPartner = :siretPartner,
+            numberAddrerssBilling = :numberAddressBilling,
+            typeAddressBilling = :typeAddressBilling,
+            nameAddressBilling = :nameAddressBilling,
+            complementAddressBilling = :complementAddressBilling,
+            zipAddressBilling = :zipAddressBilling,
+            cityAddressBilling = :cityAddressBilling
+        ";
         // on prépare la requête
         $stmt = $this->conn->prepare($query);
         $mixedPassword = password_hash($this->passwordPartner, PASSWORD_DEFAULT);
@@ -122,7 +95,12 @@ class Partner
             "cityAddressBilling" => $this->cityAddressBilling,
         ];
         // on exécute la requête et on vérifie si elle s'est bien déroulée 
-        $stmt->execute($params) : return true ? return false;
+        $result = $stmt->execute($params);
+        if ($result) {
+            return true; 
+        else {
+            return false;
+        }
     }
 
     public function listPartners() 

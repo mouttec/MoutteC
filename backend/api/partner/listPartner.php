@@ -30,7 +30,11 @@ switch ($partner['action']) {
         break;
 }
 
-(isset($result) && !empty($result)) : echo json_encode($result) ? http_response_code(404);
+if (isset($result) && !empty($result)) {
+ 	echo json_encode($result)
+} else { 
+	http_response_code(404); 
+}
 
 
 

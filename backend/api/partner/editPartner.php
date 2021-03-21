@@ -25,17 +25,24 @@ foreach ($decodedData as $key => $value) {
 $db = new Database();
 $conn = $db->connect();
 $partnerRequest = new Partner($conn);
-
 $partnerExists = $partnerRequest->searchPartner($partner['usernamePartner']);
 
 //On regarde quelle action de Read est demandée
 switch ($partner['action']) {
     case 'editPartner':
-        !empty($partnerExists) : $result = $partnerRequest->updatePartner($partner) ? $result = $partnerRequest->createPartner($partner);
+        if (!empty($partnerExists)) {
+            $result = $partnerRequest->updatePartner($partner)
+        } else { 
+            $result = $partnerRequest->createPartner($partner);
+        }
         break;
     case 'changePassword':
     //On vérifie que le Teammate existe et on demande l'ancien mot de passe, voir eventuellement si une session super admin est ouverte à modifier sans l'ancien mdp
-        (!empty($partnerExists) && (password_verify($oldPassword, $partner['mixedPassword']) || $_SESSION('superAdmin' == 1)) : $partnerRequest->passwordUpdate($partner);
+        if (!empty($partnerExists) 
+            && (password_verify($oldPassword, $partner['mixedPassword']) 
+                || $_SESSION('superAdmin' == 1))) {
+            $partnerRequest->passwordUpdate($partner); 
+        }
         break;
     case 'deletePartner':
         $result = $partnerRequest->deletePartner($partner['idPartner']);
@@ -44,7 +51,12 @@ switch ($partner['action']) {
     	$result = false;
         break;
 }
-$result : echo json_encode([ "message" => "Le partenaire a été édité !" ]) ? echo json_encode([ "message" => "Le partenaire n'a pas pu être édité..." ]);
+
+if ($result) {
+    echo json_encode([ "message" => "Le partenaire a été édité !" ]);
+} else {
+    echo json_encode([ "message" => "Le partenaire n'a pas pu être édité..." ]);
+}
 
 //!empty($partnerExist) : $result = $partnerRequest->updatePartner($partner) ? $result = $partnerRequest->createPartner($partner);
 
