@@ -19,7 +19,7 @@ $decodedData = json_decode(file_get_contents("php://input"));
 
 $partner = array();
 foreach ($decodedData as $key => $value) {
-    array_push($partner[$key] = htmlspecialchars(strip_tags($value)));
+    array_push($partner[$key] = $value);
 }
 
 $db = new Database();
