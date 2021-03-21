@@ -38,10 +38,6 @@ class Partner
 
     public function createPartner($partnerData) 
     {
-
-//            mixedPassword = :mixedPassword,
-
-
         // On crée la requête
         $query = "
             INSERT INTO "
@@ -49,6 +45,7 @@ class Partner
             " SET 
             usernamePartner = 'usernameduPartner',
             namePartner = 'nameDuPartner',
+            mixedPassword = :mixedPassword,
             numberAddressPartner = :numberAddressPartner,
             typeAddressPartner = :typeAddressPartner,
             nameAddressPartner = :nameAddressPartner,
@@ -75,7 +72,7 @@ class Partner
         // tableau associatif pour lier les paramètres reçus à la requête
         $params = [
             "usernamePartner" => $this->usernamePartner,
-            // "mixedPassword" => $mixedPassword,
+            "mixedPassword" => $mixedPassword,
             "namePartner" => $this->namePartner,
             "numberAddressPartner" => $this->numberAddressPartner,
             "typeAddressPartner" => $this->typeAddressPartner,
