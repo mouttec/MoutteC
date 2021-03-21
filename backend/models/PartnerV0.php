@@ -111,7 +111,7 @@ class Partner
             ORDER BY
             idPartner";
         $stmt = $this->conn->prepare($query);
-        $stmt->execute() : return $stmt->fetchAll() ? return false;
+        // $stmt->execute() : return $stmt->fetchAll() ? return false;
     }
 
     public function searchPartner($usernamePartner) {
@@ -123,7 +123,7 @@ class Partner
         LIMIT 0,1";
         $stmt = $this->conn->prepare($query);
         $params = ["usernamePartner" => $usernamePartner];
-        $stmt->execute($params) : return $stmt->fetch() ? return false;
+        // $stmt->execute($params) : return $stmt->fetch() ? return false;
     }
 
     public function updatePartner() 
@@ -180,7 +180,7 @@ class Partner
             "cityAddressBilling" => $this->cityAddressBilling,
             "idPartner" => $this->idPartner
         ];
-        $stmt->execute($params) : return true ? return false;
+        // $stmt->execute($params) : return true ? return false;
     }
 
     public function passwordUpdate() 
@@ -198,7 +198,7 @@ class Partner
             "usernamePartner" => $this->usernamePartner,
             "mixedPassword" => password_hash($this->newPassword, PASSWORD_DEFAULT),
         ];
-        $stmt->execute($params) : return true ? return false;
+        // $stmt->execute($params) : return true ? return false;
     }
 
 
@@ -211,7 +211,7 @@ class Partner
         ";
         $stmt = $this->conn->prepare($query);
         $params = ["usernamePartner" => $this->usernamePartner];
-        $stmt->execute($params) : return true ? return false;
+        // $stmt->execute($params) : return true ? return false;
         
     }
     
