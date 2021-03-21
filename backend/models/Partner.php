@@ -68,31 +68,31 @@ class Partner
         ";
         // on prépare la requête
         $stmt = $partnerData->conn->prepare($query);
-        $mixedPassword = password_hash($partnerData->passwordPartner, PASSWORD_DEFAULT);
+        $mixedPassword = password_hash($partnerData['passwordPartner'], PASSWORD_DEFAULT);
         // tableau associatif pour lier les paramètres reçus à la requête
         $params = [
-            "usernamePartner" => $partnerData->usernamePartner,
+            "usernamePartner" => $partnerData['usernamePartner'],
             "mixedPassword" => $mixedPassword,
-            "namePartner" => $partnerData->namePartner,
-            "numberAddressPartner" => $partnerData->numberAddressPartner,
-            "typeAddressPartner" => $partnerData->typeAddressPartner,
-            "nameAddressPartner" => $partnerData->nameAddressPartner,
-            "complementAddressPartner" => $partnerData->complementAddressPartner,
-            "zipAddressPartner" => $partnerData->zipAddressPartner,
-            "cityAddressPartner" => $partnerData->cityAddressPartner,
-            "phonePartner" => $partnerData->phonePartner,
-            "statusPartner" => $partnerData->statusPartner,
-            "typeGarage" => $partnerData->typeGarage,
-            "typeTechnicalControl" => $partnerData->typeTechnicalControl, 
-            "mailPartner" => $partnerData->mailPartner,
-            "nameBilling" => $partnerData->nameBilling,
-            "siretPartner" => $partnerData->siretPartner,
-            "numberAddressBilling" => $partnerData->numberAddressBilling,
-            "typeAddressBilling" => $partnerData->typeAddressBilling,
-            "nameAddressBilling" => $partnerData->nameAddressBilling,
-            "complementAddressBilling" => $partnerData->complementAddressBilling,
-            "zipAddressBilling" => $partnerData->zipAddressBilling,
-            "cityAddressBilling" => $partnerData->cityAddressBilling,
+            "namePartner" => $partnerData['namePartner'],
+            "numberAddressPartner" => $partnerData['numberAddressPartner'],
+            "typeAddressPartner" => $partnerData['typeAddressPartner'],
+            "nameAddressPartner" => $partnerData['nameAddressPartner'],
+            "complementAddressPartner" => $partnerData['complementAddressPartner'],
+            "zipAddressPartner" => $partnerData['zipAddressPartner'],
+            "cityAddressPartner" => $partnerData['cityAddressPartner'],
+            "phonePartner" => $partnerData['phonePartner'],
+            "statusPartner" => $partnerData['statusPartner'],
+            "typeGarage" => $partnerData['typeGarage'],
+            "typeTechnicalControl" => $partnerData['typeTechnicalControl'], 
+            "mailPartner" => $partnerData['mailPartner'],
+            "nameBilling" => $partnerData['nameBilling'],
+            "siretPartner" => $partnerData['siretPartner'],
+            "numberAddressBilling" => $partnerData['numberAddressBilling'],
+            "typeAddressBilling" => $partnerData['typeAddressBilling'],
+            "nameAddressBilling" => $partnerData['nameAddressBilling'],
+            "complementAddressBilling" => $partnerData['complementAddressBilling'],
+            "zipAddressBilling" => $partnerData['zipAddressBilling'],
+            "cityAddressBilling" => $partnerData['cityAddressBilling'],
         ];
         // on exécute la requête et on vérifie si elle s'est bien déroulée 
         $result = $stmt->execute($params);
