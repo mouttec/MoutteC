@@ -101,7 +101,7 @@ class Partner
         $result = $stmt->execute($params);
         if ($result) {
             return true; 
-        else {
+        } else {
             return false;
         }
     }
