@@ -43,7 +43,7 @@ class Partner
             INSERT INTO "
             . $this->table .
             " SET
-            usernamePartner = :usernamePartner,
+            usernamePartner = 'username du Partner',
             mixedPassword = :mixedPassword,
             namePartner = :namePartner,
             numberAddressPartner = :numberAddressPartner,
