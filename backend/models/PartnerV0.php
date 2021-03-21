@@ -36,7 +36,7 @@ class Partner
         $this->conn = $db;
     }
 
-    public function createPartner() 
+    public function createPartner($partnerData) 
     {
         // On crée la requête
         $query = "
@@ -100,7 +100,8 @@ class Partner
             return true; 
         } else {
             return false;
-        }    }
+        }    
+    }
 
     public function listPartners() 
     {
