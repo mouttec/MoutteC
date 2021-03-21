@@ -47,8 +47,8 @@ class Partner
             INSERT INTO "
             . $this->table .
             " SET 
-            usernamePartner = usernameduPartner,
-            namePartner = ". $this->namePartner .",
+            usernamePartner = 'usernameduPartner',
+            namePartner = '". $this->namePartner ."',
             numberAddressPartner = :numberAddressPartner,
             typeAddressPartner = :typeAddressPartner,
             nameAddressPartner = :nameAddressPartner,
