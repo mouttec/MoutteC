@@ -95,8 +95,12 @@ class Partner
             "cityAddressBilling" => $this->cityAddressBilling,
         ];
         // on exécute la requête et on vérifie si elle s'est bien déroulée 
-        $stmt->execute($params) : return true ? return false;
-    }
+        $result = $stmt->execute($params);
+        if ($result) {
+            return true; 
+        } else {
+            return false;
+        }    }
 
     public function listPartners() 
     {
