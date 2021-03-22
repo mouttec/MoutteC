@@ -1,5 +1,5 @@
 <?php
-class Post {
+class Agency {
     // Propriétés privées de connexion à la DB
     private $conn;
     private $table = "agencies";
