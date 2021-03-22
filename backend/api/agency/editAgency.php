@@ -17,10 +17,20 @@ include_once "../../models/Agency.php";
 // Si données en json
 $decodedData = json_decode(file_get_contents("php://input"));
 
-$agency = array();
-foreach ($decodedData as $key => $value) {
-    array_push($agency, array($key => $value));
+// $agency = array();
+// foreach ($decodedData as $key => $value) {
+//     array_push($agency, array($key => $value));
+// }
+
+$i = 0;
+while ($i < count($decodedData)) {
+    array_push($agency, (key($decodedData) => current($decodedData)));
+    $i++;
 }
+
+// for ($i = 0; $i < count($decodedData); $i++) {
+//    array_push($agency, array( => $decodedData[$i])) 
+// }
 
 $db = new Database();
 $conn = $db->connect();
