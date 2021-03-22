@@ -41,17 +41,17 @@ class Post {
 
         $stmt = $this->conn->prepare($query);
         $params = [
-            "nameAgency" = $this->nameAgency,
-            "numberAddressAgency" = $this->numberAddressAgency,
-            "typeAddressAgency" = $this->typeAddressAgency,
-            "nameAddressAgency" = $this->nameAddressAgency,
-            "complementAddressAgency" : $this->complementAddressAgency,
-            "zipAddressAgency" = $this->zipAddressAgency,
-            "cityAddressAgency" = $this->cityAddressAgency,
-            "phoneAgency" = $this->phoneAgency,
-            "mailAgency" = $this->mailAgency,
-            "statusAgency" = $this->statusAgency,
-            "dateAgency" = date(dmY) //La date est retournée au format DDMMYYYY
+            "nameAgency" => $this->nameAgency,
+            "numberAddressAgency" => $this->numberAddressAgency,
+            "typeAddressAgency" => $this->typeAddressAgency,
+            "nameAddressAgency" => $this->nameAddressAgency,
+            "complementAddressAgency" => $this->complementAddressAgency,
+            "zipAddressAgency" => $this->zipAddressAgency,
+            "cityAddressAgency" => $this->cityAddressAgency,
+            "phoneAgency" => $this->phoneAgency,
+            "mailAgency" => $this->mailAgency,
+            "statusAgency" => $this->statusAgency,
+            "dateAgency" => date(dmY) //La date est retournée au format DDMMYYYY
         ];
 
         if ($stmt->execute($params)) {
@@ -115,16 +115,16 @@ class Post {
 
         $stmt = $this->conn->prepare($query);
         $params = [
-            "nameAgency" = $this->nameAgency,
-            "numberAddressAgency" = $this->numberAddressAgency,
-            "typeAddressAgency" = $this->typeAddressAgency,
-            "nameAddressAgency" = $this->nameAddressAgency,
-            "complementAddressAgency" : $this->complementAddressAgency,
-            "zipAddressAgency" = $this->zipAddressAgency,
-            "cityAddressAgency" = $this->cityAddressAgency,
-            "phoneAgency" = $this->phoneAgency,
-            "mailAgency" = $this->mailAgency,
-            "statusAgency" = $this->statusAgency,
+            "nameAgency" => $this->nameAgency,
+            "numberAddressAgency" => $this->numberAddressAgency,
+            "typeAddressAgency" => $this->typeAddressAgency,
+            "nameAddressAgency" => $this->nameAddressAgency,
+            "complementAddressAgency" => $this->complementAddressAgency,
+            "zipAddressAgency" => $this->zipAddressAgency,
+            "cityAddressAgency" => $this->cityAddressAgency,
+            "phoneAgency" => $this->phoneAgency,
+            "mailAgency" => $this->mailAgency,
+            "statusAgency" => $this->statusAgency,
         ];
 
         if ($stmt->execute($params)) {
