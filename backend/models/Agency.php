@@ -17,6 +17,8 @@ class Agency {
     public $statusAgency;
     public $dateAgency;
 
+    public $action; //détermine l'acion demandée par l'utilisateur
+
     public function __construct($db) {
         $this->conn = $db;
     }
