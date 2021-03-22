@@ -15,31 +15,16 @@ include_once "../../config/Database.php";
 include_once "../../models/Agency.php";
 
 // Si données en json
-$decodedData = json_decode(file_get_contents("php://input"), true);
-
-$agency = array();
-foreach ($decodedData[0] as $key => $value) {
-    array_push($agency, array($key => $value));
-}
-
-// $i = 0;
-// while ($i < count($decodedData)) {
-//     array_push($agency, array(key($decodedData) => current($decodedData)));
-//     next($decodedData);
-//     $i++;
-// }
-
-
-// $agency = array_combine(array_keys($decodedData), array_values($decodedData));
-
-// for ($i = 0; $i < count($decodedData); $i++) {
-//    array_push($agency, array( => $decodedData[$i])) 
-// }
+$data = json_decode(file_get_contents("php://input"), true);
 
 $db = new Database();
-$conn = $db->connect();
-$agencyRequest = new Agency($conn);
-$agencyExists = $agencyRequest->searchAgency($agency->nameAgency);
+$agency = new Agency($conn);
+
+$agency = array();
+foreach ($data as $key => $value) {
+    $agency->$key = $data->$key;
+}
+$agencyExists = $agency->searchAgency($agency->nameAgency);
 
 //On regarde quelle action de Read est demandée
 switch ($agency->action) {
