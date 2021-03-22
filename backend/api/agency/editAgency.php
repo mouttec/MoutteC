@@ -22,12 +22,15 @@ $agency = array();
 //     array_push($agency, array($key => $value));
 // }
 
-$i = 0;
-while ($i < count($decodedData)) {
-    array_push($agency, array(key($decodedData) => current($decodedData)));
-    next($decodedData);
-    $i++;
-}
+// $i = 0;
+// while ($i < count($decodedData)) {
+//     array_push($agency, array(key($decodedData) => current($decodedData)));
+//     next($decodedData);
+//     $i++;
+// }
+
+
+$agency = array_combine(array_keys($decodedData), array_values($decodedData));
 
 // for ($i = 0; $i < count($decodedData); $i++) {
 //    array_push($agency, array( => $decodedData[$i])) 
