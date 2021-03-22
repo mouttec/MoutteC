@@ -18,9 +18,9 @@ include_once "../../models/Agency.php";
 $data = json_decode(file_get_contents("php://input"), true);
 
 $db = new Database();
+$conn = $db->connect();
 $agency = new Agency($conn);
 
-$agency = array();
 foreach ($data as $key => $value) {
     $agency->$key = $data->$key;
 }
