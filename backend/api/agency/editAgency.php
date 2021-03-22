@@ -15,9 +15,9 @@ include_once "../../config/Database.php";
 include_once "../../models/Agency.php";
 
 // Si données en json
-$decodedData = json_decode(file_get_contents("php://input"), true);
+$agency = json_decode(file_get_contents("php://input"), true);
 
-$agency = array();
+// $agency = array();
 // foreach ($decodedData as $key => $value) {
 //     array_push($agency, array($key => $value));
 // }
@@ -30,7 +30,7 @@ $agency = array();
 // }
 
 
-$agency = array_combine(array_keys($decodedData), array_values($decodedData));
+// $agency = array_combine(array_keys($decodedData), array_values($decodedData));
 
 // for ($i = 0; $i < count($decodedData); $i++) {
 //    array_push($agency, array( => $decodedData[$i])) 
