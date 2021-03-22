@@ -24,7 +24,7 @@ $decodedData = json_decode(file_get_contents("php://input"));
 
 $i = 0;
 while ($i < count($decodedData)) {
-    array_push($agency, (key($decodedData) => current($decodedData)));
+    array_push($agency, array(key($decodedData) => current($decodedData)));
     next($decodedData);
     $i++;
 }
