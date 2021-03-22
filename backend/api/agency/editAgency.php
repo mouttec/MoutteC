@@ -39,10 +39,10 @@ $agency = json_decode(file_get_contents("php://input"), true);
 $db = new Database();
 $conn = $db->connect();
 $agencyRequest = new Agency($conn);
-$agencyExists = $agencyRequest->searchAgency($agency['nameAgency']);
+$agencyExists = $agencyRequest->searchAgency($agency->nameAgency);
 
 //On regarde quelle action de Read est demandée
-switch ($agency['action']) {
+switch ($agency->action) {
     case 'editAgency':
         if (!empty($agencyExists)) {
             $result = $agencyRequest->updateAgency($agency);
@@ -58,7 +58,7 @@ switch ($agency['action']) {
     //     }
     //     break;
     case 'deleteAgency':
-        $result = $agencyRequest->deleteAgency($agency['idAgency']);
+        $result = $agencyRequest->deleteAgency($agency->idAgency);
         break;
     default:
     	$result = false;
