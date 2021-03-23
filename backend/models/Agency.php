@@ -30,7 +30,7 @@ class Agency {
             numberAddressAgency = :numberAddressAgency,
             typeAddressAgency = :typeAddressAgency,
             nameAddressAgency = :nameAddressAgency,
-            complementAddressAgency : :complementAddressAgency,
+            complementAddressAgency = :complementAddressAgency,
             zipAddressAgency = :zipAddressAgency,
             cityAddressAgency = :cityAddressAgency,
             phoneAgency = :phoneAgency,
