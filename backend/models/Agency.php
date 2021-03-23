@@ -30,7 +30,6 @@ class Agency {
             numberAddressAgency = :numberAddressAgency,
             typeAddressAgency = :typeAddressAgency,
             nameAddressAgency = :nameAddressAgency,
-            complementAddressAgency : :complementAddressAgency,
             zipAddressAgency = :zipAddressAgency,
             cityAddressAgency = :cityAddressAgency,
             phoneAgency = :phoneAgency,
@@ -38,6 +37,7 @@ class Agency {
             statusAgency = :statusAgency
         ";
 
+            // complementAddressAgency : :complementAddressAgency,
             // ,dateAgency = :dateAgency
 
         $stmt = $this->conn->prepare($query);
@@ -46,7 +46,7 @@ class Agency {
             "numberAddressAgency" => $this->numberAddressAgency,
             "typeAddressAgency" => $this->typeAddressAgency,
             "nameAddressAgency" => $this->nameAddressAgency,
-            "complementAddressAgency" => $this->complementAddressAgency,
+            // "complementAddressAgency" => $this->complementAddressAgency,
             "zipAddressAgency" => $this->zipAddressAgency,
             "cityAddressAgency" => $this->cityAddressAgency,
             "phoneAgency" => $this->phoneAgency,
