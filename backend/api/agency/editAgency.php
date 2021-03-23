@@ -34,30 +34,30 @@ $action = $decodedData->action;
 $agencyExists = $agency->searchAgency($agency->nameAgency);
 
 //On regarde quelle action de Read est demandée
-switch ($action) {
-    case 'editAgency':
-        if (!empty($agencyExists)) {
-            $result = $agencyRequest->updateAgency($agency);
-        } else { 
-            $result = $agencyRequest->createAgency($agency);
-        }
-        break;
-    // case 'changePassword':
-    //     if (!empty($agencyExists) 
-    //         && (password_verify($oldPassword, $agency['mixedPassword']) 
-    //             || $_SESSION('superAdmin' == 1))) {
-    //         $agencyRequest->passwordUpdate($agency); 
-    //     }
-    //     break;
-    case 'deleteAgency':
-        $result = $agencyRequest->deleteAgency($agency['idAgency']);
-        break;
-    default:
-    	$result = false;
-        break;
-}
+// switch ($action) {
+//     case 'editAgency':
+//         if (!empty($agencyExists)) {
+//             $result = $agencyRequest->updateAgency($agency);
+//         } else { 
+//             $result = $agencyRequest->createAgency($agency);
+//         }
+//         break;
+//     // case 'changePassword':
+//     //     if (!empty($agencyExists) 
+//     //         && (password_verify($oldPassword, $agency['mixedPassword']) 
+//     //             || $_SESSION('superAdmin' == 1))) {
+//     //         $agencyRequest->passwordUpdate($agency); 
+//     //     }
+//     //     break;
+//     case 'deleteAgency':
+//         $result = $agencyRequest->deleteAgency($agency['idAgency']);
+//         break;
+//     default:
+//     	$result = false;
+//         break;
+// }
 
-if ($result) {
+if (!$agencyExists) {
     echo json_encode([ "message" => "L'agence a été éditée !" ]);
 } else {
     echo json_encode([ "message" => "L'agence n'a pas pu être éditée..." ]);
