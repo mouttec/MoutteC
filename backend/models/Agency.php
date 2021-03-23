@@ -90,7 +90,7 @@ class Agency {
         return false;
     }
 
-    public function updateAgency($id) {
+    public function updateAgency() {
         // On crée la requête
         $query = "
             UPDATE "
@@ -131,7 +131,7 @@ class Agency {
         return false;
     }
 
-    public function deleteAgency($id) {
+    public function deleteAgency() {
         $query = "
             DELETE
             FROM " . $this->table .

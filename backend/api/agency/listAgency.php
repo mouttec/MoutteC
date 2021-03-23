@@ -10,21 +10,19 @@ header("Access-Control-Allow-Methods: GET");
 include_once "../../config/Database.php";
 include_once "../../models/Agency.php";
 
-$decodedData = json_decode(file_get_contents("php://input"));
-
-$agency = array();
-foreach ($decodedData as $key => $value) {
-    array_push($agency, array($key => htmlspecialchars(strip_tags($value))));
-}
-
 $db = new Database();
 $conn = $db->connect();
-$agencyRequest = new Agency($conn);
+$agency = new Agency($conn);
+
+$decodedData = json_decode(file_get_contents("php://input"));
+$agency->nameAgency = htmlspecialchars(strip_tags($decodedData->nameAgency));
+
+$action = htmlspecialchars(strip_tags($decodedData->action));
 
 //On regarde quelle action de Read est demandée
-switch ($agency['action']) {
+switch ($action) {
     case 'searchAgency':
-        $result = $agencyRequest->searchAgency($agency['nameAgency']);
+        $result = $agencyRequest->searchAgency($agency->nameAgency);
         break;
     default:
         $result = $agencyRequest->listAgencies();
