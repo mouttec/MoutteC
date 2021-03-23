@@ -14,19 +14,11 @@ $db = new Database();
 $conn = $db->connect();
 $agency = new Agency($conn);
 
-$decodedData = json_decode(file_get_contents("php://input"));
-$agency->nameAgency = htmlspecialchars(strip_tags($decodedData->nameAgency));
-
-$action = htmlspecialchars(strip_tags($decodedData->action));
-
-//On regarde quelle action de Read est demandée
-switch ($action) {
-    case 'searchAgency':
-        $result = $agency->searchAgency($agency->nameAgency);
-        break;
-    default:
-        $result = $agency->listAgencies();
-        break;
+if (isset($_GET['idAgency'])) {
+	$agency->idAgency = htmlspecialchars(strip_tags($_GET['idAgency']));
+    $result = $agency->searchAgency($agency->nameAgency);
+} else {
+    $result = $agency->listAgencies();
 }
 
 if (isset($result) && !empty($result)) {
