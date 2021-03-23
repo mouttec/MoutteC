@@ -51,7 +51,7 @@ class Agency {
             "phoneAgency" => $this->phoneAgency,
             "mailAgency" => $this->mailAgency,
             "statusAgency" => $this->statusAgency,
-            "dateAgency" => date('dmY') //La date est retournée au format DDMMYYYY
+            // "dateAgency" => date('dmY') //La date est retournée au format DDMMYYYY
         ];
 
         if ($stmt->execute($params)) {
