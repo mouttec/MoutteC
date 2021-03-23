@@ -37,9 +37,9 @@ $agencyExists = $agency->searchAgency($agency->nameAgency);
 switch ($action) {
     case 'editAgency':
         if (!empty($agencyExists)) {
-            $result = $agencyRequest->updateAgency($agency);
+            $result = $agency->updateAgency($agency);
         } else { 
-            $result = $agencyRequest->createAgency($agency);
+            $result = $agency->createAgency($agency);
         }
         break;
     // case 'changePassword':
@@ -50,7 +50,7 @@ switch ($action) {
     //     }
     //     break;
     case 'deleteAgency':
-        $result = $agencyRequest->deleteAgency($agency['idAgency']);
+        $result = $agency->deleteAgency($agency['idAgency']);
         break;
     default:
     	$result = false;
