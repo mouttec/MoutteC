@@ -6,7 +6,7 @@
 
 // On envoie les headers
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Allow-Methods: POST, GET");
 header("Content-Type: application/json");
 header("Access-Control-Allow-Headers: Access-Control-Allow-Headers, Access-Control-Allow-Methods, Content-Type, Authorization, X-Requested-With");
 
@@ -41,11 +41,12 @@ $agency->phoneAgency = $decodedData->phoneAgency;
 $agency->mailAgency = $decodedData->mailAgency;
 $agency->statusAgency = $decodedData->statusAgency;
 
-
 $action = htmlspecialchars(strip_tags($decodedData->action));
 
-$agencyExists = $agency->searchAgency($agency->nameAgency);
-
+if (isset($_GET['idAgency'])) {
+    $agencyExists->idAgency = htmlspecialchars(strip_tags($_GET['idAgency']));
+    $agency->idAgency = $agency->searchAgency();
+}
 //On regarde quelle action de Read est demandée
 switch ($action) {
     case 'editAgency':
