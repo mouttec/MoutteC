@@ -21,6 +21,7 @@ $agency = new Agency($conn);
 $decodedData = json_decode(file_get_contents("php://input"));
 $agency->nameAgency = $decodedData->nameAgency;
 $agency->numberAddressAgency = $decodedData->numberAddressAgency;
+$agency->typeAddressAgency = $decodedData->typeAddressAgency;
 $agency->nameAddressAgency = $decodedData->nameAddressAgency;
 $agency->complementAddressAgency = $decodedData->complementAddressAgency;
 $agency->zipAddressAgency = $decodedData->zipAddressAgency;
@@ -50,7 +51,8 @@ switch ($action) {
     //     }
     //     break;
     case 'deleteAgency':
-        $result = $agency->deleteAgency($agency->nameAgency);
+        $agency->idAgency = $decodedData->idAgency;
+        $result = $agency->deleteAgency($agency->idAgency);
         break;
     default:
     	$result = false;
