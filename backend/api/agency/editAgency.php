@@ -19,15 +19,15 @@ $conn = $db->connect();
 $agency = new Agency($conn);
 
 $decodedData = json_decode(file_get_contents("php://input"), true);
-$agency->nameAgency = $decodedData->nameAgency;
-$agency->numberAddressAgency = $decodedData->numberAddressAgency;
-$agency->nameAddressAgency = $decodedData->nameAddressAgency;
-$agency->complementAddressAgency = $decodedData->complementAddressAgency;
-$agency->zipAddressAgency = $decodedData->zipAddressAgency;
-$agency->cityAddressAgency = $decodedData->cityAddressAgency;
-$agency->phoneAgency = $decodedData->phoneAgency;
-$agency->mailAgency = $decodedData->mailAgency;
-$agency->statusAgency = $decodedData->statusAgency;
+$agency->nameAgency = $decodedData["nameAgency"];
+$agency->numberAddressAgency = $decodedData["numberAddressAgency"];
+$agency->nameAddressAgency = $decodedData["nameAddressAgency"];
+$agency->complementAddressAgency = $decodedData["complementAddressAgency"];
+$agency->zipAddressAgency = $decodedData["zipAddressAgency"];
+$agency->cityAddressAgency = $decodedData["cityAddressAgency"];
+$agency->phoneAgency = $decodedData["phoneAgency"];
+$agency->mailAgency = $decodedData["mailAgency"];
+$agency->statusAgency = $decodedData["statusAgency"];
 
 $action = $decodedData->action;
 
