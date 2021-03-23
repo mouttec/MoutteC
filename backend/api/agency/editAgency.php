@@ -6,7 +6,7 @@
 
 // On envoie les headers
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST, GET");
+header("Access-Control-Allow-Methods: POST");
 header("Content-Type: application/json");
 header("Access-Control-Allow-Headers: Access-Control-Allow-Headers, Access-Control-Allow-Methods, Content-Type, Authorization, X-Requested-With");
 
@@ -19,16 +19,6 @@ $conn = $db->connect();
 $agency = new Agency($conn);
 
 $decodedData = json_decode(file_get_contents("php://input"));
-// $agency->nameAgency = htmlspecialchars(strip_tags($decodedData->nameAgency));
-// $agency->numberAddressAgency = htmlspecialchars(strip_tags($decodedData->numberAddressAgency));
-// $agency->typeAddressAgency = htmlspecialchars(strip_tags($decodedData->typeAddressAgency));
-// $agency->nameAddressAgency = htmlspecialchars(strip_tags($decodedData->nameAddressAgency));
-// $agency->complementAddressAgency = htmlspecialchars(strip_tags($decodedData->complementAddressAgency));
-// $agency->zipAddressAgency = htmlspecialchars(strip_tags($decodedData->zipAddressAgency));
-// $agency->cityAddressAgency = htmlspecialchars(strip_tags($decodedData->cityAddressAgency));
-// $agency->phoneAgency = htmlspecialchars(strip_tags($decodedData->phoneAgency));
-// $agency->mailAgency = htmlspecialchars(strip_tags($decodedData->mailAgency));
-// $agency->statusAgency = htmlspecialchars(strip_tags($decodedData->statusAgency));
 
 $agency->nameAgency = $decodedData->nameAgency;
 $agency->numberAddressAgency = $decodedData->numberAddressAgency;
