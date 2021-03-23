@@ -35,9 +35,10 @@ class Agency {
             cityAddressAgency = :cityAddressAgency,
             phoneAgency = :phoneAgency,
             mailAgency = :mailAgency,
-            statusAgency = :statusAgency,
-            dateAgency = :dateAgency
+            statusAgency = :statusAgency
         ";
+
+            // ,dateAgency = :dateAgency
 
         $stmt = $this->conn->prepare($query);
         $params = [
