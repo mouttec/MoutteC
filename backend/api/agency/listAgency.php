@@ -22,10 +22,10 @@ $action = htmlspecialchars(strip_tags($decodedData->action));
 //On regarde quelle action de Read est demandée
 switch ($action) {
     case 'searchAgency':
-        $result = $agencyRequest->searchAgency($agency->nameAgency);
+        $result = $agency->searchAgency($agency->nameAgency);
         break;
     default:
-        $result = $agencyRequest->listAgencies();
+        $result = $agency->listAgencies();
         break;
 }
 
