@@ -34,14 +34,13 @@ $agency->statusAgency = $decodedData->statusAgency;
 $action = htmlspecialchars(strip_tags($decodedData->action));
 
 if (isset($_GET['idAgency'])) {
-    $agencyExists->idAgency = htmlspecialchars(strip_tags($_GET['idAgency']));
-    $agency->idAgency = $agency->searchAgency();
+    $agency->idAgency = htmlspecialchars(strip_tags($_GET['idAgency']));
+    $isAgencyExists = $agency->searchAgency();
 }
 //On regarde quelle action de Read est demandée
 switch ($action) {
     case 'editAgency':
-        if (!empty($agencyExists)) {
-            $agency->idAgency = $agencyExists->idAgency;
+        if (!empty($isAgencyExists)) {
             $result = $agency->updateAgency($agency);
         } else { 
             $result = $agency->createAgency($agency);
