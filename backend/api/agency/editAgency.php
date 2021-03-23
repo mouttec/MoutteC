@@ -50,7 +50,7 @@ switch ($action) {
     //     }
     //     break;
     case 'deleteAgency':
-        $result = $agency->deleteAgency($agency['idAgency']);
+        $result = $agency->deleteAgency($agency->nameAgency);
         break;
     default:
     	$result = false;
