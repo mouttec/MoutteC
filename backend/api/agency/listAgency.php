@@ -6,6 +6,8 @@
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 header("Access-Control-Allow-Methods: GET");
+header("Access-Control-Allow-Headers: Access-Control-Allow-Headers, Access-Control-Allow-Methods, Content-Type, Authorization, X-Requested-With");
+
 // On inclus les objets (ou classes) nécessaires
 include_once "../../config/Database.php";
 include_once "../../models/Agency.php";
