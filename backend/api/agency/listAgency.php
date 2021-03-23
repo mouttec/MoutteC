@@ -16,7 +16,7 @@ $agency = new Agency($conn);
 
 if (isset($_GET['idAgency'])) {
 	$agency->idAgency = htmlspecialchars(strip_tags($_GET['idAgency']));
-    $result = $agency->searchAgency($agency->nameAgency);
+    $result = $agency->searchAgency($agency->idAgency);
 } else {
     $result = $agency->listAgencies();
 }

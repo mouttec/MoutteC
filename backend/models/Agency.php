@@ -77,11 +77,11 @@ class Agency {
         SELECT *
         FROM "
         . $this->table . " 
-        WHERE nameAgency = :nameAgency
+        WHERE idAgency = :idAgency
         LIMIT 0,1";
         
         $stmt = $this->conn->prepare($query);
-        $params = ["nameAgency" => $this->nameAgency];
+        $params = ["idAgency" => htmlspecialchars(strip_tags($this->idAgency))];
 
         if ($stmt->execute($params)) {
             $row = $stmt->fetch();    
@@ -105,10 +105,9 @@ class Agency {
             cityAddressAgency = :cityAddressAgency,
             phoneAgency = :phoneAgency,
             mailAgency = :mailAgency,
-            statusAgency = :statusAgency,
-            dateAgency = :dateAgency
+            statusAgency = :statusAgency
             WHERE
-            id = :id        
+            idAgency = :idAgency
         ";
 
         $stmt = $this->conn->prepare($query);
@@ -123,11 +122,12 @@ class Agency {
             "phoneAgency" => $this->phoneAgency,
             "mailAgency" => $this->mailAgency,
             "statusAgency" => $this->statusAgency,
+            "idAgency" => $this->idAgency
         ];
 
         if ($stmt->execute($params)) {
-                return true;
-            }
+            return true;
+        }
         return false;
     }
 
@@ -135,11 +135,11 @@ class Agency {
         $query = "
             DELETE
             FROM " . $this->table .
-            " WHERE id = :id
+            " WHERE idAgency = :idAgency
         ";
 
         $stmt = $this->conn->prepare($query);
-        $params = ["id" => $this->id];
+        $params = ["idAgency" => $this->idAgency];
 
         if($stmt->execute($params)) {
             return true;

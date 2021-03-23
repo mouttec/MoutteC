@@ -50,6 +50,7 @@ $agencyExists = $agency->searchAgency($agency->nameAgency);
 switch ($action) {
     case 'editAgency':
         if (!empty($agencyExists)) {
+            $agency->idAgency = $agencyExists->idAgency;
             $result = $agency->updateAgency($agency);
         } else { 
             $result = $agency->createAgency($agency);
