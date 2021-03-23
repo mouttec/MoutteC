@@ -65,5 +65,5 @@ switch ($action) {
 if ($result) {
     echo json_encode([ "message" => "L'agence a été éditée !" ]);
 } else {
-    echo json_encode([ "message" => "L'agence n'a pas pu être éditée..." ]);
+    echo json_encode([ "message" => "L'agence n'a pas pu être éditée...", "Récupération du $_GET['idAgency'] = ".$_GET['idAgency']) ]);
 }
