@@ -19,16 +19,28 @@ $conn = $db->connect();
 $agency = new Agency($conn);
 
 $decodedData = json_decode(file_get_contents("php://input"));
-$agency->nameAgency = htmlspecialchars(strip_tags($decodedData->nameAgency));
-$agency->numberAddressAgency = htmlspecialchars(strip_tags($decodedData->numberAddressAgency));
-$agency->typeAddressAgency = htmlspecialchars(strip_tags($decodedData->typeAddressAgency));
-$agency->nameAddressAgency = htmlspecialchars(strip_tags($decodedData->nameAddressAgency));
-$agency->complementAddressAgency = htmlspecialchars(strip_tags($decodedData->complementAddressAgency));
-$agency->zipAddressAgency = htmlspecialchars(strip_tags($decodedData->zipAddressAgency));
-$agency->cityAddressAgency = htmlspecialchars(strip_tags($decodedData->cityAddressAgency));
-$agency->phoneAgency = htmlspecialchars(strip_tags($decodedData->phoneAgency));
-$agency->mailAgency = htmlspecialchars(strip_tags($decodedData->mailAgency));
-$agency->statusAgency = htmlspecialchars(strip_tags($decodedData->statusAgency));
+// $agency->nameAgency = htmlspecialchars(strip_tags($decodedData->nameAgency));
+// $agency->numberAddressAgency = htmlspecialchars(strip_tags($decodedData->numberAddressAgency));
+// $agency->typeAddressAgency = htmlspecialchars(strip_tags($decodedData->typeAddressAgency));
+// $agency->nameAddressAgency = htmlspecialchars(strip_tags($decodedData->nameAddressAgency));
+// $agency->complementAddressAgency = htmlspecialchars(strip_tags($decodedData->complementAddressAgency));
+// $agency->zipAddressAgency = htmlspecialchars(strip_tags($decodedData->zipAddressAgency));
+// $agency->cityAddressAgency = htmlspecialchars(strip_tags($decodedData->cityAddressAgency));
+// $agency->phoneAgency = htmlspecialchars(strip_tags($decodedData->phoneAgency));
+// $agency->mailAgency = htmlspecialchars(strip_tags($decodedData->mailAgency));
+// $agency->statusAgency = htmlspecialchars(strip_tags($decodedData->statusAgency));
+
+$agency->nameAgency = $decodedData->nameAgency;
+$agency->numberAddressAgency = $decodedData->numberAddressAgency;
+$agency->typeAddressAgency = $decodedData->typeAddressAgency;
+$agency->nameAddressAgency = $decodedData->nameAddressAgency;
+$agency->complementAddressAgency = $decodedData->complementAddressAgency;
+$agency->zipAddressAgency = $decodedData->zipAddressAgency;
+$agency->cityAddressAgency = $decodedData->cityAddressAgency;
+$agency->phoneAgency = $decodedData->phoneAgency;
+$agency->mailAgency = $decodedData->mailAgency;
+$agency->statusAgency = $decodedData->statusAgency;
+
 
 $action = htmlspecialchars(strip_tags($decodedData->action));
 
