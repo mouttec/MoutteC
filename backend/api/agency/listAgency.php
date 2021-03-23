@@ -16,9 +16,31 @@ $agency = new Agency($conn);
 
 if (isset($_GET['idAgency'])) {
 	$agency->idAgency = htmlspecialchars(strip_tags($_GET['idAgency']));
-    $result = $agency->searchAgency($agency->idAgency);
+    $result = $agency->searchAgency();
 } else {
-    $result = $agency->listAgencies();
+    $agencies = $agency->listAgencies();
+    $counter = $agencies->rowCount();
+    if ($counter < 0) {
+    	$agencies_array = array();
+    	while ($row = $agencies->fetch()) {
+    		extract($row);
+    		$agency_item = [
+    			"idAgency" => $idAgency,
+	            "nameAgency" => $nameAgency,
+	            "numberAddressAgency" => $numberAddressAgency,
+	            "typeAddressAgency" => $typeAddressAgency,
+	            "nameAddressAgency" => $nameAddressAgency,
+	            "complementAddressAgency" => $complementAddressAgency,
+	            "zipAddressAgency" => $zipAddressAgency,
+	            "cityAddressAgency" => $cityAddressAgency,
+	            "phoneAgency" => $phoneAgency,
+	            "mailAgency" => $mailAgency,
+	            "statusAgency" => $statusAgency
+    		];
+    		array_push($agencies_array, $agency_item);
+    	}
+    	$result = $agencies_array;
+    }
 }
 
 if (isset($result) && !empty($result)) {
