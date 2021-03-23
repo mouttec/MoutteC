@@ -14,20 +14,27 @@ header("Access-Control-Allow-Headers: Access-Control-Allow-Headers, Access-Contr
 include_once "../../config/Database.php";
 include_once "../../models/Agency.php";
 
-// Si données en json
-$data = json_decode(file_get_contents("php://input"), true);
-
 $db = new Database();
 $conn = $db->connect();
 $agency = new Agency($conn);
 
-foreach ($data as $key => $value) {
-    $agency->$key = $data->$key;
-}
+$decodedData = json_decode(file_get_contents("php://input"), true);
+$agency->nameAgency = $decodedData->nameAgency;
+$agency->numberAddressAgency = $decodedData->numberAddressAgency;
+$agency->nameAddressAgency = $decodedData->nameAddressAgency;
+$agency->complementAddressAgency = $decodedData->complementAddressAgency;
+$agency->zipAddressAgency = $decodedData->zipAddressAgency;
+$agency->cityAddressAgency = $decodedData->cityAddressAgency;
+$agency->phoneAgency = $decodedData->phoneAgency;
+$agency->mailAgency = $decodedData->mailAgency;
+$agency->statusAgency = $decodedData->statusAgency;
+
+$action = $decodedData->action;
+
 $agencyExists = $agency->searchAgency($agency->nameAgency);
 
 //On regarde quelle action de Read est demandée
-switch ($agency->action) {
+switch ($action) {
     case 'editAgency':
         if (!empty($agencyExists)) {
             $result = $agencyRequest->updateAgency($agency);
