@@ -30,6 +30,7 @@ class Agency {
             numberAddressAgency = :numberAddressAgency,
             typeAddressAgency = :typeAddressAgency,
             nameAddressAgency = :nameAddressAgency,
+            complementAddressAgency : :complementAddressAgency,
             zipAddressAgency = :zipAddressAgency,
             cityAddressAgency = :cityAddressAgency,
             phoneAgency = :phoneAgency,
@@ -37,22 +38,18 @@ class Agency {
             statusAgency = :statusAgency
         ";
 
-            // complementAddressAgency : :complementAddressAgency,
-            // ,dateAgency = :dateAgency
-
         $stmt = $this->conn->prepare($query);
         $params = [
             "nameAgency" => $this->nameAgency,
             "numberAddressAgency" => $this->numberAddressAgency,
             "typeAddressAgency" => $this->typeAddressAgency,
             "nameAddressAgency" => $this->nameAddressAgency,
-            // "complementAddressAgency" => $this->complementAddressAgency,
+            "complementAddressAgency" => $this->complementAddressAgency,
             "zipAddressAgency" => $this->zipAddressAgency,
             "cityAddressAgency" => $this->cityAddressAgency,
             "phoneAgency" => $this->phoneAgency,
             "mailAgency" => $this->mailAgency,
-            "statusAgency" => $this->statusAgency,
-            // "dateAgency" => date('dmY') //La date est retournée au format DDMMYYYY
+            "statusAgency" => $this->statusAgency
         ];
 
         if ($stmt->execute($params)) {
