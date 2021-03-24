@@ -20,7 +20,7 @@ if (isset($_GET['idAgency'])) {
 } else {
     $agencies = $agency->listAgencies();
     $counter = $agencies->rowCount();
-    if ($counter < 0) {
+    if ($counter > 0) {
     	$agencies_array = array();
     	while ($row = $agencies->fetch()) {
     		extract($row);
