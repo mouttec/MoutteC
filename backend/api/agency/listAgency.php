@@ -2,13 +2,11 @@
 //ini_set('display_errors', 1);
 //ini_set('display_startup_errors', 1);
 //error_reporting(E_ALL);
-// On envoie les headers
+
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 header("Access-Control-Allow-Methods: GET");
-header("Access-Control-Allow-Headers: Access-Control-Allow-Headers, Access-Control-Allow-Methods, Content-Type, Authorization, X-Requested-With");
 
-// On inclus les objets (ou classes) nécessaires
 include_once "../../config/Database.php";
 include_once "../../models/Agency.php";
 
@@ -17,7 +15,7 @@ $conn = $db->connect();
 $agency = new Agency($conn);
 
 if (isset($_GET['idAgency'])) {
-	$agency->idAgency = htmlspecialchars(strip_tags($_GET['idAgency']));
+	$agency->idAgency = $_GET['idAgency'];
     $result = $agency->searchAgency();
 } else {
     $agencies = $agency->listAgencies();
