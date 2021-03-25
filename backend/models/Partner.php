@@ -70,7 +70,7 @@ class Partner
         $stmt = $this->conn->prepare($query);
         $params = [
             "usernamePartner" => $this->$usernamePartner,
-            "mixedPassword" => password_hash($this->$mixedPassword, PASSWORD_DEFAULT);,
+            "mixedPassword" => password_hash($this->$mixedPassword, PASSWORD_DEFAULT),
             "namePartner" => $this->$namePartner,
             "numberAddressPartner" => $this->$numberAddressPartner,
             "typeAddressPartner" => $this->$typeAddressPartner,
