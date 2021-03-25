@@ -47,16 +47,7 @@ if (!empty($partner->idPartner)) {
 }
 
 if ($result) {
-    echo json_encode([ "message" => "Le partner a été édité !" ]);
+    echo json_encode([ "message" => "Le Partner a été édité !" ]);
 } else {
-    echo json_encode([ "message" => "Le partenaire n'a pas pu être édité..." ]);
+    echo json_encode([ "message" => "Le Partner n'a pas pu être édité..." ]);
 }
-    // case 'changePassword':
-    // //On vérifie que le Teammate existe et on demande l'ancien mot de passe, voir eventuellement si une session super admin est ouverte à modifier sans l'ancien mdp
-    //     if (!empty($partnerExists) 
-    //         && (password_verify($oldPassword, $partner['mixedPassword']) 
-    //             || $_SESSION('superAdmin' == 1))) {
-    //         $partnerRequest->passwordUpdate($partner); 
-    //     }
-    // case 'deletePartner':
-    //     $result = $partnerRequest->deletePartner($partner['idPartner']);

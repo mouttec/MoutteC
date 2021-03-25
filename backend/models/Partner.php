@@ -67,32 +67,30 @@ class Partner
             cityAddressBilling = :cityAddressBilling
         ";
         // on prépare la requête
-        $stmt = $partnerData->conn->prepare($query);
-        $mixedPassword = password_hash($partnerData['passwordPartner'], PASSWORD_DEFAULT);
-        // tableau associatif pour lier les paramètres reçus à la requête
+        $stmt = $this->conn->prepare($query);
         $params = [
-            "usernamePartner" => $partnerData['usernamePartner'],
-            "mixedPassword" => $mixedPassword,
-            "namePartner" => $partnerData['namePartner'],
-            "numberAddressPartner" => $partnerData['numberAddressPartner'],
-            "typeAddressPartner" => $partnerData['typeAddressPartner'],
-            "nameAddressPartner" => $partnerData['nameAddressPartner'],
-            "complementAddressPartner" => $partnerData['complementAddressPartner'],
-            "zipAddressPartner" => $partnerData['zipAddressPartner'],
-            "cityAddressPartner" => $partnerData['cityAddressPartner'],
-            "phonePartner" => $partnerData['phonePartner'],
-            "statusPartner" => $partnerData['statusPartner'],
-            "typeGarage" => $partnerData['typeGarage'],
-            "typeTechnicalControl" => $partnerData['typeTechnicalControl'], 
-            "mailPartner" => $partnerData['mailPartner'],
-            "nameBilling" => $partnerData['nameBilling'],
-            "siretPartner" => $partnerData['siretPartner'],
-            "numberAddressBilling" => $partnerData['numberAddressBilling'],
-            "typeAddressBilling" => $partnerData['typeAddressBilling'],
-            "nameAddressBilling" => $partnerData['nameAddressBilling'],
-            "complementAddressBilling" => $partnerData['complementAddressBilling'],
-            "zipAddressBilling" => $partnerData['zipAddressBilling'],
-            "cityAddressBilling" => $partnerData['cityAddressBilling'],
+            "usernamePartner" => $this->$usernamePartner,
+            "mixedPassword" => password_hash($this->$mixedPassword, PASSWORD_DEFAULT);,
+            "namePartner" => $this->$namePartner,
+            "numberAddressPartner" => $this->$numberAddressPartner,
+            "typeAddressPartner" => $this->$typeAddressPartner,
+            "nameAddressPartner" => $this->$nameAddressPartner,
+            "complementAddressPartner" => $this->$complementAddressPartner,
+            "zipAddressPartner" => $this->$zipAddressPartner,
+            "cityAddressPartner" => $this->$cityAddressPartner,
+            "phonePartner" => $this->$phonePartner,
+            "statusPartner" => $this->$statusPartner,
+            "typeGarage" => $this->$typeGarage,
+            "typeTechnicalControl" => $this->$typeTechnicalControl,
+            "mailPartner" => $this->$mailPartner,
+            "nameBilling" => $this->$nameBilling,
+            "siretPartner" => $this->$siretPartner,
+            "numberAddressBilling" => $this->$numberAddressBilling,
+            "typeAddressBilling" => $this->$typeAddressBilling,
+            "nameAddressBilling" => $this->$nameAddressBilling,
+            "complementAddressBilling" => $this->$complementAddressBilling,
+            "zipAddressBilling" => $this->$zipAddressBilling,
+            "cityAddressBilling" => $this->$cityAddressBilling
         ];
         // on exécute la requête et on vérifie si elle s'est bien déroulée 
         $result = $stmt->execute($params);

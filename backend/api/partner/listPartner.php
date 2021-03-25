@@ -54,7 +54,8 @@ if (isset($_GET['idPartner'])) {
 }
 
 if (isset($result) && !empty($result)) {
- 	echo json_encode($result);
+ 	// echo json_encode($result);
+ 	echo json_encode($_SESSION);
 } else { 
 	http_response_code(404); 
 }
