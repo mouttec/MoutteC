@@ -25,8 +25,8 @@ if (isset($_GET['idPartner'])) {
     		extract($row);
     		$partner_item = [
 				"idPartner" => $idPartner,
-	            "usernamePartner" => $usernameduPartner,
-	            "namePartner" => $nameDuPartner,
+	            "usernamePartner" => $usernamePartner,
+	            "namePartner" => $namePartner,
 	            "numberAddressPartner" => $numberAddressPartner,
 	            "typeAddressPartner" => $typeAddressPartner,
 	            "nameAddressPartner" => $nameAddressPartner,
