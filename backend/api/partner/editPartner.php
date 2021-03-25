@@ -1,59 +1,62 @@
 <?php
-
 //ini_set('display_errors', 1);
 //ini_set('display_startup_errors', 1);
 //error_reporting(E_ALL);
 
-// On envoie les headers
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST");
 header("Content-Type: application/json");
 header("Access-Control-Allow-Headers: Access-Control-Allow-Headers, Access-Control-Allow-Methods, Content-Type, Authorization, X-Requested-With");
-
-// On inclus les objets (ou classes) nécessaires
 include_once "../../config/Database.php";
-include_once "../../models/PartnerV0.php";
-
-// Si données en json
-$decodedData = json_decode(file_get_contents("php://input"));
-
-$partner = array();
-foreach ($decodedData as $key => $value) {
-    array_push($partner, array($key => $value));
-}
+include_once "../../models/Partner.php";
 
 $db = new Database();
 $conn = $db->connect();
-$partnerRequest = new Partner($conn);
-$partnerExists = $partnerRequest->searchPartner($partner['usernamePartner']);
+$partner = new Partner($conn);
 
-//On regarde quelle action de Read est demandée
-switch ($partner['action']) {
-    case 'editPartner':
-        if (!empty($partnerExists)) {
-            $result = $partnerRequest->updatePartner($partner);
-        } else { 
-            $result = $partnerRequest->createPartner($partner);
-        }
-        break;
-    case 'changePassword':
-    //On vérifie que le Teammate existe et on demande l'ancien mot de passe, voir eventuellement si une session super admin est ouverte à modifier sans l'ancien mdp
-        if (!empty($partnerExists) 
-            && (password_verify($oldPassword, $partner['mixedPassword']) 
-                || $_SESSION('superAdmin' == 1))) {
-            $partnerRequest->passwordUpdate($partner); 
-        }
-        break;
-    case 'deletePartner':
-        $result = $partnerRequest->deletePartner($partner['idPartner']);
-        break;
-    default:
-    	$result = false;
-        break;
+$decodedData = json_decode(file_get_contents("php://input"));
+
+$partner->idPartner = $decodedData->idPartner;
+$partner->usernamePartner = $decodedData->usernamePartner;
+$partner->mixedPassword = $decodedData->password;
+$partner->namePartner = $decodedData->namePartner;
+$partner->numberAddressPartner = $decodedData->numberAddressPartner;
+$partner->typeAddressPartner = $decodedData->typeAddressPartner;
+$partner->nameAddressPartner = $decodedData->nameAddressPartner;
+$partner->complementAddressPartner = $decodedData->complementAddressPartner;
+$partner->zipAddressPartner = $decodedData->zipAddressPartner;
+$partner->cityAddressPartner = $decodedData->cityAddressPartner;
+$partner->phonePartner = $decodedData->phonePartner;
+$partner->statusPartner = $decodedData->statusPartner;
+$partner->typeGarage = $decodedData->typeGarage;
+$partner->typeTechnicalControl = $decodedData->typeTechnicalControl;
+$partner->mailPartner = $decodedData->mailPartner;
+$partner->nameBilling = $decodedData->nameBilling;
+$partner->siretPartner = $decodedData->siretPartner;
+$partner->numberAddressBilling = $decodedData->numberAddressBilling;
+$partner->typeAddressBilling = $decodedData->typeAddressBilling;
+$partner->nameAddressBilling = $decodedData->nameAddressBilling;
+$partner->complementAddressBilling = $decodedData->complementAddressBilling;
+$partner->zipAddressBilling = $decodedData->zipAddressBilling;
+$partner->cityAddressBilling = $decodedData->cityAddressBilling;
+
+if (!empty($partner->idPartner)) {
+    $result = $partner->updatePartner($partner);
+} else {
+    $result = $partner->createPartner($partner);
 }
 
 if ($result) {
-    echo json_encode([ "message" => "Le partenaire a été édité !" ]);
+    echo json_encode([ "message" => "Le partner a été édité !" ]);
 } else {
     echo json_encode([ "message" => "Le partenaire n'a pas pu être édité..." ]);
 }
+    // case 'changePassword':
+    // //On vérifie que le Teammate existe et on demande l'ancien mot de passe, voir eventuellement si une session super admin est ouverte à modifier sans l'ancien mdp
+    //     if (!empty($partnerExists) 
+    //         && (password_verify($oldPassword, $partner['mixedPassword']) 
+    //             || $_SESSION('superAdmin' == 1))) {
+    //         $partnerRequest->passwordUpdate($partner); 
+    //     }
+    // case 'deletePartner':
+    //     $result = $partnerRequest->deletePartner($partner['idPartner']);

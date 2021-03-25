@@ -43,8 +43,8 @@ class Partner
             INSERT INTO "
             . $this->table .
             " SET 
-            usernamePartner = 'usernameduPartner',
-            namePartner = 'nameDuPartner',
+            usernamePartner = :usernameduPartner,
+            namePartner = :nameDuPartner,
             mixedPassword = :mixedPassword,
             numberAddressPartner = :numberAddressPartner,
             typeAddressPartner = :typeAddressPartner,
@@ -120,13 +120,30 @@ class Partner
         }
     }
 
-    public function searchPartner($usernamePartner) {
+    public function searchPartnerById() {
         $query = "
         SELECT *
         FROM "
         . $this->table . " 
-        WHERE usernamePartner = :usernamePartner
+        WHERE idPartner = :idPartner
         LIMIT 0,1";
+        $stmt = $this->conn->prepare($query);
+        $params = ["idPartner" => $idPartner];
+        $stmt->execute($params);
+        if (!empty($stmt)) {
+            return $stmt->fetch();
+        } else {
+            return false;
+        }
+    }
+
+    public function searchPartnerByUsername() {
+        $query = "
+            SELECT *
+            FROM "
+            . $this->table . " 
+            WHERE usernamePartner = :usernamePartner
+            LIMIT 0,1";
         $stmt = $this->conn->prepare($query);
         $params = ["usernamePartner" => $usernamePartner];
         $stmt->execute($params);
@@ -138,6 +155,7 @@ class Partner
     }
 
     public function updatePartner() 
+    //update complet sauf mot de passe
     {
         $query = "
             UPDATE "
@@ -199,27 +217,27 @@ class Partner
         }
     }
 
-    public function passwordUpdate() 
+    public function changePassword() 
     {
-    //     $query = "
-    //         UPDATE "
-    //         . $this->table .
-    //         " SET
-    //         mixedPassword = :mixedPassword
-    //         WHERE
-    //         usernamePartner = :usernamePartner       
-    //     ";
-    //     $stmt = $this->conn->prepare($query);
-    //     $params = [
-    //         "usernamePartner" => $this->usernamePartner,
-    //         "mixedPassword" => password_hash($this->newPassword, PASSWORD_DEFAULT),
-    //     ];
-    //     $stmt->execute($params); 
-    //     return true;
+        $query = "
+            UPDATE "
+            . $this->table .
+            " SET
+            mixedPassword = :mixedPassword
+            WHERE
+            idPartner = :idPartner       
+        ";
+        $stmt = $this->conn->prepare($query);
+        $params = [
+            "idPartner" => $this->idPartner,
+            "mixedPassword" => password_hash($this->mixedPassword, PASSWORD_DEFAULT),
+        ];
+        $stmt->execute($params);
+        return true;
     }
 
 
-    public function deletePartner($usernamePartner) 
+    public function deletePartner() 
     {
         $query = "
             DELETE

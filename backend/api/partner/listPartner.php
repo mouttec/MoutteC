@@ -6,28 +6,51 @@
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 header("Access-Control-Allow-Methods: GET");
-// On inclus les objets (ou classes) nécessaires
 include_once "../../config/Database.php";
 include_once "../../models/Partner.php";
 
-$decodedData = json_decode(file_get_contents("php://input"));
-$partner = array();
-foreach ($decodedData as $key => $value) {
-    array_push($partner[$key] = htmlspecialchars(strip_tags($value)));
-}
-
 $db = new Database();
 $conn = $db->connect();
-$partnerRequest = new Partner($conn);
+$partner = new Partner($conn);
 
-//On regarde quelle action de Read est demandée
-switch ($partner['action']) {
-    case 'searchPartner':
-        $result = $partnerRequest->searchPartner($partner['usernamePartner']);
-        break;
-    default:
-        $result = $partnerRequest->listPartners();
-        break;
+if (isset($_GET['idPartner'])) {
+	$partner->idPartner = $_GET['idPartner'];
+    $result = $partner->searchPartnerById();
+} else {
+    $partners = $partner->listPartners();
+    $counter = $partners->rowCount();
+    if ($counter > 0) {
+    	$partners_array = array();
+    	while ($row = $partners->fetch()) {
+    		extract($row);
+    		$partner_item = [
+				"idPartner" => $idPartner,
+	            "usernamePartner" => $usernameduPartner,
+	            "namePartner" => $nameDuPartner,
+	            "numberAddressPartner" => $numberAddressPartner,
+	            "typeAddressPartner" => $typeAddressPartner,
+	            "nameAddressPartner" => $nameAddressPartner,
+	            "complementAddressPartner" => $complementAddressPartner,
+	            "zipAddressPartner" => $zipAddressPartner,
+	            "cityAddressPartner" => $cityAddressPartner,
+	            "phonePartner" => $phonePartner,
+	            "statusPartner" => $statusPartner,
+	            "typeGarage" => $typeGarage,
+	            "typeTechnicalControl" => $typeTechnicalControl,
+	            "mailPartner" => $mailPartner,        
+	            "nameBilling" => $nameBilling,
+	            "siretPartner" => $siretPartner,
+	            "numberAddrerssBilling" => $numberAddressBilling,
+	            "typeAddressBilling" => $typeAddressBilling,
+	            "nameAddressBilling" => $nameAddressBilling,
+	            "complementAddressBilling" => $complementAddressBilling,
+	            "zipAddressBilling" => $zipAddressBilling,
+	            "cityAddressBilling" => $cityAddressBilling
+    		];
+    		array_push($partners_array, $partner_item);
+    	}
+    	$result = $partners_array;
+    }
 }
 
 if (isset($result) && !empty($result)) {

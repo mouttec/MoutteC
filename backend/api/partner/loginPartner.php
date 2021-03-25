@@ -1,28 +1,25 @@
 <?php
+
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json");
+header("Access-Control-Allow-Methods: POST");
 include_once("database.php");
 include_once "../../models/Partner.php";
 
+$db = new Database();
+$conn = $db->connect();
+$partner = new Partner($conn);
+
 $decodedData = json_decode(file_get_contents("php://input"));
-$partner = array();
-foreach ($decodedData as $key => $value) {
-    array_push($partner[$key] = htmlspecialchars(strip_tags($value)));
+$partner->usernamePartner = $decodedData->usernamePartner;
+$password = htmlspecialchars($decodedData->password);
+
+$partnerExists = $partner->searchPartnerByUsername($partner);
+
+//Si un partner existe avec cet username et que le password matche
+if (!empty($partnerExists) && 
+	(password_verify($password, $partnerExists['mixedPassword'])) {
+		echo json_encode($partnerExists);
+} else {
+	http_response_code(404);	
 }
-
-//On créé un objet Partner pour chercher celui qui correspond à l'email donné
-$partnerRequest = new Partner;
-$partnerExists = $partnerRequest->searchPartner($usernamePartner);
-//Vérification du mot de passe
-(!empty($partnerExists) && password_verify($partner['password'], $partnerExists['mixedPassword']) : echo json_encode($partnerExists) ? http_response_code(404);
-
-
-// $password = mysqli_real_escape_string($mysqli, trim($decodedData['passwordPartner']));
-// $usernamePartner = mysqli_real_escape_string($mysqli, trim($decodedData['usernamePartner']));
-
-
-//$sql = "SELECT * FROM teammates where email='$email'";
-// $result = mysqli_query($mysqli,$sql);
-// $rows = array();
-// while($row = mysqli_fetch_assoc($result))
-// {
-//     $rows[] = $row;
-// }
