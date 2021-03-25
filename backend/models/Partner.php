@@ -125,11 +125,11 @@ class Partner
         $stmt = $this->conn->prepare($query);
         $params = ["idPartner" => $idPartner];
         $stmt->execute($params);
-        if (!empty($stmt)) {
-            return $stmt->fetch();
-        } else {
-            return false;
+        if ($stmt->execute($params)) {
+            $row = $stmt->fetch();    
+            return $row;
         }
+        return false;
     }
 
     public function searchPartnerByUsername() {
@@ -141,12 +141,11 @@ class Partner
             LIMIT 0,1";
         $stmt = $this->conn->prepare($query);
         $params = ["usernamePartner" => $usernamePartner];
-        $stmt->execute($params);
-        if (!empty($stmt)) {
-            return $stmt->fetch();
-        } else {
-            return false;
+        if ($stmt->execute($params)) {
+            $row = $stmt->fetch();    
+            return $row;
         }
+        return false;
     }
 
     public function updatePartner() 
