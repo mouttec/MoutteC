@@ -111,11 +111,8 @@ class Partner
             idPartner";
         $stmt = $this->conn->prepare($query);
         $stmt->execute(); 
-        if (!empty($stmt)) {
-            return $stmt->fetchAll();
-        } else {
-            return false;
-        }
+
+        return $stmt;
     }
 
     public function searchPartnerById() {
