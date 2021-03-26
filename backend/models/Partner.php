@@ -174,7 +174,7 @@ class Partner
             zipAddressBilling = :zipAddressBilling,
             cityAddressBilling = :cityAddressBilling
             WHERE
-            idPartner = :idPartner       
+            idPartner = :idPartner
         ";
         $stmt = $this->conn->prepare($query);
         $params = [
@@ -201,12 +201,11 @@ class Partner
             "cityAddressBilling" => $this->cityAddressBilling,
             "idPartner" => $this->idPartner
         ];
-        $stmt->execute($params); 
-        if (!empty($stmt)) {
-            return true; 
-        } else { 
-            return false;
+
+        if ($stmt->execute($params)) {
+            return true;
         }
+        return false;
     }
 
     public function changePassword() 
