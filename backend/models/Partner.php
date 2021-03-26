@@ -179,6 +179,7 @@ class Partner
         $stmt = $this->conn->prepare($query);
         $params = [
             "usernamePartner" => $this->usernamePartner,
+            "namePartner" => $this->namePartner,
             "numberAddressPartner" => $this->numberAddressPartner,
             "typeAddressPartner" => $this->typeAddressPartner,
             "nameAddressPartner" => $this->nameAddressPartner,
