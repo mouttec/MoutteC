@@ -69,28 +69,28 @@ class Partner
         // on prépare la requête
         $stmt = $this->conn->prepare($query);
         $params = [
-            "usernamePartner" => $this->$usernamePartner,
-            "mixedPassword" => password_hash($this->$mixedPassword, PASSWORD_DEFAULT),
-            "namePartner" => $this->$namePartner,
-            "numberAddressPartner" => $this->$numberAddressPartner,
-            "typeAddressPartner" => $this->$typeAddressPartner,
-            "nameAddressPartner" => $this->$nameAddressPartner,
-            "complementAddressPartner" => $this->$complementAddressPartner,
-            "zipAddressPartner" => $this->$zipAddressPartner,
-            "cityAddressPartner" => $this->$cityAddressPartner,
-            "phonePartner" => $this->$phonePartner,
-            "statusPartner" => $this->$statusPartner,
-            "typeGarage" => $this->$typeGarage,
-            "typeTechnicalControl" => $this->$typeTechnicalControl,
-            "mailPartner" => $this->$mailPartner,
-            "nameBilling" => $this->$nameBilling,
-            "siretPartner" => $this->$siretPartner,
-            "numberAddressBilling" => $this->$numberAddressBilling,
-            "typeAddressBilling" => $this->$typeAddressBilling,
-            "nameAddressBilling" => $this->$nameAddressBilling,
-            "complementAddressBilling" => $this->$complementAddressBilling,
-            "zipAddressBilling" => $this->$zipAddressBilling,
-            "cityAddressBilling" => $this->$cityAddressBilling
+            "usernamePartner" => $this->usernamePartner,
+            "mixedPassword" => password_hash($this->mixedPassword, PASSWORD_DEFAULT),
+            "namePartner" => $this->namePartner,
+            "numberAddressPartner" => $this->numberAddressPartner,
+            "typeAddressPartner" => $this->typeAddressPartner,
+            "nameAddressPartner" => $this->nameAddressPartner,
+            "complementAddressPartner" => $this->complementAddressPartner,
+            "zipAddressPartner" => $this->zipAddressPartner,
+            "cityAddressPartner" => $this->cityAddressPartner,
+            "phonePartner" => $this->phonePartner,
+            "statusPartner" => $this->statusPartner,
+            "typeGarage" => $this->typeGarage,
+            "typeTechnicalControl" => $this->typeTechnicalControl,
+            "mailPartner" => $this->mailPartner,
+            "nameBilling" => $this->nameBilling,
+            "siretPartner" => $this->siretPartner,
+            "numberAddressBilling" => $this->numberAddressBilling,
+            "typeAddressBilling" => $this->typeAddressBilling,
+            "nameAddressBilling" => $this->nameAddressBilling,
+            "complementAddressBilling" => $this->complementAddressBilling,
+            "zipAddressBilling" => $this->zipAddressBilling,
+            "cityAddressBilling" => $this->cityAddressBilling
         ];
         // on exécute la requête et on vérifie si elle s'est bien déroulée 
         $result = $stmt->execute($params);
@@ -123,7 +123,7 @@ class Partner
         WHERE idPartner = :idPartner
         LIMIT 0,1";
         $stmt = $this->conn->prepare($query);
-        $params = ["idPartner" => $idPartner];
+        $params = ["idPartner" => $this->idPartner];
         $stmt->execute($params);
         if ($stmt->execute($params)) {
             $row = $stmt->fetch();    
@@ -140,7 +140,7 @@ class Partner
             WHERE usernamePartner = :usernamePartner
             LIMIT 0,1";
         $stmt = $this->conn->prepare($query);
-        $params = ["usernamePartner" => $usernamePartner];
+        $params = ["usernamePartner" => $this->usernamePartner];
         if ($stmt->execute($params)) {
             $row = $stmt->fetch();    
             return $row;
