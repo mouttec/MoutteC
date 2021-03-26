@@ -12,7 +12,9 @@ $partner = new Partner($conn);
 
 $decodedData = json_decode(file_get_contents("php://input"));
 
-$partner->idPartner = $decodedData->idPartner;
+if (!empty($decodedData->idPartner)) {
+    $partner->idPartner = $decodedData->idPartner;
+}
 $partner->usernamePartner = $decodedData->usernamePartner;
 $partner->mixedPassword = $decodedData->password;
 $partner->namePartner = $decodedData->namePartner;

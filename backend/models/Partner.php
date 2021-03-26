@@ -1,10 +1,9 @@
 <?php
 class Partner 
 {
-    // Propriétés privées de connexion à la DB
     private $conn;
     private $table = "partners";
-    // Propriétés publiques de l'objet Post
+ 
     public $idPartner;
     public $usernamePartner;
     public $mixedPassword;
@@ -30,7 +29,6 @@ class Partner
     public $cityAddressBilling;
     public $datePartner;
 
-    // Constructeur : quand on instancie l'objet, on lui passe la connexion à la DB
     public function __construct($db) 
     {
         $this->conn = $db;
@@ -38,7 +36,7 @@ class Partner
 
     public function createPartner() 
     {
-        // On crée la requête
+
         $query = "
             INSERT INTO "
             . $this->table .
@@ -66,7 +64,7 @@ class Partner
             zipAddressBilling = :zipAddressBilling,
             cityAddressBilling = :cityAddressBilling
         ";
-        // on prépare la requête
+
         $stmt = $this->conn->prepare($query);
         $params = [
             "usernamePartner" => $this->usernamePartner,
@@ -92,13 +90,12 @@ class Partner
             "zipAddressBilling" => $this->zipAddressBilling,
             "cityAddressBilling" => $this->cityAddressBilling
         ];
-        // on exécute la requête et on vérifie si elle s'est bien déroulée 
         $result = $stmt->execute($params);
+
         if ($result) {
             return true; 
-        } else {
-            return false;
         }
+        return false;
     }
 
     public function listPartners() 
