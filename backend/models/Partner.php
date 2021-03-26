@@ -59,7 +59,7 @@ class Partner
             mailPartner = :mailPartner,        
             nameBilling = :nameBilling,
             siretPartner = :siretPartner,
-            numberAddrerssBilling = :numberAddressBilling,
+            numberAddressBilling = :numberAddressBilling,
             typeAddressBilling = :typeAddressBilling,
             nameAddressBilling = :nameAddressBilling,
             complementAddressBilling = :complementAddressBilling,

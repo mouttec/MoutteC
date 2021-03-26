@@ -1,16 +1,8 @@
 <?php
-
-//ini_set('display_errors', 1);
-//ini_set('display_startup_errors', 1);
-//error_reporting(E_ALL);
-
-// On envoie les headers
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST");
 header("Content-Type: application/json");
 header("Access-Control-Allow-Headers: Access-Control-Allow-Headers, Access-Control-Allow-Methods, Content-Type, Authorization, X-Requested-With");
-
-// On inclus les objets (ou classes) nécessaires
 include_once "../../config/Database.php";
 include_once "../../models/Agency.php";
 
@@ -43,19 +35,3 @@ if ($result) {
 } else {
     echo json_encode(["message" => "L'agence n'a pas pu être éditée..."]);
 }
-
-    // case 'changePassword':
-    //     if (!empty($agencyExists) 
-    //         && (password_verify($oldPassword, $agency['mixedPassword']) 
-    //             || $_SESSION('superAdmin' == 1))) {
-    //         $agencyRequest->passwordUpdate($agency); 
-    //     }
-    //     break;
-//     case 'deleteAgency':
-//         $agency->idAgency = $decodedData->idAgency;
-//         $result = $agency->deleteAgency($agency->idAgency);
-//         break;
-//     default:
-//      $result = false;
-//
-
