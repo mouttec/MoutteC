@@ -36,7 +36,7 @@ class Partner
         $this->conn = $db;
     }
 
-    public function createPartner($partnerData) 
+    public function createPartner() 
     {
         // On crée la requête
         $query = "
