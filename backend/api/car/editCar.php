@@ -11,6 +11,7 @@ $conn = $db->connect();
 $car = new Car($conn);
 
 $decodedData = json_decode(file_get_contents("php://input"));
+
 $car->idCustomer = $decodedData->idCustomer;
 $car->licensePlateCar = $decodedData->licensePlateCar;
 $car->brandCar = $decodedData->brandCar;
