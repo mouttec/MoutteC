@@ -14,8 +14,8 @@ class Booking {
     public $dateReturn;
     public $hoursReturn;
     public $idCar;
-    public $idAddressTakingCare;
-    public $idAddressReturn;
+    public $idPickupAddress;
+    public $idReturnAddress;
 
     public function __construct($db) {
         $this->conn = $db;
@@ -33,10 +33,10 @@ class Booking {
             statusBooking = :statusBooking,
             formulaBooking = :formulaBooking,
             dateReturn = :dateReturn,
-            hoursReturn = :dateReturn,        
+            hoursReturn = :hoursReturn,        
             idCar = :idCar,
-            idAddressTakingCare = :idAddressTakingCare,
-            idAddressReturn = :idAddresReturn";
+            idPickupAddress = :idPickupAddress,
+            idReturnAddress = :idReturnAddress";
         $stmt = $this->conn->prepare($query);
 
         $params = [
@@ -49,8 +49,8 @@ class Booking {
             "dateReturn" => htmlspecialchars(strip_tags($this->dateReturn)),
             "hoursReturn" => htmlspecialchars(strip_tags($this->hoursReturn)),
             "idCar" => htmlspecialchars(strip_tags($this->idCar)),
-            "idAddressTakingCare" => htmlspecialchars(strip_tags($this->idAddressTakingCare)),
-            "idAddressReturn" => htmlspecialchars(strip_tags($this->idAddressReturn))
+            "idPickupAddress" => htmlspecialchars(strip_tags($this->idPickupAddress)),
+            "idReturnAddress" => htmlspecialchars(strip_tags($this->idReturnAddress))
         ];
 
         if($stmt->execute($params)) {
@@ -153,8 +153,8 @@ class Booking {
             dateReturn = :dateReturn,
             hoursReturn = :dateReturn,
             idCar = :idCar,
-            idAddressTakingCare = :idAddressTakingCare,
-            idAddressReturn = :idAddresReturn
+            idPickupAddress = :idPickupAddress,
+            idReturnAddress = :idReturnAddress
             WHERE
             idBooking = :idBooking       
         ";
@@ -169,8 +169,8 @@ class Booking {
             "dateReturn" => htmlspecialchars(strip_tags($this->dateReturn)),
             "hoursReturn" => htmlspecialchars(strip_tags($this->hoursReturn)),
             "idCar" => htmlspecialchars(strip_tags($this->idCar)),
-            "idAddressTakingCare" => htmlspecialchars(strip_tags($this->idAddressTakingCare)),
-            "idAddressReturn" => htmlspecialchars(strip_tags($this->idAddressReturn)),
+            "idPickupAddress" => htmlspecialchars(strip_tags($this->idPickupAddress)),
+            "idReturnAddress" => htmlspecialchars(strip_tags($this->idReturnAddress)),
             "idBooking" => htmlspecialchars(strip_tags($this->idBooking))
         ];
 

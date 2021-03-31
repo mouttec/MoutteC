@@ -41,8 +41,8 @@ if (isset($_GET['idBooking'])) {
                  "dateReturn" => $dateReturn,
                  "hoursReturn" => $hoursReturn,
                  "idCar" => $idCar,
-                 "idAddressTakingCare" => $idAddressTakingCare,
-                 "idAddressReturn" => $idAddressReturn
+                 "idPickupAddress" => $idPickupAddress,
+                 "idReturnAddress" => $idReturnAddress
             ];
             array_push($bookings_array, $booking_item);
         }

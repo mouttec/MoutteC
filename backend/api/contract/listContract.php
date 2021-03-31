@@ -47,7 +47,7 @@ if (isset($_GET['idContract'])) {
     } else {
         $contracts = $contract->listContracts();
     }
-    $counter = $contract->rowCount();
+    $counter = $contracts->rowCount();
     if ($counter > 0) {
         $contracts_array = array();
         while ($row = $contracts->fetch()) {

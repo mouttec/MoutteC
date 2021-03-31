@@ -154,9 +154,7 @@ class Contract
             idCar = :idCar,
             idPickupAddress = :idPickupAddress,
             idReturnAddress = :idReturnAddress,
-            WHERE
-            idContract = :idContract
-        ";
+            WHERE idContract = :idContract";
         $stmt = $this->conn->prepare($query);
 
         $params = [
