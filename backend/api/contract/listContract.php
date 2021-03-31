@@ -19,7 +19,7 @@ if (isset($_GET['idContract'])) {
     $counter = rowCount($videos);
     if ($counter > 0) {
         $videos_array = array();
-        while($row = $videos->fetch()) {
+        while ($row = $videos->fetch()) {
             $video_item = [
                 "idVideo" => $idVideo,
                 "urlVideo" => $urlVideo,
@@ -36,12 +36,12 @@ if (isset($_GET['idContract'])) {
         $contract->idPartner = $_GET['idPartner'];
         $contracts = $contract->searchContractsByPartner();
     }
-    else if (isset($_GET['idCustomer'])) {
+    elseif (isset($_GET['idCustomer'])) {
         $contract->idCustomer = $_GET['idCustomer'];
         $contracts = $contract->searchContractsByCustomer();
     }
-    else if (isset($_GET['idCar'])) {
-        $contract->idCar = $_GET['idContract'];
+    elseif (isset($_GET['idCar'])) {
+        $contract->idCar = $_GET['idCar'];
         $contracts = $contract->searchContractsByCar();
     } else {
         $contracts = $contract->listContracts();

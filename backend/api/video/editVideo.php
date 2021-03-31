@@ -38,7 +38,7 @@ $video->urlVideo = $video->idContract ."/". $videoName;
 $result = $video->createVideo();
 
 if ($result) {
-    echo json_encode([ "message" => "La vidéo a été créée !" ]) 
+    echo json_encode([ "message" => "La vidéo a été créée !" ]);
 } else {     
     echo json_encode([ "message" => "La vidéo n'a pas pu être créée..." ]);
 }

@@ -12,7 +12,7 @@ $car = new Car($conn);
 if (isset($_GET['idCar'])) {
     $car->idCar = $_GET['idCar'];
     $result = $car->searchCarById();
-} if else (isset($_GET['licensePlateCar'])) {
+} elseif (isset($_GET['licensePlateCar'])) {
     $car->licensePlateCar = $_GET['licensePlateCar'];
     $result = $car->searchCarByPlate();
 } else {

@@ -31,7 +31,7 @@ if (!empty($decodedData->idBooking)) {
 }
 
 if ($result) {
-    echo json_encode([ "message" => "La réservation a été éditée !" ]) 
+    echo json_encode([ "message" => "La réservation a été éditée !" ]);
 } else {     
     echo json_encode([ "message" => "La réservation n'a pas pu être éditée..." ]);
 }

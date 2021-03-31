@@ -13,13 +13,13 @@ if (isset($_GET['idBooking'])) {
     $booking->idBooking = $_GET['idBooking'];
     $result = $booking->searchBookingById();
 } else {
-    if (isset($_GET['idPartner']) {
+    if (isset($_GET['idPartner'])) {
         $booking->idPartner = $_GET['idPartner'];
         $bookings = $booking->searchBookingByPartner();
-    } else if (isset($_GET['idCustomer'])) {
+    } elseif (isset($_GET['idCustomer'])) {
         $booking->idCustomer = $_GET['idCustomer'];
         $bookings = $booking->searchBookingByCustomer();
-    } else if (isset($_GET['dateBooking'])) {
+    } elseif (isset($_GET['dateBooking'])) {
         $booking->dateBooking == $_GET['dateBooking'];
         $bookings = $booking->searchBookingByDay();
     } else {

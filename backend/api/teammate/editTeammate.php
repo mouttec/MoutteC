@@ -5,7 +5,7 @@ header("Access-Control-Allow-Methods: POST");
 header("Content-Type: application/json");
 header("Access-Control-Allow-Headers: Access-Control-Allow-Headers, Access-Control-Allow-Methods, Content-Type, Authorization, X-Requested-With");
 include_once "../../config/Database.php";
-include_once "../../models/Manager.php";
+include_once "../../models/Teammate.php";
 
 $db = new Database();
 $conn = $db->connect();

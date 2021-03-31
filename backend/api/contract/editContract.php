@@ -33,7 +33,7 @@ if (!empty($decodedData->idTeammateReturn)) {
 }
 
 if ($result) {
-    echo json_encode([ "message" => "Le contrat a été édité !" ]) 
+    echo json_encode([ "message" => "Le contrat a été édité !" ]);
 } else {     
     echo json_encode([ "message" => "Le contrat n'a pas pu être édité..." ]);
 }

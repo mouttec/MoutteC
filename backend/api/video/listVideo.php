@@ -15,7 +15,7 @@ if (isset($_GET['idVideo'])) {
     $video->idVideo = $_GET['idVideo'];
     $result = $video->searchVideo();
 } else {
-    $result = $video->listVideos() 
+    $result = $video->listVideos();
 }
 
 if (isset($result) && !empty($result)) {
