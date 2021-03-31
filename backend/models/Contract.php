@@ -5,7 +5,6 @@ class Contract
     private $table = "contracts";
 
     public $idContract;
-    public $idCustomer;
     public $idPartner;
     public $idBooking;
     public $urlContract;
@@ -181,9 +180,7 @@ class Contract
             . $this->table .
             " SET
             idTeammateReturn = :idTeammateReturn,
-            WHERE
-            idContract = :idContract       
-        ";
+            WHERE idContract = :idContract ";
         $stmt = $this->conn->prepare($query);
 
         $params = [
