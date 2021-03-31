@@ -26,9 +26,9 @@ if (!empty($decodedData->idTeammateReturn)) {
     $contract->idReturnAddress = $decodedData->idReturnAddress;
     if (!empty($decodedData->idContract)) {
         $contract->idContract = $decodedData->idContract;
-        $result = $contract->updateContract();
+        $result = $contract->updateContract($contract);
     } else {
-        $result = $contract->createContract();
+        $result = $contract->createContract($contract);
     }
 }
 

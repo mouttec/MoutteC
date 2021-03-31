@@ -13,7 +13,7 @@ $decodedData = json_decode(file_get_contents("php://input"));
 
 if (isset($_GET['idVideo'])) {
     $video->idVideo = $_GET['idVideo'];
-    $result = $video->searchVideo();
+    $result = $video->searchVideo($video);
 } else {
     $result = $video->listVideos();
 }

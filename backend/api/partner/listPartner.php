@@ -11,7 +11,7 @@ $partner = new Partner($conn);
 
 if (isset($_GET['idPartner'])) {
 	$partner->idPartner = $_GET['idPartner'];
-    $result = $partner->searchPartnerById();
+    $result = $partner->searchPartnerById($partner);
 } else {
     $partners = $partner->listPartners();
     $counter = $partners->rowCount();

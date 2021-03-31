@@ -37,9 +37,9 @@ $partner->cityAddressBilling = $decodedData->cityAddressBilling;
 
 if (!empty($partner->idPartner)) {
 	$partner->idPartner = $decodedData->idPartner;
-    $result = $partner->updatePartner();
+    $result = $partner->updatePartner($partner);
 } else {
-    $result = $partner->createPartner();
+    $result = $partner->createPartner($partner);
 }
 
 if ($result) {

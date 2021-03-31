@@ -11,7 +11,7 @@ $teammate = new Teammate($conn);
 
 if (isset($_GET['idTeammate'])) {
 	$teammate->idTeammate = $_GET['idTeammate'];
-	$result = $teammate->searchTeammateById();
+	$result = $teammate->searchTeammateById($teammate);
 } else {
 	$teammates = $teammate->listTeammates();
 	$counter = $teammates->rowCount();

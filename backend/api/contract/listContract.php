@@ -12,11 +12,11 @@ $contract = new Contract($conn);
 
 if (isset($_GET['idContract'])) {
     $contract->idContract = $_GET['idContract'];
-    $resultContract = $contract->searchContract();
+    $resultContract = $contract->searchContract($contract);
     //Récupération des vidéos liées au contrat
-    $videos = new Video($conn);
-    $videos->idContract = $_GET['idContract'];
-    $videos = $videos->searchContractVideos();
+    $video = new Video($conn);
+    $video->idContract = $_GET['idContract'];
+    $videos = $video->searchContractVideos($video);
     $counter = $videos->rowCount();
     if ($counter > 0) {
         $videos_array = array();
@@ -35,15 +35,15 @@ if (isset($_GET['idContract'])) {
 } else {
     if (isset($_GET['idPartner'])) {
         $contract->idPartner = $_GET['idPartner'];
-        $contracts = $contract->searchContractsByPartner();
+        $contracts = $contract->searchContractsByPartner($contract);
     }
     elseif (isset($_GET['idCustomer'])) {
         $contract->idCustomer = $_GET['idCustomer'];
-        $contracts = $contract->searchContractsByCustomer();
+        $contracts = $contract->searchContractsByCustomer($contract);
     }
     elseif (isset($_GET['idCar'])) {
         $contract->idCar = $_GET['idCar'];
-        $contracts = $contract->searchContractsByCar();
+        $contracts = $contract->searchContractsByCar($contract);
     } else {
         $contracts = $contract->listContracts();
     }

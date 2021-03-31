@@ -11,7 +11,7 @@ $agency = new Agency($conn);
 
 if (isset($_GET['idAgency'])) {
 	$agency->idAgency = $_GET['idAgency'];
-    $result = $agency->searchAgency();
+    $result = $agency->searchAgency($agency);
 } else {
     $agencies = $agency->listAgencies();
     $counter = $agencies->rowCount();

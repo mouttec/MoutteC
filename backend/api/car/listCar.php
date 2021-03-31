@@ -11,14 +11,14 @@ $car = new Car($conn);
 
 if (isset($_GET['idCar'])) {
     $car->idCar = $_GET['idCar'];
-    $result = $car->searchCarById();
+    $result = $car->searchCarById($car);
 } elseif (isset($_GET['licensePlateCar'])) {
     $car->licensePlateCar = $_GET['licensePlateCar'];
-    $result = $car->searchCarByPlate();
+    $result = $car->searchCarByPlate($car);
 } else {
     if (isset($_GET['idCustomer'])) {
         $car->idCustomer = $_GET['idCustomer'];
-        $cars = $car->searchCarsByCustomer();
+        $cars = $car->searchCarsByCustomer($car);
     } else {
         $cars = $car->listCars();
     }

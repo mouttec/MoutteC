@@ -22,9 +22,9 @@ $car->urlGrayCard = $decodedData->urlGrayCard;
 
 if(!empty($decodedData->idCar)) {
     $car->idCar = $decodedData->idCar;
-    $result = $car->updateCar();
+    $result = $car->updateCar($car);
 } else {
-    $result = $car->createCar();
+    $result = $car->createCar($car);
 }
 
 if ($result) {

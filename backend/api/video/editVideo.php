@@ -12,7 +12,7 @@ $video = new Video($conn);
 
 $decodedData = json_decode(file_get_contents("php://input"));
 $video->idContract = $decodedData->idContract;
-$videos = $video->searchContractVideos();
+$videos = $video->searchContractVideos($video);
 
 $nbVideos = rowCount($videos);
 switch ($nbVideos) {

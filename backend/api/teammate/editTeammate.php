@@ -25,9 +25,9 @@ $teammate->superAdmin = $decodedData->superAdmin;
 
 if (!empty($decodedData->idTeammate)) {
     $teammate->idTeammate = $decodedData->idTeammate;
-    $result = $teammate->updateTeammate();
+    $result = $teammate->updateTeammate($teammate);
 } else {
-    $result = $teammate->createTeammate();
+    $result = $teammate->createTeammate($teammate);
 }
 
 if ($result) {
