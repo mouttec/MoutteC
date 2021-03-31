@@ -44,7 +44,7 @@ class Video {
         $stmt = $this->conn->prepare($query);
 
         if ($stmt->execute()) {
-            return true; 
+            return $stmt; 
         }
         return false;
     }
@@ -61,7 +61,7 @@ class Video {
         $params = ["idContract" => htmlspecialchars(strip_tags($this->idContract))];
 
         if ($stmt->execute($params)) {
-            return true; 
+            return $stmt; 
         }
         return false;
     }
@@ -77,7 +77,8 @@ class Video {
         $params = ["idVideo" => htmlspecialchars(strip_tags($this->idVideo))];
 
         if ($stmt->execute($params)) {
-            return true; 
+            $row = $stmt->fetch();    
+            return $row;
         }
         return false;
     }

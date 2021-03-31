@@ -49,8 +49,8 @@ class Contract
             "idTeammatePickup" => htmlspecialchars(strip_tags($this->idTeammatePickup))
         ];
 
-        if ($stmt->execute()) {
-            return $stmt;
+        if ($stmt->execute($params)) {
+            return true;
         }
         return false;
     }
@@ -134,7 +134,7 @@ class Contract
         
         $params = ["idContract" => htmlspecialchars(strip_tags($this->idContract))];
         
-        if ($stmt->execute()) {
+        if ($stmt->execute($params)) {
             $row = $stmt->fetch();    
             return $row;
         }
@@ -189,8 +189,8 @@ class Contract
         $stmt = $this->conn->prepare($query);
 
         $params = [
-            "idContract" => htmlspecialchars(strip_tags($this->idContract)),
-            "idTeammateReturn" => htmlspecialchars(strip_tags($this->idTeammateReturn))
+            "idTeammateReturn" => htmlspecialchars(strip_tags($this->idTeammateReturn)),
+            "idContract" => htmlspecialchars(strip_tags($this->idContract))
         ];
 
         if ($stmt->execute($params)) {

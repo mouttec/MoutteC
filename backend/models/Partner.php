@@ -121,8 +121,9 @@ class Partner
         WHERE idPartner = :idPartner
         LIMIT 0,1";
         $stmt = $this->conn->prepare($query);
+
         $params = ["idPartner" => htmlspecialchars(strip_tags($this->idPartner))];
-        $stmt->execute($params);
+        
         if ($stmt->execute($params)) {
             $row = $stmt->fetch();    
             return $row;
@@ -223,8 +224,8 @@ class Partner
         ";
         $stmt = $this->conn->prepare($query);
         $params = [
-            "idPartner" => htmlspecialchars(strip_tags($this->idPartner)),
             "mixedPassword" => password_hash($this->mixedPassword, PASSWORD_DEFAULT),
+            "idPartner" => htmlspecialchars(strip_tags($this->idPartner))
         ];
         if ($stmt->execute($params)) {
             return true;
@@ -248,5 +249,4 @@ class Partner
         return false;
         
     }
-    
 }

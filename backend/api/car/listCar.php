@@ -16,7 +16,7 @@ if (isset($_GET['idCar'])) {
     $car->licensePlateCar = $_GET['licensePlateCar'];
     $result = $car->searchCarByPlate();
 } else {
-    if (isset($_GET['idCustomer']) {
+    if (isset($_GET['idCustomer'])) {
         $car->idCustomer = $_GET['idCustomer'];
         $cars = $car->searchCarsByCustomer();
     } else {

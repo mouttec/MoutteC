@@ -15,8 +15,9 @@ if (isset($_GET['idContract'])) {
     $resultContract = $contract->searchContract();
     //Récupération des vidéos liées au contrat
     $videos = new Video($conn);
+    $videos->idContract = $_GET['idContract'];
     $videos = $videos->searchContractVideos();
-    $counter = rowCount($videos);
+    $counter = $videos->rowCount();
     if ($counter > 0) {
         $videos_array = array();
         while ($row = $videos->fetch()) {

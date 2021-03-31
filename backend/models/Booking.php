@@ -151,7 +151,8 @@ class Booking {
             statusBooking = :statusBooking,
             formulaBooking = :formulaBooking,
             dateReturn = :dateReturn,
-            hoursReturn = :dateReturn,        
+            hoursReturn = :dateReturn,
+            idCar = :idCar,
             idAddressTakingCare = :idAddressTakingCare,
             idAddressReturn = :idAddresReturn
             WHERE

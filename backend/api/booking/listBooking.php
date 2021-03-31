@@ -43,7 +43,7 @@ if (isset($_GET['idBooking'])) {
                  "idCar" => $idCar,
                  "idAddressTakingCare" => $idAddressTakingCare,
                  "idAddressReturn" => $idAddressReturn
-            ]
+            ];
             array_push($bookings_array, $booking_item);
         }
         $result = $bookings_array;

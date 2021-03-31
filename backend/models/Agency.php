@@ -65,8 +65,8 @@ class Agency {
             . $this->table . " 
             ORDER BY
             dateAgency ASC";
-
         $stmt = $this->conn->prepare($query);
+
         $stmt->execute();
 
         return $stmt;
