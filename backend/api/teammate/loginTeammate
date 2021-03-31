@@ -1,26 +1,23 @@
 <?php
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json");
+header("Access-Control-Allow-Methods: POST");
 include_once("database.php");
 include_once "../../models/Teammate.php";
 
+$db = new Database();
+$conn = $db->connect();
+$teammate = new Teammate($conn);
+
 $decodedData = json_decode(file_get_contents("php://input"));
-$teammate = array();
-foreach ($decodedData as $key => $value) {
-    array_push($teammate[$key] = htmlspecialchars(strip_tags($value)));
+$teammate->usernameTeammate = $decodedData->usernameTeammate;
+$password = htmlspecialchars($decodedData->$password);
+
+$teammateExists = $teammateRequest->searchTeammateByUsername($teammate);
+
+if ((!empty($teammateExists)) && 
+ 	(password_verify($password, $teammateExists->mixedPassword))) {
+  		echo json_encode($teammateExists);
+} else {
+  	http_response_code(404);
 }
-
-//On créé un objet teammate pour chercher le teammate qui correspond à l'email donné
-$teammateRequest = new Teammate;
-$teammateExists = $teammateRequest->searchTeammate($teammate['usernameTeammate']);
-//Vérification du mot de passe
-(!empty($teammateExists) && password_verify($teammate['password'], $teammateExists['mixedPassword'])) : echo json_encode($teammateExists) ? http_response_code(404);
-
-
-// $password = mysqli_real_escape_string($mysqli, trim($decodedData['passwordTeammate']));
-// $usernameTeammate = mysqli_real_escape_string($mysqli, trim($decodedData['usernameTeammate']));
-    //$sql = "SELECT * FROM teammates where email='$email'";
-    // $result = mysqli_query($mysqli,$sql);
-    // $rows = array();
-    // while($row = mysqli_fetch_assoc($result))
-    // {
-    //     $rows[] = $row;
-    // }

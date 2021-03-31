@@ -16,8 +16,8 @@ $password = htmlspecialchars($decodedData->password);
 $partnerExists = $partner->searchPartnerByUsername($partner);
 
 //Si un partner existe avec cet username et que le password matche
-if (!empty($partnerExists) && 
-	(password_verify($password, $partnerExists['mixedPassword'])) {
+if ((!empty($partnerExists)) && 
+	(password_verify($password, $partnerExists->mixedPassword))) {
 		echo json_encode($partnerExists);
 } else {
 	http_response_code(404);	

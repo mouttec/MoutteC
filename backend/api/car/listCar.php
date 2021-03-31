@@ -1,37 +1,50 @@
 <?php
-//ini_set('display_errors', 1);
-//ini_set('display_startup_errors', 1);
-//error_reporting(E_ALL);
-// On envoie les headers
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 header("Access-Control-Allow-Methods: GET");
-// On inclus les objets (ou classes) nécessaires
 include_once "../../config/Database.php";
 include_once "../../models/Car.php";
 
-//!\\ Est-ce que l'on récupère une $data ?
-$decodedData = json_decode(file_get_contents("php://input"));
-$car = array();
-foreach ($decodedData as $key => $value) {
-    array_push($car[$key] =  htmlspecialchars(strip_tags($value)));
-}
-
 $db = new Database();
 $conn = $db->connect();
-$carRequest = new Car($conn);
+$car = new Car($conn);
 
-//On regarde quelle action de Read est demandée
-switch ($car['action']) {
-    case 'listCustomerCars':
-        $result = $carRequest->listCustomerCars($car['idCustomer']);
-        break;
-    case 'searchCar':
-        $result = $carRequest->searchCar($car['licensePlateCar']);
-        break;
-    default:
-        $result = $carRequest->listCars();
-        break;
+if (isset($_GET['idCar'])) {
+    $car->idCar = $_GET['idCar'];
+    $result = $car->searchCarById();
+} if else (isset($_GET['licensePlateCar'])) {
+    $car->licensePlateCar = $_GET['licensePlateCar'];
+    $result = $car->searchCarByPlate();
+} else {
+    if (isset($_GET['idCustomer']) {
+        $car->idCustomer = $_GET['idCustomer'];
+        $cars = $car->searchCarsByCustomer();
+    } else {
+        $cars = $car->listCars();
+    }
+    $counter = $cars->rowCount();
+    if ($counter > 0) {
+        $cars_array = array();
+        while ($row = $cars->fetch()) {
+            extract($row);
+            $car_item = [
+                 "idCar" => $idCar,
+                 "idCustomer" => $idCustomer,
+                 "licensePlateCar" => $licensePlateCar,
+                 "brandCar" => $brandCar,
+                 "modelCar" => $modelCar,
+                 "dateOfCirculationCar" => $dateOfCirculationCar,
+                 "motorizationCar" => $motorizationCar,
+                 "urlGrayCard" => $urlGrayCard
+            ]
+            array_push($cars_array, $car_item);
+        }
+        $result = $cars_array;
+    }
 }
 
-(isset($result) && !empty($result)) : echo json_encode($result) ? http_response_code(404);
+if (isset($result) && !empty($result)) {
+    echo json_encode($result);
+} else { 
+    http_response_code(404); 
+}

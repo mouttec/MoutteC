@@ -12,9 +12,6 @@ $partner = new Partner($conn);
 
 $decodedData = json_decode(file_get_contents("php://input"));
 
-if (!empty($decodedData->idPartner)) {
-    $partner->idPartner = $decodedData->idPartner;
-}
 $partner->usernamePartner = $decodedData->usernamePartner;
 $partner->mixedPassword = $decodedData->password;
 $partner->namePartner = $decodedData->namePartner;
@@ -39,9 +36,10 @@ $partner->zipAddressBilling = $decodedData->zipAddressBilling;
 $partner->cityAddressBilling = $decodedData->cityAddressBilling;
 
 if (!empty($partner->idPartner)) {
-    $result = $partner->updatePartner($partner);
+	$partner->idPartner = $decodedData->idPartner;
+    $result = $partner->updatePartner();
 } else {
-    $result = $partner->createPartner($partner);
+    $result = $partner->createPartner();
 }
 
 if ($result) {

@@ -64,8 +64,8 @@ class Partner
             zipAddressBilling = :zipAddressBilling,
             cityAddressBilling = :cityAddressBilling
         ";
-
         $stmt = $this->conn->prepare($query);
+
         $params = [
             "usernamePartner" => $this->usernamePartner,
             "mixedPassword" => password_hash($this->mixedPassword, PASSWORD_DEFAULT),
@@ -90,9 +90,8 @@ class Partner
             "zipAddressBilling" => $this->zipAddressBilling,
             "cityAddressBilling" => $this->cityAddressBilling
         ];
-        $result = $stmt->execute($params);
 
-        if ($result) {
+        if ($stmt->execute($params)) {
             return true; 
         }
         return false;
@@ -107,9 +106,11 @@ class Partner
             ORDER BY
             idPartner";
         $stmt = $this->conn->prepare($query);
-        $stmt->execute(); 
 
-        return $stmt;
+        if ($stmt->execute()) {
+            return $stmt;
+        }
+        return false;
     }
 
     public function searchPartnerById() {
@@ -137,7 +138,9 @@ class Partner
             WHERE usernamePartner = :usernamePartner
             LIMIT 0,1";
         $stmt = $this->conn->prepare($query);
+
         $params = ["usernamePartner" => $this->usernamePartner];
+
         if ($stmt->execute($params)) {
             $row = $stmt->fetch();    
             return $row;
@@ -223,8 +226,10 @@ class Partner
             "idPartner" => $this->idPartner,
             "mixedPassword" => password_hash($this->mixedPassword, PASSWORD_DEFAULT),
         ];
-        $stmt->execute($params);
-        return true;
+        if ($stmt->execute($params)) {
+            return true;
+        }
+        return false;
     }
 
 
@@ -237,8 +242,10 @@ class Partner
         ";
         $stmt = $this->conn->prepare($query);
         $params = ["usernamePartner" => $this->usernamePartner];
-        $stmt->execute($params); 
-        return true;
+        if ($stmt->execute($params)) {
+            return true;
+        }
+        return false;
         
     }
     

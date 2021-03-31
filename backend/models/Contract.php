@@ -1,10 +1,9 @@
 <?php
 class Contract 
 {
-    // Propriétés privées de connexion à la DB
     private $conn;
     private $table = "contracts";
-    // Propriétés publiques de l'objet Post
+
     public $idContract;
     public $idCustomer;
     public $idPartner;
@@ -16,77 +15,63 @@ class Contract
     public $idReturnAddress;
     public $idTeammatePickup;
     public $idTeammateReturn;
-    public $idVideoPickup;
-    public $idVideoDepositPartner;
-    public $idVideoWithdrawalPartner;
-    public $idVideoReturn;
 
-    // Constructeur : quand on instancie l'objet, on lui passe la connexion à la DB
     public function __construct($db) 
     {
         $this->conn = $db;
     }
 
-    // Créer un post
     public function createContract() 
     {
-        // On crée la requête
         $query = "
             INSERT INTO "
             . $this->table .
             " SET
             idCustomer = :idCustomer,
             idPartner = :idPartner,
+            idBooking = :idBooking,
             urlContract = :urlContract,
             idCar = :idCar,
             idPickupAddress = :idPickupAddress,
             idReturnAddress = :idReturnAddress,
-            idVideoPickup = :idVideoPickup
+            idTeammatePickup = :idTeammatePickup
         ";
-        // on prépare la requête
         $stmt = $this->conn->prepare($query);
-        // On nettoie et sécurise les inputs
-        // référence strip_tags(): https://www.php.net/manual/en/function.strip-tags.php
-        // référence htmlspecialchars() : https://www.php.net/manual/en/function.htmlspecialchars.php 
-        // $this->idCustomer = htmlspecialchars(strip_tags($this->idCustomer));
-        // $this->idPartner = htmlspecialchars(strip_tags($this->idPartner));
-        // $this->urlContract = htmlspecialchars(strip_tags($this->urlContract));
-        // $this->idCar = htmlspecialchars(strip_tags($this->idCar));
-        // $this->idAddressTakingCare = htmlspecialchars(strip_tags($this->idAddressTakingCare));
-        // $this->idAddressReturn = htmlspecialchars(strip_tags($this->idAddressReturn));
-        // tableau associatif pour lier les paramètres reçus à la requête
+
         $params = [
-            "idCustomer" => $this->idCustomer,
-            "idPartner" => $this->idPartner,
-            "urlContract" => $this->urlContract,
-            "idCar" => $this->idCar,
-            "idPickupAddress" => $this->idPickupAddress,
-            "idReturnAddress" => $this->idReturnAddress,
+            "idCustomer" => htmlspecialchars(strip_tags($this->idCustomer));,
+            "idPartner" => htmlspecialchars(strip_tags($this->idPartner)),
+            "idBooking" => htmlspecialchars(strip_tags($this->idBooking)),
+            "urlContract" => htmlspecialchars(strip_tags($this->urlContract)),
+            "idCar" => htmlspecialchars(strip_tags($this->idCar)),
+            "idPickupAddress" => htmlspecialchars(strip_tags($this->idPickupAddress)),
+            "idReturnAddress" => htmlspecialchars(strip_tags($this->idReturnAddress)),
+            "idTeammatePickup" => htmlspecialchars(strip_tags($this->idTeammatePickup))
         ];
-        // on exécute la requête et on vérifie si elle s'est bien déroulée 
-        $stmt->execute($params) : return true ? return false;
+
+        if ($stmt->execute()) {
+            return $stmt;
+        }
+        return false;
     }
 
-    // Récupérer la liste des Contracts
     public function listContracts() 
     {
-        // création de la requête
         $query = "
             SELECT *
             FROM "
             . $this->table . " 
             ORDER BY
             dateContract DESC";
-        // préparation de la requête
         $stmt = $this->conn->prepare($query);
-        // exécution de la requête
-        $stmt->execute();
-        // on retourne le résultat
-        return $stmt->fetchAll();
+
+        if ($stmt->execute()) {
+            return $stmt;
+        }
+        return false;
     }
 
-    // Récupérer les Contracts d'un Partner
-    public function searchPartnerContracts($idPartner) 
+    public function searchContractsByPartner() 
     {
         $query = "
         SELECT *
@@ -94,12 +79,16 @@ class Contract
         . $this->table . " 
         WHERE idPartner = :idPartner";
         $stmt = $this->conn->prepare($query);
-        $params = ["idPartner" => $idPartner];
-        $stmt->execute($params) : return $stmt->fetchAll() ? return false;
+        
+        $params = ["idPartner" => htmlspecialchars(strip_tags($this->idPartner))];
+
+        if ($stmt->execute($params)) {
+            return $stmt;
+        }
+        return false;
     }
 
-    // Récupérer les Contracts d'un Customer
-    public function searchCustomerContracts($idCustomer) 
+    public function searchCustomerContractsByCustomer() 
     {
         $query = "
         SELECT *
@@ -107,12 +96,16 @@ class Contract
         . $this->table . " 
         WHERE idCustomer = :idCustomer";
         $stmt = $this->conn->prepare($query);
-        $params = ["idCustomer" => $idCustomer];
-        $stmt->execute($params) : return $stmt->fetchAll() ? return false;
+
+        $params = ["idCustomer" => htmlspecialchars(strip_tags($this->idCustomer))];
+        
+        if ($stmt->execute($params)) {
+            return $stmt;
+        }
+        return false;
     }
 
-    // Récupérer les Contracts d'une Car
-    public function searchCarContracts($idCar) 
+    public function searchContractsByCar() 
     {
         $query = "
         SELECT *
@@ -120,11 +113,15 @@ class Contract
         . $this->table . " 
         WHERE idCar = :idCar";
         $stmt = $this->conn->prepare($query);
-        $params = ["idCar" => $idCar];
-        $stmt->execute($params) : return $stmt->fetchAll() ? return false;
+
+        $params = ["idCar" => htmlspecialchars(strip_tags($this->idCar))];
+
+        if ($stmt->execute($params)) {
+            return $stmt;
+        }
+        return false;    
     }
 
-    // Récupérer un Contract
     public function searchContract() 
     {
         $query = "
@@ -134,14 +131,18 @@ class Contract
         WHERE idContract = :idContract
         LIMIT 0,1";
         $stmt = $this->conn->prepare($query);
-        $params = ["idContract" => $this->idContract];
-        $stmt->execute($params) : return $stmt->fetch() ? return false;
+        
+        $params = ["idContract" => htmlspecialchars(strip_tags($this->idContract))];
+        
+        if ($stmt->execute()) {
+            $row = $stmt->fetch();    
+            return $row;
+        }
+        return false;
     }
 
-    // Modifier un post
     public function updateContract() 
     {
-        // On crée la requête
         $query = "
             UPDATE "
             . $this->table .
@@ -149,63 +150,70 @@ class Contract
             idCustomer = :idCustomer,
             idPartner = :idPartner,
             urlContract = :urlContract,
+            idBooking = :idBooking,
             idCar = :idCar,
             idPickupAddress = :idPickupAddress,
             idReturnAddress = :idReturnAddress,
             WHERE
-            idContract = :idContract       
+            idContract = :idContract
         ";
-        // on prépare la requête
         $stmt = $this->conn->prepare($query);
+
         $params = [
-            "idContract" => $this->idContract,
-            "idCustomer" => $this->idCustomer,
-            "idPartner" => $this->idPartner,
-            "urlContract" => $this->urlContract,
-            "idCar" => $this->idCar,
-            "idPickupAddress" => $this->idPickupAddress,
-            "idReturnAddress" => $this->idReturnAddress,
+            "idCustomer" => htmlspecialchars(strip_tags($this->idCustomer));,
+            "idPartner" => htmlspecialchars(strip_tags($this->idPartner)),
+            "idBooking" => htmlspecialchars(strip_tags($this->idBooking)),
+            "urlContract" => htmlspecialchars(strip_tags($this->urlContract)),
+            "idCar" => htmlspecialchars(strip_tags($this->idCar)),
+            "idPickupAddress" => htmlspecialchars(strip_tags($this->idPickupAddress)),
+            "idReturnAddress" => htmlspecialchars(strip_tags($this->idReturnAddress)),
+            "idContract" => htmlspecialchars(strip_tags($this->idContract))
         ];
-        // on exécute la requête et on vérifie si elle s'est bien déroulée
-        $stmt->execute($params) : return true ? return false;
+
+        if ($stmt->execute($params)) {
+            return $stmt;
+        }
+        return false;
     }
 
-    public function teammateAction($contract, $action) 
+    public function teammateReturn() 
     {
-        // On crée la requête
         $query = "
             UPDATE "
             . $this->table .
             " SET
-            idTeammate".$action." = :idTeammate,
+            idTeammateReturn = :idTeammateReturn,
             WHERE
             idContract = :idContract       
         ";
-        // on prépare la requête
         $stmt = $this->conn->prepare($query);
+
         $params = [
             "idContract" => $contract->idContract,
-            "idTeammate" => $contract->idTeammate,
+            "idTeammateReturn" => $contract->idTeammateReturn,
         ];
-        // on exécute la requête et on vérifie si elle s'est bien déroulée
-        $stmt->execute($params) : return true ? return false;
+
+        if ($stmt->execute($params)) {
+            return $stmt;
+        }
+        return false;
     }
 
-    public function deleteContract($idContract) 
-    {
-        // On crée la requête
-        $query = "
-            DELETE
-            FROM " . $this->table .
-            " WHERE idContract = :idContract
-        ";
-        // on prépare la requête
-        $stmt = $this->conn->prepare($query);
-        // on nettoie et sécurise l'input
-        // $this->idContract = htmlspecialchars(strip_tags($this->idContract));
-        // tableau associatif pour lier les paramètres reçus à la requête
-        $params = ["idContract" => $idContract];
-        // on exécute la requête et on vérifie si elle s'est bien déroulée
-        if($stmt->execute($params) : return true ? return false;
-    }    
+    // public function deleteContract() 
+    // {
+    //     // On crée la requête
+    //     $query = "
+    //         DELETE
+    //         FROM " . $this->table .
+    //         " WHERE idContract = :idContract
+    //     ";
+    //     // on prépare la requête
+    //     $stmt = $this->conn->prepare($query);
+    //     // on nettoie et sécurise l'input
+    //     // $this->idContract = htmlspecialchars(strip_tags($this->idContract));
+    //     // tableau associatif pour lier les paramètres reçus à la requête
+    //     $params = ["idContract" => $idContract];
+    //     // on exécute la requête et on vérifie si elle s'est bien déroulée
+    //     if($stmt->execute($params) : return true ? return false;
+    // }    
 }
