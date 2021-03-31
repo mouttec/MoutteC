@@ -43,7 +43,7 @@ class Video {
             idContract DESC";
         $stmt = $this->conn->prepare($query);
 
-        if ($stmt->execute($params)) {
+        if ($stmt->execute()) {
             return true; 
         }
         return false;
@@ -55,7 +55,7 @@ class Video {
             SELECT *
             FROM " . $this->table . "
             WHERE idContract = :idContract
-            ORDRE BY dateVideo ASC";
+            ORDER BY dateVideo ASC";
         $stmt = $this->conn->prepare($query);
 
         $params = ["idContract" => htmlspecialchars(strip_tags($this->idContract))];

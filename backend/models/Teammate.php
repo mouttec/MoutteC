@@ -67,7 +67,7 @@ class Teammate {
             FROM "
             . $this->table . " 
             ORDER BY
-            dateTeammate DESC";
+            dateTeammate ASC";
         $stmt = $this->conn->prepare($query);
         
         if ($stmt->execute()) {

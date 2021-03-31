@@ -21,7 +21,7 @@ if (isset($_GET['idTeammate'])) {
 			extract($row);
 			$teammate_item = [
 				"idTeammate" => $idTeammate,
-				"firstnameTeammate" => $firstnameTeammate,
+				"firstNameTeammate" => $firstNameTeammate,
 				"lastNameTeammate" => $lastNameTeammate,
 				"usernameTeammate" => $usernameTeammate,
 				"mailTeammate" => $mailTeammate,

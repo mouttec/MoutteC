@@ -11,10 +11,9 @@ $conn = $db->connect();
 $video = new Video($conn);
 
 $decodedData = json_decode(file_get_contents("php://input"));
-
-
 $video->idContract = $decodedData->idContract;
 $videos = $video->searchContractVideos();
+
 $nbVideos = rowCount($videos);
 switch ($nbVideos) {
     case 1:
