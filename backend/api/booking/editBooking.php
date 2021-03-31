@@ -11,6 +11,7 @@ $conn = $db->connect();
 $booking = new Booking($conn);
 
 $decodedData = json_decode(file_get_contents("php://input"));
+
 $booking->idCustomer = $decodedData->idCustomer;
 $booking->idPartner = $decodedData->idPartner;
 $booking->hoursBooking = $decodedData->hoursBooking;
@@ -20,8 +21,8 @@ $booking->formulaBooking = $decodedData->formulaBooking;
 $booking->dateReturn = $decodedData->dateReturn;
 $booking->hoursReturn = $decodedData->hoursReturn;
 $booking->idCar = $decodedData->idCar;
-$booking->idAddressTakingCare = $decodedData->idAddressTakingCare;
-$booking->idAddressReturn = $decodedData->idAddressReturn;
+$booking->idPickupAddress = $decodedData->idPickupAddress;
+$booking->idReturnAddress = $decodedData->idReturnAddress;
 
 if (!empty($decodedData->idBooking)) {
     $booking->idBooking = $decodedData->idBooking;

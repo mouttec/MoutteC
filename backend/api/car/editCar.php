@@ -20,7 +20,6 @@ $car->dateOfCirculationCar = $decodedData->dateOfCirculationCar;
 $car->motorizationCar = $decodedData->motorizationCar;
 $car->urlGrayCard = $decodedData->urlGrayCard;
 
-
 if(!empty($decodedData->idCar)) {
     $car->idCar = $decodedData->idCar;
     $result = $car->updateCar();
