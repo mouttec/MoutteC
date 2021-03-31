@@ -15,7 +15,24 @@ if (isset($_GET['idVideo'])) {
     $video->idVideo = $_GET['idVideo'];
     $result = $video->searchVideo($video);
 } else {
-    $result = $video->listVideos();
+    $videos = $video->listVideos();
+    $counter = $videos->rowCount();
+    if ($counter > 0) {
+        $videos_array = array();
+        while ($row = $videos->fetch()) {
+            extract($row);
+            $video_item = [
+                 "idVideo" => $idVideo,
+                 "urlVideo" => $urtlVideo,
+                 "idContract" => $idContract,
+                 "dateVideo" => $dateVideo,
+                 "videoType" => $videoType
+            ];
+            array_push($videos_array, $video_item);
+        }
+        $result = $videos_array;
+    }
+}
 }
 
 if (isset($result) && !empty($result)) {
