@@ -12,7 +12,6 @@ $agency = new Agency($conn);
 
 $decodedData = json_decode(file_get_contents("php://input"));
 
-$agency->idAgency = $decodedData->idAgency;
 $agency->nameAgency = $decodedData->nameAgency;
 $agency->numberAddressAgency = $decodedData->numberAddressAgency;
 $agency->typeAddressAgency = $decodedData->typeAddressAgency;
@@ -24,7 +23,8 @@ $agency->phoneAgency = $decodedData->phoneAgency;
 $agency->mailAgency = $decodedData->mailAgency;
 $agency->statusAgency = $decodedData->statusAgency;
 
-if (!empty($agency->idAgency)) {
+if (!empty($decodedData->idAgency)) {
+	$agency->idAgency = $decodedData->idAgency;
     $result = $agency->updateAgency($agency);
 } else { 
     $result = $agency->createAgency($agency);
