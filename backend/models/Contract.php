@@ -39,7 +39,7 @@ class Contract
         $stmt = $this->conn->prepare($query);
 
         $params = [
-            "idCustomer" => htmlspecialchars(strip_tags($this->idCustomer));,
+            "idCustomer" => htmlspecialchars(strip_tags($this->idCustomer)),
             "idPartner" => htmlspecialchars(strip_tags($this->idPartner)),
             "idBooking" => htmlspecialchars(strip_tags($this->idBooking)),
             "urlContract" => htmlspecialchars(strip_tags($this->urlContract)),
@@ -160,7 +160,7 @@ class Contract
         $stmt = $this->conn->prepare($query);
 
         $params = [
-            "idCustomer" => htmlspecialchars(strip_tags($this->idCustomer));,
+            "idCustomer" => htmlspecialchars(strip_tags($this->idCustomer)),
             "idPartner" => htmlspecialchars(strip_tags($this->idPartner)),
             "idBooking" => htmlspecialchars(strip_tags($this->idBooking)),
             "urlContract" => htmlspecialchars(strip_tags($this->urlContract)),
