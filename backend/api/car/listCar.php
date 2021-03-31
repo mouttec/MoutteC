@@ -36,7 +36,7 @@ if (isset($_GET['idCar'])) {
                  "dateOfCirculationCar" => $dateOfCirculationCar,
                  "motorizationCar" => $motorizationCar,
                  "urlGrayCard" => $urlGrayCard
-            ]
+            ];
             array_push($cars_array, $car_item);
         }
         $result = $cars_array;
