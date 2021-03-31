@@ -86,7 +86,7 @@ class Teammate {
         LIMIT 0,1";
         $stmt = $this->conn->prepare($query);
 
-        $params = ["idTeammate" => $this->idTeammate];
+        $params = ["idTeammate" => htmlspecialchars(strip_tags($this->idTeammate))];
 
         if ($stmt->execute($params)) {
             $row = $stmt->fetch();    
@@ -105,7 +105,7 @@ class Teammate {
         LIMIT 0,1";
         $stmt = $this->conn->prepare($query);
 
-        $params = ["usernameTeammate" => $this->usernameTeammate];
+        $params = ["usernameTeammate" => htmlspecialchars(strip_tags($this->usernameTeammate))];
 
         if ($stmt->execute($params)) {
             $row = $stmt->fetch();    

@@ -40,16 +40,16 @@ class Agency {
 
         $stmt = $this->conn->prepare($query);
         $params = [
-            "nameAgency" => $this->nameAgency,
-            "numberAddressAgency" => $this->numberAddressAgency,
-            "typeAddressAgency" => $this->typeAddressAgency,
-            "nameAddressAgency" => $this->nameAddressAgency,
-            "complementAddressAgency" => $this->complementAddressAgency,
-            "zipAddressAgency" => $this->zipAddressAgency,
-            "cityAddressAgency" => $this->cityAddressAgency,
-            "phoneAgency" => $this->phoneAgency,
-            "mailAgency" => $this->mailAgency,
-            "statusAgency" => $this->statusAgency
+            "nameAgency" => htmlspecialchars(strip_tags($this->nameAgency)),
+            "numberAddressAgency" => htmlspecialchars(strip_tags($this->numberAddressAgency)),
+            "typeAddressAgency" => htmlspecialchars(strip_tags($this->typeAddressAgency)),
+            "nameAddressAgency" => htmlspecialchars(strip_tags($this->nameAddressAgency)),
+            "complementAddressAgency" => htmlspecialchars(strip_tags($this->complementAddressAgency)),
+            "zipAddressAgency" => htmlspecialchars(strip_tags($this->zipAddressAgency)),
+            "cityAddressAgency" => htmlspecialchars(strip_tags($this->cityAddressAgency)),
+            "phoneAgency" => htmlspecialchars(strip_tags($this->phoneAgency)),
+            "mailAgency" => htmlspecialchars(strip_tags($this->mailAgency)),
+            "statusAgency" => htmlspecialchars(strip_tags($this->statusAgency))
         ];
 
         if ($stmt->execute($params)) {
@@ -112,17 +112,17 @@ class Agency {
 
         $stmt = $this->conn->prepare($query);
         $params = [
-            "nameAgency" => $this->nameAgency,
-            "numberAddressAgency" => $this->numberAddressAgency,
-            "typeAddressAgency" => $this->typeAddressAgency,
-            "nameAddressAgency" => $this->nameAddressAgency,
-            "complementAddressAgency" => $this->complementAddressAgency,
-            "zipAddressAgency" => $this->zipAddressAgency,
-            "cityAddressAgency" => $this->cityAddressAgency,
-            "phoneAgency" => $this->phoneAgency,
-            "mailAgency" => $this->mailAgency,
-            "statusAgency" => $this->statusAgency,
-            "idAgency" => $this->idAgency
+            "nameAgency" => htmlspecialchars(strip_tags($this->nameAgency)),
+            "numberAddressAgency" => htmlspecialchars(strip_tags($this->numberAddressAgency)),
+            "typeAddressAgency" => htmlspecialchars(strip_tags($this->typeAddressAgency)),
+            "nameAddressAgency" => htmlspecialchars(strip_tags($this->nameAddressAgency)),
+            "complementAddressAgency" => htmlspecialchars(strip_tags($this->complementAddressAgency)),
+            "zipAddressAgency" => htmlspecialchars(strip_tags($this->zipAddressAgency)),
+            "cityAddressAgency" => htmlspecialchars(strip_tags($this->cityAddressAgency)),
+            "phoneAgency" => htmlspecialchars(strip_tags($this->phoneAgency)),
+            "mailAgency" => htmlspecialchars(strip_tags($this->mailAgency)),
+            "statusAgency" => htmlspecialchars(strip_tags($this->statusAgency)),
+            "idAgency" => htmlspecialchars(strip_tags($this->idAgency))
         ];
 
         if ($stmt->execute($params)) {
@@ -139,7 +139,7 @@ class Agency {
         ";
 
         $stmt = $this->conn->prepare($query);
-        $params = ["idAgency" => $this->idAgency];
+        $params = ["idAgency" => htmlspecialchars(strip_tags($this->idAgency))];
 
         if($stmt->execute($params)) {
             return true;

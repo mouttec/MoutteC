@@ -189,8 +189,8 @@ class Contract
         $stmt = $this->conn->prepare($query);
 
         $params = [
-            "idContract" => $contract->idContract,
-            "idTeammateReturn" => $contract->idTeammateReturn,
+            "idContract" => htmlspecialchars(strip_tags($this->idContract)),
+            "idTeammateReturn" => htmlspecialchars(strip_tags($this->idTeammateReturn))
         ];
 
         if ($stmt->execute($params)) {
