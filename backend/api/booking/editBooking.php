@@ -26,9 +26,9 @@ $booking->idReturnAddress = $decodedData->idReturnAddress;
 
 if (!empty($decodedData->idBooking)) {
     $booking->idBooking = $decodedData->idBooking;
-    $result = $booking->updateBooking();
+    $result = $booking->updateBooking($booking);
 } else {
-    $result = $booking->createBooking();
+    $result = $booking->createBooking($booking);
 }
 
 if ($result) {
