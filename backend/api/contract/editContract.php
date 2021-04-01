@@ -16,7 +16,6 @@ if (!empty($decodedData->idTeammateReturn)) {
     $contract->idTeammateReturn = $decodedData->idTeammateReturn;
     $result = $contract->teammateReturn();
 } else {
-    $contract->idContract = $decodedData->idContract;
     $contract->idCustomer = $decodedData->idCustomer;
     $contract->idPartner = $decodedData->idPartner;
     $contract->idBooking = $decodedData->idBooking;
