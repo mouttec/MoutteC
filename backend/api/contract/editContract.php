@@ -14,7 +14,7 @@ $decodedData = json_decode(file_get_contents("php://input"));
 
 if (!empty($decodedData->idTeammateReturn)) {
     $contract->idTeammateReturn = $decodedData->idTeammateReturn;
-    $result = $contract->teammateReturn();
+    $result = $contract->teammateReturn($contract);
 } else {
     $contract->idCustomer = $decodedData->idCustomer;
     $contract->idPartner = $decodedData->idPartner;

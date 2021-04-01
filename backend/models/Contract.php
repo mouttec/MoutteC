@@ -179,7 +179,7 @@ class Contract
             UPDATE "
             . $this->table .
             " SET
-            idTeammateReturn = :idTeammateReturn,
+            idTeammateReturn = :idTeammateReturn
             WHERE idContract = :idContract ";
         $stmt = $this->conn->prepare($query);
 
