@@ -159,8 +159,8 @@ class Contract
         $params = [
             "idCustomer" => htmlspecialchars(strip_tags($this->idCustomer)),
             "idPartner" => htmlspecialchars(strip_tags($this->idPartner)),
-            "idBooking" => htmlspecialchars(strip_tags($this->idBooking)),
             "urlContract" => htmlspecialchars(strip_tags($this->urlContract)),
+            "idBooking" => htmlspecialchars(strip_tags($this->idBooking)),
             "idCar" => htmlspecialchars(strip_tags($this->idCar)),
             "idPickupAddress" => htmlspecialchars(strip_tags($this->idPickupAddress)),
             "idReturnAddress" => htmlspecialchars(strip_tags($this->idReturnAddress)),
