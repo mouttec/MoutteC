@@ -152,7 +152,7 @@ class Contract
             idBooking = :idBooking,
             idCar = :idCar,
             idPickupAddress = :idPickupAddress,
-            idReturnAddress = :idReturnAddress,
+            idReturnAddress = :idReturnAddress
             WHERE idContract = :idContract";
         $stmt = $this->conn->prepare($query);
 
