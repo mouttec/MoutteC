@@ -33,7 +33,6 @@ if (isset($_GET['idVideo'])) {
         $result = $videos_array;
     }
 }
-}
 
 if (isset($result) && !empty($result)) {
     echo json_encode($result);
