@@ -12,7 +12,8 @@ $contract = new Contract($conn);
 
 $decodedData = json_decode(file_get_contents("php://input"));
 
-if (!empty($decodedData->idTeammateReturn)) {
+if ((!empty($decodedData->idTeammateReturn)) && (!empty($decodedData->idContract))) {
+    $contract->idContract = $decodedData->idContract;
     $contract->idTeammateReturn = $decodedData->idTeammateReturn;
     $result = $contract->teammateReturn($contract);
 } else {

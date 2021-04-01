@@ -140,38 +140,38 @@ class Contract
         return false;
     }
 
-    public function updateContract() 
-    {
-        $query = "
-            UPDATE "
-            . $this->table .
-            " SET
-            idCustomer = :idCustomer,
-            idPartner = :idPartner,
-            urlContract = :urlContract,
-            idBooking = :idBooking,
-            idCar = :idCar,
-            idPickupAddress = :idPickupAddress,
-            idReturnAddress = :idReturnAddress
-            WHERE idContract = :idContract";
-        $stmt = $this->conn->prepare($query);
+    // public function updateContract() 
+    // {
+    //     $query = "
+    //         UPDATE "
+    //         . $this->table .
+    //         " SET
+    //         idCustomer = :idCustomer,
+    //         idPartner = :idPartner,
+    //         urlContract = :urlContract,
+    //         idBooking = :idBooking,
+    //         idCar = :idCar,
+    //         idPickupAddress = :idPickupAddress,
+    //         idReturnAddress = :idReturnAddress
+    //         WHERE idContract = :idContract";
+    //     $stmt = $this->conn->prepare($query);
 
-        $params = [
-            "idCustomer" => htmlspecialchars(strip_tags($this->idCustomer)),
-            "idPartner" => htmlspecialchars(strip_tags($this->idPartner)),
-            "urlContract" => htmlspecialchars(strip_tags($this->urlContract)),
-            "idBooking" => htmlspecialchars(strip_tags($this->idBooking)),
-            "idCar" => htmlspecialchars(strip_tags($this->idCar)),
-            "idPickupAddress" => htmlspecialchars(strip_tags($this->idPickupAddress)),
-            "idReturnAddress" => htmlspecialchars(strip_tags($this->idReturnAddress)),
-            "idContract" => htmlspecialchars(strip_tags($this->idContract))
-        ];
+    //     $params = [
+    //         "idCustomer" => htmlspecialchars(strip_tags($this->idCustomer)),
+    //         "idPartner" => htmlspecialchars(strip_tags($this->idPartner)),
+    //         "urlContract" => htmlspecialchars(strip_tags($this->urlContract)),
+    //         "idBooking" => htmlspecialchars(strip_tags($this->idBooking)),
+    //         "idCar" => htmlspecialchars(strip_tags($this->idCar)),
+    //         "idPickupAddress" => htmlspecialchars(strip_tags($this->idPickupAddress)),
+    //         "idReturnAddress" => htmlspecialchars(strip_tags($this->idReturnAddress)),
+    //         "idContract" => htmlspecialchars(strip_tags($this->idContract))
+    //     ];
 
-        if ($stmt->execute($params)) {
-            return $stmt;
-        }
-        return false;
-    }
+    //     if ($stmt->execute($params)) {
+    //         return $stmt;
+    //     }
+    //     return false;
+    // }
 
     public function teammateReturn() 
     {
