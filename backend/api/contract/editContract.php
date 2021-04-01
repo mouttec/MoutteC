@@ -23,6 +23,7 @@ if (!empty($decodedData->idTeammateReturn)) {
     $contract->idCar = $decodedData->idCar;
     $contract->idPickupAddress = $decodedData->idPickupAddress;
     $contract->idReturnAddress = $decodedData->idReturnAddress;
+    $contract->idTeammatePickup = $decodedData->idTeammatePickup;
     if (!empty($decodedData->idContract)) {
         $contract->idContract = $decodedData->idContract;
         $result = $contract->updateContract($contract);
