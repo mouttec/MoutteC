@@ -180,8 +180,8 @@ class Contract
             . $this->table .
             " SET
             idTeammateReturn = :idTeammateReturn
-            WHERE idContract = :idContract ";
-        $stmt = $this->conn->prepare($query);
+            WHERE idContract = :idContract";
+        $stmt = $this->conn->prepare($query);   
 
         $params = [
             "idTeammateReturn" => htmlspecialchars(strip_tags($this->idTeammateReturn)),
