@@ -31,10 +31,10 @@ switch ($nbVideos) {
 }
 $video->videoType = $video_type;
 
-// $videoName = $decodedData->videoName;
-// $video->urlVideo = $video->idContract ."/". $videoName;
+$filenameVideo = $decodedData->filenameVideo;
+$video->urlVideo = $video->idContract ."/". $filenameVideo;
 
-$result = $video->createVideo();
+$result = $video->createVideo($video);
 
 if ($result) {
     echo json_encode([ "message" => "La vidéo a été créée !" ]);

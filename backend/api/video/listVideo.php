@@ -23,7 +23,7 @@ if (isset($_GET['idVideo'])) {
             extract($row);
             $video_item = [
                  "idVideo" => $idVideo,
-                 "urlVideo" => $urtlVideo,
+                 "urlVideo" => $urlVideo,
                  "idContract" => $idContract,
                  "dateVideo" => $dateVideo,
                  "videoType" => $videoType
