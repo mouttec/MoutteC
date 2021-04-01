@@ -14,7 +14,7 @@ $decodedData = json_decode(file_get_contents("php://input"));
 $video->idContract = $decodedData->idContract;
 $videos = $video->searchContractVideos($video);
 
-$nbVideos = rowCount($videos);
+$nbVideos = $videos->rowCount();
 switch ($nbVideos) {
     case 1:
         $video_type = "garageArrival";
@@ -31,8 +31,8 @@ switch ($nbVideos) {
 }
 $video->videoType = $video_type;
 
-$videoName = $decodedData->videoName;
-$video->urlVideo = $video->idContract ."/". $videoName;
+// $videoName = $decodedData->videoName;
+// $video->urlVideo = $video->idContract ."/". $videoName;
 
 $result = $video->createVideo();
 
