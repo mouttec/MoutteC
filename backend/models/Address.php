@@ -33,13 +33,13 @@ class Address
         $stmt = $this->conn->prepare($query);
 
         $params = [
-            "idCustomer" = htmlspecialchars(strip_tags($this->idCustomer)),
-            "streetNumber" = htmlspecialchars(strip_tags($this->streetNumber)),
-            "streetType" = htmlspecialchars(strip_tags($this->streetType)),
-            "streetName" = htmlspecialchars(strip_tags($this->streetName)),
-            "streetComplement" = htmlspecialchars(strip_tags($this->streetComplement)),
-            "zip" = htmlspecialchars(strip_tags($this->zip)),
-            "city" = htmlspecialchars(strip_tags($this->city))
+            "idCustomer" => htmlspecialchars(strip_tags($this->idCustomer)),
+            "streetNumber" => htmlspecialchars(strip_tags($this->streetNumber)),
+            "streetType" => htmlspecialchars(strip_tags($this->streetType)),
+            "streetName" => htmlspecialchars(strip_tags($this->streetName)),
+            "streetComplement" => htmlspecialchars(strip_tags($this->streetComplement)),
+            "zip" => htmlspecialchars(strip_tags($this->zip)),
+            "city" => htmlspecialchars(strip_tags($this->city))
         ];
 
         if ($stmt->execute($params)) {
@@ -130,12 +130,12 @@ class Address
         $stmt = $this->conn->prepare($query);
 
         $params = [
-            "streetNumber" = htmlspecialchars(strip_tags($this->streetNumber)),
-            "streetType" = htmlspecialchars(strip_tags($this->streetType)),
-            "streetName" = htmlspecialchars(strip_tags($this->streetName)),
-            "streetComplement" = htmlspecialchars(strip_tags($this->streetComplement)),
-            "zip" = htmlspecialchars(strip_tags($this->zip)),
-            "city" = htmlspecialchars(strip_tags($this->city)),
+            "streetNumber" => htmlspecialchars(strip_tags($this->streetNumber)),
+            "streetType" => htmlspecialchars(strip_tags($this->streetType)),
+            "streetName" => htmlspecialchars(strip_tags($this->streetName)),
+            "streetComplement" => htmlspecialchars(strip_tags($this->streetComplement)),
+            "zip" => htmlspecialchars(strip_tags($this->zip)),
+            "city" => htmlspecialchars(strip_tags($this->city)),
             "idAddress" => htmlspecialchars(strip_tags($this->idAddress))
         ];
 
