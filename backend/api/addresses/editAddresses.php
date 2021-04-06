@@ -14,12 +14,12 @@ $address = new Address($conn);
 $decodedData = json_decode(file_get_contents("php://input"));
 
 $address->idCustomer = $decodedData->idCustomer;
-$address->streetNumber = $decodedData->streetNumber;
-$address->streetType = $decodedData->streetType;
-$address->streetName = $decodedData->streetName;
-$address->streetComplement = $decodedData->streetComplement;
-$address->zip = $decodedData->zip;
-$address->city = $decodedData->city;
+$address->adressStreetNumber = $decodedData->adressStreetNumber;
+$address->adressStreetType = $decodedData->adressStreetType;
+$address->adressStreetName = $decodedData->adressStreetName;
+$address->adressStreetComplement = $decodedData->adressStreetComplement;
+$address->adressZip = $decodedData->adressZip;
+$address->adressCity = $decodedData->adressCity;
 
 if (!empty($decodedData->idAddress)) {
     $address->idAddress = $decodedData->idAddress;

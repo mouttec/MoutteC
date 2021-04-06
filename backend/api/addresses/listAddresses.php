@@ -29,12 +29,12 @@ if (isset($_GET['idAddress'])) {
 			extract($row);
 			$address_item = [
 	            "idCustomer" => $idCustomer,
-	            "streetNumber" => $streetNumber,
-	            "streetType" => $streetType,
-	            "streetName" => $streetName,
-	            "streetComplement" => $streetComplement,
-	            "zip" => $zip,
-	            "city" => $city
+	            "adressStreetNumber" => $adressStreetNumber,
+	            "adressStreetType" => $adressStreetType,
+	            "adressStreetName" => $adressStreetName,
+	            "adressStreetComplement" => $adressStreetComplement,
+	            "adressZip" => $adressZip,
+	            "adressCity" => $adressCity
 			];
 			array_push($addresses_array, $address_item);
 		}
