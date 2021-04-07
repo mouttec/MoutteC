@@ -35,7 +35,7 @@ $partner->zipAddressBilling = $decodedData->zipAddressBilling;
 $partner->cityAddressBilling = $decodedData->cityAddressBilling;
 $partner->idAgency = $decodedData->idAgency;
 
-if (!empty($partner->idPartner)) {
+if (isset($decodedData->idPartner)) {
 	$partner->idPartner = $decodedData->idPartner;
     $result = $partner->updatePartner($partner);
 } else {
