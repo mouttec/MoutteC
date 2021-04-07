@@ -58,7 +58,7 @@ class Address
         $stmt = $this->conn->prepare($query);
 
         if ($stmt->execute()) {
-            return true;
+            return $stmt;
         }
         return false;
     }
