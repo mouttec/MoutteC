@@ -27,10 +27,9 @@ if (isset($_GET['idContract'])) {
     } else {
         $payments = $dailyPayment->listPayments();
     }
-    $counter = $billingData->rowCount();
+    $counter = $payments->rowCount();
     if ($counter > 0) {
         $billings_array = array();
-        $partners_list = array();
         $invoiceAmount = 0;
         while($row = $billingData->fetch()) {
             extract($row);

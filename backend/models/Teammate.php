@@ -35,9 +35,9 @@ class Teammate {
             phoneTeammate = :phoneTeammate,        
             mixedPassword = :mixedPassword,
             statusTeammate = :statusTeammate,
-            teamManager = :jobTeammate,
+            jobTeammate = :jobTeammate,
             idAgency = :idAgency,
-            superAdmin = :superAdmin,
+            superAdmin = :superAdmin
         ";
         $stmt = $this->conn->prepare($query);
 
@@ -51,7 +51,7 @@ class Teammate {
             "statusTeammate" => htmlspecialchars(strip_tags($this->statusTeammate)),
             "jobTeammate" => htmlspecialchars(strip_tags($this->jobTeammate)),
             "idAgency" => htmlspecialchars(strip_tags($this->idAgency)),
-            "superAdmin" => htmlspecialchars(strip_tags($this->superAdmin)),
+            "superAdmin" => htmlspecialchars(strip_tags($this->superAdmin))
         ];
 
         if ($stmt->execute($params)) {

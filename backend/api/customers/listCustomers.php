@@ -15,7 +15,7 @@ if (isset($_GET['idCustomer'])) {
 } else {
     if (isset($_GET['idPartner'])) {
         $customer->idPartner = $_GET['idPartner'];
-        $customers = $customer->searchCustomerByPartner($customer);
+        $customers = $customer->searchCustomersByPartner($customer);
     } else {
         $customers = $customer->listCustomers();
     }
