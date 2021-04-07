@@ -6,12 +6,12 @@ class Address
 
     public $idAddress;
     public $idCustomer;
-    public $adressStreetNumber;
-    public $adressStreetType;
-    public $adresStreetName;
-    public $adressStreetComplement;
-    public $adressZip;
-    public $adressCity;
+    public $addressStreetNumber;
+    public $addressStreetType;
+    public $addresStreetName;
+    public $addressStreetComplement;
+    public $addressZip;
+    public $addressCity;
 
     public function __construct($db) {
         $this->conn = $db;
@@ -23,23 +23,23 @@ class Address
             . $this->table .
             " SET
             idCustomer = :idCustomer,
-            addressStreetNumber = :adressStreetNumber,
-            adressStreetType = :adressStreetType,
-            adressStreetName = :adressStreetName,
-            adressStreetComplement = :adressStreetComplement,        
-            adressZip = :adressZip,
-            adressCity = :adressCity
+            addressStreetNumber = :addressStreetNumber,
+            addressStreetType = :addressStreetType,
+            addressStreetName = :addressStreetName,
+            addressStreetComplement = :addressStreetComplement,        
+            addressZip = :addressZip,
+            addressCity = :addressCity
         ";
         $stmt = $this->conn->prepare($query);
 
         $params = [
             "idCustomer" => htmlspecialchars(strip_tags($this->idCustomer)),
-            "adressStreetNumber" => htmlspecialchars(strip_tags($this->adressStreetNumber)),
-            "adressStreetType" => htmlspecialchars(strip_tags($this->adressStreetType)),
-            "adressStreetName" => htmlspecialchars(strip_tags($this->adressStreetName)),
-            "adressStreetComplement" => htmlspecialchars(strip_tags($this->adressStreetComplement)),
-            "adressZip" => htmlspecialchars(strip_tags($this->adressZip)),
-            "adressCity" => htmlspecialchars(strip_tags($this->adressCity))
+            "addressStreetNumber" => htmlspecialchars(strip_tags($this->addressStreetNumber)),
+            "addressStreetType" => htmlspecialchars(strip_tags($this->addressStreetType)),
+            "addressStreetName" => htmlspecialchars(strip_tags($this->addressStreetName)),
+            "addressStreetComplement" => htmlspecialchars(strip_tags($this->addressStreetComplement)),
+            "addressZip" => htmlspecialchars(strip_tags($this->addressZip)),
+            "addressCity" => htmlspecialchars(strip_tags($this->addressCity))
         ];
 
         if ($stmt->execute($params)) {
@@ -118,24 +118,24 @@ class Address
             UPDATE "
             . $this->table .
             " SET
-            adressStreetNumber = :adressStreetNumber,
-            adressStreetType = :adressStreetType,
-            adressStreetName = :adressStreetName,
-            adressStreetComplement = :adressStreetComplement,        
-            adressZip = :adressZip,
-            adressCity = :adressCity
+            addressStreetNumber = :addressStreetNumber,
+            addressStreetType = :addressStreetType,
+            addressStreetName = :addressStreetName,
+            addressStreetComplement = :addressStreetComplement,        
+            addressZip = :addressZip,
+            addressCity = :addressCity
             WHERE
             idAAddress = :idAddress       
         ";
         $stmt = $this->conn->prepare($query);
 
         $params = [
-            "adressStreetNumber" => htmlspecialchars(strip_tags($this->adressStreetNumber)),
-            "adressStreetType" => htmlspecialchars(strip_tags($this->adressStreetType)),
-            "adressStreetName" => htmlspecialchars(strip_tags($this->adressStreetName)),
-            "adressStreetComplement" => htmlspecialchars(strip_tags($this->adressStreetComplement)),
-            "adressZip" => htmlspecialchars(strip_tags($this->adressZip)),
-            "adressCity" => htmlspecialchars(strip_tags($this->adressCity)),
+            "addressStreetNumber" => htmlspecialchars(strip_tags($this->addressStreetNumber)),
+            "addressStreetType" => htmlspecialchars(strip_tags($this->addressStreetType)),
+            "addressStreetName" => htmlspecialchars(strip_tags($this->addressStreetName)),
+            "addressStreetComplement" => htmlspecialchars(strip_tags($this->addressStreetComplement)),
+            "addressZip" => htmlspecialchars(strip_tags($this->addressZip)),
+            "addressCity" => htmlspecialchars(strip_tags($this->addressCity)),
             "idAddress" => htmlspecialchars(strip_tags($this->idAddress))
         ];
 
