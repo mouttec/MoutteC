@@ -33,6 +33,7 @@ $partner->nameAddressBilling = $decodedData->nameAddressBilling;
 $partner->complementAddressBilling = $decodedData->complementAddressBilling;
 $partner->zipAddressBilling = $decodedData->zipAddressBilling;
 $partner->cityAddressBilling = $decodedData->cityAddressBilling;
+$partner->idAgency = $decodedData->idAgency;
 
 if (!empty($partner->idPartner)) {
 	$partner->idPartner = $decodedData->idPartner;

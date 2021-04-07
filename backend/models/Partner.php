@@ -27,6 +27,7 @@ class Partner
     public $zipAddressBilling;
     public $cityAddressBilling;
     public $datePartner;
+    public $idAgency;
 
     public function __construct($db) 
     {
@@ -60,7 +61,8 @@ class Partner
             nameAddressBilling = :nameAddressBilling,
             complementAddressBilling = :complementAddressBilling,
             zipAddressBilling = :zipAddressBilling,
-            cityAddressBilling = :cityAddressBilling
+            cityAddressBilling = :cityAddressBilling,
+            idAgency = :idAgency
         ";
         $stmt = $this->conn->prepare($query);
 
@@ -85,7 +87,8 @@ class Partner
             "nameAddressBilling" => htmlspecialchars(strip_tags($this->nameAddressBilling)),
             "complementAddressBilling" => htmlspecialchars(strip_tags($this->complementAddressBilling)),
             "zipAddressBilling" => htmlspecialchars(strip_tags($this->zipAddressBilling)),
-            "cityAddressBilling" => htmlspecialchars(strip_tags($this->cityAddressBilling))
+            "cityAddressBilling" => htmlspecialchars(strip_tags($this->cityAddressBilling)),
+            "idAgency" => htmlspecialchars(strip_tags($this->idAgency))
         ];
 
         if ($stmt->execute($params)) {
@@ -172,7 +175,8 @@ class Partner
             nameAddressBilling = :nameAddressBilling,
             complementAddressBilling = :complementAddressBilling,
             zipAddressBilling = :zipAddressBilling,
-            cityAddressBilling = :cityAddressBilling
+            cityAddressBilling = :cityAddressBilling,
+            idAgency = : idAgency
             WHERE
             idPartner = :idPartner
         ";
@@ -198,6 +202,7 @@ class Partner
             "complementAddressBilling" => htmlspecialchars(strip_tags($this->complementAddressBilling)),
             "zipAddressBilling" => htmlspecialchars(strip_tags($this->zipAddressBilling)),
             "cityAddressBilling" => htmlspecialchars(strip_tags($this->cityAddressBilling)),
+            "idAgency" => htmlspecialchars(strip_tags($this->idAgency)),
             "idPartner" => htmlspecialchars(strip_tags($this->idPartner))
         ];
 
@@ -207,7 +212,7 @@ class Partner
         return false;
     }
 
-    public function changePassword() 
+    public function changePasswordPartner() 
     {
         $query = "
             UPDATE "
