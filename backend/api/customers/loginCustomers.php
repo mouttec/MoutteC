@@ -1,15 +1,23 @@
 <?php
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: POST");
+header("Content-Type: application/json");
+header("Access-Control-Allow-Headers: Access-Control-Allow-Headers, Access-Control-Allow-Methods, Content-Type, Authorization, X-Requested-With");
 include_once("database.php");
 include_once "../../models/Customer.php";
 
-$decodedData = json_decode(file_get_contents("php://input"));
-$customer = array();
-foreach ($decodedData as $key => $value) {
-    array_push($customer[$key] = htmlspecialchars(strip_tags($value)));
-}
+$db = new Database();
+$conn = $db->connect();
+$customer = new Customer($conn);
 
-//On créé un objet Partner pour chercher celui qui correspond à l'email donné
-$customerRequest = new Customer;
-$customerExists = $customerRequest->searchCustomer($mailCustomer);
-//Vérification du mot de passe
-(!empty($customerExists) && password_verify($customer['password'], $customerExists['mixedPassword']) : echo json_encode($customerExists) ? http_response_code(404);
+$decodedData = json_decode(file_get_contents("php://input"));
+
+$customer->mailCustomer = $decodedData->mailCustomer;
+$proposedPassword = $decodedData->mixedPassword;
+
+$customerExists = $customer->searchCustomerByEmail($customer)
+if (password_verify($proposedPassword, $customerExists->mixedPassword)) {
+	echo json_encode($customerExists);
+} else {
+	http_response_code(404);
+}
