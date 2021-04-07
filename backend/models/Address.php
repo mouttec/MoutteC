@@ -125,7 +125,7 @@ class Address
             addressZip = :addressZip,
             addressCity = :addressCity
             WHERE
-            idAAddress = :idAddress       
+            idAddress = :idAddress       
         ";
         $stmt = $this->conn->prepare($query);
 
