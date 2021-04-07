@@ -16,8 +16,7 @@ class Partner
     public $cityAddressPartner;
     public $phonePartner;
     public $statusPartner;
-    public $typeGarage;
-    public $typeTechnicalControl;
+    public $typePartner;
     public $mailPartner;
     public $nameBilling;
     public $siretPartner;
@@ -52,8 +51,7 @@ class Partner
             cityAddressPartner = :cityAddressPartner,
             phonePartner = :phonePartner,
             statusPartner = :statusPartner,
-            typeGarage = :typeGarage,
-            typeTechnicalControl = :typeTechnicalControl,
+            typePartner = :typePartner,
             mailPartner = :mailPartner,        
             nameBilling = :nameBilling,
             siretPartner = :siretPartner,
@@ -78,8 +76,7 @@ class Partner
             "cityAddressPartner" => htmlspecialchars(strip_tags($this->cityAddressPartner)),
             "phonePartner" => htmlspecialchars(strip_tags($this->phonePartner)),
             "statusPartner" => htmlspecialchars(strip_tags($this->statusPartner)),
-            "typeGarage" => htmlspecialchars(strip_tags($this->typeGarage)),
-            "typeTechnicalControl" => htmlspecialchars(strip_tags($this->typeTechnicalControl)),
+            "typePartner" => htmlspecialchars(strip_tags($this->typePartner)),
             "mailPartner" => htmlspecialchars(strip_tags($this->mailPartner)),
             "nameBilling" => htmlspecialchars(strip_tags($this->nameBilling)),
             "siretPartner" => htmlspecialchars(strip_tags($this->siretPartner)),
@@ -166,8 +163,7 @@ class Partner
             cityAddressPartner = :cityAddressPartner,
             phonePartner = :phonePartner,
             statusPartner = :statusPartner,
-            typeGarage = :typeGarage,
-            typeTechnicalControl = :typeTechnicalControl,
+            typePartner = :typePartner,
             mailPartner = :mailPartner,        
             nameBilling = :nameBilling,
             siretPartner = :siretPartner,
@@ -192,8 +188,7 @@ class Partner
             "cityAddressPartner" => htmlspecialchars(strip_tags($this->cityAddressPartner)),
             "phonePartner" => htmlspecialchars(strip_tags($this->phonePartner)),
             "statusPartner" => htmlspecialchars(strip_tags($this->statusPartner)),
-            "typeGarage" => htmlspecialchars(strip_tags($this->typeGarage)),
-            "typeTechnicalControl" => htmlspecialchars(strip_tags($this->typeTechnicalControl)), 
+            "typePartner" => htmlspecialchars(strip_tags($this->typePartner)), 
             "mailPartner" => htmlspecialchars(strip_tags($this->mailPartner)),
             "nameBilling" => htmlspecialchars(strip_tags($this->nameBilling)),
             "siretPartner" => htmlspecialchars(strip_tags($this->siretPartner)),

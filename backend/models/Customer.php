@@ -1,37 +1,62 @@
 <?php
 class Customer {
-    // Propriétés privées de connexion à la DB
     private $conn;
     private $table = "customers";
-    // Propriétés publiques de l'objet Post
+
     public $idCustomer;
     public $firstNameCustomer;
     public $lastNameCustomer;
+    public $dateOfBirthdayCustomer;
     public $phoneCustomer;
     public $mailCustomer;
     public $mixedPassword;
     public $idPartner;
     public $dateCustomer;
 
-    // Constructeur : quand on instancie l'objet, on lui passe la connexion à la DB
     public function __construct($db) {
         $this->conn = $db;
     }
 
-    // Récupérer la liste des clients
+    public function createCustomer() {
+        $query = "
+            INSERT INTO "
+            . $this->table .
+            " SET
+            firstNameCustomer = :firstNameCustomer,
+            lastNameCustomer = :lastNameCustomer,
+            dateOfBirthdayCustomer = :dateOfBirthdayCustomer,
+            phoneCustomer = :phoneCustomer, 
+            mailCustomer = :mailCustomer,
+            mixedPassword = :mixedPassword
+        ";
+        $stmt = $this->conn->prepare($query);
+
+        $params = [
+            "firstNameCustomer" => htmlspecialchars(strip_tags($this->firstNameCustomer)),
+            "lastNameCustomer" => htmlspecialchars(strip_tags($this->lastNameCustomer)),
+            "dateOfBirthdayCustomer" => htmlspecialchars(strip_tags($this->dateOfBirthdayCustomer)),
+            "phoneCustomer" => htmlspecialchars(strip_tags($this->phoneCustomer))
+            "mailCustomer" => htmlspecialchars(strip_tags($this->mailCustomer)),
+            "mixedPassword" => password_hash(htmlspecialchars(strip_tags($this->passwordCustomer)), PASSWORD_DEFAULT)
+        ];
+
+        if ($stmt->execute($params)) {
+            return true;
+        }
+        return false;
+    }
+
     public function listCustomers() {
-        // création de la requête
         $query = "
             SELECT *
             FROM "
             . $this->table . " 
             ORDER BY
             firstNameCustomer ASC";
-        // préparation de la requête
         $stmt = $this->conn->prepare($query);
-        // exécution de la requête
+
         $stmt->execute();
-        // on retourne le résultat
+
         return $stmt;
     }
 
@@ -57,45 +82,6 @@ class Customer {
         return false;
     }
 
-    // Créer un client
-    public function createCustomer() {
-        // On crée la requête
-        $query = "
-            INSERT INTO "
-            . $this->table .
-            " SET
-            firstNameCustomer = :firstNameCustomer,
-            lastNameCustomer = :lastNameCustomer,
-            phoneCustomer = :phoneCustomer, 
-            mailCustomer = :mailCustomer,
-            mixedPassword = :mixedPassword
-        ";
-        // on prépare la requête
-        $stmt = $this->conn->prepare($query);
-        // On nettoie et sécurise les inputs
-        // référence strip_tags(): https://www.php.net/manual/en/function.strip-tags.php
-        // référence htmlspecialchars() : https://www.php.net/manual/en/function.htmlspecialchars.php 
-        $this->firstNameCustomer = htmlspecialchars(strip_tags($this->firstNameCustomer));
-        $this->lastNameCustomer = htmlspecialchars(strip_tags($this->lastNameCustomer));
-        $this->phoneCustomer = htmlspecialchars(strip_tags($this->phoneCustomer));
-        $this->mailCustomer = htmlspecialchars(strip_tags($this->mailCustomer));
-        $this->mixedPassword = password_hash(htmlspecialchars(strip_tags($this->passwordCustomer)), PASSWORD_DEFAULT);
-        // tableau associatif pour lier les paramètres reçus à la requête
-        $params = [
-            "firstNameCustomer" => $this->firstNameCustomer,
-            "lastNameCustomer" => $this->lastNameCustomer,
-            "phoneCustomer" => $this->phoneCustomer,
-            "mailCustomer" => $this->mailCustomer,
-            "mixedPassword" => $this->mixedPassword,
-        ];
-        // on exécute la requête et on vérifie si elle s'est bien déroulée 
-        if($stmt->execute($params)) {
-            // Dans ce cas on retourne true
-            return true;
-        }
-        // sinon on retourne false
-        return false;
-    }
 
     // Modifier un client
     public function updateCustomer($idCustomer) {

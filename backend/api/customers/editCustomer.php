@@ -23,6 +23,19 @@ if (!empty($decodedData->idCustomer)) {
     $customer->idCustomer = $decodedData->idcustomer;
     $result = $customer->updateCustomer($customer);
 } else {
+	if (isset($decodedData->mixedPassword)) {
+		$customer->mixedPassword = $decodedData->mixedPassword;
+	} else {
+	 	$chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+ 		$maxLength = strlen($chars);
+ 		$randomStr = '';
+ 		for ($i = 0; $i < 30; $i++) {
+			$randomStr .= $chars[rand(0, $maxLength - 1)];
+ 		}
+ 		$customer->mixedPassword = $randomStr;
+ 		//Envoi d'un mail au client pour son mot de passe 
+ 		// $randomStr est une chaîne de caractère aléatoire qui va être utilisée comme mot de passe temporaire, elle sera envoyée en get dans le lien
+	}
     $result = $customer->createCustomer($customer);
 }
 
