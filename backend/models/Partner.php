@@ -239,10 +239,10 @@ class Partner
         $query = "
             DELETE
             FROM " . $this->table .
-            " WHERE usernamePartner = :usernamePartner
+            " WHERE idPartner = :idPartner
         ";
         $stmt = $this->conn->prepare($query);
-        $params = ["usernamePartner" => htmlspecialchars(strip_tags($this->usernamePartner))];
+        $params = ["idPartner" => htmlspecialchars(strip_tags($this->idPartner))];
         if ($stmt->execute($params)) {
             return true;
         }

@@ -20,7 +20,7 @@ if (isset($_GET['idContract'])) {
     elseif (isset($_GET['idCustomer'])) {
         $dailyPayment->idCustomer = $_GET['idCustomer'];
         $payments = $dailyPayment->searchPaymentsByCustomer($dailyPayment);
-    } else if (isset($_GET['monthRequired'])) && (isset($_GET['yearRequired']))) {
+    } else if ((isset($_GET['monthRequired'])) && (isset($_GET['yearRequired']))) {
         $monthRequired = $decodedData->monthRequired;
         $yearRequired = $decodedData->yearRequired;
         $payments = $dailyPayment->searchBillingsByMonth($monthRequired, $yearRequired);

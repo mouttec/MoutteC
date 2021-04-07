@@ -21,8 +21,8 @@ if ((isset($decodedData->statusDailyPayment)) && (isset($decodedData->idDailyPay
 	$dailyPayment->idDailyPayment = $decodedData->idDailyPayment;	
 	$result = $dailyPayment->updatePaymentStatus($dailyPayment);
 } else {
-	$dailyPayment->statusDailyPayment = "En attente";
-	$result = $partner->createPayment($dailyPayment);
+	$dailyPayment->statusDailyPayment = $decodedData->statusDailyPayment;
+	$result = $dailyPayment->createPayment($dailyPayment);
 }
 
 if ($result) {
