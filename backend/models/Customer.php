@@ -37,7 +37,7 @@ class Customer {
             "firstNameCustomer" => htmlspecialchars(strip_tags($this->firstNameCustomer)),
             "lastNameCustomer" => htmlspecialchars(strip_tags($this->lastNameCustomer)),
             "dateOfBirthdayCustomer" => htmlspecialchars(strip_tags($this->dateOfBirthdayCustomer)),
-            "phoneCustomer" => htmlspecialchars(strip_tags($this->phoneCustomer))
+            "phoneCustomer" => htmlspecialchars(strip_tags($this->phoneCustomer)),
             "mailCustomer" => htmlspecialchars(strip_tags($this->mailCustomer)),
             "mixedPassword" => password_hash(htmlspecialchars(strip_tags($this->passwordCustomer)), PASSWORD_DEFAULT)
         ];
@@ -141,7 +141,7 @@ class Customer {
             "firstNameCustomer" => htmlspecialchars(strip_tags($this->firstNameCustomer)),
             "lastNameCustomer" => htmlspecialchars(strip_tags($this->lastNameCustomer)),
             "dateOfBirthdayCustomer" => htmlspecialchars(strip_tags($this->dateOfBirthdayCustomer)),
-            "phoneCustomer" => htmlspecialchars(strip_tags($this->phoneCustomer))
+            "phoneCustomer" => htmlspecialchars(strip_tags($this->phoneCustomer)),
             "mailCustomer" => htmlspecialchars(strip_tags($this->mailCustomer)),
             "idPartner" => htmlspecialchars(strip_tags($this->idPartner)),
             "idCustomer" => htmlspecialchars(strip_tags($this->idCustomer))
