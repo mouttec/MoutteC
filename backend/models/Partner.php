@@ -176,7 +176,7 @@ class Partner
             complementAddressBilling = :complementAddressBilling,
             zipAddressBilling = :zipAddressBilling,
             cityAddressBilling = :cityAddressBilling,
-            idAgency = : idAgency
+            idAgency = :idAgency
             WHERE
             idPartner = :idPartner
         ";
