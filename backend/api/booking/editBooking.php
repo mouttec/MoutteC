@@ -23,6 +23,7 @@ $booking->hoursReturn = $decodedData->hoursReturn;
 $booking->idCar = $decodedData->idCar;
 $booking->idPickupAddress = $decodedData->idPickupAddress;
 $booking->idReturnAddress = $decodedData->idReturnAddress;
+$booking->idAgency = $decodedData->idAgency;
 
 if (!empty($decodedData->idBooking)) {
     $booking->idBooking = $decodedData->idBooking;

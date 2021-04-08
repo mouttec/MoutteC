@@ -98,7 +98,7 @@ class Booking {
     {
         $query = "
         SELECT *
-        FROM bookings, partners
+        FROM bookings
         WHERE idPartner = :idPartner";
         $stmt = $this->conn->prepare($query);
 
@@ -114,7 +114,7 @@ class Booking {
     {
         $query = "
         SELECT *
-        FROM bookings, customers
+        FROM bookings
         WHERE idCustomer = :idCustomer";
         $stmt = $this->conn->prepare($query);
 
@@ -130,7 +130,7 @@ class Booking {
     {
         $query = "
         SELECT *
-        FROM bookings, customers
+        FROM bookings
         WHERE idAgency = :idAgency";
         $stmt = $this->conn->prepare($query);
 
@@ -146,7 +146,7 @@ class Booking {
     {
         $query = "
         SELECT *
-        FROM bookings, customers
+        FROM bookings
         WHERE dateBooking = :dateBooking
         ORDER BY hoursBooking ASC";
         $stmt = $this->conn->prepare($query);
