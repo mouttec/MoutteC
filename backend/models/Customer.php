@@ -39,7 +39,7 @@ class Customer {
             "dateOfBirthdayCustomer" => htmlspecialchars(strip_tags($this->dateOfBirthdayCustomer)),
             "phoneCustomer" => htmlspecialchars(strip_tags($this->phoneCustomer)),
             "mailCustomer" => htmlspecialchars(strip_tags($this->mailCustomer)),
-            "mixedPassword" => password_hash(htmlspecialchars(strip_tags($this->passwordCustomer)), PASSWORD_DEFAULT)
+            "mixedPassword" => password_hash($this->mixedPassword, PASSWORD_DEFAULT)
         ];
 
         if ($stmt->execute($params)) {
@@ -59,7 +59,7 @@ class Customer {
         $stmt = $this->conn->prepare($query);
 
         if ($stmt->execute()) {
-            return true;
+            return $stmt;
         }
         return false;
     }
@@ -76,8 +76,7 @@ class Customer {
         $params = ["idPartner" => $this->idPartner];
 
         if($stmt->execute($params)) {
-            $row = $stmt->fetch();
-            return $row;
+            return $stmt;
         }
         return false;
     }
