@@ -31,7 +31,7 @@ if (isset($_GET['idContract'])) {
     if ($counter > 0) {
         $billings_array = array();
         $invoiceAmount = 0;
-        while($row = $billingData->fetch()) {
+        while($row = $payments->fetch()) {
             extract($row);
             $billing_item = [
                 "idPartner" => $idPartner,
