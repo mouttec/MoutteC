@@ -16,7 +16,7 @@ $partner->idPartner = $decodedData->idPartner;
 $partner->mixedPassword = $decodedData->password;
 
 if ((!empty($partner->idPartner)) /*|| ($_SESSION('superAdmin' == 1))*/) {
-    $result = $partner->changePassword($partner);
+    $result = $partner->changePasswordPartner($partner);
 } 
 
 if ($result) {

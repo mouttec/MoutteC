@@ -41,6 +41,10 @@ if (isset($_GET['idContract'])) {
         $contract->idCustomer = $_GET['idCustomer'];
         $contracts = $contract->searchContractsByCustomer($contract);
     }
+    elseif (isset($_GET['idAgency'])) {
+        $contract->idAgency = $_GET['idAgency'];
+        $contracts = $contract->searchContractsByCustomer($contract);
+    }
     elseif (isset($_GET['idCar'])) {
         $contract->idCar = $_GET['idCar'];
         $contracts = $contract->searchContractsByCar($contract);
