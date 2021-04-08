@@ -16,6 +16,7 @@ class Booking {
     public $idCar;
     public $idPickupAddress;
     public $idReturnAddress;
+    public $idAgency;
 
     public function __construct($db) {
         $this->conn = $db;
@@ -36,7 +37,9 @@ class Booking {
             hoursReturn = :hoursReturn,        
             idCar = :idCar,
             idPickupAddress = :idPickupAddress,
-            idReturnAddress = :idReturnAddress";
+            idReturnAddress = :idReturnAddress,
+            idAgency = :idAgency
+            ";
         $stmt = $this->conn->prepare($query);
 
         $params = [
@@ -50,7 +53,8 @@ class Booking {
             "hoursReturn" => htmlspecialchars(strip_tags($this->hoursReturn)),
             "idCar" => htmlspecialchars(strip_tags($this->idCar)),
             "idPickupAddress" => htmlspecialchars(strip_tags($this->idPickupAddress)),
-            "idReturnAddress" => htmlspecialchars(strip_tags($this->idReturnAddress))
+            "idReturnAddress" => htmlspecialchars(strip_tags($this->idReturnAddress)),
+            "idAgency" => htmlspecialchars(strip_tags($this->idAgency))
         ];
 
         if($stmt->execute($params)) {
@@ -122,6 +126,22 @@ class Booking {
         return false;
     }
 
+    public function searchBookingsByAgency() 
+    {
+        $query = "
+        SELECT *
+        FROM bookings, customers
+        WHERE idAgency = :idAgency";
+        $stmt = $this->conn->prepare($query);
+
+        $params = ["idAgency" => htmlspecialchars(strip_tags($this->idAgency))];
+
+        if($stmt->execute($params)) {
+            return $stmt;
+        }
+        return false;
+    }
+
     public function searchBookingsByDay() 
     {
         $query = "
@@ -154,7 +174,8 @@ class Booking {
             hoursReturn = :dateReturn,
             idCar = :idCar,
             idPickupAddress = :idPickupAddress,
-            idReturnAddress = :idReturnAddress
+            idReturnAddress = :idReturnAddress,
+            idAgency = :idAgency
             WHERE
             idBooking = :idBooking       
         ";
@@ -171,6 +192,7 @@ class Booking {
             "idCar" => htmlspecialchars(strip_tags($this->idCar)),
             "idPickupAddress" => htmlspecialchars(strip_tags($this->idPickupAddress)),
             "idReturnAddress" => htmlspecialchars(strip_tags($this->idReturnAddress)),
+            "idAgency" => htmlspecialchars(strip_tags($this->idAgency)),
             "idBooking" => htmlspecialchars(strip_tags($this->idBooking))
         ];
 

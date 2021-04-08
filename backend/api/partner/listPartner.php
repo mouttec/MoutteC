@@ -13,7 +13,12 @@ if (isset($_GET['idPartner'])) {
 	$partner->idPartner = $_GET['idPartner'];
     $result = $partner->searchPartnerById($partner);
 } else {
-    $partners = $partner->listPartners();
+	if (isset($_GET['idAgency'])) {
+		$partner->idAgency = $_GET['idAgency'];
+		$partners = $partner->listPartnersByAgency($partner);
+	} else {
+	    $partners = $partner->listPartners();		
+	}
     $counter = $partners->rowCount();
     if ($counter > 0) {
     	$partners_array = array();

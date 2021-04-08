@@ -14,6 +14,12 @@ if (isset($_GET['idTeammate'])) {
 	$result = $teammate->searchTeammateById($teammate);
 } else {
 	$teammates = $teammate->listTeammates();
+	if (isset($_GET['idAgency'])) {
+		$criteria = $_GET['idAgency'];
+	}
+	if (isset($_GET['jobTeammate'])) {
+		$criteria = $_GET['jobTeammate'];
+	}
 	$counter = $teammates->rowCount();
 	if ($counter > 0) {
 		$teammates_array = array();
@@ -31,7 +37,13 @@ if (isset($_GET['idTeammate'])) {
 				"idAgency" => $idAgency,
 				"superAdmin" => $superAdmin
 			];
-			array_push($teammates_array, $teammate_item);
+			if ((isset($_GET['idAgency'])) && ($_GET['idAgency'] == $idAgency)) {
+				array_push($teammates_array, $teammate_item);				
+			} else if ((isset($_GET['jobTeammate'])) && ($_GET['jobTeammate'] == $jobTeammate)) {
+				array_push($teammates_array, $teammate_item);
+			} else if ((!isset($_GET['idAgency'])) && (!isset($_GET['jobTeammate']))) {
+				array_push($teammates_array, $teammate_item);
+			}
 		}
 		$result = $teammates_array;
 	}

@@ -19,6 +19,9 @@ if (isset($_GET['idBooking'])) {
     } elseif (isset($_GET['idCustomer'])) {
         $booking->idCustomer = $_GET['idCustomer'];
         $bookings = $booking->searchBookingByCustomer($bookings);
+    } elseif (isset($_GET['idAgency'])) {
+        $booking->idAgency == $_GET['idAgency'];
+        $bookings = $booking->searchBookingByAgency($booking);
     } elseif (isset($_GET['dateBooking'])) {
         $booking->dateBooking == $_GET['dateBooking'];
         $bookings = $booking->searchBookingByDay($booking);
@@ -42,7 +45,8 @@ if (isset($_GET['idBooking'])) {
                  "hoursReturn" => $hoursReturn,
                  "idCar" => $idCar,
                  "idPickupAddress" => $idPickupAddress,
-                 "idReturnAddress" => $idReturnAddress
+                 "idReturnAddress" => $idReturnAddress,
+                 "idAgency" => $idAgency
             ];
             array_push($bookings_array, $booking_item);
         }

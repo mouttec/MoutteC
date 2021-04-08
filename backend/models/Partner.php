@@ -113,6 +113,25 @@ class Partner
         return false;
     }
 
+    public function listPartnersByAgency() 
+    {
+        $query = "
+            SELECT *
+            FROM "
+            . $this->table . " 
+            WHERE idAgency = :idAgency
+            ORDER BY
+            idPartner";
+        $stmt = $this->conn->prepare($query);
+
+        $params = ["idAgency" => htmlspecialchars(strip_tags($this->idAgency))];
+
+        if ($stmt->execute($params)) {
+            return $stmt;
+        }
+        return false;
+    }
+
     public function searchPartnerById() {
         $query = "
         SELECT *

@@ -87,7 +87,7 @@ class Contract
         return false;
     }
 
-    public function searchCustomerContractsByCustomer() 
+    public function searchContractsByCustomer() 
     {
         $query = "
         SELECT *
