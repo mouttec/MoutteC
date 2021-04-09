@@ -15,6 +15,7 @@ $decodedData = json_decode(file_get_contents("php://input"));
 $dailyPayment->idContract = $decodedData->idContract;
 $dailyPayment->priceDailyPayment = $decodedData->priceDailyPayment;
 $dailyPayment->idPartner = $decodedData->idPartner;
+$dailyPayment->idCustomer = $decodedData->idCustomer;
 
 if ((isset($decodedData->statusDailyPayment)) && (isset($decodedData->idDailyPayment))) {
 	$dailyPayment->statusDailyPayment = $decodedData->statusDailyPayment;

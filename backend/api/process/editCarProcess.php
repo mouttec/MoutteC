@@ -14,9 +14,9 @@ $carProcess = new carProcess($conn);
 $decodedData = json_decode(file_get_contents("php://input"));
 
 if (isset($decodedData->idProcess)) {
-	$car = $process->idProcess = $decodedData->idProcess;
-	$car->carStatus .= 1;
-	$result = $car->updateCarProcessStatus($car);
+	$carProcess->idProcess = $decodedData->idProcess;
+	$carProcess->carStatus .= 1;
+	$result = $carProcess->updateCarProcessStatus($carProcess);
 }
 
 if ($result) {

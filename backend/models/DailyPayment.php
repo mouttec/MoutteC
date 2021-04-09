@@ -5,10 +5,11 @@ class DailyPayment
     private $table = "dailyPayments";
 
     public $idDailyPayment;
-    public $idContract;
+    public $idBooking;
     public $statusDailyPayment;
     public $priceDailyPayment;
     public $idPartner;
+    public $idCustomer;
     public $dateDailyPayment;
  
     public function __construct($db) {
@@ -21,18 +22,20 @@ class DailyPayment
             INSERT INTO "
             . $this->table .
             " SET
-            idContract = :idContract,
+            idBooking = :idBooking,
             statusDailyPayment = :statusDailyPayment,
             priceDailyPayment = :priceDailyPayment,
-            idPartner = :idPartner
+            idPartner = :idPartner,
+            idCustomer = :idCustomer
             ";
         $stmt = $this->conn->prepare($query);
 
         $params = [
-            "idContract" => htmlspecialchars(strip_tags($this->idContract)),
+            "idBooking" => htmlspecialchars(strip_tags($this->idBooking)),
             "statusDailyPayment" => htmlspecialchars(strip_tags($this->statusDailyPayment)),
             "priceDailyPayment" => htmlspecialchars(strip_tags($this->priceDailyPayment)),
-            "idPartner" => htmlspecialchars(strip_tags($this->idPartner))
+            "idPartner" => htmlspecialchars(strip_tags($this->idPartner)),
+            "idCustomer" => htmlspecialchars(strip_tags($this->idCustomer))
         ];
 
         if($stmt->execute($params)) {
@@ -70,8 +73,7 @@ class DailyPayment
         $params = ["idPartner" => htmlspecialchars(strip_tags($this->idPartner))];
 
         if($stmt->execute($params)) {
-            $row = $stmt->fetch();    
-            return $row;
+            return $stmt;
         }
         return false;
     }
@@ -89,23 +91,22 @@ class DailyPayment
         $params = ["idCustomer" => htmlspecialchars(strip_tags($this->idCustomer))];
 
         if($stmt->execute($params)) {
-            $row = $stmt->fetch();    
-            return $row;
+            return $stmt;
         }
         return false;
     }
 
-    public function searchPaymentByContract() 
+    public function searchPaymentByBooking() 
     {
         $query = "
         SELECT *
         FROM "
         . $this->table . " 
-        WHERE idContract = :idContract
+        WHERE idBooking = :idBooking
         ";
         $stmt = $this->conn->prepare($query);
 
-        $params = ["idContract" => htmlspecialchars(strip_tags($this->idContract))];
+        $params = ["idBooking" => htmlspecialchars(strip_tags($this->idBooking))];
 
         if($stmt->execute($params)) {
             $row = $stmt->fetch();    
@@ -114,7 +115,51 @@ class DailyPayment
         return false;
     }
 
-    public function searchBillingsByMonth($monthRequired, $yearRequired)
+    public function searchPaymentById() 
+    {
+        $query = "
+        SELECT *
+        FROM "
+        . $this->table . " 
+        WHERE idDailyPayment = :idDailyPayment
+        ";
+        $stmt = $this->conn->prepare($query);
+
+        $params = ["idDailyPayment" => htmlspecialchars(strip_tags($this->idDailyPayment))];
+
+        if($stmt->execute($params)) {
+            $row = $stmt->fetch();    
+            return $row;
+        }
+        return false;
+    }
+
+    public function listPaymentsByDate()
+    {
+        $query = "
+            SELECT *
+            FROM "
+            . $this->table . " 
+            WHERE
+            (dateDailyPayment >= :dayStart AND
+             dateDailyPayment <= :dayEnd)
+            ORDER BY idPartner ASC";
+        $stmt = $this->conn->prepare($query);
+
+        $dateDailyPayment = htmlspecialchars(strip_tags($this->dateDailyPayment));
+
+        $params = [
+            "dayStart" => $dateDailyPayment ." 00:00:00"),
+            "dayEnd" => $dateDailyPayment ." 23:59:59")
+        ];
+
+        if ($stmt->execute($params)) {
+            return $stmt;
+        }
+        return false;
+    }
+
+    public function listPaymentsByMonth($monthRequired, $yearRequired)
     {
         $query = "
             SELECT *
@@ -122,17 +167,17 @@ class DailyPayment
             . $this->table . " 
             WHERE
             (dateDailyPayment >= :monthStart AND
-             dateDailyPayment =< :monthEnd)
+             dateDailyPayment <= :monthEnd)
              ORDER BY idPartner ASC";
         $stmt = $this->conn->prepare($query);
 
+        $d = cal_days_in_month(CAL_GREGORIAN, $m, $y);
         $m = htmlspecialchars(strip_tags($monthRequired));
         $y = htmlspecialchars(strip_tags($yearRequired));
-        $d = cal_days_in_month(CAL_GREGORIAN, $m, $y);
 
         $params = [
-            "monthStart" => date($y ."-". $m ."-1 00:00:00"),
-            "monthEnd" => date($y ."-". $m ."-". $d ." 23:59:59")
+            "monthStart" => $y ."-". $m ."-1 00:00:00",
+            "monthEnd" => $y ."-". $m ."-". $d ." 23:59:59"
         ];
 
         if ($stmt->execute($params)) {
@@ -176,7 +221,7 @@ class DailyPayment
     //         UPDATE "
     //         . $this->table .
     //         " SET
-    //         idContract = :idContract,
+    //         idBooking = :idBooking,
     //         priceDailyPayment = :priceDailyPayment,
     //         idPartner = :idPartner
     //         WHERE
@@ -185,7 +230,7 @@ class DailyPayment
     //     $stmt = $this->conn->prepare($query);
 
     //     $params = [
-    //         "idContract" => htmlspecialchars(strip_tags($this->idContract)),
+    //         "idBooking" => htmlspecialchars(strip_tags($this->idBooking)),
     //         "priceDailyPayment" => htmlspecialchars(strip_tags($this->priceDailyPayment)),
     //         "idPartner" => htmlspecialchars(strip_tags($this->idPartner)),
     //         "idDailyPayment" => htmlspecialchars(strip_tags($this->idDailyPayment))
@@ -220,20 +265,20 @@ class DailyPayment
         return false;
     }
 
-    public function deleteDailyPayment() 
-    {
-        $query = "
-            DELETE
-            FROM " . $this->table .
-            " WHERE idPaymentOfDay = :idPaymentOfDay
-        ";
-        $stmt = $this->conn->prepare($query);
+    // public function deleteDailyPayment() 
+    // {
+    //     $query = "
+    //         DELETE
+    //         FROM " . $this->table .
+    //         " WHERE idPaymentOfDay = :idPaymentOfDay
+    //     ";
+    //     $stmt = $this->conn->prepare($query);
 
-        $params = ["idPaymentOfDay" => htmlspecialchars(strip_tags($this->idPaymentOfDay))];
+    //     $params = ["idPaymentOfDay" => htmlspecialchars(strip_tags($this->idPaymentOfDay))];
 
-        if($stmt->execute($params)) {
-            return true;
-        }
-        return false;        
-    }
+    //     if($stmt->execute($params)) {
+    //         return true;
+    //     }
+    //     return false;        
+    // }
 }

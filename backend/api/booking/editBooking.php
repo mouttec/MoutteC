@@ -16,7 +16,6 @@ $booking->idCustomer = $decodedData->idCustomer;
 $booking->idPartner = $decodedData->idPartner;
 $booking->hoursBooking = $decodedData->hoursBooking;
 $booking->dateBooking = $decodedData->dateBooking;
-$booking->statusBooking = $decodedData->statusBooking;
 $booking->formulaBooking = $decodedData->formulaBooking;
 $booking->dateReturn = $decodedData->dateReturn;
 $booking->hoursReturn = $decodedData->hoursReturn;
@@ -27,7 +26,12 @@ $booking->idAgency = $decodedData->idAgency;
 
 if (!empty($decodedData->idBooking)) {
     $booking->idBooking = $decodedData->idBooking;
-    $result = $booking->updateBooking($booking);
+    if (!empty($decodedData->statusBooking)) {
+    	$booking->statusBooking = $decodedData->statusBooking;
+    	$result = $booking->updateBookingStatus($booking);
+    } else {
+        $result = $booking->updateBooking($booking);
+    }
 } else {
     $result = $booking->createBooking($booking);
 }

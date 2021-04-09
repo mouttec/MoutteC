@@ -36,7 +36,6 @@ class Partner
 
     public function createPartner() 
     {
-
         $query = "
             INSERT INTO "
             . $this->table .
@@ -252,20 +251,24 @@ class Partner
         return false;
     }
 
-
-    public function deletePartner() 
+    public function changeStatusPartner() 
     {
         $query = "
-            DELETE
-            FROM " . $this->table .
-            " WHERE idPartner = :idPartner
+            UPDATE "
+            . $this->table .
+            " SET
+            statusPartner = :statusPartner
+            WHERE
+            idPartner = :idPartner       
         ";
         $stmt = $this->conn->prepare($query);
-        $params = ["idPartner" => htmlspecialchars(strip_tags($this->idPartner))];
+        $params = [
+            "statusPartner" => htmlspecialchars(strip_tags($this->statusPartner)),
+            "idPartner" => htmlspecialchars(strip_tags($this->idPartner))
+        ];
         if ($stmt->execute($params)) {
             return true;
         }
         return false;
-        
     }
 }

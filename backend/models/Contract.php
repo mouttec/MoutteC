@@ -145,6 +145,25 @@ class Contract
         return false;           
     }
 
+    public function searchContractByBooking() 
+    {
+        $query = "
+        SELECT *
+        FROM "
+        . $this->table . " 
+        WHERE idBooking = :idBooking
+        LIMIT 0,1";
+        $stmt = $this->conn->prepare($query);
+        
+        $params = ["idBooking" => htmlspecialchars(strip_tags($this->idBooking))];
+        
+        if ($stmt->execute($params)) {
+            $row = $stmt->fetch();    
+            return $row;
+        }
+        return false;
+    }
+
     public function searchContract() 
     {
         $query = "

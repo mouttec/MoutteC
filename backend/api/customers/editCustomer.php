@@ -18,13 +18,20 @@ $customer->lastNameCustomer = $decodedData->lastNameCustomer;
 $customer->dateOfBirthdayCustomer = $decodedData->dateOfBirthdayCustomer;
 $customer->phoneCustomer = $decodedData->phoneCustomer;
 $customer->mailCustomer = $decodedData->mailCustomer;
+if (isset($decodedData->idPartner)) {
+	$customer->idPartner = $decodedData->idPartner;
+}
 
-if (!empty($decodedData->idCustomer)) {
+if (isset($decodedData->idCustomer)) {
+	if (isset($decodedData->statusCustomer)) {
+		$customer->statusCustomer = $decodedData->statusCustomer;
+		$result = $customer->updateStatusCustomer($customer);
+	}
     $customer->idCustomer = $decodedData->idcustomer;
     $result = $customer->updateCustomer($customer);
 } else {
-	if (isset($decodedData->mixedPassword)) {
-		$customer->mixedPassword = $decodedData->mixedPassword;
+	if (isset($decodedData->password)) {
+		$customer->mixedPassword = $decodedData->password;
 	} else {
 	 	$chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
  		$maxLength = strlen($chars);
@@ -40,8 +47,7 @@ if (!empty($decodedData->idCustomer)) {
 }
 
 if ($result) {
-    echo json_encode([ "message" => "Le client a été édité !" 
-		]);
+    echo json_encode([ "message" => "Le client a été édité !" ]);
 } else {
     echo json_encode([ "message" => "Le client n'a pas pu être édité..." ]);
 }

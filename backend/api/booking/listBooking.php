@@ -15,16 +15,16 @@ if (isset($_GET['idBooking'])) {
 } else {
     if (isset($_GET['idPartner'])) {
         $booking->idPartner = $_GET['idPartner'];
-        $bookings = $booking->searchBookingByPartner($booking);
+        $bookings = $booking->searchBookingsByPartner($booking);
     } elseif (isset($_GET['idCustomer'])) {
         $booking->idCustomer = $_GET['idCustomer'];
-        $bookings = $booking->searchBookingByCustomer($bookings);
+        $bookings = $booking->searchBookingsByCustomer($bookings);
     } elseif (isset($_GET['idAgency'])) {
         $booking->idAgency == $_GET['idAgency'];
-        $bookings = $booking->searchBookingByAgency($booking);
+        $bookings = $booking->searchBookingsByAgency($booking);
     } elseif (isset($_GET['dateBooking'])) {
         $booking->dateBooking == $_GET['dateBooking'];
-        $bookings = $booking->searchBookingByDay($booking);
+        $bookings = $booking->searchBookingsByDay($booking);
     } else {
         $bookings = $booking->listBookings();
     }

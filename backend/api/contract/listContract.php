@@ -10,9 +10,14 @@ $db = new Database();
 $conn = $db->connect();
 $contract = new Contract($conn);
 
-if (isset($_GET['idContract'])) {
-    $contract->idContract = $_GET['idContract'];
-    $resultContract = $contract->searchContract($contract);
+if ((isset($_GET['idContract'])) || (isset($_GET['idBooking']))) {
+    if(isset($_GET['idContract'])) { 
+        $contract->idContract = $_GET['idContract'];
+        $resultContract = $contract->searchContract($contract);
+    } elseif (isset($_GET['idBooking'])) {
+        $contract->idBooking = $_GET['idBooking'];
+        $resultContract = $contract->searchContractByBooking($contract);
+    }
     //Récupération des vidéos liées au contrat
     $video = new Video($conn);
     $video->idContract = $_GET['idContract'];
@@ -43,7 +48,7 @@ if (isset($_GET['idContract'])) {
     }
     elseif (isset($_GET['idAgency'])) {
         $contract->idAgency = $_GET['idAgency'];
-        $contracts = $contract->searchContractsByCustomer($contract);
+        $contracts = $contract->searchContractsByAgency($contract);
     }
     elseif (isset($_GET['idCar'])) {
         $contract->idCar = $_GET['idCar'];

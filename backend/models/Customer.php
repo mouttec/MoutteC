@@ -29,6 +29,7 @@ class Customer {
             dateOfBirthdayCustomer = :dateOfBirthdayCustomer,
             phoneCustomer = :phoneCustomer, 
             mailCustomer = :mailCustomer,
+            statusCustomer = : statusCustomer,
             mixedPassword = :mixedPassword
         ";
         $stmt = $this->conn->prepare($query);
@@ -39,6 +40,7 @@ class Customer {
             "dateOfBirthdayCustomer" => htmlspecialchars(strip_tags($this->dateOfBirthdayCustomer)),
             "phoneCustomer" => htmlspecialchars(strip_tags($this->phoneCustomer)),
             "mailCustomer" => htmlspecialchars(strip_tags($this->mailCustomer)),
+            "statusCustomer" => "Actif",
             "mixedPassword" => password_hash($this->mixedPassword, PASSWORD_DEFAULT)
         ];
 
@@ -143,6 +145,29 @@ class Customer {
             "phoneCustomer" => htmlspecialchars(strip_tags($this->phoneCustomer)),
             "mailCustomer" => htmlspecialchars(strip_tags($this->mailCustomer)),
             "idPartner" => htmlspecialchars(strip_tags($this->idPartner)),
+            "idCustomer" => htmlspecialchars(strip_tags($this->idCustomer))
+        ];
+
+        if($stmt->execute($params)) {
+            return true;
+        }
+        return false;
+    }
+
+    public function updateStatusCustomer() 
+    {
+        $query = "
+            UPDATE "
+            . $this->table .
+            " SET
+            statusCustomer = :statusCustomer
+            WHERE
+            idCustomer = :idCustomer       
+        ";
+        $stmt = $this->conn->prepare($query);
+
+        $params = [
+            "statusCustomer" => htmlspecialchars(strip_tags($this->statusCustomer)),
             "idCustomer" => htmlspecialchars(strip_tags($this->idCustomer))
         ];
 

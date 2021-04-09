@@ -47,7 +47,7 @@ class Booking {
             "idPartner" => htmlspecialchars(strip_tags($this->idPartner)),
             "hoursBooking" => htmlspecialchars(strip_tags($this->hoursBooking)),
             "dateBooking" => htmlspecialchars(strip_tags($this->dateBooking)),
-            "statusBooking" => htmlspecialchars(strip_tags($this->statusBooking)),
+            "statusBooking" => "Validée",
             "formulaBooking" => htmlspecialchars(strip_tags($this->formulaBooking)),
             "dateReturn" => htmlspecialchars(strip_tags($this->dateReturn)),
             "hoursReturn" => htmlspecialchars(strip_tags($this->hoursReturn)),
@@ -168,7 +168,6 @@ class Booking {
             idPartner = :idPartner,
             hoursBooking = :hoursBooking,
             dateBooking = :dateBooking,
-            statusBooking = :statusBooking,
             formulaBooking = :formulaBooking,
             dateReturn = :dateReturn,
             hoursReturn = :dateReturn,
@@ -185,7 +184,6 @@ class Booking {
             "idPartner" => htmlspecialchars(strip_tags($this->idPartner)),
             "hoursBooking" => htmlspecialchars(strip_tags($this->hoursBooking)),
             "dateBooking" => htmlspecialchars(strip_tags($this->dateBooking)),
-            "statusBooking" => htmlspecialchars(strip_tags($this->statusBooking)),
             "formulaBooking" => htmlspecialchars(strip_tags($this->formulaBooking)),
             "dateReturn" => htmlspecialchars(strip_tags($this->dateReturn)),
             "hoursReturn" => htmlspecialchars(strip_tags($this->hoursReturn)),
@@ -200,6 +198,28 @@ class Booking {
             return true;
         }
         return false;
+    }
+
+    public function updateBookingStatus() {
+        $query = "
+            UPDATE "
+            . $this->table .
+            " SET
+            statusBooking = :statusBooking,
+            WHERE
+            idBooking = :idBooking       
+        ";
+        $stmt = $this->conn->prepare($query);
+
+        $params = [
+            "statusBooking" => htmlspecialchars(strip_tags($this->statusBooking)),
+            "idBooking" => htmlspecialchars(strip_tags($this->idBooking))
+        ];
+
+        if($stmt->execute($params)) {
+            return true;
+        }
+        return false;        
     }
 
     public function deleteBooking() {

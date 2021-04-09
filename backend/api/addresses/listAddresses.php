@@ -4,6 +4,7 @@ header("Content-Type: application/json");
 header("Access-Control-Allow-Methods: GET");
 include_once "../../config/Database.php";
 include_once "../../models/Address.php";
+include_once "../../models/Booking.php";
 
 $db = new Database();
 $conn = $db->connect();
@@ -12,14 +13,18 @@ $address = new Address($conn);
 if (isset($_GET['idAddress'])) {
 	$address->idAddress = $_GET['idAddress'];
 	$result = $address->searchAddress($address);
+} elseif (isset($_GET['idBooking'])) {
+	$booking = new Booking($conn);
+	$booking->idBooking = $_GET['idBooking'];
+	$thisBooking = $booking->searchBookingById($booking);
+	$pickupAddress = $address->searchAddressById($thisBooking->idPickupAddress);
+	$returnAddress = $address->searchAddressById($thisBooking->idReturnAddress);
+	$result = [$pickupAddress, $returnAddress];
 } else {
     if (isset($_GET['idCustomer'])) {
         $address->idCustomer = $_GET['idCustomer'];
         $addresses = $address->listAddressesByCustomer($address);
-    } else if (isset($_GET['idBooking'])) {
-    	$address->idBooking = $_GET['idBooking'];
-    	$addresses = $address->searchAddressesByBooking($address);
-    } else {
+   } else {
         $addresses = $address->listAddresses();
     }
 	$counter = $addresses->rowCount();

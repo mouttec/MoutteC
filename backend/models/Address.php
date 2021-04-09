@@ -43,7 +43,7 @@ class Address
         ];
 
         if ($stmt->execute($params)) {
-            return $stmt;
+            return true;
         }
         return false;
     }
@@ -97,22 +97,6 @@ class Address
         return false;
     }
 
-    public function searchAddressesByBooking() {
-        $query = "
-        SELECT *
-        FROM "
-        . $this->table . " 
-        WHERE idBooking = :idBooking";
-        $stmt = $this->conn->prepare($query);
-
-        $params = ["idBooking" => $this->idBooking];
-
-        if($stmt->execute($params)) {
-            return $stmt;
-        }
-        return false;
-    }
-
     public function updateAddress() {
         $query = "
             UPDATE "
@@ -143,21 +127,5 @@ class Address
             return $stmt;
         }
         return false;
-    }
-
-    public function deleteAddress() {
-        $query = "
-            DELETE
-            FROM " . $this->table .
-            " WHERE idAddress = :idAddress
-        ";
-        $stmt = $this->conn->prepare($query);
-
-        $params = ["idAddress" => htmlspecialchars(strip_tags($this->idAddress))];
-
-        if($stmt->execute($params)) {
-            return true;
-        }
-        return false;        
     }
 }

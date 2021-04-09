@@ -4,8 +4,6 @@ header("Content-Type: application/json");
 header("Access-Control-Allow-Methods: GET");
 include_once "../../config/Database.php";
 include_once "../../models/Video.php";
-include_once "../../models/Partner.php";
-include_once "../../models/Customer.php";
 include_once "../../models/Contract.php";
 
 $db = new Database();
@@ -27,7 +25,7 @@ if (isset($_GET['idVideo'])) {
             $contract->idPartner = $_GET['idPartner'];
             $contracts = $contract->searchContractsByPartner($contract);
         }
-        $counter = $contracts->rowCount()
+        $counter = $contracts->rowCount();
         if ($counter > 0) {
             $contractsId = array();
             while ($row = $contracts->fetch()) {

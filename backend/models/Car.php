@@ -69,7 +69,7 @@ class Car
             SELECT *
             FROM " . $this->table . "
             WHERE idCustomer = :idCustomer
-            ORDRE BY idCar ASC";
+            ORDER BY idCar ASC";
         $stmt = $this->conn->prepare($query);
 
         $params = ["idCustomer" => htmlspecialchars(strip_tags($this->idCustomer))];
@@ -149,16 +149,22 @@ class Car
         return false;
     }
 
-    public function deleteCar() 
+    public function detachCarFromCustomer() 
     {
         $query = "
-            DELETE
-            FROM " . $this->table .
-            " WHERE idCar = :idCar
+            UPDATE "
+            . $this->table .
+            " SET
+            idCustomer = :idCustomer
+            WHERE
+            idCar = :idCar       
         ";
         $stmt = $this->conn->prepare($query);
 
-        $params = ["idCar" => htmlspecialchars(strip_tags($this->idCar))];
+        $params = [
+            "idCustomer" => "",
+            "idCar" => htmlspecialchars(strip_tags($this->idCar))
+        ];
 
         if($stmt->execute($params)) {
             return true;

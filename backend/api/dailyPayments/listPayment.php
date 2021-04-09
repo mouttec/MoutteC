@@ -9,21 +9,27 @@ $db = new Database();
 $conn = $db->connect();
 $dailyPayment = new DailyPayment($conn);
 
-if (isset($_GET['idContract'])) {
-    $dailyPayment->idContract = $_GET['idContract'];
-    $result = $dailyPayment->searchPaymentByContract($dailyPayment);
+if (isset($_GET['idBooking'])) {
+    $dailyPayment->idBooking = $_GET['idBooking'];
+    $result = $dailyPayment->searchPaymentByBooking($dailyPayment);
+} else if (isset($_GET['idDailyPayment'])) {
+    $dailyPayment->idDailyPayment = $_GET['idDailyPayment'];
+    $result = $dailyPayment->searchPaymentById($dailyPayment);
 } else {
     if (isset($_GET['idPartner'])) {
         $dailyPayment->idPartner = $_GET['idPartner'];
-        $payments = $dailyPayment->searchPaymentsByPartner($dailyPayment);
+        $payments = $dailyPayment->listPaymentsByPartner($dailyPayment);
     }
     elseif (isset($_GET['idCustomer'])) {
         $dailyPayment->idCustomer = $_GET['idCustomer'];
-        $payments = $dailyPayment->searchPaymentsByCustomer($dailyPayment);
-    } else if ((isset($_GET['monthRequired'])) && (isset($_GET['yearRequired']))) {
+        $payments = $dailyPayment->listPaymentsByCustomer($dailyPayment);
+    } elseif ((isset($_GET['monthRequired'])) && (isset($_GET['yearRequired']))) {
         $monthRequired = $decodedData->monthRequired;
         $yearRequired = $decodedData->yearRequired;
-        $payments = $dailyPayment->searchBillingsByMonth($monthRequired, $yearRequired);
+        $payments = $dailyPayment->listPaymentsByMonth($monthRequired, $yearRequired);
+    } elseif ((isset($decodedData->dateDailyPayment))) {
+        $dailyPayment->dateDailyPayment = $decodedData->dateDailyPayment;
+        $payments = $dailyPayment->listPaymentsByDate($dailyPayment);
     } else {
         $payments = $dailyPayment->listPayments();
     }
@@ -34,10 +40,12 @@ if (isset($_GET['idContract'])) {
         while($row = $payments->fetch()) {
             extract($row);
             $billing_item = [
+                "idDailyPayment" => $idDailyPayment,
                 "idPartner" => $idPartner,
                 "idCustomer" => $idCustomer,
                 "priceDailyPayment" => $priceDailyPayment,
-                "idContract" => $idContract
+                "idBooking" => $idBooking,
+                "idCustomer" => $idCustomer
             ];
             array_push($billings_array, $billing_item);
         }
