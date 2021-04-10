@@ -38,7 +38,11 @@ class Booking {
             idCar = :idCar,
             idPickupAddress = :idPickupAddress,
             idReturnAddress = :idReturnAddress,
-            idAgency = :idAgency
+            idAgency = :idAgency,
+            distanceForth = :distanceForth,
+            durationForth = :durationForth,
+            distanceBack = :distanceBack,
+            durationBack = :durationBack
             ";
         $stmt = $this->conn->prepare($query);
 
@@ -54,7 +58,11 @@ class Booking {
             "idCar" => htmlspecialchars(strip_tags($this->idCar)),
             "idPickupAddress" => htmlspecialchars(strip_tags($this->idPickupAddress)),
             "idReturnAddress" => htmlspecialchars(strip_tags($this->idReturnAddress)),
-            "idAgency" => htmlspecialchars(strip_tags($this->idAgency))
+            "idAgency" => htmlspecialchars(strip_tags($this->idAgency)),
+            "distanceForth" => htmlspecialchars(strip_tags($this->distanceForth)),
+            "durationForth" => htmlspecialchars(strip_tags($this->durationForth)),
+            "distanceBack" => htmlspecialchars(strip_tags($this->distanceBack)),
+            "durationBack" => htmlspecialchars(strip_tags($this->durationBack))
         ];
 
         if($stmt->execute($params)) {
@@ -74,6 +82,28 @@ class Booking {
 
         $stmt->execute();
         return $stmt;
+    }
+
+    public function prepareCalendar() {
+        $query = "
+            SELECT *
+            FROM "
+            . $this->table . "
+            WHERE (dateBooking >= :startDate AND dateBooking <= :endDate AND idAgency = :idAgency) 
+            ORDER BY
+            idBooking DESC";
+        $stmt = $this->conn->prepare($query);
+
+        $params = [
+            "startDate" => date('j/m/Y'),
+            "endDate" => date('d/m/Y', strtotime('+60 days')),
+            "idAgency" => htmlspecialchars(strip_tags($this->idAgency))
+        ]
+
+        if ($stmt->execute($params)) {
+            return $stmt;
+        }
+        return false;
     }
 
     public function searchBookingById() {
