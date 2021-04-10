@@ -210,13 +210,13 @@ class Contract
             . $this->table .
             " SET
             idTeammateReturn = :idTeammateReturn,            
-            urlArrivalInventory = :urlArrivalInventory
+            urlDeparturelInventory = :urlDepartureInventory
             WHERE idContract = :idContract";
         $stmt = $this->conn->prepare($query);
 
         $params = [
             "idTeammateReturn" => htmlspecialchars(strip_tags($this->idTeammateReturn)),
-            "urlArrivalInventory" => htmlspecialchars(strip_tags($this->urlArrivalInventory)),
+            "urlDepartureInventory" => htmlspecialchars(strip_tags($this->urlDepartureInventory)),
             "idContract" => htmlspecialchars(strip_tags($this->idContract))
         ];
         if ($stmt->execute($params)) {

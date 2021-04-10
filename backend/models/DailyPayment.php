@@ -149,8 +149,8 @@ class DailyPayment
         $dateDailyPayment = htmlspecialchars(strip_tags($this->dateDailyPayment));
 
         $params = [
-            "dayStart" => $dateDailyPayment ." 00:00:00"),
-            "dayEnd" => $dateDailyPayment ." 23:59:59")
+            "dayStart" => $dateDailyPayment ." 00:00:00",
+            "dayEnd" => $dateDailyPayment ." 23:59:59"
         ];
 
         if ($stmt->execute($params)) {

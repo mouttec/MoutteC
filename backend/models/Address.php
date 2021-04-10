@@ -124,7 +124,7 @@ class Address
         ];
 
         if($stmt->execute($params)) {
-            return $stmt;
+            return true;
         }
         return false;
     }

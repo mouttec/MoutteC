@@ -21,11 +21,15 @@ $agency->zipAddressAgency = $decodedData->zipAddressAgency;
 $agency->cityAddressAgency = $decodedData->cityAddressAgency;
 $agency->phoneAgency = $decodedData->phoneAgency;
 $agency->mailAgency = $decodedData->mailAgency;
-$agency->statusAgency = $decodedData->statusAgency;
 
 if (!empty($decodedData->idAgency)) {
 	$agency->idAgency = $decodedData->idAgency;
-    $result = $agency->updateAgency($agency);
+	if (!empty($decodedData->statusAgency)) {
+		$agency->statusAgency = $decodedData->statusAgency;
+		$result = $agency->updateStatusAgency($agency);
+	} else {
+    	$result = $agency->updateAgency($agency);
+	}
 } else { 
     $result = $agency->createAgency($agency);
 }

@@ -9,9 +9,9 @@ $db = new Database();
 $conn = $db->connect();
 $carProcess = new carProcess($conn);
 
-$process->idBooking = $decodedData->idBooking;
-$process->idPartner = $decodedData->idPartner;
-$process->carStatus = $decodedData->carStatus;
+// $process->idBooking = $decodedData->idBooking;
+// $process->idPartner = $decodedData->idPartner;
+// $process->carStatus = $decodedData->carStatus;
 
 $processSteps = [
 	['En attente', 'En attente', 'En attente'],
@@ -28,15 +28,18 @@ $processSteps = [
 
 if (isset($_GET['idCar'])) {
     $process->idCar = $_GET['idCar'];
-    $carInProcess = $process->searchProcessByIdCar($process);
+    $carInProcess = $carProcess->searchProcessByIdCar($carProcess);
     $carInProcess->carStatus = $processSteps[$carInProcess->carStatus];
     $result = $carInProcess;
 } else { 
-	if (isset($decodedData->idAgency)) {
-		$process->idAgency = $decodedData->idAgency;
-		$carsInProcess = $process->listCarProcessesByAgency($process);
-	} else {
-    	$carsInProcess = $process->listCarsInProcess();
+	if (isset($_GET['idAgency'])) {
+		$carProcess->idAgency = $_GET['idAgency'];
+		$carsInProcess = $carProcess->listCarProcessesByAgency($carProcess);
+	} else if (isset($_GET['idPartner'])) {
+        $carProcess->idPartner = $_GET['idPartner'];
+        $carsInProcess = $carProcess->listCarProcessesByPartner($carProcess);
+    } else {
+    	$carsInProcess = $carProcess->listCarsInProcess();
     }
     $counter = $carsInProcess->rowCount();
     if ($counter > 0) {
@@ -58,7 +61,7 @@ if (isset($_GET['idCar'])) {
 }
 
 if ($result) {
-    echo json_encode([$result]);
+    echo json_encode($result);
 } else {
 	http_response_code(404); 
 }

@@ -131,8 +131,7 @@ class Customer {
             lastNameCustomer = :lastNameCustomer,
             dateOfBirthdayCustomer = :dateOfBirthdayCustomer,
             phoneCustomer = :phoneCustomer,
-            mailCustomer = :mailCustomer,
-            idPartner = :idPartner
+            mailCustomer = :mailCustomer
             WHERE
             idCustomer = :idCustomer       
         ";
@@ -144,7 +143,6 @@ class Customer {
             "dateOfBirthdayCustomer" => htmlspecialchars(strip_tags($this->dateOfBirthdayCustomer)),
             "phoneCustomer" => htmlspecialchars(strip_tags($this->phoneCustomer)),
             "mailCustomer" => htmlspecialchars(strip_tags($this->mailCustomer)),
-            "idPartner" => htmlspecialchars(strip_tags($this->idPartner)),
             "idCustomer" => htmlspecialchars(strip_tags($this->idCustomer))
         ];
 
@@ -177,6 +175,29 @@ class Customer {
         return false;
     }
 
+    public function bindPartnerToCustomer() 
+    {
+        $query = "
+            UPDATE "
+            . $this->table .
+            " SET
+            idPartner = :idPartner
+            WHERE
+            idCustomer = :idCustomer       
+        ";
+        $stmt = $this->conn->prepare($query);
+
+        $params = [
+            "idPartner" => htmlspecialchars(strip_tags($this->idPartner)),
+            "idCustomer" => htmlspecialchars(strip_tags($this->idCustomer))
+        ];
+
+        if($stmt->execute($params)) {
+            return true;
+        }
+        return false;
+    }
+
     public function updatePasswordCustomer() 
     {
         $query = "
@@ -200,15 +221,21 @@ class Customer {
         return false;
     }
 
-    public function deleteCustomer() {
-        $query = "
-            DELETE
-            FROM " . $this->table .
-            " WHERE idCustomer = :idCustomer
+    public function deactivateCustomer() {
+       $query = "
+            UPDATE "
+            . $this->table .
+            " SET
+            statusCustomer = :statusCustomer
+            WHERE
+            idCustomer = :idCustomer       
         ";
         $stmt = $this->conn->prepare($query);
 
-        $params = ["idCustomer" => htmlspecialchars(strip_tags($this->idCustomer))];
+        $params = [
+            "statusCustomer" => "Inactif",
+            "idCustomer" => htmlspecialchars(strip_tags($this->idCustomer))
+        ];
 
         if($stmt->execute($params)) {
             return true;

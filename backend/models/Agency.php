@@ -1,9 +1,8 @@
 <?php
 class Agency {
-    // Propriétés privées de connexion à la DB
     private $conn;
     private $table = "agencies";
-    // Propriétés publiques de l'objet Post
+
     public $idAgency;
     public $nameAgency;
     public $numberAddressAgency;
@@ -67,9 +66,10 @@ class Agency {
             dateAgency ASC";
         $stmt = $this->conn->prepare($query);
 
-        $stmt->execute();
-
-        return $stmt;
+        if ($stmt->execute()) {
+            return $stmt;
+        }
+        return false;
     }
 
     public function searchAgency() {
@@ -91,7 +91,6 @@ class Agency {
     }
 
     public function updateAgency() {
-        // On crée la requête
         $query = "
             UPDATE "
             . $this->table .
@@ -105,7 +104,6 @@ class Agency {
             cityAddressAgency = :cityAddressAgency,
             phoneAgency = :phoneAgency,
             mailAgency = :mailAgency,
-            statusAgency = :statusAgency
             WHERE
             idAgency = :idAgency
         ";
@@ -121,7 +119,6 @@ class Agency {
             "cityAddressAgency" => htmlspecialchars(strip_tags($this->cityAddressAgency)),
             "phoneAgency" => htmlspecialchars(strip_tags($this->phoneAgency)),
             "mailAgency" => htmlspecialchars(strip_tags($this->mailAgency)),
-            "statusAgency" => htmlspecialchars(strip_tags($this->statusAgency)),
             "idAgency" => htmlspecialchars(strip_tags($this->idAgency))
         ];
 
@@ -131,17 +128,45 @@ class Agency {
         return false;
     }
 
-    public function deleteAgency() {
+    public function updateStatusAgency() {
         $query = "
-            DELETE
-            FROM " . $this->table .
-            " WHERE idAgency = :idAgency
+            UPDATE "
+            . $this->table .
+            " SET
+            statusAgency = :statusAgency
+            WHERE
+            idAgency = :idAgency
         ";
 
         $stmt = $this->conn->prepare($query);
-        $params = ["idAgency" => htmlspecialchars(strip_tags($this->idAgency))];
+        $params = [
+            "statusAgency" => htmlspecialchars(strip_tags($this->idAgency)),
+            "idAgency" => htmlspecialchars(strip_tags($this->idAgency))
+        ];
 
-        if($stmt->execute($params)) {
+        if ($stmt->execute($params)) {
+            return true;
+        }
+        return false;
+    }
+
+    public function closeAgency() {
+        $query = "
+            UPDATE "
+            . $this->table .
+            " SET
+            statusAgency = :statusAgency
+            WHERE
+            idAgency = :idAgency
+        ";
+
+        $stmt = $this->conn->prepare($query);
+        $params = [
+            "statusAgency" => "Fermée",
+            "idAgency" => htmlspecialchars(strip_tags($this->idAgency))
+        ];
+
+        if ($stmt->execute($params)) {
             return true;
         }
         return false;

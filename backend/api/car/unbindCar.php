@@ -11,7 +11,7 @@ $car = new Car($conn);
 
 if (isset($_GET['idCar'])) {
     $car->idCar = $_GET['idCar'];
-    $result = $car->detachCarFromCustomer($car);
+    $result = $car->unbindCarFromCustomer($car);
 }
 
 if (isset($result) && !empty($result)) {

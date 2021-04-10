@@ -30,6 +30,7 @@ if ((isset($_GET['idContract'])) || (isset($_GET['idBooking']))) {
                 "idVideo" => $idVideo,
                 "urlVideo" => $urlVideo,
                 "idContract" => $idContract,
+                "dateVideo" => $dateVideo,
                 "videoType" => $videoType
             ];
             array_push($videos_array, $video_item);

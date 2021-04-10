@@ -165,8 +165,8 @@ class Teammate {
         $stmt = $this->conn->prepare($query);
 
         $params = [
-            "usernameTeammate" => htmlspecialchars(strip_tags($this->usernameTeammate)),
             "mixedPassword" => password_hash($this->mixedPassword, PASSWORD_DEFAULT),
+            "idTeammate" => htmlspecialchars(strip_tags($this->idTeammate))
         ];
 
         if ($stmt->execute($params)) {
@@ -175,16 +175,22 @@ class Teammate {
         return false;
     }
 
-    public function deleteTeammate($idTeammate) 
+    public function desactiveTeammate() 
     {
         $query = "
-            DELETE
-            FROM " . $this->table .
-            " WHERE idTeammate = :idTeammate
+            UPDATE "
+            . $this->table .
+            " SET
+            statusTeammate = :statusTeammate
+            WHERE
+            idTeammate = :idTeammate       
         ";
         $stmt = $this->conn->prepare($query);
 
-        $params = ["idTeammate" => htmlspecialchars(strip_tags($this->idTeammate))];
+        $params = [
+            "statusTeammate" => htmlspecialchars(strip_tags($this->statusTeammate)),
+            "idTeammate" => htmlspecialchars(strip_tags($this->idTeammate))
+        ];
 
         if ($stmt->execute($params)) {
             return true;

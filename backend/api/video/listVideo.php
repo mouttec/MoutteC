@@ -15,13 +15,12 @@ if (isset($_GET['idVideo'])) {
     $result = $video->searchVideo($video);
 } else {
     if ((isset($_GET['idCustomer'])) || (isset($_GET['idPartner']))) {
+        $contract = new Contract($conn);
         if (isset($_GET['idCustomer'])) {
-            $contract = new Contract($conn);
             $contract->idCustomer = $_GET['idCustomer'];
             $contracts = $contract->searchContractsByCustomer($contract);
         }
         if (isset($_GET['idPartner'])) {
-            $contract = new Contract($conn);
             $contract->idPartner = $_GET['idPartner'];
             $contracts = $contract->searchContractsByPartner($contract);
         }
@@ -48,9 +47,8 @@ if (isset($_GET['idVideo'])) {
                  "videoType" => $videoType
             ];
             if ((isset($contractsId)) && (in_array($idContract, $contractsId))) {
-                    array_push($videos_array, $video_item);
-                }
-            } else if ((!isset($_GET['idCustomer'])) && (!isset($_GET['idPartner']))) {
+                array_push($videos_array, $video_item);
+            } elseif ((!isset($_GET['idCustomer'])) && (!isset($_GET['idPartner']))) {
                 array_push($videos_array, $video_item);
             }
         }

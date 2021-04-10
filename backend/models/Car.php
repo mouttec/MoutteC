@@ -149,7 +149,7 @@ class Car
         return false;
     }
 
-    public function detachCarFromCustomer() 
+    public function unbindCarFromCustomer() 
     {
         $query = "
             UPDATE "

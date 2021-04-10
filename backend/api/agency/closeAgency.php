@@ -19,7 +19,7 @@ $agency = new Agency($conn);
 
 $decodedData = json_decode(file_get_contents("php://input"));
 $agency->idAgency = $decodedData->idAgency;
-$result = $agency->deleteAgency($agency);
+$result = $agency->closeAgency($agency);
 
 if ($result) {
     echo json_encode(["message" => "L'agence a été effacée !"]);

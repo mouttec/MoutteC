@@ -37,7 +37,7 @@ if (isset($decodedData->idPartner)) {
 	$partner->idPartner = $decodedData->idPartner;
 	if (isset($decodedData->statusPartner)) {
 		$partner->statusPartner = $decodedData->statusPartner;
-		$result = $partner->changeStatusPartner($partner);
+		$result = $partner->activatePartner($partner);
 	} else {
     	$result = $partner->updatePartner($partner);
 	}

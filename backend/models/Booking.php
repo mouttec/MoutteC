@@ -98,7 +98,7 @@ class Booking {
             "startDate" => date('j/m/Y'),
             "endDate" => date('d/m/Y', strtotime('+60 days')),
             "idAgency" => htmlspecialchars(strip_tags($this->idAgency))
-        ]
+        ];
 
         if ($stmt->execute($params)) {
             return $stmt;
@@ -252,20 +252,46 @@ class Booking {
         return false;        
     }
 
-    public function deleteBooking() {
+    public function updateBookingStatus() {
         $query = "
-            DELETE
-            FROM " . $this->table .
-            " WHERE idBooking = :idBooking
+            UPDATE "
+            . $this->table .
+            " SET
+            statusBooking = :statusBooking,
+            WHERE
+            idBooking = :idBooking       
         ";
         $stmt = $this->conn->prepare($query);
 
-        $params = ["idBooking" => htmlspecialchars(strip_tags($this->idBooking))];
+        $params = [
+            "statusBooking" => htmlspecialchars(strip_tags($this->statusBooking)),
+            "idBooking" => htmlspecialchars(strip_tags($this->idBooking))
+        ];
 
         if($stmt->execute($params)) {
             return true;
         }
         return false;        
     }
-    
+
+    public function cancelBooking() {
+        $query = "
+            UPDATE "
+            . $this->table .
+            " SET
+            statusBooking = :statusBooking,
+            WHERE
+            idBooking = :idBooking       
+        ";
+        $stmt = $this->conn->prepare($query);
+
+        $params = [
+            "statusBooking" => 'cancelled',
+            "idBooking" => htmlspecialchars(strip_tags($this->idBooking))
+        ];
+
+        if($stmt->execute($params)) {
+            return true;
+        }
+        return false; 
 }

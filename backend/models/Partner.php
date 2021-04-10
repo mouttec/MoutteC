@@ -183,7 +183,6 @@ class Partner
             zipAddressPartner = :zipAddressPartner,
             cityAddressPartner = :cityAddressPartner,
             phonePartner = :phonePartner,
-            statusPartner = :statusPartner,
             typePartner = :typePartner,
             mailPartner = :mailPartner,        
             nameBilling = :nameBilling,
@@ -209,7 +208,6 @@ class Partner
             "zipAddressPartner" => htmlspecialchars(strip_tags($this->zipAddressPartner)),
             "cityAddressPartner" => htmlspecialchars(strip_tags($this->cityAddressPartner)),
             "phonePartner" => htmlspecialchars(strip_tags($this->phonePartner)),
-            "statusPartner" => htmlspecialchars(strip_tags($this->statusPartner)),
             "typePartner" => htmlspecialchars(strip_tags($this->typePartner)), 
             "mailPartner" => htmlspecialchars(strip_tags($this->mailPartner)),
             "nameBilling" => htmlspecialchars(strip_tags($this->nameBilling)),
@@ -251,7 +249,7 @@ class Partner
         return false;
     }
 
-    public function changeStatusPartner() 
+    public function activatePartner() 
     {
         $query = "
             UPDATE "
@@ -263,7 +261,28 @@ class Partner
         ";
         $stmt = $this->conn->prepare($query);
         $params = [
-            "statusPartner" => htmlspecialchars(strip_tags($this->statusPartner)),
+            "statusPartner" => "Partenaire",
+            "idPartner" => htmlspecialchars(strip_tags($this->idPartner))
+        ];
+        if ($stmt->execute($params)) {
+            return true;
+        }
+        return false;
+    }
+    
+    public function deactivatePartner() 
+    {
+        $query = "
+            UPDATE "
+            . $this->table .
+            " SET
+            statusPartner = :statusPartner
+            WHERE
+            idPartner = :idPartner       
+        ";
+        $stmt = $this->conn->prepare($query);
+        $params = [
+            "statusPartner" => "Non partenaire",
             "idPartner" => htmlspecialchars(strip_tags($this->idPartner))
         ];
         if ($stmt->execute($params)) {

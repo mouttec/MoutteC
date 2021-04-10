@@ -18,17 +18,18 @@ $customer->lastNameCustomer = $decodedData->lastNameCustomer;
 $customer->dateOfBirthdayCustomer = $decodedData->dateOfBirthdayCustomer;
 $customer->phoneCustomer = $decodedData->phoneCustomer;
 $customer->mailCustomer = $decodedData->mailCustomer;
-if (isset($decodedData->idPartner)) {
-	$customer->idPartner = $decodedData->idPartner;
-}
 
 if (isset($decodedData->idCustomer)) {
+    $customer->idCustomer = $decodedData->idcustomer;
 	if (isset($decodedData->statusCustomer)) {
 		$customer->statusCustomer = $decodedData->statusCustomer;
 		$result = $customer->updateStatusCustomer($customer);
+	} else if (isset($decodedData->idPartner)) {
+		$customer->idPartner = $decodedData->idPartner;
+		$result = $customer->bindPartnerToCustomer($customer);
+	} else {
+	    $result = $customer->updateCustomer($customer);
 	}
-    $customer->idCustomer = $decodedData->idcustomer;
-    $result = $customer->updateCustomer($customer);
 } else {
 	if (isset($decodedData->password)) {
 		$customer->mixedPassword = $decodedData->password;
@@ -47,7 +48,7 @@ if (isset($decodedData->idCustomer)) {
 }
 
 if ($result) {
-    echo json_encode([ "message" => "Le client a été édité !" ]);
+    echo json_encode($result);
 } else {
     echo json_encode([ "message" => "Le client n'a pas pu être édité..." ]);
 }

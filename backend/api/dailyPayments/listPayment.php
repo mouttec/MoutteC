@@ -1,7 +1,7 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
-header("Access-Control-Allow-Methods: GET");
+header("Access-Control-Allow-Methods: POST");
 include_once "../../config/Database.php";
 include_once "../../models/DailyPayment.php";
 
@@ -9,29 +9,33 @@ $db = new Database();
 $conn = $db->connect();
 $dailyPayment = new DailyPayment($conn);
 
-if (isset($_GET['idBooking'])) {
-    $dailyPayment->idBooking = $_GET['idBooking'];
+$decodedData = json_decode(file_get_contents("php://input"));
+
+if (isset($decodedData->idBooking)) {
+    $dailyPayment->idBooking = $decodedData->idBooking;
     $result = $dailyPayment->searchPaymentByBooking($dailyPayment);
-} else if (isset($_GET['idDailyPayment'])) {
-    $dailyPayment->idDailyPayment = $_GET['idDailyPayment'];
+} else if (isset($decodedData->idDailyPayment)) {
+    $dailyPayment->idDailyPayment = $decodedData->idDailyPayment;
     $result = $dailyPayment->searchPaymentById($dailyPayment);
 } else {
-    if (isset($_GET['idPartner'])) {
-        $dailyPayment->idPartner = $_GET['idPartner'];
+    if (isset($decodedData->idPartner)) {
+        $dailyPayment->idPartner = $decodedData->idPartner;
         $payments = $dailyPayment->listPaymentsByPartner($dailyPayment);
     }
-    elseif (isset($_GET['idCustomer'])) {
-        $dailyPayment->idCustomer = $_GET['idCustomer'];
+    elseif (isset($decodedData->idCustomer)) {
+        $dailyPayment->idCustomer = $decodedData->idCustomer;
         $payments = $dailyPayment->listPaymentsByCustomer($dailyPayment);
-    } elseif ((isset($_GET['monthRequired'])) && (isset($_GET['yearRequired']))) {
+    } elseif ((isset($decodedData->monthRequired)) && (isset($decodedData->yearRequired))) {
         $monthRequired = $decodedData->monthRequired;
         $yearRequired = $decodedData->yearRequired;
         $payments = $dailyPayment->listPaymentsByMonth($monthRequired, $yearRequired);
     } elseif ((isset($decodedData->dateDailyPayment))) {
         $dailyPayment->dateDailyPayment = $decodedData->dateDailyPayment;
         $payments = $dailyPayment->listPaymentsByDate($dailyPayment);
-    } else {
-        $payments = $dailyPayment->listPayments();
+    } 
+    else {
+        $dailyPayment->dateDailyPayment = date('j/m/Y');        
+        $payments = $dailyPayment->listPaymentsByDate();
     }
     $counter = $payments->rowCount();
     if ($counter > 0) {
