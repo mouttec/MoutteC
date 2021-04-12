@@ -21,8 +21,7 @@ if (isset($decodedData->idBooking)) {
     if (isset($decodedData->idPartner)) {
         $dailyPayment->idPartner = $decodedData->idPartner;
         $payments = $dailyPayment->listPaymentsByPartner($dailyPayment);
-    }
-    elseif (isset($decodedData->idCustomer)) {
+    } elseif (isset($decodedData->idCustomer)) {
         $dailyPayment->idCustomer = $decodedData->idCustomer;
         $payments = $dailyPayment->listPaymentsByCustomer($dailyPayment);
     } elseif ((isset($decodedData->monthRequired)) && (isset($decodedData->yearRequired))) {
@@ -32,8 +31,7 @@ if (isset($decodedData->idBooking)) {
     } elseif ((isset($decodedData->dateDailyPayment))) {
         $dailyPayment->dateDailyPayment = $decodedData->dateDailyPayment;
         $payments = $dailyPayment->listPaymentsByDate($dailyPayment);
-    } 
-    else {
+    } else {
         $dailyPayment->dateDailyPayment = date('j/m/Y');        
         $payments = $dailyPayment->listPaymentsByDate();
     }

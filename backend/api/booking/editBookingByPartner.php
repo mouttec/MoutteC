@@ -42,7 +42,7 @@ if (empty($decodedData->idCustomer)) {
     $thisCustomer = $customer->searchCustomerById($customer);
 }
 
-if (empty($decodedData->idCar) {
+if (empty($decodedData->idCar)) {
     $car->idCustomer = $thisCustomer->idCustomer;
     $car->licensePlateCar = $decodedData->licensePlateCar;
     $car->brandCar = $decodedData->brandCar;

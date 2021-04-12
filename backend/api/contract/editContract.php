@@ -21,7 +21,7 @@ if ((!empty($decodedData->idTeammateReturn)) && (!empty($decodedData->idContract
     $contract->idPartner = $decodedData->idPartner;
     $contract->idAgency = $decodedData->idAgency;
     $contract->idBooking = $decodedData->idBooking;
-    $contract->urlPickupInventory = $decodedData->urlPickupInventory;
+    $contract->urlArrivalInventory = $decodedData->urlArrivalInventory;
     $contract->idCar = $decodedData->idCar;
     $contract->idPickupAddress = $decodedData->idPickupAddress;
     $contract->idReturnAddress = $decodedData->idReturnAddress;

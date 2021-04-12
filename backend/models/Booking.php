@@ -18,11 +18,13 @@ class Booking {
     public $idReturnAddress;
     public $idAgency;
 
-    public function __construct($db) {
+    public function __construct($db) 
+    {
         $this->conn = $db;
     }
 
-    public function createBooking() {
+    public function createBooking() 
+    {
         $query = "
             INSERT INTO "
             . $this->table .
@@ -71,7 +73,8 @@ class Booking {
         return false;
     }
 
-    public function listBookings() {
+    public function listBookings() 
+    {
         $query = "
             SELECT *
             FROM "
@@ -84,7 +87,8 @@ class Booking {
         return $stmt;
     }
 
-    public function prepareCalendar() {
+    public function prepareCalendar() 
+    {
         $query = "
             SELECT *
             FROM "
@@ -106,7 +110,8 @@ class Booking {
         return false;
     }
 
-    public function searchBookingById() {
+    public function searchBookingById() 
+    {
         $query = "
         SELECT *
         FROM "
@@ -145,7 +150,8 @@ class Booking {
         $query = "
         SELECT *
         FROM bookings
-        WHERE idCustomer = :idCustomer";
+        WHERE idCustomer = :idCustomer
+        ORDER BY dateBooking";
         $stmt = $this->conn->prepare($query);
 
         $params = ["idCustomer" => htmlspecialchars(strip_tags($this->idCustomer))];
@@ -230,7 +236,8 @@ class Booking {
         return false;
     }
 
-    public function updateBookingStatus() {
+    public function updateBookingStatus() 
+    {
         $query = "
             UPDATE "
             . $this->table .
@@ -252,7 +259,8 @@ class Booking {
         return false;        
     }
 
-    public function updateBookingStatus() {
+    public function updateBookingStatus() 
+    {
         $query = "
             UPDATE "
             . $this->table .
@@ -274,7 +282,8 @@ class Booking {
         return false;        
     }
 
-    public function cancelBooking() {
+    public function cancelBooking() 
+    {
         $query = "
             UPDATE "
             . $this->table .

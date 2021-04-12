@@ -174,7 +174,6 @@ class Partner
             UPDATE "
             . $this->table .
             " SET
-            usernamePartner = :usernamePartner,
             namePartner = :namePartner,
             numberAddressPartner = :numberAddressPartner,
             typeAddressPartner = :typeAddressPartner,
@@ -195,11 +194,10 @@ class Partner
             cityAddressBilling = :cityAddressBilling,
             idAgency = :idAgency
             WHERE
-            idPartner = :idPartner
+            usernamePartner = :usernamePartner,
         ";
         $stmt = $this->conn->prepare($query);
         $params = [
-            "usernamePartner" => htmlspecialchars(strip_tags($this->usernamePartner)),
             "namePartner" => htmlspecialchars(strip_tags($this->namePartner)),
             "numberAddressPartner" => htmlspecialchars(strip_tags($this->numberAddressPartner)),
             "typeAddressPartner" => htmlspecialchars(strip_tags($this->typeAddressPartner)),
@@ -219,7 +217,7 @@ class Partner
             "zipAddressBilling" => htmlspecialchars(strip_tags($this->zipAddressBilling)),
             "cityAddressBilling" => htmlspecialchars(strip_tags($this->cityAddressBilling)),
             "idAgency" => htmlspecialchars(strip_tags($this->idAgency)),
-            "idPartner" => htmlspecialchars(strip_tags($this->idPartner))
+            "usernamePartner" => htmlspecialchars(strip_tags($this->usernamePartner)),
         ];
 
         if ($stmt->execute($params)) {
@@ -257,12 +255,12 @@ class Partner
             " SET
             statusPartner = :statusPartner
             WHERE
-            idPartner = :idPartner       
+            usernamePartner = :usernamePartner       
         ";
         $stmt = $this->conn->prepare($query);
         $params = [
             "statusPartner" => "Partenaire",
-            "idPartner" => htmlspecialchars(strip_tags($this->idPartner))
+            "usernamePartner" => htmlspecialchars(strip_tags($this->usernamePartner)),
         ];
         if ($stmt->execute($params)) {
             return true;

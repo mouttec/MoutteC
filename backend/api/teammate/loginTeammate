@@ -15,8 +15,7 @@ $password = htmlspecialchars($decodedData->$password);
 
 $teammateExists = $teammateRequest->searchTeammateByUsername($teammate);
 
-if ((!empty($teammateExists)) && 
- 	(password_verify($password, $teammateExists->mixedPassword))) {
+if ((!empty($teammateExists)) && (password_verify($password, $teammateExists->mixedPassword))) {
   		echo json_encode($teammateExists);
 } else {
   	http_response_code(404);

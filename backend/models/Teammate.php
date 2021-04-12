@@ -175,7 +175,7 @@ class Teammate {
         return false;
     }
 
-    public function desactiveTeammate() 
+    public function deactivateTeammate() 
     {
         $query = "
             UPDATE "
@@ -188,7 +188,7 @@ class Teammate {
         $stmt = $this->conn->prepare($query);
 
         $params = [
-            "statusTeammate" => htmlspecialchars(strip_tags($this->statusTeammate)),
+            "statusTeammate" => "Inactif·ve",
             "idTeammate" => htmlspecialchars(strip_tags($this->idTeammate))
         ];
 

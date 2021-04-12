@@ -10,8 +10,7 @@ $db = new Database();
 $conn = $db->connect();
 $partner = new Partner($conn);
 
-$decodedData = json_decode(file_get_contents("php://input"));
-$partner->idPartner = $decodedData->idPartner;
+$partner->idPartner = $GET_['idPartner'];
 $result = $partner->deactivatePartner($partner);
 
 if ($result) {

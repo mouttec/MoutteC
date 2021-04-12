@@ -20,7 +20,7 @@ $customer->phoneCustomer = $decodedData->phoneCustomer;
 $customer->mailCustomer = $decodedData->mailCustomer;
 
 if (isset($decodedData->idCustomer)) {
-    $customer->idCustomer = $decodedData->idcustomer;
+    $customer->idCustomer = $decodedData->idCustomer;
 	if (isset($decodedData->statusCustomer)) {
 		$customer->statusCustomer = $decodedData->statusCustomer;
 		$result = $customer->updateStatusCustomer($customer);

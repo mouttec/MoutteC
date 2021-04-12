@@ -9,6 +9,7 @@ class Customer {
     public $dateOfBirthdayCustomer;
     public $phoneCustomer;
     public $mailCustomer;
+    public $statusCustomer;
     public $mixedPassword;
     public $idPartner;
     public $dateCustomer;
@@ -221,7 +222,8 @@ class Customer {
         return false;
     }
 
-    public function deactivateCustomer() {
+    public function deactivateCustomer() 
+    {
        $query = "
             UPDATE "
             . $this->table .
@@ -242,5 +244,4 @@ class Customer {
         }
         return false;
     }
-
 }

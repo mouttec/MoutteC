@@ -12,7 +12,8 @@ class DailyPayment
     public $idCustomer;
     public $dateDailyPayment;
  
-    public function __construct($db) {
+    public function __construct($db) 
+    {
         $this->conn = $db;
     }
 
@@ -32,7 +33,7 @@ class DailyPayment
 
         $params = [
             "idBooking" => htmlspecialchars(strip_tags($this->idBooking)),
-            "statusDailyPayment" => htmlspecialchars(strip_tags($this->statusDailyPayment)),
+            "statusDailyPayment" => 'En attente',
             "priceDailyPayment" => htmlspecialchars(strip_tags($this->priceDailyPayment)),
             "idPartner" => htmlspecialchars(strip_tags($this->idPartner)),
             "idCustomer" => htmlspecialchars(strip_tags($this->idCustomer))

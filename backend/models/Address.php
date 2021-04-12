@@ -13,11 +13,13 @@ class Address
     public $addressZip;
     public $addressCity;
 
-    public function __construct($db) {
+    public function __construct($db) 
+    {
         $this->conn = $db;
     }
 
-    public function createAddress() {
+    public function createAddress() 
+    {
         $query = "
             INSERT INTO "
             . $this->table .
@@ -48,7 +50,8 @@ class Address
         return false;
     }
 
-    public function listAddresses() {
+    public function listAddresses() 
+    {
         $query = "
             SELECT *
             FROM "
@@ -63,7 +66,8 @@ class Address
         return false;
     }
 
-    public function searchAddress() {
+    public function searchAddress() 
+    {
         $query = "
         SELECT *
         FROM "
@@ -81,7 +85,8 @@ class Address
         return false;
     }
 
-    public function listAddressesByCustomer() {
+    public function listAddressesByCustomer() 
+    {
         $query = "
         SELECT *
         FROM "
@@ -97,7 +102,8 @@ class Address
         return false;
     }
 
-    public function updateAddress() {
+    public function updateAddress() 
+    {
         $query = "
             UPDATE "
             . $this->table .

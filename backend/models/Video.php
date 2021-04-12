@@ -82,24 +82,4 @@ class Video {
         }
         return false;
     }
- 
-    // //Supprimer une vidéo
-    // public function deleteVideo($idVideo) {
-    //     // On crée la requête
-    //     $query = "
-    //         DELETE
-    //         FROM " . $this->table .
-    //         " WHERE idVideo = :idVideo
-    //     ";
-    //     // on prépare la requête
-    //     $stmt = $this->conn->prepare($query);
-    //     // on nettoie et sécurise l'input
-    //     // $this->idVideo = htmlspecialchars(strip_tags($this->idVideo));
-    //     // tableau associatif pour lier les paramètres reçus à la requête
-    //     $params = ["idVideo" => $idVideo];
-    //     // on exécute la requête et on vérifie si elle s'est bien déroulée
-    //     $stmt->execute($params) : return true ? return false;
-            
-    //     }
-    
 }
