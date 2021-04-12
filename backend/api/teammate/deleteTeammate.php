@@ -12,10 +12,10 @@ $teammate = new Teammate($conn);
 
 $decodedData = json_decode(file_get_contents("php://input"));
 $teammate->idTeammate = $decodedData->idTeammate;
-$result = $teammate->desactiveTeammate($teammate);
+$result = $teammate->deleteTeammate($teammate);
 
 if ($result) {
-    echo json_encode(["message" => "Le Teammate a été désactivé !"]);
+    echo json_encode(["message" => "Le Teammate a été effacé !"]);
 } else {
-    echo json_encode(["message" => "Le Teammate n'a pas pu être désactivé..."]);
+    echo json_encode(["message" => "Le Teammate n'a pas pu être effacé..."]);
 }
