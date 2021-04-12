@@ -294,5 +294,4 @@ class Booking {
             return true;
         }
         return false; 
-    }
 }
