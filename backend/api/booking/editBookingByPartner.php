@@ -37,7 +37,7 @@ if (!isset($decodedData->idCustomer)) {
     $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $maxLength = strlen($chars);
     $randomStr = '';
-    for ($i = 0; $i < 30; $i++) {
+    for ($i = 0; $i < 50; $i++) {
         $randomStr .= $chars[rand(0, $maxLength - 1)];
     }
     $customer->mixedPassword = $randomStr;
@@ -47,7 +47,7 @@ if (!isset($decodedData->idCustomer)) {
         $thisCustomer = $customer->searchCustomerByNames($customer);
         echo json_encode([ $thisCustomer ]);
     } else {
-        return echo json_encode([ "message" => "La client n'a pas pu être créé..." ]);
+        return;
     }
     //customer créé
 } else {
