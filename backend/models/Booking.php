@@ -53,7 +53,7 @@ class Booking {
             "idPartner" => htmlspecialchars(strip_tags($this->idPartner)),
             "hoursBooking" => htmlspecialchars(strip_tags($this->hoursBooking)),
             "dateBooking" => htmlspecialchars(strip_tags($this->dateBooking)),
-            "statusBooking" => "Validée",
+            "statusBooking" => htmlspecialchars(strip_tags($this->statusBooking)),
             "formulaBooking" => htmlspecialchars(strip_tags($this->formulaBooking)),
             "dateReturn" => htmlspecialchars(strip_tags($this->dateReturn)),
             "hoursReturn" => htmlspecialchars(strip_tags($this->hoursReturn)),

@@ -24,9 +24,13 @@ if (empty($decodedData->idCustomer)) {
     $customer->phoneCustomer = $decodedData->phoneCustomer;
     if (isset($decodedData->mailCustomer)) {
         $customer->mailCustomer = $decodedData->mailCustomer;
-    }    
+    } else {        
+        $customer->mailCustomer = "Non renseignée";
+    }
     if (isset($decodedData->dateOfBirthdayCustomer)) {
         $customer->dateOfBirthdayCustomer = $decodedData->dateOfBirthdayCustomer;
+    } else {
+        $customer->dateOfBirthdayCustomer = "Non renseignée";
     }
     $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $maxLength = strlen($chars);
@@ -57,7 +61,7 @@ if (empty($decodedData->idCar)) {
 }
 
 if (!empty($decodedData->addressStreetNumber)) {
-    //adresse domicile client > partenaire
+    //adresse aller = domicile client > partenaire
     $address->idCustomer = $thisCustomer->idCustomer;
     $address->addressStreetNumber = $decodedData->addressStreetNumber;
     $address->addressStreetType = $decodedData->addressStreetType;
@@ -69,7 +73,7 @@ if (!empty($decodedData->addressStreetNumber)) {
 }
 
 if (!empty($decodedData->addressBackStreetNumber)) {
-    //adresse partenaire > domicile client
+    //adresse retour = partenaire > domicile client
     $address->idCustomer = $thisCustomer->idCustomer;
     $address->addressStreetNumber = $decodedData->addressBackStreetNumber;
     $address->addressStreetType = $decodedData->addressBackStreetType;
@@ -85,11 +89,12 @@ $booking->idPartner = $decodedData->idPartner;
 $booking->hoursBooking = $decodedData->hoursBooking;
 $booking->dateBooking = $decodedData->dateBooking;
 $booking->formulaBooking = $decodedData->formulaBooking;
+$booking->statusBooking = $decodedData->statusBooking;
 $booking->dateReturn = $decodedData->dateReturn;
 $booking->hoursReturn = $decodedData->hoursReturn;
 $booking->idCar = $thisCar->idCar;
 $booking->idPickupAddress = $addressForth->idAddress;
-$booking->idReturnAddress = $decodedData->idAddress;
+$booking->idReturnAddress = $addressBack->idAddress;
 $booking->idAgency = $decodedData->idAgency;
 $booking->distanceForth = $decodedData->distanceForth;
 $booking->durationForth = $decodedData->durationForth;
