@@ -30,7 +30,7 @@ class Customer {
             dateOfBirthdayCustomer = :dateOfBirthdayCustomer,
             phoneCustomer = :phoneCustomer, 
             mailCustomer = :mailCustomer,
-            statusCustomer = : statusCustomer,
+            statusCustomer = :statusCustomer,
             mixedPassword = :mixedPassword
         ";
         $stmt = $this->conn->prepare($query);

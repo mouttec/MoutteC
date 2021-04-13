@@ -48,7 +48,7 @@ if (isset($decodedData->idCustomer)) {
 }
 
 if ($result) {
-    echo json_encode($result);
+    echo json_encode([ "message" => "Le client a été édité..." ]);
 } else {
     echo json_encode([ "message" => "Le client n'a pas pu être édité..." ]);
 }
