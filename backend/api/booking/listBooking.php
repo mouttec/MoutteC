@@ -20,10 +20,10 @@ if (isset($_GET['idBooking'])) {
         $booking->idCustomer = $_GET['idCustomer'];
         $bookings = $booking->searchBookingsByCustomer($bookings);
     } elseif (isset($_GET['idAgency'])) {
-        $booking->idAgency == $_GET['idAgency'];
+        $booking->idAgency = $_GET['idAgency'];
         $bookings = $booking->searchBookingsByAgency($booking);
     } elseif (isset($_GET['dateBooking'])) {
-        $booking->dateBooking == $_GET['dateBooking'];
+        $booking->dateBooking = $_GET['dateBooking'];
         $bookings = $booking->searchBookingsByDay($booking);
     } else {
         $bookings = $booking->listBookings();
