@@ -66,7 +66,7 @@ if (!isset($decodedData->idCar)) {
     $car->motorizationCar = $decodedData->motorizationCar;
     $car->createCar($car);
     $thisCar = $car->searchCarByPlate($car);
-    echo json_encode($thisCar->idCar);
+    echo json_encode($idCar);
     //$thisCar->idCar créé
 } else {
     $car->idCar = $decodedData->idCar;
