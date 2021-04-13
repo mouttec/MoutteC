@@ -25,12 +25,12 @@ if (empty($decodedData->idCustomer)) {
     if (isset($decodedData->mailCustomer)) {
         $customer->mailCustomer = $decodedData->mailCustomer;
     } else {        
-        $customer->mailCustomer = "Non renseignée";
+        $customer->mailCustomer = "Non renseigné";
     }
     if (isset($decodedData->dateOfBirthdayCustomer)) {
         $customer->dateOfBirthdayCustomer = $decodedData->dateOfBirthdayCustomer;
     } else {
-        $customer->dateOfBirthdayCustomer = "Non renseignée";
+        $customer->dateOfBirthdayCustomer = "Non renseigné";
     }
     $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $maxLength = strlen($chars);
@@ -46,6 +46,8 @@ if (empty($decodedData->idCustomer)) {
     $customer->idCustomer = $decodedData->idCustomer;
     $thisCustomer = $customer->searchCustomerById($customer);
 }
+
+echo json_encode($thisCustomer);
 
 if (empty($decodedData->idCar)) {
     $car->idCustomer = $thisCustomer->idCustomer;
