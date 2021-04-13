@@ -137,7 +137,7 @@ class Customer {
             "firstNameCustomer" => htmlspecialchars(strip_tags($this->firstNameCustomer))
         ];
 
-        if($stmt->execute($params)) {
+        if ($stmt->execute($params)) {
             //$row = $stmt->fetch();
             //return $row;
             return $stmt;
