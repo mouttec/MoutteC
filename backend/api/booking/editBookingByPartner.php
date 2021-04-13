@@ -44,10 +44,11 @@ if (!isset($decodedData->idCustomer)) {
     $isCreatedCustomer = $customer->createCustomer($customer);
     if ($isCreatedCustomer) {
         // send email to customer
-        $thisCustomer = $customer->searchCustomerByNames($customer);
-        echo json_encode([ $thisCustomer ]);
-    } else {
-        return;
+        $thisCustomer = new Customer($conn);
+        $thisCustomer->lastNameCustomer = $decodedData->lastNameCustomer;
+        $thisCustomer->firstNameCustomer = $decodedData->firstNameCustomer;
+        $custo = $thisCustomer->searchCustomerByNames($thisCustomer);
+        echo json_encode([ $custo ]);
     }
     //customer créé
 } else {
