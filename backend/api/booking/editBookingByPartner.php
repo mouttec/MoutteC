@@ -44,20 +44,21 @@ if (!isset($decodedData->idCustomer)) {
     $isCreatedCustomer = $customer->createCustomer($customer);
     if ($isCreatedCustomer) {
         // send email to customer
-        $thisCustomer = new Customer($conn);
-        $thisCustomer->lastNameCustomer = $decodedData->lastNameCustomer;
-        $thisCustomer->firstNameCustomer = $decodedData->firstNameCustomer;
-        $custo = $thisCustomer->searchCustomerByNames($thisCustomer);
-        echo json_encode([ $custo ]);
+        $newCustomer = new Customer($conn);
+        $newCustomer->lastNameCustomer = $decodedData->lastNameCustomer;
+        $newCustomer->firstNameCustomer = $decodedData->firstNameCustomer;
+        $thisCustomer = $newCustomer->searchCustomerByNames($newCustomer);
+        extract($thisCustomer);
+        $thisCustomerId = $idCustomer;
     }
-    //customer créé
 } else {
     $customer->idCustomer = $decodedData->idCustomer;
     $thisCustomer = $customer->searchCustomerById($customer);
+    $thisCustomerId = $thisCustomer->idCustomer;
 }
 
 if (empty($decodedData->idCar)) {
-    $car->idCustomer = $thisCustomer->idCustomer;
+    $car->idCustomer = $thisCustomerId;
     $car->licensePlateCar = $decodedData->licensePlateCar;
     $car->brandCar = $decodedData->brandCar;
     $car->modelCar = $decodedData->modelCar;
@@ -73,7 +74,7 @@ if (empty($decodedData->idCar)) {
 
 if (!empty($decodedData->addressStreetNumber)) {
     //adresse aller = domicile client > partenaire
-    $address->idCustomer = $thisCustomer->idCustomer;
+    $address->idCustomer = $thisCustomerId;
     $address->addressStreetNumber = $decodedData->addressStreetNumber;
     $address->addressStreetType = $decodedData->addressStreetType;
     $address->addressStreetName = $decodedData->addressStreetName;
@@ -86,7 +87,7 @@ if (!empty($decodedData->addressStreetNumber)) {
 
 if (!empty($decodedData->addressBackStreetNumber)) {
     //adresse retour = partenaire > domicile client
-    $address->idCustomer = $thisCustomer->idCustomer;
+    $address->idCustomer = $thisCustomerId;
     $address->addressStreetNumber = $decodedData->addressBackStreetNumber;
     $address->addressStreetType = $decodedData->addressBackStreetType;
     $address->addressStreetName = $decodedData->addressBackStreetName;
