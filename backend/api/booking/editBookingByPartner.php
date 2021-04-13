@@ -66,6 +66,7 @@ if (empty($decodedData->idCar)) {
     $car->motorizationCar = $decodedData->motorizationCar;
     $car->createCar($car);
     $thisCar = $car->searchCarByPlate($car);
+    echo json_encode($thisCar);
     //$thisCar->idCar créé
 } else {
     $car->idCar = $decodedData->idCar;
@@ -98,7 +99,7 @@ if (!empty($decodedData->addressBackStreetNumber)) {
     $addressBackId = $address->searchAddressId($address);
 }
 
-$booking->idCustomer = $thisCustomer->idCustomer;
+$booking->idCustomer = $thisCustomerId;
 $booking->idPartner = $decodedData->idPartner;
 $booking->hoursBooking = $decodedData->hoursBooking;
 $booking->dateBooking = $decodedData->dateBooking;
