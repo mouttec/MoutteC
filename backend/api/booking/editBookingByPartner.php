@@ -45,6 +45,7 @@ if (!isset($decodedData->idCustomer)) {
     if ($isCreatedCustomer) {
         // send email to customer
         $thisCustomer = $customer->searchCustomerByNames($customer);
+        echo json_encode([ $thisCustomer ]);
     } else {
         return echo json_encode([ "message" => "La client n'a pas pu être créé..." ]);
     }
