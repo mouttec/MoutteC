@@ -41,7 +41,7 @@ class Customer {
             "dateOfBirthdayCustomer" => htmlspecialchars(strip_tags($this->dateOfBirthdayCustomer)),
             "phoneCustomer" => htmlspecialchars(strip_tags($this->phoneCustomer)),
             "mailCustomer" => htmlspecialchars(strip_tags($this->mailCustomer)),
-            "statusCustomer" => "Actif",
+            "statusCustomer" => htmlspecialchars(strip_tags($this->statusCustomer)),
             "mixedPassword" => password_hash($this->mixedPassword, PASSWORD_DEFAULT)
         ];
 
@@ -106,11 +106,11 @@ class Customer {
     public function searchCustomerById() 
     {
         $query = "
-        SELECT *
-        FROM "
-        . $this->table . " 
-        WHERE idCustomer = :idCustomer
-        LIMIT 0,1";
+            SELECT *
+            FROM "
+            . $this->table . " 
+            WHERE idCustomer = :idCustomer
+            LIMIT 0,1";
         $stmt = $this->conn->prepare($query);
 
         $params = ["idCustomer" => htmlspecialchars(strip_tags($this->idCustomer))];
@@ -127,8 +127,8 @@ class Customer {
         $query = "
             SELECT *
             FROM "
-            . $this->table . " 
-            WHERE (lastNameCustomer = :lastNameCustomer AND firstNameCustomer = :firstNameCustomer)";
+            .   $this->table . 
+            " WHERE (lastNameCustomer = :lastNameCustomer AND firstNameCustomer = :firstNameCustomer)";
         $stmt = $this->conn->prepare($query);
 
         $params = [

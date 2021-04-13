@@ -91,14 +91,14 @@ class Address
         SELECT *
         FROM "
         . $this->table .
-        " SET
-        idCustomer = :idCustomer,
-        addressStreetNumber = :addressStreetNumber,
-        addressStreetType = :addressStreetType,
-        addressStreetName = :addressStreetName,
-        addressStreetComplement = :addressStreetComplement,        
-        addressZip = :addressZip,
-        addressCity = :addressCity
+        " WHERE
+        (idCustomer = :idCustomer AND
+        addressStreetNumber = :addressStreetNumber AND
+        addressStreetType = :addressStreetType AND
+        addressStreetName = :addressStreetName AND
+        addressStreetComplement = :addressStreetComplement AND        
+        addressZip = :addressZip AND
+        addressCity = :addressCity)
         ";
         $stmt = $this->conn->prepare($query);
 

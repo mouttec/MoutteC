@@ -18,13 +18,14 @@ $address = new Address($conn);
 
 $decodedData = json_decode(file_get_contents("php://input"));
 
-if (empty($decodedData->idCustomer)) {
+if (!isset($decodedData->idCustomer)) {
     $customer->firstNameCustomer = $decodedData->firstNameCustomer;
     $customer->lastNameCustomer = $decodedData->lastNameCustomer;
     $customer->phoneCustomer = $decodedData->phoneCustomer;
+    $customer->statusCustomer = "Client créé par un partenaire";
     if (isset($decodedData->mailCustomer)) {
         $customer->mailCustomer = $decodedData->mailCustomer;
-    } else {        
+    } else {
         $customer->mailCustomer = "Non renseigné";
     }
     if (isset($decodedData->dateOfBirthdayCustomer)) {
@@ -32,6 +33,7 @@ if (empty($decodedData->idCustomer)) {
     } else {
         $customer->dateOfBirthdayCustomer = "Non renseigné";
     }
+    //Création du mot de passe temporaire
     $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $maxLength = strlen($chars);
     $randomStr = '';
@@ -39,21 +41,18 @@ if (empty($decodedData->idCustomer)) {
         $randomStr .= $chars[rand(0, $maxLength - 1)];
     }
     $customer->mixedPassword = $randomStr;
-    $createdCustomer = $customer->createCustomer($customer);
-    if ($createdCustomer) {
+    $isCreatedCustomer = $customer->createCustomer($customer);
+    if ($isCreatedCustomer) {
+        // send email to customer
         $thisCustomer = $customer->searchCustomerByNames($customer);
+    } else {
+        return echo json_encode([ "message" => "La client n'a pas pu être créé..." ]);
     }
-    //idCustomer créée
-    // $thisCustomer = new Customer($conn);
-    // $thisCustomer->firstNameCustomer = $decodedData->firstNameCustomer;
-    // $thisCustomer->lastNameCustomer = $decodedData->lastNameCustomer;
-    // $thisCustomer = $thisCustomer->searchCustomerByNames($thisCustomer);
+    //customer créé
 } else {
     $customer->idCustomer = $decodedData->idCustomer;
     $thisCustomer = $customer->searchCustomerById($customer);
 }
-
-echo json_encode($thisCustomer);
 
 if (empty($decodedData->idCar)) {
     $car->idCustomer = $thisCustomer->idCustomer;
