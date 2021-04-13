@@ -57,7 +57,7 @@ if (!isset($decodedData->idCustomer)) {
     $thisCustomerId = $thisCustomer->idCustomer;
 }
 
-if (empty($decodedData->idCar)) {
+if (!isset($decodedData->idCar)) {
     $car->idCustomer = $thisCustomerId;
     $car->licensePlateCar = $decodedData->licensePlateCar;
     $car->brandCar = $decodedData->brandCar;
