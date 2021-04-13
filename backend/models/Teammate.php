@@ -32,7 +32,7 @@ class Teammate {
             lastNameTeammate = :lastNameTeammate,
             usernameTeammate = :usernameTeammate,
             mailTeammate = :mailTeammate,
-            phoneTeammate = :phoneTeammate,        
+            phoneTeammate = :phoneTeammate,
             mixedPassword = :mixedPassword,
             statusTeammate = :statusTeammate,
             jobTeammate = :jobTeammate,
@@ -124,13 +124,13 @@ class Teammate {
             lastNameTeammate = :lastNameTeammate,
             usernameTeammate = :usernameTeammate,
             mailTeammate = :mailTeammate,
-            phoneTeammate = :phoneTeammate,        
+            phoneTeammate = :phoneTeammate,
             statusTeammate = :statusTeammate,
             jobTeammate = :jobTeammate,
             idAgency = :idAgency,
             superAdmin = :superAdmin
             WHERE
-            idTeammate = :idTeammate       
+            idTeammate = :idTeammate
         ";
         $stmt = $this->conn->prepare($query);
 
@@ -160,7 +160,7 @@ class Teammate {
             " SET
             mixedPassword = :mixedPassword
             WHERE
-            idTeammate = :idTeammate       
+            idTeammate = :idTeammate
         ";
         $stmt = $this->conn->prepare($query);
 
@@ -183,7 +183,7 @@ class Teammate {
             " SET
             statusTeammate = :statusTeammate
             WHERE
-            idTeammate = :idTeammate       
+            idTeammate = :idTeammate
         ";
         $stmt = $this->conn->prepare($query);
 

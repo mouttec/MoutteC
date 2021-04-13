@@ -259,29 +259,6 @@ class Booking {
         return false;        
     }
 
-    public function updateBookingStatus() 
-    {
-        $query = "
-            UPDATE "
-            . $this->table .
-            " SET
-            statusBooking = :statusBooking,
-            WHERE
-            idBooking = :idBooking       
-        ";
-        $stmt = $this->conn->prepare($query);
-
-        $params = [
-            "statusBooking" => htmlspecialchars(strip_tags($this->statusBooking)),
-            "idBooking" => htmlspecialchars(strip_tags($this->idBooking))
-        ];
-
-        if($stmt->execute($params)) {
-            return true;
-        }
-        return false;        
-    }
-
     public function cancelBooking() 
     {
         $query = "

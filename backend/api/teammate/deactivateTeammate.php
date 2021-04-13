@@ -14,7 +14,7 @@ $teammate->idTeammate = $_GET['idTeammate'];
 $result = $teammate->deactivateTeammate($teammate);
 
 if ($result) {
-    echo json_encode(["message" => "Le Teammate a été effacé !"]);
+    echo json_encode(["message" => "Le Teammate a été désactivé !"]);
 } else {
-    echo json_encode(["message" => "Le Teammate n'a pas pu être effacé..."]);
+    echo json_encode(["message" => "Le Teammate n'a pas pu être désactivé..."]);
 }
