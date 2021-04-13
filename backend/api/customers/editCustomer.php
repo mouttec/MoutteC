@@ -45,6 +45,10 @@ if (isset($decodedData->idCustomer)) {
  		// $randomStr est une chaîne de caractère aléatoire qui va être utilisée comme mot de passe temporaire, elle sera envoyée en get dans le lien
 	}
     $result = $customer->createCustomer($customer);
+    if (isset($decodedData->idPartner)) {
+    	$customer->idPartner = $decodedData->idPartner;
+    	$customer->bindPartnerToCustomer($customer);
+    }
 }
 
 if ($result) {

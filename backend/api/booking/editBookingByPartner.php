@@ -39,8 +39,9 @@ if (empty($decodedData->idCustomer)) {
         $randomStr .= $chars[rand(0, $maxLength - 1)];
     }
     $customer->mixedPassword = $randomStr;
-    $thisCustomer = $customer->createCustomer($customer);
-    // $thisCustomer->idCustomer créé
+    $customer->createCustomer($customer);
+    //idCustomer créée
+    $thisCustomer = $customer->searchCustomerByNames($customer);
 } else {
     $customer->idCustomer = $decodedData->idCustomer;
     $thisCustomer = $customer->searchCustomerById($customer);
@@ -53,7 +54,8 @@ if (empty($decodedData->idCar)) {
     $car->modelCar = $decodedData->modelCar;
     $car->dateOfCirculationCar = $decodedData->dateOfCirculationCar;
     $car->motorizationCar = $decodedData->motorizationCar;
-    $thiscar = $car->createCar($car);
+    $car->createCar($car);
+    $thisCar = $car->searchCarByPlate($car);
     //$thisCar->idCar créé
 } else {
     $car->idCar = $decodedData->idCar;
@@ -69,7 +71,8 @@ if (!empty($decodedData->addressStreetNumber)) {
     $address->addressStreetComplement = $decodedData->addressStreetComplement;
     $address->addressZip = $decodedData->addressZip;
     $address->addressCity = $decodedData->addressCity;
-    $addressForth = $address->createAddress($address);
+    $address->createAddress($address);
+    $addressForthId = $address->searchAddressId($address);
 }
 
 if (!empty($decodedData->addressBackStreetNumber)) {
@@ -81,7 +84,8 @@ if (!empty($decodedData->addressBackStreetNumber)) {
     $address->addressStreetComplement = $decodedData->addressBackStreetComplement;
     $address->addressZip = $decodedData->addressBackZip;
     $address->addressCity = $decodedData->addressBackCity;
-    $addressBack = $address->createAddress($address);
+    $address->createAddress($address);
+    $addressBackId = $address->searchAddressId($address);
 }
 
 $booking->idCustomer = $thisCustomer->idCustomer;
@@ -93,8 +97,8 @@ $booking->statusBooking = $decodedData->statusBooking;
 $booking->dateReturn = $decodedData->dateReturn;
 $booking->hoursReturn = $decodedData->hoursReturn;
 $booking->idCar = $thisCar->idCar;
-$booking->idPickupAddress = $addressForth->idAddress;
-$booking->idReturnAddress = $addressBack->idAddress;
+$booking->idPickupAddress = $addressForthId;
+$booking->idReturnAddress = $addressBackId;
 $booking->idAgency = $decodedData->idAgency;
 $booking->distanceForth = $decodedData->distanceForth;
 $booking->durationForth = $decodedData->durationForth;

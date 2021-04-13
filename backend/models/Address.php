@@ -85,6 +85,40 @@ class Address
         return false;
     }
 
+    public function searchAddressId() 
+    {
+        $query = "
+        SELECT *
+        FROM "
+        . $this->table .
+        " SET
+        idCustomer = :idCustomer,
+        addressStreetNumber = :addressStreetNumber,
+        addressStreetType = :addressStreetType,
+        addressStreetName = :addressStreetName,
+        addressStreetComplement = :addressStreetComplement,        
+        addressZip = :addressZip,
+        addressCity = :addressCity
+        ";
+        $stmt = $this->conn->prepare($query);
+
+        $params = [
+            "idCustomer" => htmlspecialchars(strip_tags($this->idCustomer)),
+            "addressStreetNumber" => htmlspecialchars(strip_tags($this->addressStreetNumber)),
+            "addressStreetType" => htmlspecialchars(strip_tags($this->addressStreetType)),
+            "addressStreetName" => htmlspecialchars(strip_tags($this->addressStreetName)),
+            "addressStreetComplement" => htmlspecialchars(strip_tags($this->addressStreetComplement)),
+            "addressZip" => htmlspecialchars(strip_tags($this->addressZip)),
+            "addressCity" => htmlspecialchars(strip_tags($this->addressCity))
+        ];
+
+        if($stmt->execute($params)) {
+            $row = $stmt->fetch();
+            return $row['idAddress'];
+        }
+        return false;
+    }    
+
     public function listAddressesByCustomer() 
     {
         $query = "

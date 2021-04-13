@@ -122,6 +122,28 @@ class Customer {
         return false;
     }
 
+    public function searchCustomerByNames() 
+    {
+        $query = "
+        SELECT *
+        FROM "
+        . $this->table . " 
+        WHERE (lastNameCustomer = :lastNameCustomer AND firstNameCustomer = :firstNameCustomer)
+        LIMIT 0,1";
+        $stmt = $this->conn->prepare($query);
+
+        $params = [
+            "lastNameCustomer" => htmlspecialchars(strip_tags($this->lastNameCustomer)),
+            "firstNameCustomer" => htmlspecialchars(strip_tags($this->firstNameCustomer))
+        ];
+
+        if($stmt->execute($params)) {
+            $row = $stmt->fetch();
+            return $row;
+        }
+        return false;
+    }
+
     public function updateCustomer() 
     {
         $query = "
