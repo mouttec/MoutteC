@@ -39,9 +39,9 @@ if (empty($decodedData->idCustomer)) {
         $randomStr .= $chars[rand(0, $maxLength - 1)];
     }
     $customer->mixedPassword = $randomStr;
-    $customer->createCustomer($customer);
+    $newCustomer = $customer->createCustomer($customer);
     //idCustomer créée
-    $thisCustomer = $customer->searchCustomerByNames($customer);
+    $thisCustomer = $newCustomer->searchCustomerByNames($newCustomer);
 } else {
     $customer->idCustomer = $decodedData->idCustomer;
     $thisCustomer = $customer->searchCustomerById($customer);

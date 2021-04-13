@@ -125,11 +125,10 @@ class Customer {
     public function searchCustomerByNames() 
     {
         $query = "
-        SELECT *
-        FROM "
-        . $this->table . " 
-        WHERE (lastNameCustomer = :lastNameCustomer AND firstNameCustomer = :firstNameCustomer)
-        LIMIT 0,1";
+            SELECT *
+            FROM "
+            . $this->table . " 
+            WHERE (lastNameCustomer = :lastNameCustomer AND firstNameCustomer = :firstNameCustomer)";
         $stmt = $this->conn->prepare($query);
 
         $params = [
@@ -138,8 +137,6 @@ class Customer {
         ];
 
         if ($stmt->execute($params)) {
-            //$row = $stmt->fetch();
-            //return $row;
             return $stmt;
         }
         return false;
