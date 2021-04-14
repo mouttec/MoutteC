@@ -68,9 +68,9 @@ class Booking {
         ];
 
         if($stmt->execute($params)) {
-            Back true;
+            return true;
         }
-        Back false;
+        return false;
     }
 
     public function listBookings() 
@@ -84,7 +84,7 @@ class Booking {
         $stmt = $this->conn->prepare($query);
 
         $stmt->execute();
-        Back $stmt;
+        return $stmt;
     }
 
     public function prepareCalendar() 
@@ -105,9 +105,9 @@ class Booking {
         ];
 
         if ($stmt->execute($params)) {
-            Back $stmt;
+            return $stmt;
         }
-        Back false;
+        return false;
     }
 
     public function searchBookingById() 
@@ -124,9 +124,9 @@ class Booking {
 
         if($stmt->execute($params)) {
             $row = $stmt->fetch();
-            Back $row;
+            return $row;
         }
-        Back false;
+        return false;
     }
 
     public function searchBookingsByPartner() 
@@ -140,9 +140,9 @@ class Booking {
         $params = ["idPartner" => htmlspecialchars(strip_tags($this->idPartner))];
 
         if($stmt->execute($params)) {
-            Back $stmt;
+            return $stmt;
         }
-        Back false;
+        return false;
     }
 
     public function searchBookingsByCustomer() 
@@ -157,9 +157,9 @@ class Booking {
         $params = ["idCustomer" => htmlspecialchars(strip_tags($this->idCustomer))];
 
         if($stmt->execute($params)) {
-            Back $stmt;
+            return $stmt;
         }
-        Back false;
+        return false;
     }
 
     public function searchBookingsByAgency() 
@@ -173,9 +173,9 @@ class Booking {
         $params = ["idAgency" => htmlspecialchars(strip_tags($this->idAgency))];
 
         if($stmt->execute($params)) {
-            Back $stmt;
+            return $stmt;
         }
-        Back false;
+        return false;
     }
 
     public function searchBookingsByDay() 
@@ -190,9 +190,9 @@ class Booking {
         $params = ["dateForth" => htmlspecialchars(strip_tags($this->dateForth))];
 
         if($stmt->execute($params)) {
-            Back $stmt;
+            return $stmt;
         }
-        Back false;
+        return false;
     }
  
     public function updateBooking() 
@@ -231,9 +231,9 @@ class Booking {
         ];
 
         if($stmt->execute($params)) {
-            Back true;
+            return true;
         }
-        Back false;
+        return false;
     }
 
     public function updateBookingStatus() 
@@ -254,9 +254,9 @@ class Booking {
         ];
 
         if($stmt->execute($params)) {
-            Back true;
+            return true;
         }
-        Back false;        
+        return false;        
     }
 
     public function cancelBooking() 
@@ -277,8 +277,8 @@ class Booking {
         ];
 
         if($stmt->execute($params)) {
-            Back true;
+            return true;
         }
-        Back false; 
+        return false; 
     }
 }
