@@ -67,20 +67,20 @@ if (!isset($decodedData->idCar)) {
 }
 
 $address = new Address($conn);
-if (!empty($decodedData->addressStreetNumber)) {
+if (!empty($decodedData->addressForthStreetName)) {
     //adresse aller = domicile client > partenaire
     $address->idCustomer = $thisCustomerId;
-    $address->addressStreetNumber = $decodedData->addressStreetNumber;
-    $address->addressStreetName = $decodedData->addressStreetName;
-    $address->addressZip = $decodedData->addressZip;
-    $address->addressCity = $decodedData->addressCity;
+    $address->addressStreetNumber = $decodedData->addressForthStreetNumber;
+    $address->addressStreetName = $decodedData->addressForthStreetName;
+    $address->addressZip = $decodedData->addressForthZip;
+    $address->addressCity = $decodedData->addressForthCity;
     $address->createAddress($address);
     $addressForth = $address->searchAddressByDetails($address);
     extract($addressForth);
     $addressForthId = $idAddress;
 }
 
-if (!empty($decodedData->addressBackStreetNumber)) {
+if (!empty($decodedData->addressBackStreetName)) {
     //adresse retour = partenaire > domicile client
     $address->idCustomer = $thisCustomerId;
     $address->addressStreetNumber = $decodedData->addressBackStreetNumber;
