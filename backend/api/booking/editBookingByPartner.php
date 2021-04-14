@@ -38,7 +38,8 @@ if (!isset($decodedData->idCustomer)) {
         $randomStr .= $chars[rand(0, $maxLength - 1)];
     }
     $customer->mixedPassword = $randomStr;
-    $thisCustomer = $customer->createCustomer($customer);
+    $customer->createCustomer($customer);
+    $thisCustomer = $customer->searchCustomerById($customer);
     extract($thisCustomer);
     $thisCustomerId = $idCustomer;
 } else {
