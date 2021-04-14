@@ -72,6 +72,8 @@ if (!empty($decodedData->addressForthStreetName)) {
     $address->idCustomer = $thisCustomerId;
     $address->addressStreetNumber = $decodedData->addressForthStreetNumber;
     $address->addressStreetName = $decodedData->addressForthStreetName;
+    $address->addressStreetType = $decodedData->addressForthStreetType;
+    $address->addressStreetComplement = $decodedData->addressForthStreetComplement;    
     $address->addressZip = $decodedData->addressForthZip;
     $address->addressCity = $decodedData->addressForthCity;
     $address->createAddress($address);
@@ -85,6 +87,8 @@ if (!empty($decodedData->addressBackStreetName)) {
     $address->idCustomer = $thisCustomerId;
     $address->addressStreetNumber = $decodedData->addressBackStreetNumber;
     $address->addressStreetName = $decodedData->addressBackStreetName;
+    $address->addressStreetType = $decodedData->addressBackStreetType;
+    $address->addressBackStreetComplement = $decodedData->addressBackStreetComplement;    
     $address->addressZip = $decodedData->addressBackZip;
     $address->addressCity = $decodedData->addressBackCity;
     $address->createAddress($address);
@@ -97,12 +101,12 @@ $booking = new Booking($conn);
 
 $booking->idCustomer = $thisCustomerId;
 $booking->idPartner = $decodedData->idPartner;
-$booking->hoursBooking = $decodedData->hoursBooking;
-$booking->dateBooking = $decodedData->dateBooking;
+$booking->hoursForth = $decodedData->hoursForth;
+$booking->dateForth = $decodedData->dateForth;
 $booking->formulaBooking = $decodedData->formulaBooking;
 // $booking->statusBooking = $decodedData->statusBooking;
-$booking->dateReturn = $decodedData->dateReturn;
-$booking->hoursReturn = $decodedData->hoursReturn;
+$booking->dateBack = $decodedData->dateBack;
+$booking->hoursBack = $decodedData->hoursBack;
 $booking->idCar = $thisCarId;
 $booking->idPickupAddress = $addressForthId;
 $booking->idReturnAddress = $addressBackId;
