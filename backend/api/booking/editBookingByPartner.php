@@ -11,13 +11,10 @@ include_once "../../models/Address.php";
 
 $db = new Database();
 $conn = $db->connect();
-$booking = new Booking($conn);
-$customer = new Customer($conn);
-$car = new Car($conn);
-$address = new Address($conn);
 
 $decodedData = json_decode(file_get_contents("php://input"));
 
+$customer = new Customer($conn);
 if (!isset($decodedData->idCustomer)) {
     $customer->firstNameCustomer = $decodedData->firstNameCustomer;
     $customer->lastNameCustomer = $decodedData->lastNameCustomer;
@@ -41,22 +38,16 @@ if (!isset($decodedData->idCustomer)) {
         $randomStr .= $chars[rand(0, $maxLength - 1)];
     }
     $customer->mixedPassword = $randomStr;
-    $isCreatedCustomer = $customer->createCustomer($customer);
-    if ($isCreatedCustomer) {
-        // send email to customer
-        $newCustomer = new Customer($conn);
-        $newCustomer->lastNameCustomer = $decodedData->lastNameCustomer;
-        $newCustomer->firstNameCustomer = $decodedData->firstNameCustomer;
-        $thisCustomer = $newCustomer->searchCustomerByNames($newCustomer);
-        extract($thisCustomer);
-        $thisCustomerId = $idCustomer;
-    }
+    $thisCustomer = $customer->createCustomer($customer);
+    extract($thisCustomer);
+    $thisCustomerId = $idCustomer;
 } else {
     $customer->idCustomer = $decodedData->idCustomer;
     $thisCustomer = $customer->searchCustomerById($customer);
     $thisCustomerId = $thisCustomer->idCustomer;
 }
 
+$car = new Car($conn);
 if (!isset($decodedData->idCar)) {
     $car->idCustomer = $thisCustomerId;
     $car->licensePlateCar = $decodedData->licensePlateCar;
@@ -67,48 +58,51 @@ if (!isset($decodedData->idCar)) {
     $car->createCar($car);
     $thisCar = $car->searchCarByPlate($car);
     extract($thisCar);
-    echo json_encode($idCar);
-    //$thisCar->idCar créé
+    $thisCarId = $idCar;
 } else {
     $car->idCar = $decodedData->idCar;
     $thisCar = $car->searchCarById($car);
+    $thisCarId = $thisCar->idCar;
 }
 
+$address = new Address($conn);
 if (!empty($decodedData->addressStreetNumber)) {
     //adresse aller = domicile client > partenaire
     $address->idCustomer = $thisCustomerId;
     $address->addressStreetNumber = $decodedData->addressStreetNumber;
-    $address->addressStreetType = $decodedData->addressStreetType;
     $address->addressStreetName = $decodedData->addressStreetName;
-    $address->addressStreetComplement = $decodedData->addressStreetComplement;
     $address->addressZip = $decodedData->addressZip;
     $address->addressCity = $decodedData->addressCity;
     $address->createAddress($address);
-    $addressForthId = $address->searchAddressId($address);
+    $addressForth = $address->searchAddressByDetails($address);
+    extract($addressForth);
+    $addressForthId = $idAddress;
 }
 
 if (!empty($decodedData->addressBackStreetNumber)) {
     //adresse retour = partenaire > domicile client
     $address->idCustomer = $thisCustomerId;
     $address->addressStreetNumber = $decodedData->addressBackStreetNumber;
-    $address->addressStreetType = $decodedData->addressBackStreetType;
     $address->addressStreetName = $decodedData->addressBackStreetName;
-    $address->addressStreetComplement = $decodedData->addressBackStreetComplement;
     $address->addressZip = $decodedData->addressBackZip;
     $address->addressCity = $decodedData->addressBackCity;
     $address->createAddress($address);
-    $addressBackId = $address->searchAddressId($address);
+    $addressBack = $address->searchAddressByDetails($address);
+    extract($addressBack);
+    $addressBackId = $idAddress;
 }
+
+$booking = new Booking($conn);
 
 $booking->idCustomer = $thisCustomerId;
 $booking->idPartner = $decodedData->idPartner;
 $booking->hoursBooking = $decodedData->hoursBooking;
 $booking->dateBooking = $decodedData->dateBooking;
 $booking->formulaBooking = $decodedData->formulaBooking;
-$booking->statusBooking = $decodedData->statusBooking;
+// $booking->statusBooking = $decodedData->statusBooking;
 $booking->dateReturn = $decodedData->dateReturn;
 $booking->hoursReturn = $decodedData->hoursReturn;
-$booking->idCar = $thisCar->idCar;
+$booking->idCar = $thisCarId;
 $booking->idPickupAddress = $addressForthId;
 $booking->idReturnAddress = $addressBackId;
 $booking->idAgency = $decodedData->idAgency;

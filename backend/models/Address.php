@@ -85,7 +85,7 @@ class Address
         return false;
     }
 
-    public function searchAddressId() 
+    public function searchAddressByDetails() 
     {
         $query = "
         SELECT *
@@ -94,9 +94,7 @@ class Address
         " WHERE
         (idCustomer = :idCustomer AND
         addressStreetNumber = :addressStreetNumber AND
-        addressStreetType = :addressStreetType AND
         addressStreetName = :addressStreetName AND
-        addressStreetComplement = :addressStreetComplement AND        
         addressZip = :addressZip AND
         addressCity = :addressCity)
         ";
@@ -105,16 +103,14 @@ class Address
         $params = [
             "idCustomer" => htmlspecialchars(strip_tags($this->idCustomer)),
             "addressStreetNumber" => htmlspecialchars(strip_tags($this->addressStreetNumber)),
-            "addressStreetType" => htmlspecialchars(strip_tags($this->addressStreetType)),
             "addressStreetName" => htmlspecialchars(strip_tags($this->addressStreetName)),
-            "addressStreetComplement" => htmlspecialchars(strip_tags($this->addressStreetComplement)),
             "addressZip" => htmlspecialchars(strip_tags($this->addressZip)),
             "addressCity" => htmlspecialchars(strip_tags($this->addressCity))
         ];
 
         if($stmt->execute($params)) {
             $row = $stmt->fetch();
-            return $row['idAddress'];
+            return $row;
         }
         return false;
     }    
