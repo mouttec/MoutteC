@@ -82,8 +82,6 @@ if (!empty($decodedData->addressForthStreetName)) {
     $addressForthId = $idAddress;
 }
 
-echo json_encode(["Ceci est l'idAddress en question : ".$idAddress]);
-
 if (!empty($decodedData->addressBackStreetName)) {
     //adresse retour = partenaire > domicile client
     $address->idCustomer = $thisCustomerId;
@@ -110,8 +108,8 @@ $booking->statusBooking = $decodedData->statusBooking;
 $booking->dateBack = $decodedData->dateBack;
 $booking->hoursBack = $decodedData->hoursBack;
 $booking->idCar = $thisCarId;
-$booking->idPickupAddress = $addressForthId;
-$booking->idReturnAddress = $addressBackId;
+$booking->idForthAddress = $addressForthId;
+$booking->idBackAddress = $addressBackId;
 $booking->idAgency = $decodedData->idAgency;
 $booking->distanceForth = $decodedData->distanceForth;
 $booking->durationForth = $decodedData->durationForth;
