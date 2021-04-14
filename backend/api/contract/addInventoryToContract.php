@@ -14,19 +14,19 @@ $decodedData = json_decode(file_get_contents("php://input"));
 
 $contract->idContract = $decodedData->idContract;
 $thisContract = $contract->searchContractById($contract);
-if(!empty($thisContract->urlDepartureInventory)) {
+if(!empty($thisContract->urlPartnerBackInventory)) {
     //étape de la restitution au client
-    $thisContract->urlReturnInventory = $decodedData->urlVideo;
-    $result = $thisContract->addReturnInventory($thisContract);
-} elseif (!empty($thisContract->urlArrivalInventory)) {
+    $thisContract->urlCustomerBack = $decodedData->urlVideo;
+    $result = $thisContract->addCustomerBackInventory($thisContract);
+} elseif (!empty($thisContract->urlPartnerForthInventory)) {
     //étape de la récupération au garage
     $thisContract->idTeammateReturn = $decodedData->idTeammateReturn;
-    $thisContract->urlDepartureInventory = $decodedData->urlVideo;
-    $result = $thisContract->addDepartureInventory($thisContract);
-} elseif (!empty($thisContract->urlPickupInventory)) {
+    $thisContract->urlPartnerBackInventory = $decodedData->urlVideo;
+    $result = $thisContract->addPartnerBackInventory($thisContract);
+} elseif (!empty($thisContract->urlCustomerForthInventory)) {
     //étape du dépôt au garage
-    $thisContract->urlArrivalInventory = $decodedData->urlVideo;
-    $result = $thisContract->addArrivalInventory($thisContract);
+    $thisContract->urlPartnerForthInventory = $decodedData->urlVideo;
+    $result = $thisContract->addPartnerForthInventory($thisContract);
 }
 
 

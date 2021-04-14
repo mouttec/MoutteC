@@ -69,10 +69,10 @@ if ((isset($_GET['idContract'])) || (isset($_GET['idBooking']))) {
                 "idBooking" => $idBooking,
                 "urlContract" => $urlContract,
                 "idCar" => $idCar,
-                "idPickupAddress" => $idPickupAddress,
-                "idReturnAddress" => $idReturnAddress,
-                "idTeammatePickup" => $idTeammatePickup,
-                "$idTeammateReturn" => $idTeammateReturn
+                "idForthAddress" => $idForthAddress,
+                "idBackAddress" => $idBackAddress,
+                "idTeammateForth" => $idTeammateForth,
+                "$idTeammateBack" => $idTeammateBack
             ];
             array_push($contracts_array, $contract_item);
         }

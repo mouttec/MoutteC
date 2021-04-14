@@ -7,15 +7,15 @@ class Booking {
     public $idBooking;
     public $idCustomer;
     public $idPartner;
-    public $hoursBooking;
-    public $dateBooking;
+    public $hoursForth;
+    public $dateForth;
     public $statusBooking;
     public $formulaBooking;
-    public $dateReturn;
-    public $hoursReturn;
+    public $dateBack;
+    public $hoursBack;
     public $idCar;
-    public $idPickupAddress;
-    public $idReturnAddress;
+    public $idForthAddress;
+    public $idBackAddress;
     public $idAgency;
 
     public function __construct($db) 
@@ -31,15 +31,15 @@ class Booking {
             " SET
             idCustomer = :idCustomer,
             idPartner = :idPartner,
-            hoursBooking = :hoursBooking,
-            dateBooking = :dateBooking,
+            hoursForth = :hoursForth,
+            dateForth = :dateForth,
             statusBooking = :statusBooking,
             formulaBooking = :formulaBooking,
-            dateReturn = :dateReturn,
-            hoursReturn = :hoursReturn,        
+            dateBack = :dateBack,
+            hoursBack = :hoursBack,        
             idCar = :idCar,
-            idPickupAddress = :idPickupAddress,
-            idReturnAddress = :idReturnAddress,
+            idForthAddress = :idForthAddress,
+            idBackAddress = :idBackAddress,
             idAgency = :idAgency,
             distanceForth = :distanceForth,
             durationForth = :durationForth,
@@ -51,15 +51,15 @@ class Booking {
         $params = [
             "idCustomer" => htmlspecialchars(strip_tags($this->idCustomer)),
             "idPartner" => htmlspecialchars(strip_tags($this->idPartner)),
-            "hoursBooking" => htmlspecialchars(strip_tags($this->hoursBooking)),
-            "dateBooking" => htmlspecialchars(strip_tags($this->dateBooking)),
+            "hoursForth" => htmlspecialchars(strip_tags($this->hoursForth)),
+            "dateForth" => htmlspecialchars(strip_tags($this->dateForth)),
             "statusBooking" => htmlspecialchars(strip_tags($this->statusBooking)),
             "formulaBooking" => htmlspecialchars(strip_tags($this->formulaBooking)),
-            "dateReturn" => htmlspecialchars(strip_tags($this->dateReturn)),
-            "hoursReturn" => htmlspecialchars(strip_tags($this->hoursReturn)),
+            "dateBack" => htmlspecialchars(strip_tags($this->dateBack)),
+            "hoursBack" => htmlspecialchars(strip_tags($this->hoursBack)),
             "idCar" => htmlspecialchars(strip_tags($this->idCar)),
-            "idPickupAddress" => htmlspecialchars(strip_tags($this->idPickupAddress)),
-            "idReturnAddress" => htmlspecialchars(strip_tags($this->idReturnAddress)),
+            "idForthAddress" => htmlspecialchars(strip_tags($this->idForthAddress)),
+            "idBackAddress" => htmlspecialchars(strip_tags($this->idBackAddress)),
             "idAgency" => htmlspecialchars(strip_tags($this->idAgency)),
             "distanceForth" => htmlspecialchars(strip_tags($this->distanceForth)),
             "durationForth" => htmlspecialchars(strip_tags($this->durationForth)),
@@ -68,9 +68,9 @@ class Booking {
         ];
 
         if($stmt->execute($params)) {
-            return true;
+            Back true;
         }
-        return false;
+        Back false;
     }
 
     public function listBookings() 
@@ -84,7 +84,7 @@ class Booking {
         $stmt = $this->conn->prepare($query);
 
         $stmt->execute();
-        return $stmt;
+        Back $stmt;
     }
 
     public function prepareCalendar() 
@@ -93,7 +93,7 @@ class Booking {
             SELECT *
             FROM "
             . $this->table . "
-            WHERE (dateBooking >= :startDate AND dateBooking <= :endDate AND idAgency = :idAgency) 
+            WHERE (dateForth >= :startDate AND dateForth <= :endDate AND idAgency = :idAgency) 
             ORDER BY
             idBooking DESC";
         $stmt = $this->conn->prepare($query);
@@ -105,9 +105,9 @@ class Booking {
         ];
 
         if ($stmt->execute($params)) {
-            return $stmt;
+            Back $stmt;
         }
-        return false;
+        Back false;
     }
 
     public function searchBookingById() 
@@ -124,9 +124,9 @@ class Booking {
 
         if($stmt->execute($params)) {
             $row = $stmt->fetch();
-            return $row;
+            Back $row;
         }
-        return false;
+        Back false;
     }
 
     public function searchBookingsByPartner() 
@@ -140,9 +140,9 @@ class Booking {
         $params = ["idPartner" => htmlspecialchars(strip_tags($this->idPartner))];
 
         if($stmt->execute($params)) {
-            return $stmt;
+            Back $stmt;
         }
-        return false;
+        Back false;
     }
 
     public function searchBookingsByCustomer() 
@@ -151,15 +151,15 @@ class Booking {
         SELECT *
         FROM bookings
         WHERE idCustomer = :idCustomer
-        ORDER BY dateBooking";
+        ORDER BY dateForth";
         $stmt = $this->conn->prepare($query);
 
         $params = ["idCustomer" => htmlspecialchars(strip_tags($this->idCustomer))];
 
         if($stmt->execute($params)) {
-            return $stmt;
+            Back $stmt;
         }
-        return false;
+        Back false;
     }
 
     public function searchBookingsByAgency() 
@@ -173,9 +173,9 @@ class Booking {
         $params = ["idAgency" => htmlspecialchars(strip_tags($this->idAgency))];
 
         if($stmt->execute($params)) {
-            return $stmt;
+            Back $stmt;
         }
-        return false;
+        Back false;
     }
 
     public function searchBookingsByDay() 
@@ -183,16 +183,16 @@ class Booking {
         $query = "
         SELECT *
         FROM bookings
-        WHERE dateBooking = :dateBooking
-        ORDER BY hoursBooking ASC";
+        WHERE dateForth = :dateForth
+        ORDER BY hoursForth ASC";
         $stmt = $this->conn->prepare($query);
 
-        $params = ["dateBooking" => htmlspecialchars(strip_tags($this->dateBooking))];
+        $params = ["dateForth" => htmlspecialchars(strip_tags($this->dateForth))];
 
         if($stmt->execute($params)) {
-            return $stmt;
+            Back $stmt;
         }
-        return false;
+        Back false;
     }
  
     public function updateBooking() 
@@ -202,14 +202,14 @@ class Booking {
             . $this->table .
             " SET
             idPartner = :idPartner,
-            hoursBooking = :hoursBooking,
-            dateBooking = :dateBooking,
+            hoursForth = :hoursForth,
+            dateForth = :dateForth,
             formulaBooking = :formulaBooking,
-            dateReturn = :dateReturn,
-            hoursReturn = :dateReturn,
+            dateBack = :dateBack,
+            hoursBack = :dateBack,
             idCar = :idCar,
-            idPickupAddress = :idPickupAddress,
-            idReturnAddress = :idReturnAddress,
+            idForthAddress = :idForthAddress,
+            idBackAddress = :idBackAddress,
             idAgency = :idAgency
             WHERE
             idBooking = :idBooking       
@@ -218,22 +218,22 @@ class Booking {
 
         $params = [
             "idPartner" => htmlspecialchars(strip_tags($this->idPartner)),
-            "hoursBooking" => htmlspecialchars(strip_tags($this->hoursBooking)),
-            "dateBooking" => htmlspecialchars(strip_tags($this->dateBooking)),
+            "hoursForth" => htmlspecialchars(strip_tags($this->hoursForth)),
+            "dateForth" => htmlspecialchars(strip_tags($this->dateForth)),
             "formulaBooking" => htmlspecialchars(strip_tags($this->formulaBooking)),
-            "dateReturn" => htmlspecialchars(strip_tags($this->dateReturn)),
-            "hoursReturn" => htmlspecialchars(strip_tags($this->hoursReturn)),
+            "dateBack" => htmlspecialchars(strip_tags($this->dateBack)),
+            "hoursBack" => htmlspecialchars(strip_tags($this->hoursBack)),
             "idCar" => htmlspecialchars(strip_tags($this->idCar)),
-            "idPickupAddress" => htmlspecialchars(strip_tags($this->idPickupAddress)),
-            "idReturnAddress" => htmlspecialchars(strip_tags($this->idReturnAddress)),
+            "idForthAddress" => htmlspecialchars(strip_tags($this->idForthAddress)),
+            "idBackAddress" => htmlspecialchars(strip_tags($this->idBackAddress)),
             "idAgency" => htmlspecialchars(strip_tags($this->idAgency)),
             "idBooking" => htmlspecialchars(strip_tags($this->idBooking))
         ];
 
         if($stmt->execute($params)) {
-            return true;
+            Back true;
         }
-        return false;
+        Back false;
     }
 
     public function updateBookingStatus() 
@@ -254,9 +254,9 @@ class Booking {
         ];
 
         if($stmt->execute($params)) {
-            return true;
+            Back true;
         }
-        return false;        
+        Back false;        
     }
 
     public function cancelBooking() 
@@ -277,8 +277,8 @@ class Booking {
         ];
 
         if($stmt->execute($params)) {
-            return true;
+            Back true;
         }
-        return false; 
+        Back false; 
     }
 }

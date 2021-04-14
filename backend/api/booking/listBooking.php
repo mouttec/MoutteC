@@ -37,16 +37,20 @@ if (isset($_GET['idBooking'])) {
                  "idBooking" => $idBooking,
                  "idCustomer" => $idCustomer,
                  "idPartner" => $idPartner,
-                 "hoursBooking" => $hoursBooking,
-                 "dateBooking" => $dateBooking,
+                 "hoursForth" => $hoursForth,
+                 "dateBForth" => $dateForth,
                  "statusBooking" => $statusBooking,
                  "formulaBooking" => $formulaBooking,
-                 "dateReturn" => $dateReturn,
-                 "hoursReturn" => $hoursReturn,
+                 "dateBack" => $dateBack,
+                 "hoursBack" => $hoursBack,
                  "idCar" => $idCar,
-                 "idPickupAddress" => $idPickupAddress,
-                 "idReturnAddress" => $idReturnAddress,
-                 "idAgency" => $idAgency
+                 "idPickupAddress" => $idForthAddress,
+                 "idReturnAddress" => $idBackAddress,
+                 "idAgency" => $idAgency,
+                 "distanceForth" => $distanceForth,
+                 "durationForth" => $durationForth,
+                 "distanceBack" => $distanceBack,
+                 "durationBack" => $durationBack,
             ];
             array_push($bookings_array, $booking_item);
         }

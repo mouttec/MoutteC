@@ -17,10 +17,10 @@ if ($counter > 0) {
     while ($row = $bookings->fetch()) {
         extract($row);
         $booking_item = [
-            "hoursBooking" => $hoursBooking,
-            "dateBooking" => $dateBooking,
-            "dateReturn" => $dateReturn,
-            "hoursReturn" => $hoursReturn
+            "hoursForth" => $hoursForth,
+            "dateForth" => $dateForth,
+            "dateBack" => $dateBack,
+            "hoursBack" => $hoursBack
         ];
         array_push($bookings_array, $booking_item);
     }

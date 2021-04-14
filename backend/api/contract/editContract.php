@@ -12,26 +12,20 @@ $contract = new Contract($conn);
 
 $decodedData = json_decode(file_get_contents("php://input"));
 
-if ((!empty($decodedData->idTeammateReturn)) && (!empty($decodedData->idContract))) {
+$contract->idCustomer = $decodedData->idCustomer;
+$contract->idPartner = $decodedData->idPartner;
+$contract->idAgency = $decodedData->idAgency;
+$contract->idBooking = $decodedData->idBooking;
+$contract->urlCustomerForthInventory = $decodedData->urlCustomerForthInventory;
+$contract->idCar = $decodedData->idCar;
+$contract->idForthAddress = $decodedData->idForthAddress;
+$contract->idBackAddress = $decodedData->idBackAddress;
+$contract->idTeammatePickup = $decodedData->idTeammatePickup;
+if (!empty($decodedData->idContract)) {
     $contract->idContract = $decodedData->idContract;
-    $contract->idTeammateReturn = $decodedData->idTeammateReturn;
-    $result = $contract->teammateReturn($contract);
+    $result = $contract->updateContract($contract);
 } else {
-    $contract->idCustomer = $decodedData->idCustomer;
-    $contract->idPartner = $decodedData->idPartner;
-    $contract->idAgency = $decodedData->idAgency;
-    $contract->idBooking = $decodedData->idBooking;
-    $contract->urlArrivalInventory = $decodedData->urlArrivalInventory;
-    $contract->idCar = $decodedData->idCar;
-    $contract->idPickupAddress = $decodedData->idPickupAddress;
-    $contract->idReturnAddress = $decodedData->idReturnAddress;
-    $contract->idTeammatePickup = $decodedData->idTeammatePickup;
-    if (!empty($decodedData->idContract)) {
-        $contract->idContract = $decodedData->idContract;
-        $result = $contract->updateContract($contract);
-    } else {
-        $result = $contract->createContract($contract);
-    }
+    $result = $contract->createContract($contract);
 }
 
 if ($result) {
