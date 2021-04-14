@@ -82,7 +82,7 @@ if (!empty($decodedData->addressForthStreetName)) {
     $addressForthId = $idAddress;
 }
 
-json_encode("Ceci est l'idAddress en question : ".$idAddress);
+echo json_encode(["Ceci est l'idAddress en question : ".$idAddress]);
 
 if (!empty($decodedData->addressBackStreetName)) {
     //adresse retour = partenaire > domicile client
