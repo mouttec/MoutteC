@@ -16,6 +16,9 @@ if (isset($_GET['idCustomer'])) {
     if (isset($_GET['idPartner'])) {
         $customer->idPartner = $_GET['idPartner'];
         $customers = $customer->searchCustomersByPartner($customer);
+    } elseif (isset($_GET['lastNameCustomer'])) {
+        $customer->lastNameCustomer = $_GET['lastNameCustomer'];
+        $customers = $customer->searchCustomersByLastname($customer);
     } else {
         $customers = $customer->listCustomers();
     }

@@ -143,6 +143,24 @@ class Customer {
         return false;
     }
 
+    public function searchCustomerByLastname() 
+    {
+        $query = "
+            SELECT *
+            FROM "
+            .   $this->table . 
+            " WHERE lastNameCustomer = :lastNameCustomer
+            ORDER BY idCustomer";
+        $stmt = $this->conn->prepare($query);
+
+        $params = ["lastNameCustomer" => htmlspecialchars(strip_tags($this->lastNameCustomer))];
+
+        if ($stmt->execute($params)) {
+            return $stmt;
+        }
+        return false;
+    }
+
     public function updateCustomer() 
     {
         $query = "
