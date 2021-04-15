@@ -46,7 +46,6 @@ $shifts = ['7:30',
 ];
 
 for ($d = 0; $d <= 60; $d++) {
-    $weekNumber = $d +1 / 7;
     $day = array();
     $dateCalendar = date('d/m/Y', strtotime('+'.$d.' days'));    
     for ($s = 0; $s < count($shifts); $s++) {
@@ -60,6 +59,7 @@ for ($d = 0; $d <= 60; $d++) {
     }
     array_push($week, $day);
     if (count($week) == 7) {
+        $weekNumber = ($d+1)/7-1;
         array_push($calendar, [$weekNumber => $week]);
         unset($week);
     }
