@@ -143,7 +143,7 @@ class Customer {
         return false;
     }
 
-    public function searchCustomerByLastname() 
+    public function searchCustomersByLastname() 
     {
         $query = "
             SELECT *

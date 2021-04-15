@@ -9,11 +9,12 @@ include_once "../../models/Address.php";
 
 $db = new Database();
 $conn = $db->connect();
-$customer = new Customer($conn);
-$car = new Car($conn);
-$address = new Address($conn);
 
 if (isset($_GET['idCustomer'])) {
+    $customer = new Customer($conn);
+    $car = new Car($conn);
+    $address = new Address($conn);
+
     $customerData = array();
     $customer->idCustomer = $_GET['idCustomer'];
     $thisCustomer = $customer->searchCustomerById($customer);
