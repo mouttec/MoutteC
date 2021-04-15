@@ -16,11 +16,11 @@ if ($counter > 0) {
     $bookings_array = array();
     while ($row = $bookings->fetch()) {
         extract($row);
-        if ((!empty($dateForth)) {
+        if (!empty($dateForth)) {
             $booking_item = [$dateForth => $hoursForth];
             array_push($bookings_array, $booking_item_forth);
         }
-        if ((!empty($dateBack)) {
+        if (!empty($dateBack)) {
             $booking_item_back = [$dateBack => $hoursBack];
             array_push($bookings_array, $booking_item_back);
         }
