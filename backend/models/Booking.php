@@ -94,9 +94,7 @@ class Booking {
             SELECT *
             FROM "
             . $this->table . "
-            WHERE (dateForth >= :startDate AND dateForth <= :endDate AND idAgency = :idAgency) 
-            ORDER BY
-            idBooking DESC";
+            WHERE (((dateForth >= :startDate AND dateForth <= :endDate) OR (dateBack >= :startDate AND dateBack <= :endDate)) AND idAgency = :idAgency)";
         $stmt = $this->conn->prepare($query);
 
         $params = [
