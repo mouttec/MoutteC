@@ -12,7 +12,7 @@ $conn = $db->connect();
 
 if (isset($_GET['idCustomer'])) {
     $customerData = array();
-    
+
     $customer = new Customer($conn);
     $customer->idCustomer = $_GET['idCustomer'];
     $thisCustomer = $customer->searchCustomerById($customer);
@@ -27,6 +27,7 @@ if (isset($_GET['idCustomer'])) {
         while($row = $addresses->fetch()) {
             extract($row);
             $address_item = [
+                "idAddress" => $idAddress,
                 "idCustomer" => $idCustomer,
                 "addressStreetNumber" => $addressStreetNumber,
                 "addressStreetType" => $addressStreetType,
