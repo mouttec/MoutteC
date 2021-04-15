@@ -11,14 +11,15 @@ $db = new Database();
 $conn = $db->connect();
 
 if (isset($_GET['idCustomer'])) {
-    $customer = new Customer($conn);
-    $car = new Car($conn);
-    $address = new Address($conn);
-
     $customerData = array();
+    
+    $customer = new Customer($conn);
     $customer->idCustomer = $_GET['idCustomer'];
     $thisCustomer = $customer->searchCustomerById($customer);
     array_push($customerData, $thisCustomer);
+
+    $address = new Address($conn);
+    $address->idCustomer = $_GET['idCustomer'];
     $addresses = $address->listAddressesByCustomer($thisCustomer);
     $counter = $addresses->rowCount();
     if ($counter > 0) {
@@ -38,6 +39,9 @@ if (isset($_GET['idCustomer'])) {
         }
         array_push($customerData, $addresses_array);
     }
+ 
+    $car = new Car($conn);
+    $car->idCustomer = $_GET['idCustomer'];
     $cars = $car->searchCarsByCustomer($thisCustomer);
     $counter = $cars->rowCount();
     if ($counter > 0) {
