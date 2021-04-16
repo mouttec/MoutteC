@@ -10,6 +10,7 @@ $conn = $db->connect();
 $booking = new Booking($conn);
 
 $bookings = $booking->prepareCalendar($booking);
+echo json_encode($bookings);
 $counter = $bookings->rowCount();
 if ($counter > 0) {
     $bookings_array = array();
@@ -37,7 +38,7 @@ if ($counter > 0) {
 }
 sort($bookings_array);
 
-echo json_encode($bookings_array);
+// echo json_encode($bookings_array);
 
 $calendar = array();
 $shifts = ['7:30', 
@@ -55,30 +56,30 @@ $shifts = ['7:30',
    '20:00', '20:30'
 ];
 
-for ($d = 0; $d <= 60; $d++) {
-    $day = array();
-    $dateCalendar = date('d/m/Y', strtotime('+'.$d.' days'));    
-    for ($s = 0; $s < count($shifts); $s++) {
-        if ((($bookings_array[0]['date']) == $dateCalendar) && ($bookings_array[0]['hours'] == $shifts[$s])) {
-            array_push($day, [$shifts[$s] => 0, 'bookingData' => $bookings_array[0]]);
-            array_splice($bookings_array, 0, 1);
-        } else {
-            array_push($day, [$shifts[$s] => 1]);
-        }
-    }
-    array_push($week, $day);
-    if (count($week) == 7) {
-        $weekNumber = ($d+1)/7-1;
-        array_push($calendar, [$weekNumber => $week]);
-        unset($week);
-    }
-}
+// for ($d = 0; $d <= 60; $d++) {
+//     $day = array();
+//     $dateCalendar = date('d/m/Y', strtotime('+'.$d.' days'));    
+//     for ($s = 0; $s < count($shifts); $s++) {
+//         if ((($bookings_array[0]['date']) == $dateCalendar) && ($bookings_array[0]['hours'] == $shifts[$s])) {
+//             array_push($day, [$shifts[$s] => 0, 'bookingData' => $bookings_array[0]]);
+//             array_splice($bookings_array, 0, 1);
+//         } else {
+//             array_push($day, [$shifts[$s] => 1]);
+//         }
+//     }
+//     array_push($week, $day);
+//     if (count($week) == 7) {
+//         $weekNumber = ($d+1)/7-1;
+//         array_push($calendar, [$weekNumber => $week]);
+//         unset($week);
+//     }
+// }
 
-if (!empty($calendar)) {
-    echo json_encode($calendar);
-} else { 
-    http_response_code(404); 
-}
+// if (!empty($calendar)) {
+//     echo json_encode($calendar);
+// } else { 
+//     http_response_code(404); 
+// }
 
 
 
