@@ -59,7 +59,7 @@ for ($d = 0; $d <= 60; $d++) {
     $day = array();
     $dateCalendar = date('d/m/Y', strtotime('+'.$d.' days'));    
     for ($s = 0; $s < count($shifts); $s++) {
-        if ((key($bookings_array[0]['date']) == $dateCalendar) && ($bookings_array[0]['hours'] == $shifts[$s])) {
+        if ((($bookings_array[0]['date']) == $dateCalendar) && ($bookings_array[0]['hours'] == $shifts[$s])) {
             array_push($day, [$shifts[$s] => 0, 'bookingData' => $bookings_array[0]]);
             array_splice($bookings_array, 0, 1);
         } else {
