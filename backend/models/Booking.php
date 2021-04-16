@@ -94,7 +94,7 @@ class Booking {
             SELECT *
             FROM "
             . $this->table . "
-            WHERE ((dateForth >= :startDate OR dateBack >= :startDate) AND (dateForth <= :endDate OR dateBack <= :endDate))";
+            WHERE ((dateForth >= :startDate AND dateForth <= :endDate) OR (dateBack >= :startDate AND dateBack <= :endDate))";
         $stmt = $this->conn->prepare($query);
 
         $params = [
@@ -102,8 +102,9 @@ class Booking {
             "endDate" => date('d/m/Y', strtotime('+60 days'))
         ];
 
-        if ($stmt->execute($params)) {
-            return $stmt;
+        $result = $stmt->execute($params));
+        if (!empty($result)) {
+            return $result;
         }
         return false;
     }
