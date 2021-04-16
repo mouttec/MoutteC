@@ -9,7 +9,6 @@ $db = new Database();
 $conn = $db->connect();
 $booking = new Booking($conn);
 
-$booking->idAgency = $_GET['idAgency'];
 $bookings = $booking->prepareCalendar($booking);
 $counter = $bookings->rowCount();
 if ($counter > 0) {
@@ -17,17 +16,28 @@ if ($counter > 0) {
     while ($row = $bookings->fetch()) {
         extract($row);
         if (!empty($dateForth)) {
-            $booking_item = [$dateForth => $hoursForth];
-            array_push($bookings_array, $booking_item_forth);
+            $booking_item = [
+                'date' => $dateForth,
+                'hour' => $hoursForth,
+                'idPartner' => $idPartner,
+                'idAgency' => $idAgency
+            ];
+            array_push($bookings_array, $booking_item);
         }
         if (!empty($dateBack)) {
-            $booking_item_back = [$dateBack => $hoursBack];
-            array_push($bookings_array, $booking_item_back);
+            $booking_item = [
+                'date' => $dateBack,
+                'hour' => $hoursBack,
+                'idPartner' => $idPartner,
+                'idAgency' => $idAgency
+            ];
+            array_push($bookings_array, $booking_item);
         }
     }
 }
-
 sort($bookings_array);
+
+echo json_encode($bookings_array);
 
 $calendar = array();
 $shifts = ['7:30', 
@@ -49,13 +59,12 @@ for ($d = 0; $d <= 60; $d++) {
     $day = array();
     $dateCalendar = date('d/m/Y', strtotime('+'.$d.' days'));    
     for ($s = 0; $s < count($shifts); $s++) {
-        if ((key($bookings_array[0]) == $dateCalendar) && (current($bookings_array[0]) == $shifts[$s])) {
-            $dispo = 0;
+        if ((key($bookings_array[0]['date']) == $dateCalendar) && ($bookings_array[0]['hours'] == $shifts[$s])) {
+            array_push($day, [$shifts[$s] => 0, 'bookingData' => $bookings_array[0]]);
             array_splice($bookings_array, 0, 1);
         } else {
-            $dispo = 1;                
+            array_push($day, [$shifts[$s] => 1]);
         }
-        array_push($day,[$shifts[$s] => $dispo]);
     }
     array_push($week, $day);
     if (count($week) == 7) {

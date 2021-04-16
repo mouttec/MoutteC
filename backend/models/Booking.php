@@ -94,13 +94,12 @@ class Booking {
             SELECT *
             FROM "
             . $this->table . "
-            WHERE (((dateForth >= :startDate AND dateForth <= :endDate) OR (dateBack >= :startDate AND dateBack <= :endDate)) AND idAgency = :idAgency)";
+            WHERE ((dateForth >= :startDate AND dateForth <= :endDate) OR (dateBack >= :startDate AND dateBack <= :endDate))";
         $stmt = $this->conn->prepare($query);
 
         $params = [
-            "startDate" => date('j/m/Y'),
+            "startDate" => date('d/m/Y'),
             "endDate" => date('d/m/Y', strtotime('+60 days')),
-            "idAgency" => htmlspecialchars(strip_tags($this->idAgency))
         ];
 
         if ($stmt->execute($params)) {
