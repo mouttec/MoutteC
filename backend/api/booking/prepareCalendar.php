@@ -24,8 +24,8 @@ if ($counter > 0) {
                  "statusBooking" => $statusBooking,
                  "formulaBooking" => $formulaBooking,
                  "idCar" => $idCar,
-                 "dateForth" => $dateForth,
-                 "hoursForth" => $hoursForth,
+                 "date" => $dateForth,
+                 "hours" => $hoursForth,
                  "idForthAddress" => $idForthAddress,
                  "distanceForth" => $distanceForth,
                  "durationForth" => $durationForth,
@@ -41,8 +41,8 @@ if ($counter > 0) {
                  "statusBooking" => $statusBooking,
                  "formulaBooking" => $formulaBooking,
                  "idCar" => $idCar,
-                 "dateBack" => $dateBack,
-                 "hoursBack" => $hoursBack,
+                 "date" => $dateBack,
+                 "hours" => $hoursBack,
                  "idBackAddress" => $idBackAddress,
                  "distanceBack" => $distanceBack,
                  "durationBack" => $durationBack,
@@ -56,6 +56,7 @@ sort($bookings_array);
 echo json_encode($bookings_array);
 
 $calendar = array();
+
 $shifts = ['7:30', 
    '8:00', '8:30', 
    '9:00', '9:30', 
@@ -71,30 +72,39 @@ $shifts = ['7:30',
    '20:00', '20:30'
 ];
 
-// for ($d = 0; $d <= 60; $d++) {
-//     $day = array();
-//     $dateCalendar = date('d/m/Y', strtotime('+'.$d.' days'));    
-//     for ($s = 0; $s < count($shifts); $s++) {
-//         if ((($bookings_array[0]['date']) == $dateCalendar) && ($bookings_array[0]['hours'] == $shifts[$s])) {
-//             array_push($day, [$shifts[$s] => 0, 'bookingData' => $bookings_array[0]]);
-//             array_splice($bookings_array, 0, 1);
-//         } else {
-//             array_push($day, [$shifts[$s] => 1]);
-//         }
-//     }
-//     array_push($week, $day);
-//     if (count($week) == 7) {
-//         $weekNumber = ($d+1)/7-1;
-//         array_push($calendar, [$weekNumber => $week]);
-//         unset($week);
-//     }
-// }
+/*
+Formatage de du jour dans le calendrier
+setlocale(LC_ALL, 'fr_FR.UTF8', 'fr_FR','fr','fr','fra','fr_FR@euro');
+echo strftime("%a %d %B");
+echo strftime("%a %d %B", strtotime('+2 days')); (date + 2 jours)
+*/
 
-// if (!empty($calendar)) {
-//     echo json_encode($calendar);
-// } else { 
-//     http_response_code(404); 
-// }
+for ($d = 0; $d <= 60; $d++) {
+    $day = array();
+    // $dateCalendar = date('d/m/Y', strtotime('+'.$d.' days'));  
+    $newDay = strftime("%a %d %B", strtotime('+'.$d.' days'));
+    for ($s = 0; $s < count($shifts); $s++) {
+        if ((($bookings_array[0]['date']) == $newDay) && ($bookings_array[0]['hours'] == $shifts[$s])) {
+            $thisShift = [$shifts[$s] => $bookings_array[0]];
+            array_push($day, $thisShift);
+            array_splice($bookings_array, 0, 1);
+        } else {
+            array_push($day, $shifts[$s]);
+        }
+    }
+    array_push($week, $day);
+    if (count($week) == 7) {
+        $weekNumber = ($d+1)/7-1;
+        array_push($calendar, [$weekNumber => $week]);
+        unset($week);
+    }
+}
+
+if (!empty($calendar)) {
+    echo json_encode($calendar);
+} else { 
+    http_response_code(404); 
+}
 
 
 
