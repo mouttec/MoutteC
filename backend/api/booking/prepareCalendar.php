@@ -9,28 +9,43 @@ $db = new Database();
 $conn = $db->connect();
 $booking = new Booking($conn);
 
-$bookings = $booking->prepareCalendar($booking);
-echo json_encode($bookings);
+$bookings = $booking->listBookings();
 $counter = $bookings->rowCount();
 if ($counter > 0) {
     $bookings_array = array();
     while ($row = $bookings->fetch()) {
         extract($row);
-        if (!empty($dateForth)) {
+        if (($dateForth >= date('d/m/Y')) && ($dateForth <= date('d/m/Y', strtotime('+60 days')))) {
             $booking_item = [
-                'date' => $dateForth,
-                'hour' => $hoursForth,
-                'idPartner' => $idPartner,
-                'idAgency' => $idAgency
+                 "idBooking" => $idBooking,
+                 "idCustomer" => $idCustomer,
+                 "idPartner" => $idPartner,
+                 "idAgency" => $idAgency,
+                 "statusBooking" => $statusBooking,
+                 "formulaBooking" => $formulaBooking,
+                 "idCar" => $idCar,
+                 "dateForth" => $dateForth,
+                 "hoursForth" => $hoursForth,
+                 "idForthAddress" => $idForthAddress,
+                 "distanceForth" => $distanceForth,
+                 "durationForth" => $durationForth,
             ];
             array_push($bookings_array, $booking_item);
         }
-        if (!empty($dateBack)) {
+        if (($dateBack >= date('d/m/Y')) && ($dateBack <= date('d/m/Y', strtotime('+60 days')))) {
             $booking_item = [
-                'date' => $dateBack,
-                'hour' => $hoursBack,
-                'idPartner' => $idPartner,
-                'idAgency' => $idAgency
+                 "idBooking" => $idBooking,
+                 "idCustomer" => $idCustomer,
+                 "idPartner" => $idPartner,
+                 "idAgency" => $idAgency,
+                 "statusBooking" => $statusBooking,
+                 "formulaBooking" => $formulaBooking,
+                 "idCar" => $idCar,
+                 "dateBack" => $dateBack,
+                 "hoursBack" => $hoursBack,
+                 "idBackAddress" => $idBackAddress,
+                 "distanceBack" => $distanceBack,
+                 "durationBack" => $durationBack,
             ];
             array_push($bookings_array, $booking_item);
         }
@@ -38,7 +53,7 @@ if ($counter > 0) {
 }
 sort($bookings_array);
 
-// echo json_encode($bookings_array);
+echo json_encode($bookings_array);
 
 $calendar = array();
 $shifts = ['7:30', 

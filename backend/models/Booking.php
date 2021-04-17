@@ -88,26 +88,25 @@ class Booking {
         return $stmt;
     }
 
-    public function prepareCalendar() 
-    {
-        $query = "
-            SELECT *
-            FROM "
-            . $this->table . "
-            WHERE ((dateForth >= :startDate AND dateForth <= :endDate) OR (dateBack >= :startDate AND dateBack <= :endDate))";
-        $stmt = $this->conn->prepare($query);
+    // public function prepareCalendar() 
+    // {
+    //     $query = "
+    //         SELECT *
+    //         FROM "
+    //         . $this->table . "
+    //         WHERE ((dateForth >= :startDate AND dateForth <= :endDate) OR (dateBack >= :startDate AND dateBack <= :endDate))";
+    //     $stmt = $this->conn->prepare($query);
 
-        $params = [
-            "startDate" => date('d/m/Y'),
-            "endDate" => date('d/m/Y', strtotime('+60 days'))
-        ];
+    //     $params = [
+    //         "startDate" => date('d/m/Y'),
+    //         "endDate" => date('d/m/Y', strtotime('+60 days'))
+    //     ];
 
-        $result = $stmt->execute($params));
-        if (!empty($result)) {
-            return $result;
-        }
-        return false;
-    }
+    //     if ($stmt->execute($params)) {
+    //         return $stmt;
+    //     }
+    //     return false;
+    // }
 
     public function searchBookingById() 
     {
