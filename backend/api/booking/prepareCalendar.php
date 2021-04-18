@@ -117,7 +117,6 @@ for ($d = 0; $d <= /*70*/15; $d++) {
                 ];
                 $lockingShiftCounter = 3;
             }
-            echo json_encode('Booking entrée !');
             next($bookings_array);
             //array_splice($bookings_array, 0, 1);
         } elseif (in_array($shifts[$s], $teammateShiftsOnly)) {
@@ -133,11 +132,11 @@ for ($d = 0; $d <= /*70*/15; $d++) {
     }
 }
 
-// if (!empty($calendar)) {
-//     echo json_encode($calendar);
-// } else { 
-//     http_response_code(404); 
-// }
+if (!empty($calendar)) {
+    echo json_encode($calendar);
+} else { 
+    http_response_code(404); 
+}
 
 
 
