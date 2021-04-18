@@ -18,10 +18,10 @@ if ($counter > 0) {
         extract($row);
         if (($dateForth >= date('d/m/Y')) && ($dateForth <= date('d/m/Y', strtotime('+70 days')))) {
             $thisHour = substr($hoursForth, 0, 2);
-            $thisQuarter = substr(substr($hoursForth, 3, 2)/15, 0, 1);
             if (strlen($thisHour) == 1) {
                 $thisHour = '0'.$thisHour;
             }
+            $thisQuarter = substr(substr($hoursForth, 3, 2)/15, 0, 1);
             $bookingTimecode = 'h'.$thisHour.'q'.$thisQuarter;
             $booking_item = [
                  "idBooking" => $idBooking,
@@ -42,10 +42,10 @@ if ($counter > 0) {
         }
         if (($dateBack >= date('d/m/Y')) && ($dateBack <= date('d/m/Y', strtotime('+70 days')))) {
             $thisHour = substr($hoursBack, 0, 2);
-            $thisQuarter = substr(substr($hoursBack, 3, 2)/15, 0, 1);
             if (strlen($thisHour) == 1) {
                 $thisHour = '0'.$thisHour;
             }
+            $thisQuarter = substr(substr($hoursBack, 3, 2)/15, 0, 1);
             $bookingTimecode = 'h'.$thisHour.'q'.$thisQuarter;
             $booking_item = [
                  "idBooking" => $idBooking,
@@ -68,7 +68,7 @@ if ($counter > 0) {
     sort($bookings_array);
 }
 
-json_encode($bookings_array);
+echo json_encode($bookings_array);
 
 $quarters = [0, 1, 2, 3];
 $shifts = array(); 
@@ -96,7 +96,7 @@ Calendar[m4d14h07q2] pour le 14 avril à 7h30
 */
 
 $calendar = array();
-for ($d = 0; $d <= 20; $d++) {
+for ($d = 0; $d <= /*70*/15; $d++) {
     $lockingShiftCounter = 0;
     $newDay = date('d/m/Y', strtotime('+'.$d.' days'));
     $weekRank = substr(($d+7)/7-1, 0, 1);
