@@ -65,6 +65,7 @@ if ($counter > 0) {
             array_push($bookings_array, $booking_item);
         }
     }
+    echo json_encode($bookings_array);
     sort($bookings_array);
 }
 // echo json_encode($bookings_array);
@@ -105,7 +106,7 @@ for ($d = 0; $d <= 70; $d++) {
     $datecode = 'w'.$weekRank.'m'.date('m', strtotime('+'.$d.' days')).'d'.date('d', strtotime('+'.$d.' days'));
     for ($s = 0; $s < count($shifts); $s++) {
         $datetimeCode = $datecode.$shifts[$s];
-        echo json_encode(current($bookings_array));
+        // echo json_encode(current($bookings_array));
         // echo json_encode(current($bookings_array)['bookingTimecode']);
         // if (((current($bookings_array)['date'] == $newDay) && (current($bookings_array)['bookingTimecode'] == $shifts[$s])) || ($lockingShiftCounter != 0)) {
         //     if ($lockingShiftCounter != 0) {
