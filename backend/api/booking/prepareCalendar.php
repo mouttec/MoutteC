@@ -96,7 +96,7 @@ Calendar[m4d14h07q2] pour le 14 avril à 7h30
 */
 
 $calendar = array();
-for ($d = 0; $d <= 70; $d++) {
+for ($d = 0; $d <= 20; $d++) {
     $lockingShiftCounter = 0;
     $newDay = date('d/m/Y', strtotime('+'.$d.' days'));
     $weekRank = substr(($d+7)/7-1, 0, 1);
@@ -120,6 +120,7 @@ for ($d = 0; $d <= 70; $d++) {
                     'statusCalendar' => 'booked',
                     'bookingData' => current($bookings_array)
                 ];
+                $lockingShiftCounter = 3;
             }
             next($bookings_array);
             //array_splice($bookings_array, 0, 1);
