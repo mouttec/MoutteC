@@ -107,7 +107,8 @@ for ($d = 0; $d <= 20; $d++) {
     for ($s = 0; $s < count($shifts); $s++) {
         $datetimeCode = $datecode.$shifts[$s];
         // echo json_encode(current($bookings_array)['date']);
-        // echo json_encode(current($bookings_array)['hours']);
+        echo json_encode(current($bookings_array)['hours']);
+        echo json_encode($shifts[$s]);
         // heure positions 9/10 , quarter position 12
         if (((current($bookings_array)['date'] == $newDay) && (current($bookings_array)['hours'] == $shifts[$s])) || ($lockingShiftCounter != 0)) {
             if ($lockingShiftCounter != 0) {
