@@ -69,7 +69,6 @@ if ($counter > 0) {
     }
     sort($bookings_array);
 }
-echo json_encode($bookings_array);
 
 $quarters = [0, 1, 2, 3];
 $shifts = array(); 
@@ -107,32 +106,30 @@ for ($d = 0; $d <= 70; $d++) {
     $datecode = 'w'.$weekRank.'m'.date('m', strtotime('+'.$d.' days')).'d'.date('d', strtotime('+'.$d.' days'));
     for ($s = 0; $s < count($shifts); $s++) {
         $datetimeCode = $datecode.$shifts[$s];
-        // echo json_encode(current($bookings_array));
-        // echo json_encode(current($bookings_array)['bookingTimecode']);
-        // if (((current($bookings_array)['date'] == $newDay) && (current($bookings_array)['bookingTimecode'] == $shifts[$s])) || ($lockingShiftCounter != 0)) {
-        //     if ($lockingShiftCounter != 0) {
-        //         //Si $lockingShiftCounter != 0 c'est qu'on est dans encore dans la résa précédente
-        //         $lockingShiftCounter -= 1;
-        //         $datetimeData = ['statusCalendar' => 'booked'];
-        //     } else {
-        //         $lockingShiftCounter = substr(((current($bookings_array)['duration']+20)/15)+0.99, 0, 1);
-        //         $datetimeData = [
-        //             'statusCalendar' => 'booked',
-        //             'bookingData' => current($bookings_array),
-        //         ];
-        //     }
-        //     next($bookings_array);
-        //     //array_splice($bookings_array, 0, 1);
-        // } elseif (in_array($shifts[$s], $teammateShiftsOnly)) {
-        //     $datetimeData = [
-        //         'statusCalendar' => 'locked',
-        //     ];
-        // }  else {
-        //     $datetimeData = [
-        //         'statusCalendar' => 'available',
-        //     ];
-        // }
-        // array_push($calendar, ['datetimeCode' => $datetimeCode, 'datetimeData' => $datetimeData]);
+        if (((current($bookings_array)['date'] == $newDay) && (current($bookings_array)['bookingTimecode'] == $shifts[$s])) || ($lockingShiftCounter != 0)) {
+            if ($lockingShiftCounter != 0) {
+                //Si $lockingShiftCounter != 0 c'est qu'on est dans encore dans la résa précédente
+                $lockingShiftCounter -= 1;
+                $datetimeData = ['statusCalendar' => 'booked'];
+            } else {
+                $lockingShiftCounter = substr(((current($bookings_array)['duration']+20)/15)+0.99, 0, 1);
+                $datetimeData = [
+                    'statusCalendar' => 'booked',
+                    'bookingData' => current($bookings_array),
+                ];
+            }
+            next($bookings_array);
+            //array_splice($bookings_array, 0, 1);
+        } elseif (in_array($shifts[$s], $teammateShiftsOnly)) {
+            $datetimeData = [
+                'statusCalendar' => 'locked',
+            ];
+        }  else {
+            $datetimeData = [
+                'statusCalendar' => 'available',
+            ];
+        }
+        array_push($calendar, ['datetimeCode' => $datetimeCode, 'datetimeData' => $datetimeData]);
     }
 }
 
