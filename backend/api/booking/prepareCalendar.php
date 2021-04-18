@@ -38,7 +38,6 @@ if ($counter > 0) {
                  "duration" => $durationForth,
                  'bookingTimecode' => $bookingTimecode
             ];
-            echo json_encode($booking_item);
             array_push($bookings_array, $booking_item);
         }
         if (($dateBack >= date('d/m/Y')) && ($dateBack <= date('d/m/Y', strtotime('+60 days')))) {
@@ -118,7 +117,7 @@ for ($d = 0; $d <= 70; $d++) {
                     'bookingData' => current($bookings_array),
                 ];
             }
-            next($bookings_array)
+            next($bookings_array);
             //array_splice($bookings_array, 0, 1);
         } elseif (in_array($shifts[$s], $teammateShiftsOnly)) {
             $datetimeData = [
