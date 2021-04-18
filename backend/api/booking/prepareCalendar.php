@@ -107,7 +107,9 @@ for ($d = 0; $d <= 70; $d++) {
     for ($s = 0; $s < count($shifts); $s++) {
         $datetimeCode = $datecode.$shifts[$s];
         echo json_encode(current($bookings_array));
-        if (((current($bookings_array)['date'] == $newDay) && (current($bookings_array)['bookingTimecode'] == $shifts[$s])) || ($lockingShiftCounter != 0)) {
+
+        // heure positions 9/10 , quarter position 12
+        if (((current($bookings_array)['date'] == $newDay) && (current($bookings_array)['hours'] == $shifts[$s])) || ($lockingShiftCounter != 0)) {
             if ($lockingShiftCounter != 0) {
                 //Si $lockingShiftCounter != 0 c'est qu'on est dans encore dans la résa précédente
                 $lockingShiftCounter -= 1;
