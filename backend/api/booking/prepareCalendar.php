@@ -34,7 +34,7 @@ if ($counter > 0) {
                  "formulaBooking" => $formulaBooking,
                  "idCar" => $idCar,
                  "date" => $dateForth,
-                 "hours" => $hoursForth,
+                 "hours" => substr($hoursForth, 0, 5),
                  "idForthAddress" => $idForthAddress,
                  "distance" => $distanceForth,
                  "duration" => $durationForth,
@@ -58,7 +58,7 @@ if ($counter > 0) {
                  "formulaBooking" => $formulaBooking,
                  "idCar" => $idCar,
                  "date" => $dateBack,
-                 "hours" => $hoursBack,
+                 "hours" => substr($hoursBack, 0, 5),
                  "idBackAddress" => $idBackAddress,
                  "distance" => $distanceBack,
                  "duration" => $durationBack,
@@ -106,8 +106,8 @@ for ($d = 0; $d <= 20; $d++) {
     $datecode = 'w'.$weekRank.'m'.date('m', strtotime('+'.$d.' days')).'d'.date('d', strtotime('+'.$d.' days'));
     for ($s = 0; $s < count($shifts); $s++) {
         $datetimeCode = $datecode.$shifts[$s];
-        echo json_encode(current($bookings_array));
-
+        // echo json_encode(current($bookings_array)['date']);
+        // echo json_encode(current($bookings_array)['hours']);
         // heure positions 9/10 , quarter position 12
         if (((current($bookings_array)['date'] == $newDay) && (current($bookings_array)['hours'] == $shifts[$s])) || ($lockingShiftCounter != 0)) {
             if ($lockingShiftCounter != 0) {
