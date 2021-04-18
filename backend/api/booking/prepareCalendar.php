@@ -16,7 +16,6 @@ if ($counter > 0) {
     $bookings_array = array();
     while ($row = $bookings->fetch()) {
         extract($row);
-        echo json_encode($row);
         if (($dateForth >= date('d/m/Y')) && ($dateForth <= date('d/m/Y', strtotime('+60 days')))) {
             $thisHour = substr($hoursForth, 0, 2);
             $thisQuarter = substr($hoursForth, 3, 2)/15;
@@ -39,6 +38,7 @@ if ($counter > 0) {
                  "duration" => $durationForth,
                  'bookingTimecode' => $bookingTimecode
             ];
+            echo json_encode($booking_item);
             array_push($bookings_array, $booking_item);
         }
         if (($dateBack >= date('d/m/Y')) && ($dateBack <= date('d/m/Y', strtotime('+60 days')))) {
