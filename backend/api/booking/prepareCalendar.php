@@ -10,7 +10,10 @@ $conn = $db->connect();
 $booking = new Booking($conn);
 
 $bookings = $booking->listBookings();
+
 $counter = $bookings->rowCount();
+echo json_encode('La longueur de l\'array $bookings est de : '. $counter);
+
 if ($counter > 0) {
     $bookings_array = array();
     while ($row = $bookings->fetch()) {
@@ -50,13 +53,11 @@ if ($counter > 0) {
             array_push($bookings_array, $booking_item);
         }
     }
+    sort($bookings_array);
 }
-sort($bookings_array);
-
 echo json_encode($bookings_array);
 
 $calendar = array();
-
 $shifts = ['7:30', 
    '8:00', '8:30', 
    '9:00', '9:30', 
