@@ -105,8 +105,8 @@ for ($d = 0; $d <= 70; $d++) {
     $datecode = 'w'.$weekRank.'m'.date('m', strtotime('+'.$d.' days')).'d'.date('d', strtotime('+'.$d.' days'));
     for ($s = 0; $s < count($shifts); $s++) {
         $datetimeCode = $datecode.$shifts[$s];
-        echo json_encode(current($bookings_array)['date']);
-        echo json_encode(current($bookings_array)['bookingTimecode']);
+        echo json_encode(current($bookings_array));
+        // echo json_encode(current($bookings_array)['bookingTimecode']);
         // if (((current($bookings_array)['date'] == $newDay) && (current($bookings_array)['bookingTimecode'] == $shifts[$s])) || ($lockingShiftCounter != 0)) {
         //     if ($lockingShiftCounter != 0) {
         //         //Si $lockingShiftCounter != 0 c'est qu'on est dans encore dans la résa précédente
