@@ -20,7 +20,7 @@ if ($counter > 0) {
         // $dateBack = stripslashes($dateBack);
         if (($dateForth >= date('d/m/Y')) && ($dateForth <= date('d/m/Y', strtotime('+70 days')))) {
             $thisHour = substr($hoursForth, 0, 2);
-            $thisQuarter = substr($hoursForth, 3, 2)/15;
+            $thisQuarter = substr(substr($hoursForth, 3, 2)/15, 0, 1);
             if (strlen($thisHour) == 1) {
                 $thisHour = '0'.$thisHour;
             }
@@ -85,7 +85,7 @@ for ($h = 7; $h <= 20; $h++) {
         }
     }
 }
-$teammateShiftsOnly = ['12:30', '12:45', '13:00', '13:15', '13:30', '18h30', '18:45', '19:00', '19:15', '19h30', '19:45', '20:00', '20:15', '20:30'];
+$teammateShiftsOnly = ['h12q2', 'h12q3', 'h13q0', 'h13q1', 'h13q2', 'h18q2', 'h18q3', 'h19q0', 'h19q1', 'h19q2', 'h19q3', 'h20q0', 'h20q1', 'h20q2'];
 
 /*
 Formatage de du jour dans le calendrier
@@ -106,11 +106,7 @@ for ($d = 0; $d <= 20; $d++) {
     $datecode = 'w'.$weekRank.'m'.date('m', strtotime('+'.$d.' days')).'d'.date('d', strtotime('+'.$d.' days'));
     for ($s = 0; $s < count($shifts); $s++) {
         $datetimeCode = $datecode.$shifts[$s];
-        // echo json_encode(current($bookings_array)['date']);
-        echo json_encode(current($bookings_array)['hours']);
-        echo json_encode($shifts[$s]);
-        // heure positions 9/10 , quarter position 12
-        if (((current($bookings_array)['date'] == $newDay) && (current($bookings_array)['hours'] == $shifts[$s])) || ($lockingShiftCounter != 0)) {
+        if (((current($bookings_array)['date'] == $newDay) && (current($bookings_array)['bookingTimecode'] == $shifts[$s])) || ($lockingShiftCounter != 0)) {
             if ($lockingShiftCounter != 0) {
                 //Si $lockingShiftCounter != 0 c'est qu'on est dans encore dans la résa précédente
                 $lockingShiftCounter -= 1;
