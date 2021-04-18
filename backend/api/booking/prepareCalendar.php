@@ -68,8 +68,6 @@ if ($counter > 0) {
     sort($bookings_array);
 }
 
-echo json_encode($bookings_array);
-
 $quarters = [0, 1, 2, 3];
 $shifts = array(); 
 for ($h = /*7*/12; $h <= /*20*/18; $h++) {
@@ -98,7 +96,7 @@ Calendar[m4d14h07q2] pour le 14 avril à 7h30
 $calendar = array();
 for ($d = 0; $d <= /*70*/15; $d++) {
     $lockingShiftCounter = 0;
-    $newDay = date('d/m/Y', strtotime('+'.$d.' days'));
+    $newDay = date('Y-m-d', strtotime('+'.$d.' days'));
     $weekRank = substr(($d+7)/7-1, 0, 1);
     //strftime('%u'); Retourne le numéro du jour de la semaine, à vois pour le calcul de la semaine partielle
 
@@ -119,6 +117,7 @@ for ($d = 0; $d <= /*70*/15; $d++) {
                 ];
                 $lockingShiftCounter = 3;
             }
+            echo json_encode('Booking entrée !');
             next($bookings_array);
             //array_splice($bookings_array, 0, 1);
         } elseif (in_array($shifts[$s], $teammateShiftsOnly)) {
