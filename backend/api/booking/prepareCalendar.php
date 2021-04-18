@@ -16,8 +16,6 @@ if ($counter > 0) {
     $bookings_array = array();
     while ($row = $bookings->fetch()) {
         extract($row);
-        // $dateForth = stripslashes($dateForth);
-        // $dateBack = stripslashes($dateBack);
         if (($dateForth >= date('d/m/Y')) && ($dateForth <= date('d/m/Y', strtotime('+70 days')))) {
             $thisHour = substr($hoursForth, 0, 2);
             $thisQuarter = substr(substr($hoursForth, 3, 2)/15, 0, 1);
@@ -69,6 +67,8 @@ if ($counter > 0) {
     }
     sort($bookings_array);
 }
+
+json_encode($bookings_array);
 
 $quarters = [0, 1, 2, 3];
 $shifts = array(); 
@@ -134,11 +134,11 @@ for ($d = 0; $d <= 20; $d++) {
     }
 }
 
-if (!empty($calendar)) {
-    echo json_encode($calendar);
-} else { 
-    http_response_code(404); 
-}
+// if (!empty($calendar)) {
+//     echo json_encode($calendar);
+// } else { 
+//     http_response_code(404); 
+// }
 
 
 
