@@ -68,7 +68,7 @@ if ($counter > 0) {
     }
     sort($bookings_array);
 }
-echo json_encode('Contenu de l\'array' => $bookings_array);
+echo json_encode('Contenu de l\'array : '  $bookings_array);
 
 $quarters = [0, 1, 2, 3];
 $shifts = array(); 
