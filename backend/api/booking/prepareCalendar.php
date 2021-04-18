@@ -72,7 +72,7 @@ json_encode($bookings_array);
 
 $quarters = [0, 1, 2, 3];
 $shifts = array(); 
-for ($h = 7; $h <= 20; $h++) {
+for ($h = /*7*/12; $h <= /*20*/18; $h++) {
     foreach ($quarters as $quarter) {
         if (strlen($h) == 1) {
             $timecode = 'h0'.$h.'q'.$quarter;
