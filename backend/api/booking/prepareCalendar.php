@@ -12,13 +12,18 @@ $booking = new Booking($conn);
 $bookings = $booking->listBookings();
 
 $counter = $bookings->rowCount();
-echo json_encode('La longueur de l\'array $bookings est de : '. $counter);
-
 if ($counter > 0) {
     $bookings_array = array();
     while ($row = $bookings->fetch()) {
         extract($row);
+        echo json_encode($row);
         if (($dateForth >= date('d/m/Y')) && ($dateForth <= date('d/m/Y', strtotime('+60 days')))) {
+            $thisHour = substr($hoursForth, 0, 2);
+            $thisQuarter = substr($hoursForth, 3, 2)/15;
+            if (strlen($thisHour) == 1) {
+                $thisHour = '0'.$thisHour;
+            }
+            $bookingTimecode = 'h'.$thisHour.'q'.$thisQuarter;
             $booking_item = [
                  "idBooking" => $idBooking,
                  "idCustomer" => $idCustomer,
@@ -30,12 +35,19 @@ if ($counter > 0) {
                  "date" => $dateForth,
                  "hours" => $hoursForth,
                  "idForthAddress" => $idForthAddress,
-                 "distanceForth" => $distanceForth,
-                 "durationForth" => $durationForth,
+                 "distance" => $distanceForth,
+                 "duration" => $durationForth,
+                 'bookingTimecode' => $bookingTimecode
             ];
             array_push($bookings_array, $booking_item);
         }
         if (($dateBack >= date('d/m/Y')) && ($dateBack <= date('d/m/Y', strtotime('+60 days')))) {
+            $thisHour = substr($hoursBack, 0, 2);
+            $thisQuarter = substr($hoursBack, 3, 2)/15;
+            if (strlen($thisHour) == 1) {
+                $thisHour = '0'.$thisHour;
+            }
+            $bookingTimecode = 'h'.$thisHour.'q'.$thisQuarter;
             $booking_item = [
                  "idBooking" => $idBooking,
                  "idCustomer" => $idCustomer,
@@ -47,8 +59,9 @@ if ($counter > 0) {
                  "date" => $dateBack,
                  "hours" => $hoursBack,
                  "idBackAddress" => $idBackAddress,
-                 "distanceBack" => $distanceBack,
-                 "durationBack" => $durationBack,
+                 "distance" => $distanceBack,
+                 "duration" => $durationBack,
+                 'bookingTimecode' => $bookingTimecode
             ];
             array_push($bookings_array, $booking_item);
         }
@@ -57,47 +70,65 @@ if ($counter > 0) {
 }
 echo json_encode($bookings_array);
 
-$calendar = array();
-$shifts = ['7:30', 
-   '8:00', '8:30', 
-   '9:00', '9:30', 
-   '10:00', '10:30', 
-   '11:00', '11:30', 
-   '12:00', '13:30', 
-   '14:00', '14:30', 
-   '15:00', '15:30', 
-   '16:00', '16:30', 
-   '17:00', '17:30', 
-   '18:00', '18:30',
-   '19:00', '19:30', 
-   '20:00', '20:30'
-];
+$quarters = [0, 1, 2, 3];
+$shifts = array(); 
+for ($h = 7; $h <= 20; $h++) {
+    foreach ($quarters as $quarter) {
+        if (strlen($h) == 1) {
+            $timecode = 'h0'.$h.'q'.$quarter;
+        } else {
+            $timecode = 'h'.$h.'q'.$quarter;
+        }
+        //On retire les créaneaux non disponibles dans le calendrier
+        if (($timecode != 'h07q0') && ($timecode != 'h07q1') && ($timecode != 'h20q3')) {
+            array_push($shifts, $timecode);
+        }
+    }
+}
+$teammateShiftsOnly = ['12:30', '12:45', '13:00', '13:15', '13:30', '18h30', '18:45', '19:00', '19:15', '19h30', '19:45', '20:00', '20:15', '20:30'];
 
 /*
 Formatage de du jour dans le calendrier
 setlocale(LC_ALL, 'fr_FR.UTF8', 'fr_FR','fr','fr','fra','fr_FR@euro');
 echo strftime("%a %d %B");
 echo strftime("%a %d %B", strtotime('+2 days')); (date + 2 jours)
+Calendar[m4d14h07q2] pour le 14 avril à 7h30
 */
 
-for ($d = 0; $d <= 60; $d++) {
-    $day = array();
-    // $dateCalendar = date('d/m/Y', strtotime('+'.$d.' days'));  
-    $newDay = strftime("%a %d %B", strtotime('+'.$d.' days'));
+$calendar = array();
+for ($d = 0; $d <= 70; $d++) {
+    $lockingShiftCounter = 0;
+    $newDay = date('d/m/Y', strtotime('+'.$d.' days'));
+    $weekRank = substr(($d+7)/7-1, 0, 1);
+    //strftime('%u'); Retourne le numéro du jour de la semaine, à vois pour le calcul de la semaine partielle
+
+    //début du formatage du datecode
+    $datecode = 'w'.$weekRank.'m'.date('m', strtotime('+'.$d.' days')).'d'.date('d', strtotime('+'.$d.' days'));
     for ($s = 0; $s < count($shifts); $s++) {
-        if ((($bookings_array[0]['date']) == $newDay) && ($bookings_array[0]['hours'] == $shifts[$s])) {
-            $thisShift = [$shifts[$s] => $bookings_array[0]];
-            array_push($day, $thisShift);
+        $datetimeCode = $datecode.$shifts[$s];
+        if ((($bookings_array[0]['date'] == $newDay) && ($bookings_array[0]['bookingTimecode'] == $shifts[$s])) || ($lockingShiftCounter != 0)) {
+            if ($lockingShiftCounter != 0) {
+                //Si $lockingShiftCounter != 0 c'est qu'on est dans encore dans la résa précédente
+                $lockingShiftCounter -= 1;
+                $datetimeData = ['statusCalendar' => 'booked'];
+            } else {
+                $lockingShiftCounter = substr((($bookings_array[0]['duration']+20)/15)+0.99, 0, 1);
+                $datetimeData = [
+                    'statusCalendar' => 'booked',
+                    'bookingData' => $bookings_array[0],
+                ];
+            }
             array_splice($bookings_array, 0, 1);
-        } else {
-            array_push($day, $shifts[$s]);
+        } elseif (in_array($shifts[$s], $teammateShiftsOnly)) {
+            $datetimeData = [
+                'statusCalendar' => 'locked',
+            ];
+        }  else {
+            $datetimeData = [
+                'statusCalendar' => 'available',
+            ];
         }
-    }
-    array_push($week, $day);
-    if (count($week) == 7) {
-        $weekNumber = ($d+1)/7-1;
-        array_push($calendar, [$weekNumber => $week]);
-        unset($week);
+        array_push($calendar, ['datetimeCode' => $datetimeCode, 'datetimeData' => $datetimeData]);
     }
 }
 
