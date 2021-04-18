@@ -16,8 +16,8 @@ if ($counter > 0) {
     $bookings_array = array();
     while ($row = $bookings->fetch()) {
         extract($row);
-        $dateForth = stripslashes($dateForth);
-        $dateBack = stripslashes($dateBack);
+        // $dateForth = stripslashes($dateForth);
+        // $dateBack = stripslashes($dateBack);
         if (($dateForth >= date('d/m/Y')) && ($dateForth <= date('d/m/Y', strtotime('+70 days')))) {
             $thisHour = substr($hoursForth, 0, 2);
             $thisQuarter = substr($hoursForth, 3, 2)/15;
