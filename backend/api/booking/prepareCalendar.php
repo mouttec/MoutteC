@@ -70,7 +70,7 @@ if ($counter > 0) {
 
 $quarters = [0, 1, 2, 3];
 $shifts = array(); 
-for ($h = /*7*/12; $h <= /*20*/18; $h++) {
+for ($h = 7; $h <= 20; $h++) {
     foreach ($quarters as $quarter) {
         if (strlen($h) == 1) {
             $timecode = 'h0'.$h.'q'.$quarter;
@@ -94,7 +94,7 @@ Calendar[m4d14h07q2] pour le 14 avril à 7h30
 */
 
 $calendar = array();
-for ($d = 0; $d <= /*70*/15; $d++) {
+for ($d = 0; $d <= 70; $d++) {
     $lockingShiftCounter = 0;
     $newDay = date('Y-m-d', strtotime('+'.$d.' days'));
     $weekRank = substr(($d+7)/7-1, 0, 1);
@@ -118,7 +118,6 @@ for ($d = 0; $d <= /*70*/15; $d++) {
                 $lockingShiftCounter = 3;
             }
             next($bookings_array);
-            //array_splice($bookings_array, 0, 1);
         } elseif (in_array($shifts[$s], $teammateShiftsOnly)) {
             $datetimeData = [
                 'statusCalendar' => 'locked'

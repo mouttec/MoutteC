@@ -38,7 +38,6 @@ if (isset($decodedData->idBooking)) {
     $counter = $payments->rowCount();
     if ($counter > 0) {
         $billings_array = array();
-        $invoiceAmount = 0;
         while($row = $payments->fetch()) {
             extract($row);
             $billing_item = [
