@@ -115,6 +115,7 @@ $booking->distanceForth = $decodedData->distanceForth;
 $booking->durationForth = $decodedData->durationForth;
 $booking->distanceBack = $decodedData->distanceBack;
 $booking->durationBack = $decodedData->durationBack;
+$bookng->originBooking = "partner";
 
 $result = $booking->createBooking($booking);
 

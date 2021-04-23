@@ -20,15 +20,18 @@ if ($counter > 0) {
     $payments_array = array();
     while($row = $payments->fetch()) {
         extract($row);
-        $payment_item = [
-            "idDailyPayment" => $idDailyPayment,
-            "idPartner" => $idPartner,
-            "idCustomer" => $idCustomer,
-            "priceDailyPayment" => $priceDailyPayment,
-            "idBooking" => $idBooking,
-            "idCustomer" => $idCustomer
-        ];
-        array_push($payments_array, $payment_item);
+        if ($bookingOrigin == "partner") {
+	        $payment_item = [
+	            "idDailyPayment" => $idDailyPayment,
+	            "idPartner" => $idPartner,
+	            "idCustomer" => $idCustomer,
+	            "priceDailyPayment" => $priceDailyPayment,
+	            "idBooking" => $idBooking,
+	            "idCustomer" => $idCustomer,
+	            "bookingOrigin" => $bookingOrigin
+	        ];
+	        array_push($payments_array, $payment_item);
+    	}
     }
 }
 for ($p = 0; $p < count($payments_array); $p++) {

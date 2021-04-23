@@ -11,6 +11,7 @@ class DailyPayment
     public $idPartner;
     public $idCustomer;
     public $dateDailyPayment;
+    public $originBooking;
  
     public function __construct($db) 
     {
@@ -27,7 +28,8 @@ class DailyPayment
             statusDailyPayment = :statusDailyPayment,
             priceDailyPayment = :priceDailyPayment,
             idPartner = :idPartner,
-            idCustomer = :idCustomer
+            idCustomer = :idCustomer,
+            originBooking= :originBooking
             ";
         $stmt = $this->conn->prepare($query);
 
@@ -36,7 +38,8 @@ class DailyPayment
             "statusDailyPayment" => 'En attente',
             "priceDailyPayment" => htmlspecialchars(strip_tags($this->priceDailyPayment)),
             "idPartner" => htmlspecialchars(strip_tags($this->idPartner)),
-            "idCustomer" => htmlspecialchars(strip_tags($this->idCustomer))
+            "idCustomer" => htmlspecialchars(strip_tags($this->idCustomer)),
+            "originBooking" => htmlspecialchars(strip_tags($this->originBooking))
         ];
 
         if($stmt->execute($params)) {
@@ -187,62 +190,6 @@ class DailyPayment
         return false;
     }
 
-    // public function preparePartnerInvoice($monthRequired, $yearRequired, $idPartner) 
-    // {
-    //     $query = "
-    //         SELECT *
-    //         FROM "
-    //         . $this->table . " 
-    //         WHERE
-    //         (dateDailyPayment >= :monthStart AND
-    //          dateDailyPayment =< :monthEnd AND 
-    //          idPartner = :idPartner)
-    //          ORDER BY dateDailyPayment ASC";
-    //     $stmt = $this->conn->prepare($query);
-
-    //     $m = htmlspecialchars(strip_tags($monthRequired));
-    //     $y = htmlspecialchars(strip_tags($yearRequired));
-    //     $d = cal_days_in_month(CAL_GREGORIAN, $m, $y);
-
-    //     $params = [
-    //         "monthStart" => date($y ."-". $m ."-1 00:00:00"),
-    //         "monthEnd" => date($y ."-". $m ."-". $d ." 23:59:59"),
-    //         "idPartner" => htmlspecialchars(strip_tags($idPartner))
-    //     ];
-
-    //     if ($stmt->execute($params)) {
-    //         return $stmt;
-    //     }
-    //     return false;
-    // }
-
-    // public function updateDailyPayment() 
-    // {
-    //     $query = "
-    //         UPDATE "
-    //         . $this->table .
-    //         " SET
-    //         idBooking = :idBooking,
-    //         priceDailyPayment = :priceDailyPayment,
-    //         idPartner = :idPartner
-    //         WHERE
-    //         idDailyPayment = :idDailyPayment       
-    //     ";
-    //     $stmt = $this->conn->prepare($query);
-
-    //     $params = [
-    //         "idBooking" => htmlspecialchars(strip_tags($this->idBooking)),
-    //         "priceDailyPayment" => htmlspecialchars(strip_tags($this->priceDailyPayment)),
-    //         "idPartner" => htmlspecialchars(strip_tags($this->idPartner)),
-    //         "idDailyPayment" => htmlspecialchars(strip_tags($this->idDailyPayment))
-    //     ];
-
-    //     if($stmt->execute($params)) {
-    //        return true;
-    //     }
-    //     return false;
-    // }
-
     public function updatePaymentStatus() 
     {
         $query = "
@@ -265,21 +212,4 @@ class DailyPayment
         }
         return false;
     }
-
-    // public function deleteDailyPayment() 
-    // {
-    //     $query = "
-    //         DELETE
-    //         FROM " . $this->table .
-    //         " WHERE idPaymentOfDay = :idPaymentOfDay
-    //     ";
-    //     $stmt = $this->conn->prepare($query);
-
-    //     $params = ["idPaymentOfDay" => htmlspecialchars(strip_tags($this->idPaymentOfDay))];
-
-    //     if($stmt->execute($params)) {
-    //         return true;
-    //     }
-    //     return false;        
-    // }
 }

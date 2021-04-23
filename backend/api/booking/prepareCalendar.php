@@ -112,7 +112,7 @@ for ($d = 0; $d <= 20; $d++) {
                 $lockingShiftCounter -= 1;
                 $datetimeData = ['statusCalendar' => 'booked'];
             } else {
-                $lockingShiftCounter = substr(((current($bookings_array)['duration']+20)/15)+0.99, 0, 1);
+                $lockingShiftCounter = substr(((current($bookings_array)['duration']+30)/15)+0.99, 0, 1);
                 $datetimeData = [
                     'statusCalendar' => 'booked',
                     'bookingData' => current($bookings_array)

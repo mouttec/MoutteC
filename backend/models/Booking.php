@@ -17,6 +17,7 @@ class Booking {
     public $idForthAddress;
     public $idBackAddress;
     public $idAgency;
+    public $bookingOrigin;
 
     public function __construct($db) 
     {
@@ -44,7 +45,8 @@ class Booking {
             distanceForth = :distanceForth,
             durationForth = :durationForth,
             distanceBack = :distanceBack,
-            durationBack = :durationBack
+            durationBack = :durationBack,
+            bookingOrigin = :bookingOrigin
             ";
         $stmt = $this->conn->prepare($query);
 
@@ -65,7 +67,8 @@ class Booking {
             "distanceForth" => htmlspecialchars(strip_tags($this->distanceForth)),
             "durationForth" => htmlspecialchars(strip_tags($this->durationForth)),
             "distanceBack" => htmlspecialchars(strip_tags($this->distanceBack)),
-            "durationBack" => htmlspecialchars(strip_tags($this->durationBack))
+            "durationBack" => htmlspecialchars(strip_tags($this->durationBack)),
+            "bookingOrigin" => htmlspecialchars(strip_tags($this->bookingOrigin))
         ];
 
         if($stmt->execute($params)) {
@@ -114,8 +117,7 @@ class Booking {
         SELECT *
         FROM "
         . $this->table . " 
-        WHERE idBooking = :idBooking
-        LIMIT 0,1";
+        WHERE idBooking = :idBooking";
         $stmt = $this->conn->prepare($query);
 
         $params = ["idBooking" => htmlspecialchars(strip_tags($this->idBooking))];
@@ -208,7 +210,8 @@ class Booking {
             idCar = :idCar,
             idForthAddress = :idForthAddress,
             idBackAddress = :idBackAddress,
-            idAgency = :idAgency
+            idAgency = :idAgency,
+            bookingOrigin = :bookingOrigin
             WHERE
             idBooking = :idBooking       
         ";
@@ -225,7 +228,8 @@ class Booking {
             "idForthAddress" => htmlspecialchars(strip_tags($this->idForthAddress)),
             "idBackAddress" => htmlspecialchars(strip_tags($this->idBackAddress)),
             "idAgency" => htmlspecialchars(strip_tags($this->idAgency)),
-            "idBooking" => htmlspecialchars(strip_tags($this->idBooking))
+            "idBooking" => htmlspecialchars(strip_tags($this->idBooking)),
+            "bookingOrigin" => htmlspecialchars(strip_tags($this->bookingOrigin))
         ];
 
         if($stmt->execute($params)) {

@@ -6,10 +6,12 @@ header("Content-Type: application/json");
 header("Access-Control-Allow-Headers: Access-Control-Allow-Headers, Access-Control-Allow-Methods, Content-Type, Authorization, X-Requested-With");
 include_once "../../config/Database.php";
 include_once "../../models/Customer.php";
+include_once "../../models/Address.php";
 
 $db = new Database();
 $conn = $db->connect();
 $customer = new Customer($conn);
+$address = new Address($conn);
 
 $decodedData = json_decode(file_get_contents("php://input"));
 
@@ -18,6 +20,12 @@ $customer->lastNameCustomer = $decodedData->lastNameCustomer;
 $customer->dateOfBirthdayCustomer = $decodedData->dateOfBirthdayCustomer;
 $customer->phoneCustomer = $decodedData->phoneCustomer;
 $customer->mailCustomer = $decodedData->mailCustomer;
+$address->addressStreetNumber = $decodedData->addressStreetNumber;
+$address->addressStreetType = $decodedData->addressStreetType;
+$address->addressStreetName = $decodedData->addressStreetName;
+$address->addressStreetComplement = $decodedData->addressStreetComplement;
+$address->addressZip = $decodedData->addressZip;
+$address->addressCity = $decodedData->addressCity;
 
 if (isset($decodedData->idCustomer)) {
     $customer->idCustomer = $decodedData->idCustomer;
@@ -42,13 +50,16 @@ if (isset($decodedData->idCustomer)) {
  		}
  		$customer->mixedPassword = $randomStr;
  		//Envoi d'un mail au client pour son mot de passe 
- 		// $randomStr est une chaîne de caractère aléatoire qui va être utilisée comme mot de passe temporaire, elle sera envoyée en get dans le lien
+ 		//$randomStr est une chaîne de caractère aléatoire qui va être utilisée comme mot de passe temporaire, elle sera envoyée en get dans le lien
 	}
-    $result = $customer->createCustomer($customer);
+    $thisCustomer = $customer->createCustomer($customer);
     if (isset($decodedData->idPartner)) {
-    	$customer->idPartner = $decodedData->idPartner;
-    	$customer->bindPartnerToCustomer($customer);
+    	$thisCustomer->idPartner = $decodedData->idPartner;
+    	$thisCustomer->bindPartnerToCustomer($thisCustomer);
     }
+    $address->idCustomer = $thisCustomer->idCustomer;
+    $thisCustomer->idAddressBilling = $address->createAddress($address);
+    $thisCustomer->bindBillingAddress($thisCustomer);
 }
 
 if ($result) {

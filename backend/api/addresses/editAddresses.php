@@ -29,10 +29,7 @@ if (!empty($decodedData->idAddress)) {
 }
 
 if ($result) {
-    echo json_encode([
-    	"address" => $result, 
-		"message" => "L'adresse a été éditée !" 
-		]);
+    echo json_encode([ "message" => "L'adresse a été éditée !" ]);
 } else {
     echo json_encode([ "message" => "L'adresse n'a pas pu être éditée..." ]);
 }

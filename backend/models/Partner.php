@@ -136,8 +136,7 @@ class Partner
         SELECT *
         FROM "
         . $this->table . " 
-        WHERE idPartner = :idPartner
-        LIMIT 0,1";
+        WHERE idPartner = :idPartner";
         $stmt = $this->conn->prepare($query);
 
         $params = ["idPartner" => htmlspecialchars(strip_tags($this->idPartner))];
@@ -154,8 +153,7 @@ class Partner
             SELECT *
             FROM "
             . $this->table . " 
-            WHERE usernamePartner = :usernamePartner
-            LIMIT 0,1";
+            WHERE usernamePartner = :usernamePartner";
         $stmt = $this->conn->prepare($query);
 
         $params = ["usernamePartner" => htmlspecialchars(strip_tags($this->usernamePartner))];

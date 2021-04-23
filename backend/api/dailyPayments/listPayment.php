@@ -46,7 +46,8 @@ if (isset($decodedData->idBooking)) {
                 "idCustomer" => $idCustomer,
                 "priceDailyPayment" => $priceDailyPayment,
                 "idBooking" => $idBooking,
-                "idCustomer" => $idCustomer
+                "idCustomer" => $idCustomer,
+                "originBooking" => $originBooking
             ];
             array_push($billings_array, $billing_item);
         }

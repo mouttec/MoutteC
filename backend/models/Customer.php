@@ -13,6 +13,7 @@ class Customer {
     public $mixedPassword;
     public $idPartner;
     public $dateCustomer;
+    public $idBillingAddress;
 
     public function __construct($db) 
     {
@@ -46,7 +47,11 @@ class Customer {
         ];
 
         if ($stmt->execute($params)) {
-            return true;
+            $query = "SELECT max(idCustomer) FROM ". $this->table;
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+            $row = $stmt->fetch();
+            return $row;
         }
         return false;
     }

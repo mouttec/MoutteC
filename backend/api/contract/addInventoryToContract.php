@@ -18,9 +18,9 @@ if(!empty($thisContract->urlPartnerBackInventory)) {
     //étape de la restitution au client
     $thisContract->urlCustomerBack = $decodedData->urlVideo;
     $result = $thisContract->addCustomerBackInventory($thisContract);
-} elseif (!empty($thisContract->urlPartnerForthInventory)) {
+} elseif ((!empty($thisContract->urlPartnerForthInventory)) || (is_null($thisContract->idPForthAddress))) {
     //étape de la récupération au garage
-    $thisContract->idTeammateReturn = $decodedData->idTeammateReturn;
+    $thisContract->idTeammateBack = $decodedData->idTeammateBack;
     $thisContract->urlPartnerBackInventory = $decodedData->urlVideo;
     $result = $thisContract->addPartnerBackInventory($thisContract);
 } elseif (!empty($thisContract->urlCustomerForthInventory)) {

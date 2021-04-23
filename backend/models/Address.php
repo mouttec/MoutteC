@@ -45,7 +45,11 @@ class Address
         ];
 
         if ($stmt->execute($params)) {
-            return true;
+            $query = "SELECT max(idAddress) FROM ". $this->table;
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+            $row = $stmt->fetch();
+            return $row;
         }
         return false;
     }
@@ -72,8 +76,7 @@ class Address
         SELECT *
         FROM "
         . $this->table . " 
-        WHERE idAddress = :idAddress
-        LIMIT 0,1";
+        WHERE idAddress = :idAddress";
         $stmt = $this->conn->prepare($query);
 
         $params = ["idAddress" => htmlspecialchars(strip_tags($this->idAddress))];
