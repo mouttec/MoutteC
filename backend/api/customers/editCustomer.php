@@ -49,8 +49,7 @@ if (isset($decodedData->idCustomer)) {
 			$randomStr .= $chars[rand(0, $maxLength - 1)];
  		}
  		$customer->mixedPassword = $randomStr;
- 		//Envoi d'un mail au client pour son mot de passe 
- 		//$randomStr est une chaîne de caractère aléatoire qui va être utilisée comme mot de passe temporaire, elle sera envoyée en get dans le lien
+ 		$customer->sendNewPasswordEmail($customer);
 	}
     $customer->idCustomer = $customer->createCustomer($customer);
     echo json_encode($customer);

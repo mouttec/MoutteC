@@ -311,4 +311,22 @@ class Customer {
         }
         return false;
     }
+
+    public function sendNewPasswordEmail() {
+        $messageContent = [
+                'name'              => htmlspecialchars(strip_tags($this->lastNameCustomer)).' '.htmlspecialchars(strip_tags($this->firstNameCustomer)),
+                'mailCustomer'       => htmlspecialchars(strip_tags($this->mailCustomer)),
+                'confirmationCode'  => $this->mixedPassword
+                    ];
+        $mailContent = '<p>Bonjour '. $messageContent->name .' !<br />Nous vous invitons à confirmer votre compte client chez MoutteC en créant votre mot de passe en cliquant sur 
+                        <a href="https://mouttec.com/confirmAccount?key='.$messageContent->confirmationCode.'">ce lien</a>"<br /><br />
+                        En cas de problème, copiez et collez ce lien dans votre navigateur préféré : <br />
+                        https://mouttec.com/confirmAccount?key='.$messageContent->confirmationCode.'<br /><br />
+                        Toute l\'équipe de <a href="https://mouttec.com">MoutteC</a> vous remercie de votre confiance !<br />';
+        $customerHeaders =  'Reply-To: contact@mouttec.com' . "\r\n" .
+                            'X-Mailer: PHP/' . phpversion() . "\r\n" .
+                            'MIME-Version: 1.0' . "\r\n" . 
+                            'Content-Type: text/html; charset=UTF-8' . "\r\n";
+        mail($messageContent->mailCustomer, 'Création d\'un nouveau mot de passe sur MoutteC', $mailContent, $customerHeaders);
+    }
 }
