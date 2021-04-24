@@ -53,11 +53,12 @@ if (isset($decodedData->idCustomer)) {
  		//$randomStr est une chaîne de caractère aléatoire qui va être utilisée comme mot de passe temporaire, elle sera envoyée en get dans le lien
 	}
     $thisCustomer = $customer->createCustomer($customer);
+    echo json_encode($thisCustomer);
     if (isset($decodedData->idPartner)) {
     	$thisCustomer->idPartner = $decodedData->idPartner;
     	$thisCustomer->bindPartnerToCustomer($thisCustomer);
     }
-    $address->idCustomer = $thisCustomer->idCustomer;
+    $address->idCustomer = $thisCustomer;
     $thisCustomer->idAddressBilling = $address->createAddress($address);
     $thisCustomer->bindBillingAddress($thisCustomer);
 }
