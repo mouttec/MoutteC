@@ -243,6 +243,29 @@ class Customer {
         return false;
     }
 
+    public function bindBillingAddress() 
+    {
+        $query = "
+            UPDATE "
+            . $this->table .
+            " SET
+            idBillingAddress = :idBillingAddress
+            WHERE
+            idCustomer = :idCustomer       
+        ";
+        $stmt = $this->conn->prepare($query);
+
+        $params = [
+            "idBillingAddress" => htmlspecialchars(strip_tags($this->idBillingAddress)),
+            "idCustomer" => htmlspecialchars(strip_tags($this->idCustomer))
+        ];
+
+        if($stmt->execute($params)) {
+            return true;
+        }
+        return false;
+    }
+
     public function updatePasswordCustomer() 
     {
         $query = "
