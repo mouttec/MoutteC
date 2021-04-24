@@ -4,7 +4,13 @@ header("Content-Type: application/json");
 header("Access-Control-Allow-Methods: GET");
 include_once "../../config/Database.php";
 include_once "../../models/Contract.php";
-include_once"../../models/Video.php";
+include_once "../../models/Booking.php";
+include_once "../../models/Customer.php";
+include_once "../../models/Partner.php";
+include_once "../../models/Video.php";
+include_once "../../models/Car.php";
+include_once "../../model/Address.php";
+include_once "../../models/IdCard.php";
 
 $db = new Database();
 $conn = $db->connect();
@@ -58,6 +64,25 @@ if ((isset($_GET['idContract'])) || (isset($_GET['idBooking']))) {
         }
         $resultVideos = $video_array;
     }
+    //Récupération des cartes d'identités liées au contrat
+    $identityCard = new IdentityCard($conn);
+    $identityCard->idContract = $_GET['idContract'];
+    $identityCards = $identityCard->listCardsByContract($identityCard);
+    $counter = $identityCards->rowCount();
+    if ($counter > 0) {
+        $identityCards_array = array();
+        while ($row = $identityCards->fetch()) {
+            extract($row);
+            $card_item = [
+                "idCard" => $idCard,
+                "urlCard" => $urlCard,
+                "idContract" => $idContract,
+                "powerRecovery" => $powerRecovery
+            ];
+            array_push($identityCards_array, $card_item);
+        }
+        $resultIdentityCards = $identityCards_array;
+    }
     $result = [
         "contractDetails" => $resultContract, 
         "bookingDetails" => $thisBooking, 
@@ -66,7 +91,8 @@ if ((isset($_GET['idContract'])) || (isset($_GET['idBooking']))) {
         "carDetails" => $thisCar, 
         "addressForthDetails" => $thisAddressForth, 
         "addressBackDetails" => $thisAddressBack, 
-        "videoList" => $resultVideos
+        "videoList" => $resultVideos,
+        "identityCards" => $resultIdentityCards,
     ];
 } else {
     if (isset($_GET['idPartner'])) {
