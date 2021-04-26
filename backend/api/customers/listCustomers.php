@@ -4,14 +4,22 @@ header("Content-Type: application/json");
 header("Access-Control-Allow-Methods: GET");
 include_once "../../config/Database.php";
 include_once "../../models/Customer.php";
+include_once "../../models/Address.php";
 
 $db = new Database();
 $conn = $db->connect();
 $customer = new Customer($conn);
+$address = new Address($conn);
 
 if (isset($_GET['idCustomer'])) {
     $customer->idCustomer = $_GET['idCustomer'];
-    $result = $customer->searchCustomerById($customer);
+    $thisCustomer = $customer->searchCustomerById($customer);
+    $address->idAddress = $_GET['idCustomer'];
+    $billingAddress = $address->searchAddress($address);
+    $result = [
+        "customerDetails" => $thisCustomer,
+        "billingAddress" => $billingAddress
+    ];
 } else {
     if (isset($_GET['idPartner'])) {
         $customer->idPartner = $_GET['idPartner'];

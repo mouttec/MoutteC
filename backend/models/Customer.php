@@ -312,7 +312,8 @@ class Customer {
         return false;
     }
 
-    public function sendNewPasswordEmail() {
+    public function sendNewPasswordEmail() 
+    {
         $messageContent = [
                 'name'              => htmlspecialchars(strip_tags($this->lastNameCustomer)).' '.htmlspecialchars(strip_tags($this->firstNameCustomer)),
                 'mailCustomer'      => htmlspecialchars(strip_tags($this->mailCustomer)),
