@@ -50,9 +50,8 @@ if (isset($decodedData->idCustomer)) {
  		}
  		$customer->mixedPassword = $randomStr;
 	}
-    $response = $customer->createCustomer($customer);
-    $customer->idCustomer = $response["max(idCustomer)"];
-    echo json_encode($customer);
+    $customerResponse = $customer->createCustomer($customer);
+    $customer->idCustomer = $customerResponse["max(idCustomer)"];
     if (isset($randomStr)) {
     	$customer->sendNewPasswordEmail($customer);
     }
@@ -62,7 +61,8 @@ if (isset($decodedData->idCustomer)) {
     	$customer->bindPartnerToCustomer($customer);
     }
     $address->idCustomer = $customer->idCustomer;
-    $customer->idAddressBilling = $address->createAddress($address);
+    $addressResponse = $address->createAddress($address);
+    $customer->idAddressBilling = $addresssResponse["max(idAddress)"];
     $customer->bindBillingAddress($customer);
 }
 
