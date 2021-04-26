@@ -138,7 +138,7 @@ class DailyPayment
         return false;
     }
 
-    public function listPaymentsByDate()
+    public function listPaymentsByDay()
     {
         $query = "
             SELECT *

@@ -30,10 +30,10 @@ if (isset($decodedData->idBooking)) {
         $payments = $dailyPayment->listPaymentsByMonth($monthRequired, $yearRequired);
     } elseif ((isset($decodedData->dateDailyPayment))) {
         $dailyPayment->dateDailyPayment = $decodedData->dateDailyPayment;
-        $payments = $dailyPayment->listPaymentsByDate($dailyPayment);
+        $payments = $dailyPayment->listPaymentsByDay($dailyPayment);
     } else {
-        $dailyPayment->dateDailyPayment = date('j/m/Y');        
-        $payments = $dailyPayment->listPaymentsByDate();
+        $dailyPayment->dateDailyPayment = date('j/m/Y');
+        $payments = $dailyPayment->listPaymentsByDay();
     }
     $counter = $payments->rowCount();
     if ($counter > 0) {

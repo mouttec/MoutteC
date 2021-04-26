@@ -1,14 +1,14 @@
 <?php
-class MonthlyBilling {
+class MonthlyPayment {
     private $conn;
-    private $table = "monthlyBillings";
+    private $table = "monthlyPayment";
 
     public $idMonthlyPayment;
     public $idPartner;
     public $statusMonthlyPayment;
-    public $monthMonthlyPayment;
     public $urlMonthlyPayment;
     public $invoiceAmount;
+    public $invoiceLines;
     public $dateMonthlyPayment;
  
     public function __construct($db) {
@@ -31,9 +31,10 @@ class MonthlyBilling {
         $params = [
             "idPartner" => htmlspecialchars(strip_tags($this->idPartner)),
             "statusMonthlyPayment" => htmlspecialchars(strip_tags($this->statusMonthlyPayment)),
-            "monthMonthlyPayment" => htmlspecialchars(strip_tags($this->monthMonthlyPayment)),
             "urlMonthlyPayment" => htmlspecialchars(strip_tags($this->urlMonthlyPayment)),
-            "invoiceAmount" => htmlspecialchars(strip_tags($this->invoiceAmount))
+            "invoiceAmount" => htmlspecialchars(strip_tags($this->invoiceAmount)),
+            "invoiceLines" => htmlspecialchars(strip_tags($this->invoiceLines)),
+            "dateMonthlyPayment" => htmlspecialchars(strip_tags($this->dateMonthlyPayment))
         ];
 
         if($stmt->execute($params)) {
@@ -42,7 +43,7 @@ class MonthlyBilling {
         return false;
     }
 
-    public function listMonthlyBills() {
+    public function listMonthlyPayments() {
         $query = "
             SELECT *
             FROM "
@@ -56,7 +57,7 @@ class MonthlyBilling {
         return $stmt;
     }
 
-    public function listMonthlyBillsByPartner() {
+    public function listMonthlyPaymentsByPartner() {
         $query = "
             SELECT *
             FROM "
@@ -73,23 +74,23 @@ class MonthlyBilling {
         return $stmt;
     }
 
-    public function listMonthlyBillsByMonth() {
+    public function listMonthlyPaymentsByDate() {
         $query = "
             SELECT *
             FROM "
             . $this->table . " 
-            WHERE monthMonthlyPayment = :monthMonthlyPayment
+            WHERE dateMonthlyPayment = :dateMonthlyPayment
             ORDER BY
             idPartner ASC";
 
         $stmt = $this->conn->prepare($query);
 
-        $params = ["monthMonthlyPayment" => htmlspecialchars(strip_tags($this->monthMonthlyPayment))];
+        $params = ["dateMonthlyPayment" => htmlspecialchars(strip_tags($this->dateMonthlyPayment))];
 
         $stmt->execute();
         return $stmt;
     }
-    public function searchMonthlyBill() {
+    public function searchMonthlyPayment() {
         $query = "
             SELECT *
             FROM "
@@ -106,7 +107,7 @@ class MonthlyBilling {
         return false;
     }
 
-    public function updateBillStatus() {
+    public function updatePaymentStatus() {
         $query = "
             UPDATE "
             . $this->table .

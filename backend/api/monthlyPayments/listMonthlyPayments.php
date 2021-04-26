@@ -3,28 +3,28 @@ header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 header("Access-Control-Allow-Methods: GET");
 include_once "../../config/Database.php";
-include_once "../../models/MonthlyBillings.php";
+include_once "../../models/MonthlyPayment.php";
 
 $db = new Database();
 $conn = $db->connect();
-$monthlyBilling = new MonthlyBilling($conn);
+$monthlyPayment = new MonthlyPayment($conn);
 
 if (isset($_GET['idMonthlyPayment'])) {
-    $monthlyBilling->idMonthlyPayment = $_GET['idMonthlyPayment'];
-    $result = $monthlyBilling->searchMonthlyBill($monthlyBilling);
+    $monthlyPayment->idMonthlyPayment = $_GET['idMonthlyPayment'];
+    $result = $monthlyPayment->searchMonthlyPayments($monthlyPayment);
 } else {
     if (isset($_GET['idPartner'])) {
-        $monthlyBilling->idPartner = $_GET['idPartner'];
-        $bills = $monthlyBilling->listMonthlyBillsByPartner($monthlyBilling);
+        $monthlyPayment->idPartner = $_GET['idPartner'];
+        $payments = $monthlyPayment->listMonthlyPaymentsByPartner($monthlyPayment);
     } else {
-        $bills = $monthlyBilling->listMonthlyBills();
+        $payments = $monthlyPayment->listMonthlyPayments();
     }
-    $counter = $billings->rowCount();
+    $counter = $payments->rowCount();
     if ($counter > 0) {
-        $bills_array = array();
-        while ($row = $bills->fetch()) {
+        $payments_array = array();
+        while ($row = $payments_array->fetch()) {
             extract($row);
-            $bill_item = [
+            $payment_item = [
                  "idMonthlyPayment" => $idMonthlyPayment,
                  "idPartner" => $idPartner,
                  "statusMonthlyPayment" => $statusMonthlyPayment,
@@ -33,9 +33,9 @@ if (isset($_GET['idMonthlyPayment'])) {
                  "invoiceAmount" => $invoiceAmount,
                  "dateMonthlyPayment" => $dateMonthlyPayment
             ];
-            array_push($bills_array, $bill_item);
+            array_push($payments_array, $payment_item);
         }
-        $result = $bills_array;
+        $result = $payments_array;
     }
 }
 
