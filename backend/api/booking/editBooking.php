@@ -27,7 +27,7 @@ $booking->distanceForth = $decodedData->distanceForth;
 $booking->durationForth = $decodedData->durationForth;
 $booking->distanceBack = $decodedData->distanceBack;
 $booking->durationBack = $decodedData->durationBack;
-$booking->bookingOrigin = $decodedData->bookingOrigin;
+$booking->originBooking = $decodedData->originBooking;
 
 
 if (!empty($decodedData->idBooking)) {

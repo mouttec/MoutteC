@@ -17,7 +17,7 @@ class Booking {
     public $idForthAddress;
     public $idBackAddress;
     public $idAgency;
-    public $bookingOrigin;
+    public $originBooking;
 
     public function __construct($db) 
     {
@@ -46,7 +46,7 @@ class Booking {
             durationForth = :durationForth,
             distanceBack = :distanceBack,
             durationBack = :durationBack,
-            bookingOrigin = :bookingOrigin
+            originBooking = :originBooking
             ";
         $stmt = $this->conn->prepare($query);
 
@@ -68,7 +68,7 @@ class Booking {
             "durationForth" => htmlspecialchars(strip_tags($this->durationForth)),
             "distanceBack" => htmlspecialchars(strip_tags($this->distanceBack)),
             "durationBack" => htmlspecialchars(strip_tags($this->durationBack)),
-            "bookingOrigin" => htmlspecialchars(strip_tags($this->bookingOrigin))
+            "originBooking" => htmlspecialchars(strip_tags($this->originBooking))
         ];
 
         if($stmt->execute($params)) {
@@ -211,7 +211,7 @@ class Booking {
             idForthAddress = :idForthAddress,
             idBackAddress = :idBackAddress,
             idAgency = :idAgency,
-            bookingOrigin = :bookingOrigin
+            originBooking = :originBooking
             WHERE
             idBooking = :idBooking       
         ";
@@ -229,7 +229,7 @@ class Booking {
             "idBackAddress" => htmlspecialchars(strip_tags($this->idBackAddress)),
             "idAgency" => htmlspecialchars(strip_tags($this->idAgency)),
             "idBooking" => htmlspecialchars(strip_tags($this->idBooking)),
-            "bookingOrigin" => htmlspecialchars(strip_tags($this->bookingOrigin))
+            "originBooking" => htmlspecialchars(strip_tags($this->originBooking))
         ];
 
         if($stmt->execute($params)) {
