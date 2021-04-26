@@ -50,11 +50,9 @@ if (isset($decodedData->idCustomer)) {
  		}
  		$customer->mixedPassword = $randomStr;
 	}
-    $response = $customer->createCustomer($customer);	
-    // extract($response);
-
-    //$customer->idCustomer = $customer->createCustomer($customer);
-    echo json_encode($response["max(idCustomer)"]);
+    $response = $customer->createCustomer($customer);
+    $customer->idCustomer = $response["max(idCustomer)"];
+    echo json_encode($customer);
     if (isset($randomStr)) {
     	$customer->sendNewPasswordEmail($customer);
     }
