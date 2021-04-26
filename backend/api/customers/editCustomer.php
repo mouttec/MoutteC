@@ -56,7 +56,6 @@ if (isset($decodedData->idCustomer)) {
     	$customer->sendNewPasswordEmail($customer);
     }
     if (isset($decodedData->idPartner)) {
-    	$customer->idCustomer = $idCustomer;
     	$customer->idPartner = $decodedData->idPartner;
     	$customer->bindPartnerToCustomer($customer);
     }
