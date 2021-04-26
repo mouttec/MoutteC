@@ -50,9 +50,8 @@ class Customer {
             $query = "SELECT max(idCustomer) FROM ". $this->table;
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
-            // $row = $stmt->fetch();
-            // return $row;
-            return $stmt;
+            $row = $stmt->fetch();
+            return $row;
         }
         return false;
     }
