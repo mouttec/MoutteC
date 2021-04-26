@@ -64,6 +64,7 @@ if (isset($decodedData->idCustomer)) {
     echo json_encode($addressResponse["max(idAddress)"]);
     $customer->idBillingAddress = $addressResponse["max(idAddress)"];
     $customer->bindBillingAddress($customer);
+    $result = true;
 }
 
 if ($result) {
