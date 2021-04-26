@@ -49,9 +49,12 @@ if (isset($decodedData->idCustomer)) {
 			$randomStr .= $chars[rand(0, $maxLength - 1)];
  		}
  		$customer->mixedPassword = $randomStr;
- 		$customer->sendNewPasswordEmail($customer);
+ 		// $customer->sendNewPasswordEmail($customer);
 	}
     $customer->idCustomer = $customer->createCustomer($customer);
+    if (isset($randomStr)) {
+    	$customer->sendNewPasswordEmail($customer);
+    }
     //extract($row);
     // $customer->idCustomer = $row->idCustomer;
     echo json_encode($customer);

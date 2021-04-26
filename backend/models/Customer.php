@@ -50,7 +50,7 @@ class Customer {
             $query = "SELECT max(idCustomer) FROM ". $this->table;
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
-            //$row = $stmt->fetch();
+            // $row = $stmt->fetch();
             // return $row;
             return $stmt;
         }
@@ -115,8 +115,7 @@ class Customer {
             SELECT *
             FROM "
             . $this->table . " 
-            WHERE idCustomer = :idCustomer
-            LIMIT 0,1";
+            WHERE idCustomer = :idCustomer";
         $stmt = $this->conn->prepare($query);
 
         $params = ["idCustomer" => htmlspecialchars(strip_tags($this->idCustomer))];
@@ -316,13 +315,14 @@ class Customer {
     public function sendNewPasswordEmail() {
         $messageContent = [
                 'name'              => htmlspecialchars(strip_tags($this->lastNameCustomer)).' '.htmlspecialchars(strip_tags($this->firstNameCustomer)),
-                'mailCustomer'       => htmlspecialchars(strip_tags($this->mailCustomer)),
-                'confirmationCode'  => $this->mixedPassword
+                'mailCustomer'      => htmlspecialchars(strip_tags($this->mailCustomer)),
+                'confirmationCode'  => $this->mixedPassword,
+                'id'                => $this->idCustomer
                     ];
         $mailContent = '<p>Bonjour '. $messageContent->name .' !<br />Nous vous invitons à confirmer votre compte client chez MoutteC en créant votre mot de passe en cliquant sur 
                         <a href="https://mouttec.com/confirmAccount?key='.$messageContent->confirmationCode.'">ce lien</a>"<br /><br />
                         En cas de problème, copiez et collez ce lien dans votre navigateur préféré : <br />
-                        https://mouttec.com/confirmAccount?key='.$messageContent->confirmationCode.'<br /><br />
+                        https://mouttec.com/confirmAccount?id='.$messageContent->id.'+key='.$messageContent->confirmationCode.'<br /><br />
                         Toute l\'équipe de <a href="https://mouttec.com">MoutteC</a> vous remercie de votre confiance !<br />';
         $customerHeaders =  'Reply-To: contact@mouttec.com' . "\r\n" .
                             'X-Mailer: PHP/' . phpversion() . "\r\n" .
