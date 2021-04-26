@@ -61,7 +61,7 @@ if (isset($decodedData->idCustomer)) {
     }
     $address->idCustomer = $customer->idCustomer;
     $addressResponse = $address->createAddress($address);
-    $customer->idAddressBilling = $addresssResponse["max(idAddress)"];
+    $customer->idAddressBilling = $addressResponse["max(idAddress)"];
     $customer->bindBillingAddress($customer);
 }
 
