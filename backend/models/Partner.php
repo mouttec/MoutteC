@@ -28,6 +28,7 @@ class Partner
     public $cityAddressBilling;
     public $datePartner;
     public $idAgency;
+    public $partnerKey
 
     public function __construct($db) 
     {
@@ -61,7 +62,8 @@ class Partner
             complementAddressBilling = :complementAddressBilling,
             zipAddressBilling = :zipAddressBilling,
             cityAddressBilling = :cityAddressBilling,
-            idAgency = :idAgency
+            idAgency = :idAgency,
+            partnerKey = :partnerKey
         ";
         $stmt = $this->conn->prepare($query);
 
@@ -87,7 +89,8 @@ class Partner
             "complementAddressBilling" => htmlspecialchars(strip_tags($this->complementAddressBilling)),
             "zipAddressBilling" => htmlspecialchars(strip_tags($this->zipAddressBilling)),
             "cityAddressBilling" => htmlspecialchars(strip_tags($this->cityAddressBilling)),
-            "idAgency" => htmlspecialchars(strip_tags($this->idAgency))
+            "idAgency" => htmlspecialchars(strip_tags($this->idAgency)),
+            "partnerKey" => htmlspecialchars(strip_tags($this->partnerKey))
         ];
 
         if ($stmt->execute($params)) {
@@ -140,6 +143,23 @@ class Partner
         $stmt = $this->conn->prepare($query);
 
         $params = ["idPartner" => htmlspecialchars(strip_tags($this->idPartner))];
+        
+        if ($stmt->execute($params)) {
+            $row = $stmt->fetch();    
+            return $row;
+        }
+        return false;
+    }
+
+    public function searchPartnerByKey() {
+        $query = "
+        SELECT *
+        FROM "
+        . $this->table . " 
+        WHERE partnerKey = :partnerKey";
+        $stmt = $this->conn->prepare($query);
+
+        $params = ["partnerKey" => htmlspecialchars(strip_tags($this->partnerKey))];
         
         if ($stmt->execute($params)) {
             $row = $stmt->fetch();    

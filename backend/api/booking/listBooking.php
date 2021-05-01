@@ -89,7 +89,6 @@ if (isset($_GET['idBooking'])) {
                  "addressBackDetails" => $thisAddressBack,
                  "carDetails" => $thisCar
             ];
-            // Ajouter nom/prénom/téléphone client + nom/adresse partner + infos voiture + addresses completes
             array_push($bookings_array, $booking_item);
         }
         $result = $bookings_array;

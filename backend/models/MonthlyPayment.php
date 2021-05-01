@@ -6,10 +6,11 @@ class MonthlyPayment {
     public $idMonthlyPayment;
     public $idPartner;
     public $statusMonthlyPayment;
-    public $urlMonthlyPayment;
+    public $invoiceNumber;
     public $invoiceAmount;
     public $invoiceLines;
     public $dateMonthlyPayment;
+    public $partnerKey;
  
     public function __construct($db) {
         $this->conn = $db;
@@ -22,19 +23,22 @@ class MonthlyPayment {
             " SET
             idPartner = :idPartner,
             statusMonthlyPayment = :statusMonthlyPayment,
-            monthMonthlyPayment = :monthMonthlyPayment,
-            urlMonthlyPayment = :urlMonthlyPayment,
-            invoiceAmount = :invoiceAmount
+            invoiceNumber = :invoiceNumber,
+            invoiceAmount = :invoiceAmount,
+            invoiceLines = :invoiceLines,
+            dateMonthlyPayment = :dateMonthlyPayment,
+            partnerKey = :partnerKey
         ";
         $stmt = $this->conn->prepare($query);
 
         $params = [
             "idPartner" => htmlspecialchars(strip_tags($this->idPartner)),
             "statusMonthlyPayment" => htmlspecialchars(strip_tags($this->statusMonthlyPayment)),
-            "urlMonthlyPayment" => htmlspecialchars(strip_tags($this->urlMonthlyPayment)),
+            "invoiceNumber" => htmlspecialchars(strip_tags($this->invoiceNumber)),
             "invoiceAmount" => htmlspecialchars(strip_tags($this->invoiceAmount)),
             "invoiceLines" => htmlspecialchars(strip_tags($this->invoiceLines)),
-            "dateMonthlyPayment" => htmlspecialchars(strip_tags($this->dateMonthlyPayment))
+            "dateMonthlyPayment" => htmlspecialchars(strip_tags($this->dateMonthlyPayment)),
+            "partnerKey" => htmlspecialchars(strip_tags($this->partnerKey))
         ];
 
         if($stmt->execute($params)) {
@@ -88,9 +92,11 @@ class MonthlyPayment {
         $params = ["dateMonthlyPayment" => htmlspecialchars(strip_tags($this->dateMonthlyPayment))];
 
         $stmt->execute();
-        return $stmt;
+        re
+        turn $stmt;
     }
-    public function searchMonthlyPayment() {
+
+    public function searchMonthlyPaymentById() {
         $query = "
             SELECT *
             FROM "
@@ -99,6 +105,23 @@ class MonthlyPayment {
         $stmt = $this->conn->prepare($query);
 
         $params = ["idMonthlyPayment" => htmlspecialchars(strip_tags($this->idMonthlyPayment))];
+
+        if($stmt->execute($params)) {
+            $row = $stmt->fetch();
+            return $row;
+        }
+        return false;
+    }
+
+    public function searchMonthlyPaymentByInvoiceNumber() {
+        $query = "
+            SELECT *
+            FROM "
+            . $this->table . " 
+            WHERE invoiceNumber = :invoiceNumber";
+        $stmt = $this->conn->prepare($query);
+
+        $params = ["invoiceNumber" => htmlspecialchars(strip_tags($this->invoiceNumber))];
 
         if($stmt->execute($params)) {
             $row = $stmt->fetch();

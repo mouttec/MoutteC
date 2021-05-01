@@ -11,7 +11,7 @@ $monthlyPayment = new MonthlyPayment($conn);
 
 if (isset($_GET['idMonthlyPayment'])) {
     $monthlyPayment->idMonthlyPayment = $_GET['idMonthlyPayment'];
-    $result = $monthlyPayment->searchMonthlyPayments($monthlyPayment);
+    $result = $monthlyPayment->searchMonthlyPaymentById($monthlyPayment);
 } else {
     if (isset($_GET['idPartner'])) {
         $monthlyPayment->idPartner = $_GET['idPartner'];
