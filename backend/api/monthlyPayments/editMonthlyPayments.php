@@ -14,7 +14,7 @@ include_once "../../models/Partner"
 $db = new Database();
 $conn = $db->connect();
 $monthlyPayments = new MonthlyPayment($conn);
-$dailyPayment = new DailyPayments($conn);
+$dailyPayment = new DailyPayment($conn);
 $customer = new Customer($conn);
 $booking = new Booking($conn);
 $partner = new Partner($conn);
@@ -147,7 +147,6 @@ for ($p = 0; $p < count($payments_array); $p++) {
 		$monthlyPayment->statusMonthlyPayment = 'En attente';
 		$monthlyPayment->dateMonthlyPayment = $monthConcerned.$yearConcerned;
 		$monthlyPayment->invoiceNumber = $monthConcerned.$yearConcerned.$actualPartnerId.'-'.$i;
-		//$monthlyPayment->urlMonthlyPayment = "serverPath/".$yearConcerned."/".$monthConcerned."/".$monthlyPayment->idPartner.'/'.$pdfFileName;
 		$monthlyPayment->invoiceLines = $invoiceLines;
 		$monthlyPayment->invoiceAmount = $invoiceAmount;
 		$monthlyPayment->createMonthlyPayment($monthlyPayment);
