@@ -1,0 +1,667 @@
+<div class="mt-5 mb-5 pt">
+  <div class="row">
+    <div class="text-center col-12">
+      <h2>Planning</h2>
+    </div>
+
+    <!-- <div class="container">
+      <table class="d-flex flex-column">
+        <tr class="row d-flex flex-row">
+          <th class="col-2" *ngFor="let calendar of calendars">{{ calendar.day }}</th>
+        </tr>
+        <tr class="col-2" *ngFor="let hour of hours">
+          <td class="text-center d-block">{{hour}}</td>
+        </tr>
+      </table>
+    </div> -->
+
+    <div class="container">
+      <div class="row">
+        <div class="col-2 mt-3 mb-2"></div>
+        <div class="col-2 mt-3 mb-2" *ngFor="let calendar of calendars">
+          <h3 class="text-center">{{ calendar.day }}</h3>
+        </div>
+      </div>
+      <div class="containerFixe">
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fifteen">07:30</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center orange">{{ calendar.hours.h7q2.firstNameCustomer }} {{ calendar.hours.h7q2.lastNameCustomer }}<br>{{ calendar.hours.h7q2.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fifteen">07:45</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h7q3.firstNameCustomer }} {{ calendar.hours.h7q3.lastNameCustomer }}<br>{{ calendar.hours.h7q3.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fullHour">08:00</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h8.firstNameCustomer }} {{ calendar.hours.h8.lastNameCustomer }}<br>{{ calendar.hours.h8.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fifteen">08:15</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h8q1.firstNameCustomer }} {{ calendar.hours.h8q1.lastNameCustomer }}<br>{{ calendar.hours.h8q1.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fifteen">08:30</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h8q2.firstNameCustomer }} {{ calendar.hours.h8q2.lastNameCustomer }}<br>{{ calendar.hours.h8q2.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fifteen">08:45</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h8q3.firstNameCustomer }} {{ calendar.hours.h8q3.lastNameCustomer }}<br>{{ calendar.hours.h8q3.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fullHour">09:00</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h9.firstNameCustomer }} {{ calendar.hours.h9.lastNameCustomer }}<br>{{ calendar.hours.h9.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fifteen">09:15</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h9q1.firstNameCustomer }} {{ calendar.hours.h9q1.lastNameCustomer }}<br>{{ calendar.hours.h9q1.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fifteen">09:30</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h9q2.firstNameCustomer }} {{ calendar.hours.h9q2.lastNameCustomer }}<br>{{ calendar.hours.h9q2.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fifteen">09:45</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h9q3.firstNameCustomer }} {{ calendar.hours.h9q3.lastNameCustomer }}<br>{{ calendar.hours.h9q3.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fullHour">10:00</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h10.firstNameCustomer }} {{ calendar.hours.h10.lastNameCustomer }}<br>{{ calendar.hours.h10.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fifteen">10:15</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h10q1.firstNameCustomer }} {{ calendar.hours.h10q1.lastNameCustomer }}<br>{{ calendar.hours.h10q1.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fifteen">10:30</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h10q2.firstNameCustomer }} {{ calendar.hours.h10q2.lastNameCustomer }}<br>{{ calendar.hours.h10q2.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fifteen">10:45</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h10q3.firstNameCustomer }} {{ calendar.hours.h10q3.lastNameCustomer }}<br>{{ calendar.hours.h10q3.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fullHour">11:00</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h11.firstNameCustomer }} {{ calendar.hours.h11.lastNameCustomer }}<br>{{ calendar.hours.h11.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fifteen">11:15</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h11q1.firstNameCustomer }} {{ calendar.hours.h11q1.lastNameCustomer }}<br>{{ calendar.hours.h11q1.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fifteen">11:30</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h11q2.firstNameCustomer }} {{ calendar.hours.h11q2.lastNameCustomer }}<br>{{ calendar.hours.h11q2.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fifteen">11:45</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h11q3.firstNameCustomer }} {{ calendar.hours.h11q3.lastNameCustomer }}<br>{{ calendar.hours.h11q3.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fullHour">12:00</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h12.firstNameCustomer }} {{ calendar.hours.h12.lastNameCustomer }}<br>{{ calendar.hours.h12.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fifteen">12:15</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h12q1.firstNameCustomer }} {{ calendar.hours.h12q1.lastNameCustomer }}<br>{{ calendar.hours.h12q1.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fifteen">12:30</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h12q2.firstNameCustomer }} {{ calendar.hours.h12q2.lastNameCustomer }}<br>{{ calendar.hours.h12q2.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height bgBlock">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fifteen">12:45</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h12q3.firstNameCustomer }} {{ calendar.hours.h12q3.lastNameCustomer }}<br>{{ calendar.hours.h12q3.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height bgBlock">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fullHour">13:00</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h13.firstNameCustomer }} {{ calendar.hours.h13.lastNameCustomer }}<br>{{ calendar.hours.h13.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height bgBlock">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fifteen">13:15</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h13q1.firstNameCustomer }} {{ calendar.hours.h13q1.lastNameCustomer }}<br>{{ calendar.hours.h13q1.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height bgBlock">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fifteen">13:30</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h13q2.firstNameCustomer }} {{ calendar.hours.h13q2.lastNameCustomer }}<br>{{ calendar.hours.h13q2.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fifteen">13:45</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h13q3.firstNameCustomer }} {{ calendar.hours.h13q3.lastNameCustomer }}<br>{{ calendar.hours.h13q3.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fullHour">14:00</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h14.firstNameCustomer }} {{ calendar.hours.h14.lastNameCustomer }}<br>{{ calendar.hours.h14.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fifteen">14:15</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h14q1.firstNameCustomer }} {{ calendar.hours.h14q1.lastNameCustomer }}<br>{{ calendar.hours.h14q1.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fifteen">14:30</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h14q2.firstNameCustomer }} {{ calendar.hours.h14q2.lastNameCustomer }}<br>{{ calendar.hours.h14q2.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fifteen">14:45</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h14q3.firstNameCustomer }} {{ calendar.hours.h14q3.lastNameCustomer }}<br>{{ calendar.hours.h14q3.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fullHour">15:00</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h15.firstNameCustomer }} {{ calendar.hours.h15.lastNameCustomer }}<br>{{ calendar.hours.h15.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fifteen">15:15</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h15q1.firstNameCustomer }} {{ calendar.hours.h15q1.lastNameCustomer }}<br>{{ calendar.hours.h15q1.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fifteen">15:30</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h15q2.firstNameCustomer }} {{ calendar.hours.h15q2.lastNameCustomer }}<br>{{ calendar.hours.h15q2.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fifteen">15:45</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h15q3.firstNameCustomer }} {{ calendar.hours.h15q3.lastNameCustomer }}<br>{{ calendar.hours.h15q3.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fullHour">16:00</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h16.firstNameCustomer }} {{ calendar.hours.h16.lastNameCustomer }}<br>{{ calendar.hours.h16.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fifteen">16:15</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h16q1.firstNameCustomer }} {{ calendar.hours.h16q1.lastNameCustomer }}<br>{{ calendar.hours.h16q1.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fifteen">16:30</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h16q2.firstNameCustomer }} {{ calendar.hours.h16q2.lastNameCustomer }}<br>{{ calendar.hours.h16q2.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fifteen">16:45</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h16q3.firstNameCustomer }} {{ calendar.hours.h16q3.lastNameCustomer }}<br>{{ calendar.hours.h16q3.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fullHour">17:00</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h17.firstNameCustomer }} {{ calendar.hours.h17.lastNameCustomer }}<br>{{ calendar.hours.h17.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fifteen">17:15</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h17q1.firstNameCustomer }} {{ calendar.hours.h17q1.lastNameCustomer }}<br>{{ calendar.hours.h17q1.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fifteen">17:30</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h17q2.firstNameCustomer }} {{ calendar.hours.h17q2.lastNameCustomer }}<br>{{ calendar.hours.h17q2.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fifteen">17:45</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h17q3.firstNameCustomer }} {{ calendar.hours.h17q3.lastNameCustomer }}<br>{{ calendar.hours.h17q3.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fullHour">18:00</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h18.firstNameCustomer }} {{ calendar.hours.h18.lastNameCustomer }}<br>{{ calendar.hours.h18.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fifteen">18:15</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h18q1.firstNameCustomer }} {{ calendar.hours.h18q1.lastNameCustomer }}<br>{{ calendar.hours.h18q1.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fifteen">18:30</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h18q2.firstNameCustomer }} {{ calendar.hours.h18q2.lastNameCustomer }}<br>{{ calendar.hours.h18q2.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fifteen">18:45</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h18q3.firstNameCustomer }} {{ calendar.hours.h18q3.lastNameCustomer }}<br>{{ calendar.hours.h18q3.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fullHour">19:00</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h19.firstNameCustomer }} {{ calendar.hours.h19.lastNameCustomer }}<br>{{ calendar.hours.h19.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fifteen">19:15</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h19q1.firstNameCustomer }} {{ calendar.hours.h19q1.lastNameCustomer }}<br>{{ calendar.hours.h19q1.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fifteen">19:30</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h19q2.firstNameCustomer }} {{ calendar.hours.h19q2.lastNameCustomer }}<br>{{ calendar.hours.h19q2.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fifteen">19:45</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h19q3.firstNameCustomer }} {{ calendar.hours.h19q3.lastNameCustomer }}<br>{{ calendar.hours.h19q3.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fullHour">20:00</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h20.firstNameCustomer }} {{ calendar.hours.h20.lastNameCustomer }}<br>{{ calendar.hours.h20.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fifteen">20:15</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h20q1.firstNameCustomer }} {{ calendar.hours.h20q1.lastNameCustomer }}<br>{{ calendar.hours.h20q1.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row height">
+          <div class="col-2 d-flex flex-column br">
+            <div class="hour text-center m-auto">
+              <p class="fifteen">20:30</p>
+            </div>
+          </div>
+          <div class="col-2 d-flex flex-column bg br" *ngFor="let calendar of calendars">
+            <div>
+              <p class="text-center">{{ calendar.hours.h20q2.firstNameCustomer }} {{ calendar.hours.h20q2.lastNameCustomer }}<br>{{ calendar.hours.h20q2.phoneCustomer }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+

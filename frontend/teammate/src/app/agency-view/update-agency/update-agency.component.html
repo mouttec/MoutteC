@@ -1,0 +1,109 @@
+<div class="row mt-5 mb-5">
+  <div class="col-12 text-center">
+      <h2>Modification de l'agence {{ nameAgency }}</h2>
+  </div>
+</div>
+
+<div class="row">
+  <form class="col-8 offset-2">
+      <div class="row d-flex flex-column">
+          <div class="input-field d-flex flex-row mb">
+              <div class="input-field col-6">
+                <label for="nameAgency">Nom de l'agence</label>
+                <input placeholder="{{nameAgency}}" type="text" class="validate" id="nameAgency" formControlName="nameAgency">
+                <!-- <div class="messageError">
+                    <sup>*</sup>Champ obligatoire
+                </div> -->
+              </div>
+              <div class="input-field col-6">
+                <label for="numberAddressAgency">Numéro</label>
+                <input [(ngModel)]="numberAddressAgency" type="text">
+                <!-- <div class="messageError">
+                    <sup>*</sup>Champ obligatoire
+                </div> -->
+              </div>
+          </div>
+
+          <div class="input-field d-flex flex-row mb">
+              <div class="input-field col-6">
+                <label for="typeAddressAgency">Type de voie</label>
+                <input required type="text" class="validate" id="typeAddressAgency" formControlName="typeAddressAgency">
+                <!-- <div class="messageError">
+                  <sup>*</sup>Champ obligatoire
+                </div> -->
+              </div>
+              <div class="input-field col-6">
+                <label for="nameAddressAgency">Nom de la voie</label>
+                <input required type="text" class="validate" id="nameAddressAgency" formControlName="nameAddressAgency">
+                <!-- <div class="messageError">
+                    <sup>*</sup>Champ obligatoire
+                </div> -->
+              </div>
+          </div>
+
+          <div class="input-field d-flex flex-row mb">
+              <div class="input-field col-6">
+                <label for="complementAddressAgency">Complement d'adresse</label>
+                <input type="text" class="validate" id="complementAddressAgency" formControlName="complementAddressAgency">
+                <!-- <div class="messageError">
+                    <sup>*</sup>Champ obligatoire
+                </div> -->
+              </div>
+              <div class="input-field col-6">
+                <label for="zipAddressAgency">Code Postale</label>
+                <input required type="text" class="validate" id="zipAddressAgency" formControlName="zipAddressAgency">
+                <!-- <div class="messageError">
+                    <sup>*</sup>Champ obligatoire
+                </div> -->
+              </div>
+          </div>
+
+          <div class="input-field d-flex flex-row mb">
+            <div class="input-field col-6">
+              <label for="cityAddressAgency">Ville</label>
+                <input required type="text" class="validate" id="cityAddressAgency" formControlName="cityAddressAgency">
+              <!-- <div class="messageError">
+                  <sup>*</sup>Champ obligatoire
+              </div> -->
+            </div>
+            <div class="input-field col-6">
+              <label for="phoneAgency">Téléphone</label>
+                <input required type="text" class="validate" id="phoneAgency" formControlName="phoneAgency">
+              <!-- <div class="messageError">
+                  <sup>*</sup>Champ obligatoire
+              </div> -->
+            </div>
+        </div>
+
+        <div class="input-field d-flex flex-row mb">
+          <div class="input-field col-6">
+            <label for="mailAgency">E-Mail</label>
+              <input required type="text" class="validate" id="mailAgency" formControlName="mailAgency">
+            <!-- <div class="messageError">
+                <sup>*</sup>Champ obligatoire
+            </div> -->
+          </div>
+          <div class="input-field col-6">
+            <label for="statusAgency">Statut de l'agence</label>
+            <div class="d-flex mt-radio">
+              <p>
+                <input required name="statusAgency" type="radio" value="Ouvert" class="validate" id="statusAgency" formControlName="statusAgency">
+                <label for="statusAgency">Ouvert</label>
+              </p>
+              <p>
+                <input required name="statusAgency" type="radio" value="Fermer" class="validate" id="statusAgency" formControlName="statusAgency">
+                <label for="statusAgency">Fermer</label>
+              </p>
+            </div>
+            <!-- <div class="messageError">
+                <sup>*</sup>Champ obligatoire
+            </div> -->
+          </div>
+      </div>
+
+        <div class="mt-5 mb-5 text-center">
+          <button class="m-auto" id="btn" type="submit" [disabled]="agencyForm.invalid">Valider la modification</button>
+        </div>
+      </div>
+  </form>
+</div>

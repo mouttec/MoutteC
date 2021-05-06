@@ -1,0 +1,12 @@
+<div [ngStyle]="{background: getColorCalendar(), opacity: getOpacityCalendar() }" class="row">
+  <div *ngIf="idBooking > 318" class="col-12 br d-flex" style="height: 80px;">
+    <h3 *ngIf="idBooking > 320 && idBooking < 326" class="m-auto bb">{{ day }}</h3>
+    <h4 *ngIf="day == ''" class="m-auto">{{ hours }}</h4>
+
+    <a [routerLink]="[idBooking]" class="mr-3 plus" *ngIf="statusCalendar === 'Réserver'">
+      <p class="text-center">{{ firstNameCustomer }}</p>
+      <p class="text-center">{{ lastNameCustomer }}</p>
+      <p class="text-center"> {{ phoneCustomer }}</p>
+    </a>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<div class="row list-group list-group-flush d-flex flex-row" [ngClass]="{'list-group-item': true, 'success': statusAgency === 'Activer', 'failure': statusAgency === 'Désactiver'}" [ngStyle]="{ opacity: getOpacityAgency() }">
+  <div class="col-1 m-auto">
+      <img src="../../../assets/images/garage.png">
+  </div>
+  <div class="col-7 d-flex flex-row">
+      <div class="m-auto">
+          <p class="m-auto p-2 info" [ngStyle]="{ color: getColorAgency() }"><span>Nom de l'agence : </span><br>{{ nameAgency }}</p>
+      </div>
+      <div class="m-auto">
+          <p class="m-auto p-2 info" [ngStyle]="{ color: getColorAgency() }"><span>Lieu : </span><br>{{ addressAgency }}</p>
+      </div>
+      <div class="m-auto">
+          <p class="m-auto p-2 info" [ngStyle]="{ color: getColorAgency() }"><span>Téléphone : </span><br>{{ phoneAgency }}</p>
+      </div>
+  </div>
+  <div class="col-4 d-flex flex-row">
+      <div class="m-auto">
+          <a [routerLink]="[idAgency]" class="mr-3 plus" *ngIf="statusAgency === 'Ouvert'">Détails</a>
+      </div>
+      <div class="m-auto">
+          <button style="font-size: 12px;" (click)="onSwitchAgency()" *ngIf="statusAgency === 'Fermer'">Ouvert</button>
+      </div>
+      <div class="m-auto">
+          <button style="font-size: 12px; background-color: #b1b1b1; border: #b1b1b1;" (click)="onSwitchNoAgency()" *ngIf="statusAgency === 'Ouvert'">Fermer</button>
+      </div>
+      <!-- <div class="m-auto">
+          <button style="font-size: 12px;" (click)="onDeleteTeammate(idTeammate)">Supprimer</button>
+      </div> -->
+  </div>
+</div>

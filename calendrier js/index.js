@@ -1,0 +1,1 @@
+const calendar = document.querySelector("#app-calendar");

@@ -1,0 +1,60 @@
+
+<div class="row mt-5 mb-5">
+  <div class="col-12 text-center">
+      <h2>Modification du client {{ firstNameCustomer }} {{lastNameCustomer}}</h2>
+  </div>
+</div>
+
+<div class="row">
+  <form class="col-8 offset-2">
+      <div class="row d-flex flex-column">
+          <div class="input-field d-flex flex-row mb">
+              <div class="input-field col-6">
+                <label for="firstNameCustomer">Nom</label>
+                <input required type="text" class="validate" id="firstNameCustomer" formControlName="firstNameCustomer">
+                <!-- <div class="messageError">
+                    <sup>*</sup>Champ obligatoire
+                </div> -->
+              </div>
+              <div class="input-field col-6">
+                <label for="lastNameCustomer">Prénom</label>
+                <input required type="text" class="validate" id="lastNameCustomer" formControlName="lastNameCustomer">
+                <!-- <div class="messageError">
+                    <sup>*</sup>Champ obligatoire
+                </div> -->
+              </div>
+          </div>
+
+          <div class="input-field d-flex flex-row mb">
+              <div class="input-field col-6">
+                <label for="dateOfBirthdayCustomer">Date de naissance</label>
+                <input required type="text" class="validate" id="dateOfBirthdayCustomer" formControlName="dateOfBirthdayCustomer">
+                <!-- <div class="messageError">
+                  <sup>*</sup>Champ obligatoire
+                </div> -->
+              </div>
+              <div class="input-field col-6">
+                <label for="phoneCustomer">Téléphone</label>
+                <input required type="text" class="validate" id="phoneCustomer" formControlName="phoneCustomer">
+                <!-- <div class="messageError">
+                    <sup>*</sup>Champ obligatoire
+                </div> -->
+              </div>
+          </div>
+
+          <div class="input-field d-flex flex-row mb">
+              <div class="input-field col-6">
+                <label for="mailCustomer">E-Mail</label>
+                <input type="text" class="validate" id="mailCustomer" formControlName="mailCustomer">
+                <!-- <div class="messageError">
+                    <sup>*</sup>Champ obligatoire
+                </div> -->
+              </div>
+          </div>
+
+        <div class="mt-5 mb-5 text-center">
+          <button class="m-auto" id="btn" type="submit" [disabled]="customerForm.invalid">Validation de la modification</button>
+        </div>
+      </div>
+  </form>
+</div>

@@ -1,0 +1,14 @@
+<div class="row mt-5 mb-5 pt">
+  <div class="text-center col-9">
+      <h2>Liste des partneaires</h2>
+  </div>
+  <div class="text-right col-3">
+      <button style="font-size: 15px;" routerLink="/addTeammate">Ajouter un salarié</button>
+  </div>
+</div>
+
+<div class="container">
+  <ul class="list-group">
+    <app-partner *ngFor="let partner of partners" [usernamePartner]="partner.usernamePartner" [namePartner]="partner.namePartner"></app-partner>
+  </ul>
+</div>

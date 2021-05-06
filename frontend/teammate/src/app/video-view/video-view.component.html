@@ -1,0 +1,8 @@
+<div class="row mt-5 mb-5 pt">
+  <div class="text-center col-12">
+    <h2>Liste des vidéos de la journée</h2>
+  </div>
+</div>
+<div class="container pb-5">
+  <app-video *ngFor="let video of videos; let i = index" [indexOfVideo]="i" [idVideo]="video.idVideo" [urlVideo]="video.urlVideo" [idContract]="video.idContract" [dateVideo]="video.dateVideo" [videoType]="video.videoType"></app-video>
+</div>

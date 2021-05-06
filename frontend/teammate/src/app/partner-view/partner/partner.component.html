@@ -1,0 +1,33 @@
+<div class="row list-group list-group-flush d-flex flex-row" [ngClass]="{'list-group-item': true, 'success': statusPartner === 'Partenaire', 'failure': statusPartner === 'Non partenaire'}" [ngStyle]="{ opacity: getOpacityPartner() }">
+  <div class="col-1 m-auto">
+      <img src="../../../assets/images/garage.png">
+  </div>
+  <div class="col-7 d-flex flex-row">
+    <div class="m-auto">
+        <p class="m-auto p-2 info" [ngStyle]="{ color: getColorPartner() }"><span>Nom du partenaire : </span><br>{{ namePartner }}</p>
+    </div>
+    <div class="m-auto">
+        <p class="m-auto p-2 info" [ngStyle]="{ color: getColorPartner() }"><span>Téléphone : </span><br>{{ phonePartner }}</p>
+    </div>
+    <div class="m-auto">
+        <p class="m-auto p-2 info" [ngStyle]="{ color: getColorPartner() }"><span>Mail : </span><br>{{ mailPartner }}</p>
+    </div>
+    <div class="m-auto">
+      <p class="m-auto p-2 info" [ngStyle]="{ color: getColorPartner() }"><span>Type : </span><br>{{ typePartner }}</p>
+    </div>
+  </div>
+  <div class="col-4 d-flex flex-row">
+      <div class="m-auto">
+          <a [routerLink]="[idPartner]" class="mr-3 plus" *ngIf="statusPartner === 'Partenaire'">Détails</a>
+      </div>
+      <div class="m-auto">
+          <button style="font-size: 12px;" (click)="onSwitchPartner()" *ngIf="statusPartner === 'Non partenaire'">Partenaire</button>
+      </div>
+      <div class="m-auto">
+          <button style="font-size: 12px; background-color: #b1b1b1; border: #b1b1b1;" (click)="onSwitchNoPartner()" *ngIf="statusPartner === 'Partenaire'">Non partenaire</button>
+      </div>
+      <!-- <div class="m-auto">
+          <button style="font-size: 12px;" (click)="onDeleteTeammate(idTeammate)">Supprimer</button>
+      </div> -->
+  </div>
+</div>

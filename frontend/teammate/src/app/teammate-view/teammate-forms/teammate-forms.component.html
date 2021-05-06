@@ -1,0 +1,126 @@
+<div class="row mt-5 mb-5">
+  <div class="col-12 text-center">
+      <h2>Ajout d'un salarié</h2>
+  </div>
+</div>
+
+<div class="row">
+  <form class="col-8 offset-2" [formGroup]="teammateForm" (ngSubmit)="onSubmitFormTeammate()">
+      <div class="row d-flex flex-column">
+          <div class="input-field d-flex flex-row mb">
+              <div class="input-field col-6">
+                <label for="firstNameTeammate">Nom</label>
+                <input required type="text" class="validate" id="firstNameTeammate" formControlName="firstNameTeammate">
+                <!-- <div class="messageError">
+                    <sup>*</sup>Champ obligatoire
+                </div> -->
+              </div>
+              <div class="input-field col-6">
+                <label for="lastNameTeammate">Prénom</label>
+                <input required type="text" class="validate" id="lastNameTeammate" formControlName="lastNameTeammate">
+                <!-- <div class="messageError">
+                    <sup>*</sup>Champ obligatoire
+                </div> -->
+              </div>
+          </div>
+
+          <div class="input-field d-flex flex-row mb">
+              <div class="input-field col-6">
+                <label for="usernameTeammate">Identifiant</label>
+                <input required type="text" class="validate" id="usernameTeammate" formControlName="usernameTeammate">
+                <!-- <div class="messageError">
+                  <sup>*</sup>Champ obligatoire
+                </div> -->
+              </div>
+              <div class="input-field col-6">
+                <label for="mailTeammate">E-mail</label>
+                <input required type="text" class="validate" id="mailTeammate" formControlName="mailTeammate">
+                <!-- <div class="messageError">
+                    <sup>*</sup>Champ obligatoire
+                </div> -->
+              </div>
+          </div>
+
+          <div class="input-field d-flex flex-row mb">
+              <div class="input-field col-6">
+                <label for="phoneTeammate">Téléphone</label>
+                <input required type="text" class="validate" id="phoneTeammate" formControlName="phoneTeammate">
+                <!-- <div class="messageError">
+                    <sup>*</sup>Champ obligatoire
+                </div> -->
+              </div>
+              <div class="input-field col-6">
+                <label for="password">Mot de passe</label>
+                <input required type="text" class="validate" id="password" formControlName="password">
+                <!-- <div class="messageError">
+                    <sup>*</sup>Champ obligatoire
+                </div> -->
+              </div>
+          </div>
+
+          <div class="input-field d-flex flex-row mb">
+            <div class="input-field col-6">
+              <label for="statusTeammate">Status de l'équipier</label>
+              <div class="d-flex mt-radio">
+                <p>
+                  <input name="statusTeammate" type="radio" value="Activer" class="validate" id="statusTeammate" formControlName="statusTeammate">
+                  <label for="statusTeammate">Activer</label>
+                </p>
+                <p>
+                  <input name="statusTeammate" type="radio" value="Désactiver" class="validate" id="statusTeammate" formControlName="statusTeammate">
+                  <label for="statusTeammate">Désactiver</label>
+                </p>
+              </div>
+              <!-- <div class="messageError">
+                  <sup>*</sup>Champ obligatoire
+              </div> -->
+            </div>
+            <div class="input-field col-6">
+              <label for="jobTeammate">Poste occupé</label>
+              <select class="validate" id="jobTeammate" formControlName="jobTeammate" required>
+                <option value="Selectionnez un poste" disabled selected>Sélectionnez un poste</option>
+                <option value="Manager">Manager</option>
+                <option value="Driver">Driver</option>
+                <option value="Biker">Biker</option>
+              </select>
+              <!-- <div class="messageError">
+                  <sup>*</sup>Champ obligatoire
+              </div> -->
+            </div>
+        </div>
+
+        <div class="input-field d-flex flex-row mb">
+          <div class="input-field col-6">
+            <label for="nameAgency">Agence</label>
+            <select class="validate" id="nameAgency" formControlName="nameAgency" required>
+              <option value="Selectionnez une agence" disabled selected>Sélectionnez une agence</option>
+              <option *ngFor="let agency of agencies" [value]="agency.nameAgency">{{ agency.nameAgency }}</option>
+            </select>
+            <!-- <div class="messageError">
+                <sup>*</sup>Champ obligatoire
+            </div> -->
+          </div>
+          <div class="input-field col-6">
+            <label for="superAdmin">Gestionnaire total</label>
+            <div class="d-flex mt-radio">
+              <p>
+                <input name="superAdmin" type="radio" value="true" class="validate" id="superAdmin" formControlName="superAdmin">
+                <label for="superAdmin">Oui</label>
+              </p>
+              <p>
+                <input name="superAdmin" type="radio" value="false" class="validate" id="superAdmin" formControlName="superAdmin">
+                <label for="superAdmin">Non</label>
+              </p>
+            </div>
+            <!-- <div class="messageError">
+                <sup>*</sup>Champ obligatoire
+            </div> -->
+          </div>
+      </div>
+
+        <div class="mt-5 mb-5 text-center">
+          <button class="m-auto" id="btn" type="submit" [disabled]="teammateForm.invalid">Ajouter un salarié</button>
+        </div>
+      </div>
+  </form>
+</div>

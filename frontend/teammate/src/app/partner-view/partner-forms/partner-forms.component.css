@@ -1,0 +1,68 @@
+h2 {
+  font-family: 'Quantify';
+  color: #EF7B15;
+  padding-top: 30px;
+}
+
+input, select {
+  border-bottom: 2px solid #A7A7A7;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  background: none;
+  width: inherit;
+  outline: none;
+}
+
+select {
+  margin-top: 6px;
+}
+
+label {
+  margin: 0;
+  font-family: 'Megante';
+}
+
+.mb {
+  margin-bottom: 40px;
+}
+
+.mt-radio {
+  margin-top: 10px;
+}
+
+.mt-radio label {
+  margin-left: 10px;
+  margin-right: 20px;
+}
+
+button {
+  font-family: 'Megante';
+  background-color: #EF7B15;
+  text-transform: uppercase;
+  border-radius: 50px;
+  border: #EF7B15 1px solid;
+  padding: 10px 20px;
+  font-size: 20px;
+  font-weight: bold;
+  width: fit-content;
+  transition: 0.3s ease;
+  color: white;
+}
+
+button:hover {
+  background-color: #EF7B15;
+  border: #EF7B15 1px solid;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+button:active,
+button:focus,
+button:visited {
+  background-color: #EF7B15;
+  border: #EF7B15 1px solid;
+}
+
+.height {
+  height: 52px;
+}

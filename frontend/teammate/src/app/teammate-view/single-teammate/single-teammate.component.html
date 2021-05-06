@@ -1,0 +1,51 @@
+<div class="row mt-5 mb-5 pt">
+  <div class="text-center col-9">
+      <h2>Fiche du salarié {{ lastNameTeammate }}</h2>
+  </div>
+  <div class="text-right col-3">
+      <button style="font-size: 12px;" class="btn-danger" routerLink="/teammate">Retour à la liste</button>
+  </div>
+</div>
+
+<div class="row pb">
+  <div class="col-6 colInfoLeft">
+      <h3 class="text-center">Information</h3>
+      <div class="row">
+          <div class="col-12">
+              <div class="m-auto">
+                  <p class="m-auto p-2 info"><span>Nom : </span>{{ firstNameTeammate }}</p>
+              </div>
+              <div class="m-auto">
+                  <p class="m-auto p-2 info"><span>Prénom : </span>{{ lastNameTeammate }}</p>
+              </div>
+              <div class="m-auto">
+                  <p class="m-auto p-2 info"><span>Identifiant : </span> {{ usernameTeammate }}</p>
+              </div>
+              <div class="m-auto">
+                  <p class="m-auto p-2 info"><span>Adresse mail : </span> {{ mailTeammate }}</p>
+              </div>
+              <div class="m-auto">
+                  <p class="m-auto p-2 info"><span>Téléphone : </span> {{ phoneTeammate }}</p>
+              </div>
+              <div class="m-auto">
+                  <p class="m-auto p-2 info"><span>Password : </span> {{ password }}</p>
+              </div>
+              <div class="m-auto">
+                  <p class="m-auto p-2 info"><span>Status : </span> {{ statusTeammate }}</p>
+              </div>
+              <div class="m-auto">
+                <p class="m-auto p-2 info"><span>Job : </span> {{ jobTeammate }}</p>
+            </div>
+            <div class="m-auto">
+              <p class="m-auto p-2 info"><span>Agence : </span> {{ nameAgency }}</p>
+          </div>
+              <div class="m-auto">
+                  <p class="m-auto p-2 info"><span>Date : </span> {{ dateTeammate }}</p>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="col-6 colInfoRight">
+      <h3 class="text-center">Historique</h3>
+  </div>
+</div>

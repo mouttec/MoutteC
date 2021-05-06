@@ -1,0 +1,32 @@
+<div class="row list-group list-group-flush list-group-item d-flex flex-row">
+  <div class="col-1 m-auto">
+      <img src="./assets/images/profile.png">
+  </div>
+  <div class="col-7 d-flex flex-column">
+    <div class="row">
+      <div class="col-6">
+        <p class="m-auto p-2 info"><span>Nom : </span><br>{{ firstNameCustomer }}</p>
+      </div>
+      <div class="col-6">
+        <p class="m-auto p-2 info"><span>Prénom : </span><br>{{ lastNameCustomer }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <p class="m-auto p-2 info"><span>Plaque d'immatriculation : </span><br>{{ licensePlateCar }}</p>
+      </div>
+      <div class="col-6">
+        <p class="m-auto p-2 info"><span>Date de rendez-vous : </span><br>{{ dateForth }}</p>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-4 d-flex flex-row">
+      <div class="m-auto">
+        <a [routerLink]="[idBooking]" class="mr-3 plus">Détails</a>
+      </div>
+      <div class="m-auto">
+        <a [href]="[urlGrayCard]" target="_blank" style="font-size: 12px;" class="mr-3 plus btn">Carte Grise</a>
+      </div>
+  </div>
+</div>

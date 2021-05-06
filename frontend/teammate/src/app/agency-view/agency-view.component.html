@@ -1,0 +1,12 @@
+<div class="row mt-5 mb-5 pt">
+  <div class="text-center col-9">
+      <h2>Liste des agences</h2>
+  </div>
+  <div class="text-right col-3">
+      <button style="font-size: 15px;" routerLink="/addAgency">Ajouter une agence</button>
+  </div>
+</div>
+
+<div class="container pb-5">
+  <app-agency *ngFor="let agency of agencies; let i = index" [indexOfAgency]="i" [idAgency]="agency.idAgency" [nameAgency]="agency.nameAgency" [addressAgency]="agency.addressAgency" [phoneAgency]="agency.phoneAgency" [mailAgency]="agency.mailAgency" [statusAgency]="agency.statusAgency" [dateAgency]="agency.dateAgency"></app-agency>
+</div>

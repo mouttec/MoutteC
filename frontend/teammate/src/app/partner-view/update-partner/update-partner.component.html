@@ -1,0 +1,209 @@
+<div class="row mt-5 mb-5">
+  <div class="col-12 text-center">
+      <h2>Modifation du partenaire {{ namePartner }} </h2>
+  </div>
+</div>
+
+<div class="row">
+  <form class="col-8 offset-2">
+      <div class="row d-flex flex-column">
+          <div class="input-field d-flex flex-row mb">
+            <div class="input-field col-6">
+              <label for="usernamePartner">Identifiant de connexion</label>
+              <input required type="text" class="validate" id="usernamePartner" formControlName="usernamePartner">
+              <!-- <div class="messageError">
+                  <sup>*</sup>Champ obligatoire
+              </div> -->
+            </div>
+            <div class="input-field col-6">
+              <label for="password">Mot de passe</label>
+              <input required type="text" class="validate" id="password" formControlName="password">
+              <!-- <div class="messageError">
+                  <sup>*</sup>Champ obligatoire
+              </div> -->
+            </div>
+          </div>
+
+          <div class="input-field d-flex flex-row mb">
+            <div class="input-field col-6">
+              <label for="namePartner">Nom du garage</label>
+              <input required type="text" class="validate" id="namePartner" formControlName="namePartner">
+              <!-- <div class="messageError">
+                <sup>*</sup>Champ obligatoire
+              </div> -->
+            </div>
+            <div class="input-field col-6">
+              <label for="numberAddressPartner">Numéro de la voie</label>
+              <input required type="text" class="validate" id="numberAddressPartner" formControlName="numberAddressPartner">
+              <!-- <div class="messageError">
+                  <sup>*</sup>Champ obligatoire
+              </div> -->
+            </div>
+          </div>
+
+          <div class="input-field d-flex flex-row mb">
+            <div class="input-field col-6">
+              <label for="typeAddressPartner">Type de voie</label>
+              <input required type="text" class="validate" id="typeAddressPartner" formControlName="typeAddressPartner">
+              <!-- <div class="messageError">
+                  <sup>*</sup>Champ obligatoire
+              </div> -->
+            </div>
+            <div class="input-field col-6">
+              <label for="nameAddressPartner">Nom de la voie</label>
+              <input required type="text" class="validate" id="nameAddressPartner" formControlName="nameAddressPartner">
+              <!-- <div class="messageError">
+                  <sup>*</sup>Champ obligatoire
+              </div> -->
+            </div>
+          </div>
+
+          <div class="input-field d-flex flex-row mb">
+            <div class="input-field col-6">
+              <label for="complementAddressPartner">Complement d'adresse</label>
+              <input type="text" class="validate" id="complementAddressPartner" formControlName="complementAddressPartner">
+              <!-- <div class="messageError">
+                  <sup>*</sup>Champ obligatoire
+              </div> -->
+            </div>
+            <div class="input-field col-6">
+              <label for="zipAddressPartner">Code Postale</label>
+              <input required type="text" class="validate" id="zipAddressPartner" formControlName="zipAddressPartner">
+              <!-- <div class="messageError">
+                  <sup>*</sup>Champ obligatoire
+              </div> -->
+            </div>
+        </div>
+
+        <div class="input-field d-flex flex-row mb">
+          <div class="input-field col-6">
+            <label for="cityAddressPartner">Ville</label>
+            <input required type="text" class="validate" id="cityAddressPartner" formControlName="cityAddressPartner">
+            <!-- <div class="messageError">
+                <sup>*</sup>Champ obligatoire
+            </div> -->
+          </div>
+          <div class="input-field col-6">
+            <label for="phonePartner">Téléphone</label>
+            <input required type="text" class="validate" id="phonePartner" formControlName="phonePartner">
+            <!-- <div class="messageError">
+                <sup>*</sup>Champ obligatoire
+            </div> -->
+          </div>
+      </div>
+
+      <div class="input-field d-flex flex-row mb height">
+        <div class="input-field col-6">
+          <label for="mailPartner">E-mail</label>
+          <input required type="text" class="validate" id="mailPartner" formControlName="mailPartner">
+          <!-- <div class="messageError">
+              <sup>*</sup>Champ obligatoire
+          </div> -->
+        </div>
+      </div>
+
+
+      <div class="input-field d-flex flex-row mb height">
+        <div class="input-field col-6">
+          <label for="statusPartner">Status du partenaire</label>
+          <div class="d-flex mt-radio">
+            <p>
+              <input required name="statusPartner" type="radio" value="Partenaire" class="validate" id="statusPartner" formControlName="statusPartner">
+              <label for="statusPartner">Partenaire</label>
+            </p>
+            <p>
+              <input required name="statusPartner" type="radio" value="Non partenaire" class="validate" id="statusPartner" formControlName="statusPartner">
+              <label for="statusPartner">Non partenaire</label>
+            </p>
+          </div>
+          <!-- <div class="messageError">
+              <sup>*</sup>Champ obligatoire
+          </div> -->
+        </div>
+        <div class="input-field col-6">
+          <label for="typePartner">Type du partenaire</label>
+          <select class="validate" id="typePartner" formControlName="typePartner" required>
+            <option value="Selectionnez un poste" disabled selected>Sélectionnez un type</option>
+            <option value="Garage">Garage</option>
+            <option value="Contrôle technique">Contrôle technique</option>
+          </select>
+          <!-- <div class="messageError">
+              <sup>*</sup>Champ obligatoire
+          </div> -->
+        </div>
+      </div>
+
+      <div class="input-field d-flex flex-row mb">
+        <div class="input-field col-6">
+          <label for="nameBilling">Nom de la facturation</label>
+          <input required type="text" class="validate" id="nameBilling" formControlName="nameBilling">
+          <!-- <div class="messageError">
+            <sup>*</sup>Champ obligatoire
+          </div> -->
+        </div>
+        <div class="input-field col-6">
+          <label for="siretPartner">Numéro siret</label>
+          <input required type="text" class="validate" id="siretPartner" formControlName="siretPartner">
+          <!-- <div class="messageError">
+              <sup>*</sup>Champ obligatoire
+          </div> -->
+        </div>
+      </div>
+
+      <div class="input-field d-flex flex-row mb">
+        <div class="input-field col-6">
+          <label for="numberAddressBilling">Numéro de voie pour la facturation</label>
+          <input required type="text" class="validate" id="numberAddressBilling" formControlName="numberAddressBilling">
+          <!-- <div class="messageError">
+            <sup>*</sup>Champ obligatoire
+          </div> -->
+        </div>
+        <div class="input-field col-6">
+          <label for="typeAddressBilling">Type de voie pour la facturation</label>
+          <input required type="text" class="validate" id="typeAddressBilling" formControlName="typeAddressBilling">
+          <!-- <div class="messageError">
+              <sup>*</sup>Champ obligatoire
+          </div> -->
+        </div>
+      </div>
+
+      <div class="input-field d-flex flex-row mb">
+        <div class="input-field col-6">
+          <label for="nameAddressBilling">Nom de la voie pour la facturation</label>
+          <input required type="text" class="validate" id="nameAddressBilling" formControlName="nameAddressBilling">
+          <!-- <div class="messageError">
+            <sup>*</sup>Champ obligatoire
+          </div> -->
+        </div>
+        <div class="input-field col-6">
+          <label for="complementAddressBilling">Complément d'adresse pour la facturations</label>
+          <input required type="text" class="validate" id="complementAddressBilling" formControlName="complementAddressBilling">
+          <!-- <div class="messageError">
+              <sup>*</sup>Champ obligatoire
+          </div> -->
+        </div>
+      </div>
+
+      <div class="input-field d-flex flex-row mb">
+        <div class="input-field col-6">
+          <label for="zipAddressBilling">Code Postale pour la facturation</label>
+          <input required type="text" class="validate" id="zipAddressBilling" formControlName="zipAddressBilling">
+          <!-- <div class="messageError">
+            <sup>*</sup>Champ obligatoire
+          </div> -->
+        </div>
+        <div class="input-field col-6">
+          <label for="cityAddressBilling">Ville pour la facturation</label>
+          <input required type="text" class="validate" id="cityAddressBilling" formControlName="cityAddressBilling">
+          <!-- <div class="messageError">
+              <sup>*</sup>Champ obligatoire
+          </div> -->
+        </div>
+      </div>
+
+      <div class="mt-5 mb-5 text-center">
+        <button class="m-auto" id="btn" type="submit" [disabled]="partnerForm.invalid">Valider la modification du partenaire</button>
+      </div>
+    </div>
+  </form>
+</div>

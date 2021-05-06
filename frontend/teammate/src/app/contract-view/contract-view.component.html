@@ -1,0 +1,9 @@
+<div class="row mt-5 mb-5 pt">
+  <div class="text-center col-12">
+      <h2>Liste des états des lieux</h2>
+  </div>
+</div>
+
+<div class="container pb-5">
+  <app-contract *ngFor="let contract of contracts; let i = index" [idContract]="contract.idContract" [idCustomer]="contract.idCustomer" [idPartner]="contract.idPartner" [idBooking]="contract.idBooking" [urlContract]="contract.urlContract" [dateContract]="contract.dateContract" [idCar]="contract.idCar" [idPickupAddress]="contract.idPickupAddress" [idReturnAddress]="contract.idReturnAddress" [idTeammatePickup]="contract.idTeammatePickup" [idTeammateReturn]="contract.idTeammateReturn" ></app-contract>
+</div>

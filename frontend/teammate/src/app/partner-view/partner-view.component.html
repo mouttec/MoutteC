@@ -1,0 +1,12 @@
+<div class="row mt-5 mb-5 pt">
+  <div class="text-center col-9">
+      <h2>Liste des partenaires</h2>
+  </div>
+  <div class="text-right col-3">
+      <button style="font-size: 15px;" routerLink="/addPartner">Ajouter un partenaire</button>
+  </div>
+</div>
+
+<div class="container pb-5">
+  <app-partner *ngFor="let partner of partners; let i = index" [indexOfPartner]="i" [idPartner]="partner.idPartner" [usernamePartner]="partner.usernamePartner" [password]="partner.password" [namePartner]="partner.namePartner" [addressPartner]="partner.addressPartner" [phonePartner]="partner.phonePartner" [statusPartner]="partner.statusPartner" [typePartner]="partner.typePartner" [mailPartner]="partner.mailPartner" [nameBilling]="partner.nameBilling" [siretPartner]="partner.siretPartner" [addressBilling]="partner.addressBilling" [datePartner]="partner.datePartner"></app-partner>
+</div>

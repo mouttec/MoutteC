@@ -1,0 +1,214 @@
+<div class="row mt-5 mb-5">
+  <div class="col-12 text-center">
+      <h2>Prendre un rendez-vous</h2>
+  </div>
+</div>
+
+<div class="row">
+  <form class="col-10 offset-1" [formGroup]="bookingForm" (ngSubmit)="onSubmitFormBooking()">
+    <div class="row d-flex">
+      <div class="mb-5 col-4">
+        <div class="input-field d-flex flex-row mb-2">
+          <div class="input-field col-12">
+            <label for="formulaBooking">Choix de la formule</label>
+            <div class="d-flex mt-radio">
+              <div class="row">
+                <p>
+                  <input name="formulaBooking" type="radio" value="Forth" class="validate" id="formulaBooking" formControlName="formulaBooking">
+                  <label for="formulaBooking">Aller</label>
+                </p>
+                <p>
+                  <input name="formulaBooking" type="radio" value="Back" class="validate" id="formulaBooking" formControlName="formulaBooking">
+                  <label for="formulaBooking">Retour</label>
+                </p>
+              </div>
+              <div class="row">
+                <p>
+                  <input name="formulaBooking" type="radio" value="Round" class="validate" id="formulaBooking" formControlName="formulaBooking">
+                  <label for="formulaBooking">Aller/Retour</label>
+                </p>
+                <p>
+                  <input name="formulaBooking" type="radio" value="Control" class="validate" id="formulaBooking" formControlName="formulaBooking">
+                  <label for="formulaBooking">Contrôle technique</label>
+                </p>
+              </div>
+
+            </div>
+            <!-- <div class="messageError">
+                <sup>*</sup>Champ obligatoire
+            </div> -->
+          </div>
+        </div>
+        <div class="input-field d-flex flex-row mb">
+          <div class="input-field col-12">
+            <label for="namePartner">Partenaire</label>
+            <select class="validate" id="namePartner" formControlName="namePartner" required>
+              <option value="Selectionnez une agence" disabled selected>Sélectionnez un partenaire</option>
+              <option *ngFor="let partner of partners" [value]="partner.namePartner">{{partner.namePartner}}</option>
+            </select>
+            <!-- <div class="messageError">
+                <sup>*</sup>Champ obligatoire
+            </div> -->
+          </div>
+        </div>
+      </div>
+      <div class="mb-5 col-6">
+        <div class="input-field d-flex flex-row mb-70">
+          <div class="input-field col-12">
+            <label for="addressForth">Adresse de prise en charge</label>
+            <input type="text" class="validate" id="addressForth" formControlName="addressForth">
+            <!-- <div class="messageError">
+                <sup>*</sup>Champ obligatoire
+            </div> -->
+          </div>
+        </div>
+        <div class="input-field d-flex flex-row mb">
+          <div class="input-field col-12">
+            <label for="addressBack">Adresse de restitution</label>
+            <input type="text" class="validate" id="addressBack" formControlName="addressBack">
+            <!-- <div class="messageError">
+                <sup>*</sup>Champ obligatoire
+            </div> -->
+          </div>
+        </div>
+      </div>
+      <div class="mb-5 d-flex col-2 align-items-center">
+        <div class="input-field text-center">
+          <button class="m-auto size" id="btn" type="submit">Tarif</button>
+        </div>
+      </div>
+    </div>
+    <div class="row d-flex">
+      <div class="col-6 colInfoLeft">
+        <h3 class="text-center mb-4">Information client</h3>
+        <div class="input-field d-flex flex-row mb">
+          <div class="input-field col-6">
+            <label for="firstNameCustomer">Nom du client</label>
+            <input required type="text" class="validate" id="firstNameCustomer" formControlName="firstNameCustomer">
+            <!-- <div class="messageError">
+                <sup>*</sup>Champ obligatoire
+            </div> -->
+          </div>
+          <div class="input-field col-6">
+            <label for="lastNameCustomer">Prénom du client</label>
+            <input required type="text" class="validate" id="lastNameCustomer" formControlName="lastNameCustomer">
+            <!-- <div class="messageError">
+                <sup>*</sup>Champ obligatoire
+            </div> -->
+          </div>
+        </div>
+        <div class="input-field d-flex flex-row mb">
+          <div class="input-field col-6">
+            <label for="phoneCustomer">Téléphone du client</label>
+            <input required type="text" class="validate" id="phoneCustomer" formControlName="phoneCustomer">
+            <!-- <div class="messageError">
+              <sup>*</sup>Champ obligatoire
+            </div> -->
+          </div>
+          <div class="input-field col-6">
+            <label for="mailCustomer">E-mail</label>
+            <input type="text" class="validate" id="mailCustomer" formControlName="mailCustomer">
+            <!-- <div class="messageError">
+                <sup>*</sup>Champ obligatoire
+            </div> -->
+          </div>
+        </div>
+        <div class="input-field d-flex flex-row mb">
+          <div class="input-field col-12">
+            <label for="dateOfBirthdayCustomer">Date de naissance du client</label>
+            <input type="date" class="validate" id="dateOfBirthdayCustomer" formControlName="dateOfBirthdayCustomer">
+            <!-- <div class="messageError">
+                <sup>*</sup>Champ obligatoire
+            </div> -->
+          </div>
+        </div>
+        <h3 class="text-center mb-4 mt-4">Information véhicule</h3>
+        <div class="input-field d-flex flex-row mb">
+          <div class="input-field col-12">
+            <label for="licensePlateCar">Plaque d'immatriculation</label>
+            <input required type="text" class="validate" id="licensePlateCar" formControlName="licensePlateCar">
+            <!-- <div class="messageError">
+              <sup>*</sup>Champ obligatoire
+            </div> -->
+          </div>
+        </div>
+        <div class="mt-5 mb-5 text-center">
+          <button class="m-auto size" id="btn" type="submit">Valider la plaque</button>
+        </div>
+        <div class="input-field d-flex flex-row mb">
+          <div class="input-field col-6">
+            <label for="brandCar">Marque du véhicule</label>
+            <input required type="text" class="validate" id="brandCar" formControlName="brandCar">
+            <!-- <div class="messageError">
+              <sup>*</sup>Champ obligatoire
+            </div> -->
+          </div>
+          <div class="input-field col-6">
+            <label for="modelCar">Modèle du véhicule</label>
+            <input required type="text" class="validate" id="modelCar" formControlName="modelCar">
+            <!-- <div class="messageError">
+                <sup>*</sup>Champ obligatoire
+            </div> -->
+          </div>
+        </div>
+        <div class="input-field d-flex flex-row mb">
+          <div class="input-field col-6">
+            <label for="motorizationCar">Motorisation du <br>véhicule</label>
+            <input required type="text" class="validate" id="motorizationCar" formControlName="motorizationCar">
+            <!-- <div class="messageError">
+              <sup>*</sup>Champ obligatoire
+            </div> -->
+          </div>
+          <div class="input-field col-6">
+            <label for="dateOfCirculationCar">Date de première mise en circulation</label>
+            <input required type="date" class="validate" id="dateOfCirculationCar" formControlName="dateOfCirculationCar">
+            <!-- <div class="messageError">
+                <sup>*</sup>Champ obligatoire
+            </div> -->
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <h3 class="text-center mb-4">Créneau de prise en charge</h3>
+        <div class="input-field d-flex flex-row mb">
+          <div class="input-field col-6">
+            <label for="dateForth">date</label>
+            <input required type="text" class="validate" id="dateForth" formControlName="dateForth">
+            <!-- <div class="messageError">
+              <sup>*</sup>Champ obligatoire
+            </div> -->
+          </div>
+          <div class="input-field col-6">
+            <label for="hoursForth">heure</label>
+            <input required type="text" class="validate" id="hoursForth" formControlName="hoursForth">
+            <!-- <div class="messageError">
+                <sup>*</sup>Champ obligatoire
+            </div> -->
+          </div>
+        </div>
+        <h3 class="text-center mb-4">Créneau de restitution</h3>
+        <div class="input-field d-flex flex-row mb">
+          <div class="input-field col-6">
+            <label for="dateBack">date</label>
+            <input required type="text" class="validate" id="dateBack" formControlName="dateBack">
+            <!-- <div class="messageError">
+              <sup>*</sup>Champ obligatoire
+            </div> -->
+          </div>
+          <div class="input-field col-6">
+            <label for="hoursBack">heure</label>
+            <input required type="text" class="validate" id="hoursBack" formControlName="hoursBack">
+            <!-- <div class="messageError">
+                <sup>*</sup>Champ obligatoire
+            </div> -->
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-12 mt-5 mb-5 text-center">
+        <button class="m-auto" id="btn" type="submit" [disabled]="bookingForm.invalid">Ajouter un rendez-vous</button>
+      </div>
+    </div>
+  </form>
+</div>

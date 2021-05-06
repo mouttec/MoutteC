@@ -1,0 +1,78 @@
+img {
+  width: 40px;
+}
+
+.list-group-flush {
+  background-color: transparent;
+  border: none;
+  border-bottom: solid 2px #6A6A6A;
+}
+
+p, a, button {
+font-family: 'Megante';
+}
+
+p {
+  margin: 0;
+}
+
+h3 {
+  font-family: 'Megante';
+  font-size: 20px;
+  font-weight: bold;
+}
+
+h4 {
+  font-family: 'Megante';
+  font-size: 16px;
+  font-weight: none;
+ }
+
+span {
+  color: #A7A7A7;
+}
+
+a {
+  color: black;
+  width: 100%;
+}
+
+button {
+  font-family: 'Megante';
+  background-color: #EF7B15;
+  text-transform: uppercase;
+  border-radius: 50px;
+  border: #EF7B15 1px solid;
+  padding: 10px 20px;
+  font-size: 20px;
+  font-weight: bold;
+  width: fit-content;
+  transition: 0.3s ease;
+  color: white;
+}
+
+button:hover {
+  background-color: #EF7B15;
+  border: #EF7B15 1px solid;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+button:active,
+button:focus,
+button:visited {
+  background-color: #EF7B15;
+  border: #EF7B15 1px solid;
+}
+
+.br {
+  margin: 0!important;
+  border-right: 1px solid #6a6a6a;
+  padding: 0;
+}
+.bb {
+  margin: 0!important;
+  width: 100%;
+  text-align: center;
+  border-bottom: 2px solid #6a6a6a;
+  padding: 0;
+}

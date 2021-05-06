@@ -1,0 +1,39 @@
+<div class="row mt-5 mb-5 pt">
+  <div class="text-center col-9">
+      <h2>Fiche du client {{ firstNameCustomer }}</h2>
+  </div>
+  <div class="text-right col-3">
+      <button style="font-size: 12px;" class="btn-danger" routerLink="/customer">Retour à la liste</button>
+  </div>
+</div>
+
+<div class="row pb">
+  <div class="col-6 colInfoLeft">
+      <h3 class="text-center">Information</h3>
+      <div class="row">
+          <div class="col-12">
+              <div class="m-auto">
+                  <p class="m-auto p-2 info"><span>Nom : </span>{{ firstNameCustomer }}</p>
+              </div>
+              <div class="m-auto">
+                  <p class="m-auto p-2 info"><span>Prénom : </span>{{ lastNameCustomer }}
+              </div>
+              <div class="m-auto">
+                  <p class="m-auto p-2 info"><span>Téléphone : </span> {{ phoneCustomer }}</p>
+              </div>
+              <div class="m-auto">
+                  <p class="m-auto p-2 info"><span>E-Mail : </span> {{ mailCustomer }}</p>
+              </div>
+              <div class="m-auto">
+                  <p class="m-auto p-2 info"><span>Date de naissance : </span> {{ dateOfBirthdayCustomer }}</p>
+              </div>
+              <div class="m-auto">
+                  <p class="m-auto p-2 info"><span>Date de création : </span> {{ dateCustomer }}</p>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="col-6 colInfoRight">
+      <h3 class="text-center">Historique de réservation</h3>
+  </div>
+</div>

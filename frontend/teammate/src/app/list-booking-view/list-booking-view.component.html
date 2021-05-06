@@ -1,0 +1,12 @@
+<div class="row mt-5 mb-5 pt">
+  <div class="text-center col-9">
+      <h2>Rendez-vous de la journée</h2>
+  </div>
+  <div class="text-right col-3">
+      <button style="font-size: 15px;" routerLink="/addBooking">Ajouter un rendez-vous</button>
+  </div>
+</div>
+
+<div class="container pb-5">
+  <app-list-booking *ngFor="let booking of bookings; let i = index" [indexOfBooking]="i" [idBooking]="booking.idBooking" [firstNameCustomer]="booking.firstNameCustomer" [lastNameCustomer]="booking.lastNameCustomer" [phoneCustomer]="booking.phoneCustomer" [licensePlateCar]="booking.licensePlateCar" [brandCar]="booking.brandCar" [modelCar]="booking.modelCar" [dateOfCirculationCar]="booking.dateOfCirculationCar" [motorizationCar]="booking.motorizationCar" [namePartner]="booking.namePartner" [dateForth]="booking.dateForth" [hoursForth]="booking.hoursForth" [formulaBooking]="booking.formulaBooking" [dateBack]="booking.dateBack" [hoursBack]="booking.hoursBack" [addressForth]="booking.addressForth" [addressBack]="booking.addressBack" [dateOfBirthdayCustomer]="booking.dateOfBirthdayCustomer" [mailCustomer]="booking.mailCustomer" [durationForth]="booking.durationForth" [distanceForth]="booking.distanceForth" [durationBack]="booking.durationBack" [distanceBack]="booking.distanceBack"></app-list-booking>
+</div>

@@ -1,0 +1,12 @@
+<div class="row mt-5 mb-5 pt">
+  <div class="text-center col-9">
+      <h2>Liste des clients</h2>
+  </div>
+  <div class="text-right col-3">
+      <button style="font-size: 15px;" routerLink="/addCustomer">Ajouter un client</button>
+  </div>
+</div>
+
+<div class="container pb-5">
+  <app-customer *ngFor="let customer of customers; let i = index" [indexOfCustomer]="i" [idCustomer]="customer.idCustomer" [firstNameCustomer]="customer.firstNameCustomer" [lastNameCustomer]="customer.lastNameCustomer" [dateOfBirthdayCustomer]="customer.dateOfBirthdayCustomer" [phoneCustomer]="customer.phoneCustomer" [mailCustomer]="customer.mailCustomer" [password]="customer.password" [idPartner]="customer.idPartner" [dateCustomer]="customer.dateCustomer"></app-customer>
+</div>

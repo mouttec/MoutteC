@@ -1,0 +1,25 @@
+<div class="row mt-5 mb-5">
+  <div class="col-12 text-center">
+      <h2>Connexion</h2>
+  </div>
+</div>
+
+<div class="row">
+  <form class="col-8 offset-2" [formGroup]="authForm" (ngSubmit)="postdata(authForm)">
+    <div class="row d-flex flex-column">
+      <div class="input-field d-flex flex-row mb">
+        <div class="input-field col-6">
+          <label for="usernameTeammate">Identifiant</label>
+          <input required type="text" class="validate" id="usernameTeammate" formControlName="usernameTeammate">
+        </div>
+        <div class="input-field col-6">
+          <label for="password">Mot de passe</label>
+          <input required type="text" class="validate" id="password" formControlName="password">
+        </div>
+      </div>
+    </div>
+    <div class=" mt-3 mb-5 text-center">
+      <button class="m-auto" id="btn" type="submit" [disabled]="authForm.invalid">Connexion</button>
+    </div>
+  </form>
+</div>

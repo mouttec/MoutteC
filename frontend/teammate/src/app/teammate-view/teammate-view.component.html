@@ -1,0 +1,13 @@
+<div class="row mt-5 mb-5 pt">
+  <div class="text-center col-9">
+      <h2>Liste des salariés</h2>
+  </div>
+  <div class="text-right col-3">
+      <button style="font-size: 15px;" routerLink="/addTeammate">Ajouter un salarié</button>
+  </div>
+</div>
+
+<div class="container pb-5">
+  <app-teammate *ngFor="let teammate of teammates; let i = index" [indexOfTeammate]="i" [idTeammate]="teammate.idTeammate" [firstNameTeammate]="teammate.firstNameTeammate" [lastNameTeammate]="teammate.lastNameTeammate" [usernameTeammate]="teammate.usernameTeammate" [mailTeammate]="teammate.mailTeammate"
+  [phoneTeammate]="teammate.phoneTeammate" [password]="teammate.password" [statusTeammate]="teammate.statusTeammate" [jobTeammate]="teammate.jobTeammate" [nameAgency]="teammate.nameAgency" [superAdmin]="teammate.superAdmin" [dateTeammate]="teammate.dateTeammate"></app-teammate>
+</div>

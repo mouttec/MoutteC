@@ -1,0 +1,14 @@
+/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: "Megante";
+  src: url("./assets/police/Megante/Megante.woff") format("woff"),
+  url("./assets/police/Megante/Megante.ttf") format("ttf"),
+  url("./assets/police/Megante/Megante.otf") format('otf');
+}
+
+@font-face {
+  font-family: "Quantify";
+  src: url("./assets/police/Quantify/Quantify.ttf") format("ttf"),
+  url("./assets/police/Quantify/Quantify.otf") format("otf");
+}
+

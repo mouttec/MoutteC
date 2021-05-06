@@ -1,0 +1,68 @@
+<div class="row mt-5 mb-5">
+  <div class="col-12 text-center">
+      <h2>Ajout d'une agence</h2>
+  </div>
+</div>
+
+<div class="row">
+  <form class="col-8 offset-2" [formGroup]="agencyForm" (ngSubmit)="onSubmitFormAgency()">
+      <div class="row d-flex flex-column">
+          <div class="input-field d-flex flex-row mb">
+              <div class="input-field col-6">
+                <label for="nameAgency">Nom de l'agence</label>
+                <input required type="text" class="validate" id="nameAgency" formControlName="nameAgency">
+                <!-- <div class="messageError">
+                    <sup>*</sup>Champ obligatoire
+                </div> -->
+              </div>
+              <div class="input-field col-6">
+                <label for="addressAgency">Adresse de l'agence</label>
+                <input required type="text" class="validate" id="addressAgency" formControlName="addressAgency">
+                <!-- <div class="messageError">
+                    <sup>*</sup>Champ obligatoire
+                </div> -->
+              </div>
+          </div>
+
+          <div class="input-field d-flex flex-row mb">
+            <div class="input-field col-6">
+              <label for="phoneAgency">Téléphone</label>
+                <input required type="text" class="validate" id="phoneAgency" formControlName="phoneAgency">
+              <!-- <div class="messageError">
+                  <sup>*</sup>Champ obligatoire
+              </div> -->
+            </div>
+            <div class="input-field col-6">
+              <label for="mailAgency">E-Mail</label>
+                <input required type="text" class="validate" id="mailAgency" formControlName="mailAgency">
+              <!-- <div class="messageError">
+                  <sup>*</sup>Champ obligatoire
+              </div> -->
+            </div>
+        </div>
+
+        <div class="input-field d-flex flex-row mb">
+          <div class="input-field col-6">
+            <label for="statusAgency">Statut de l'agence</label>
+            <div class="d-flex mt-radio">
+              <p>
+                <input name="statusAgency" type="radio" value="Ouvert" class="validate" id="statusAgency" formControlName="statusAgency">
+                <label for="statusAgency">Ouvert</label>
+              </p>
+              <p>
+                <input name="statusAgency" type="radio" value="Fermer" class="validate" id="statusAgency" formControlName="statusAgency">
+                <label for="statusAgency">Fermer</label>
+              </p>
+            </div>
+            <!-- <div class="messageError">
+                <sup>*</sup>Champ obligatoire
+            </div> -->
+          </div>
+      </div>
+
+        <div class="mt-5 mb-5 text-center">
+          <button class="m-auto" id="btn" type="submit" [disabled]="agencyForm.invalid">Ajouter une agence</button>
+        </div>
+      </div>
+  </form>
+</div>

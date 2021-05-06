@@ -1,0 +1,24 @@
+<div class="row list-group list-group-flush list-group-item success d-flex flex-row">
+  <div class="col-1 m-auto">
+      <img src="../../../assets/images/profile.png">
+  </div>
+  <div class="col-7 d-flex flex-row">
+      <div class="m-auto">
+          <p class="m-auto p-2 info"><span>Nom : </span><br>{{ firstNameCustomer }}</p>
+      </div>
+      <div class="m-auto">
+          <p class="m-auto p-2 info"><span>Téléphone : </span><br>{{ phoneCustomer }}</p>
+      </div>
+      <div class="m-auto">
+          <p class="m-auto p-2 info"><span>E-Mail : </span><br>{{ mailCustomer }}</p>
+      </div>
+  </div>
+  <div class="col-4 d-flex flex-row">
+      <div class="m-auto">
+          <a [routerLink]="[idCustomer]" class="mr-3 plus">Détails</a>
+      </div>
+      <!-- <div class="m-auto">
+          <button style="font-size: 12px;" (click)="onDeleteTeammate(idTeammate)">Supprimer</button>
+      </div> -->
+  </div>
+</div>
