@@ -1,0 +1,11 @@
+.GeneralBackground {
+  background-image: url('./../assets/images/header1.png');
+  padding: 0;
+  height: 100vh;
+}
+
+.background {
+  background-color: #ffffff5c;
+  border-radius: 20px;
+}
+

@@ -85,12 +85,6 @@ export class CalendarPersoComponent implements OnInit {
   constructor(private modal: NgbModal, private router: Router, private calendarService: CalendarService) { }
 
   ngOnInit(): void {
-    this.eventSubscription = this.calendarService.eventSubject.subscribe(
-      (events: Event[]) => {
-        this.events = events;
-      }
-    );
-    this.calendarService.readListEvent();
   }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {

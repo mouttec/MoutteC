@@ -18,7 +18,7 @@ export class CustomerService {
       phoneCustomer: '0000000000',
       mailCustomer: 'test@test.com'
     }
-  ]
+  ];
 
   constructor() { }
 
