@@ -31,9 +31,9 @@ class PDF extends FPDF
 		$this->Cell(0,5,'Page '.$this->PageNo().'/{nb}',0,0,'R');
 	}
 
-	function infosPartner($partnerKey) {
+	function partnerInfo($partnerId) {
 		$partner = new Partner($conn);
-		$thisPartner = $partner->searchPartnerByKey($partner);
+		$thisPartner = $partner->searchPartnerById($partnerId);
 		$thisPartnerAddress = $thisPartner->numberAddressBilling.', '.$thisPartner->typeAddressBilling.' '.$thisPartner->nameAddressBilling;
 		$thisPartnerZipCity = $thisPartner->zipAddressBilling.' '.$thisPartner->cityAddressBilling;
 		$this->SetFont('Arial','B',12);
@@ -41,24 +41,24 @@ class PDF extends FPDF
 		$this->Cell(0,0,$thisPartner->partnerName,0,0,'L');
 		$this->Cell(120);
 		$this->SetFont('','');
-		$this->Cell(0,0,$thisPartner->$thisPartnerAddress,0,0,'L');
-		if (!empty($thisPartner->$thisPartner->complementAddressBilling)) {
+		$this->Cell(0,0,$thisPartnerAddress,0,0,'L');
+		if (!empty($thisPartner->complementAddressBilling)) {
 			$this->Cell(120);
-			$this->Cell(0,0,$thisPartner->$thisPartner->complementAddressBilling,0,0,'L');
+			$this->Cell(0,0,$thisPartner->complementAddressBilling,0,0,'L');
 		}
 		$this->Cell(120);
-		$this->Cell(0,0,$thisPartner->$thisPartnerZipCity,0,0,'L');
+		$this->Cell(0,0,$thisPartnerZipCity,0,0,'L');
 		$this->Ln(20);
 	}
 
-	function infosInvoice($invoiceNumber, $dateMonthlyPayment) 
+	function invoiceInfo($invoiceNumber, $dateMonthlyPayment) 
 	{
 		$pdf->SetFont('Arial','',12);
 		$pdf->Cell(0,12,'Facture n°'.$invoiceNumber ,0,1,'L');
 		$pdf->Cell(0,12,'Le '.$dateMonthlyPayment ,0,1,'L');
 	}
 
-	function invoiceLines($invoiceLinesArray) 
+	function invoiceLinesArray($invoiceLinesArray) 
 	{
 		$header = ["Réf.", "Nom du client", "Date prestation", "Formule", "Prix prestation"];
 		$this->SetFillColor(255,0,0);
@@ -123,11 +123,11 @@ $thisMonthlyPayment = $monthlyPayment->searchMonthlyPaymentByInvoiceNumber($mont
 // public $partnerKey;
 
 //Couleur Mouttec : ed7d31 / rgb(237,125,49)
-if ($thisMonthlyPayment->partnerKey == $decodedData->partnerKey) {
+if ($thisMonthlyPayment->partnerId == $decodedData->partnerId) {
 	$pdf = new FPDF();
 	$pdf->addPage();
-	$pdf->infosPartner($thisMonthlyPayment->partnerKey);
-	$pdf->infosInvoice($thisMonthlyPayment->invoiceNumber, $thisMonthlyPayment->dateMonthlyPayment);
+	$pdf->partnerInfo($thisMonthlyPayment->partnerId);
+	$pdf->invoiceInfo($thisMonthlyPayment->invoiceNumber, $thisMonthlyPayment->dateMonthlyPayment);
 	$pdf->invoiceLinesArray($thisMonthlyPayment->invoiceLines);
 	$pdf->sums($thisMonthlyPayment->invoiceAmount);
 	$pdf->Output();

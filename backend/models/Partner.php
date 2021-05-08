@@ -151,23 +151,6 @@ class Partner
         return false;
     }
 
-    public function searchPartnerByKey() {
-        $query = "
-        SELECT *
-        FROM "
-        . $this->table . " 
-        WHERE partnerKey = :partnerKey";
-        $stmt = $this->conn->prepare($query);
-
-        $params = ["partnerKey" => htmlspecialchars(strip_tags($this->partnerKey))];
-        
-        if ($stmt->execute($params)) {
-            $row = $stmt->fetch();    
-            return $row;
-        }
-        return false;
-    }
-
     public function searchPartnerByUsername() {
         $query = "
             SELECT *
