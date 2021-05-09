@@ -2,7 +2,7 @@
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 header("Access-Control-Allow-Methods: POST");
-include_once("../../Database.php");
+include_once("../../config/Database.php");
 include_once "../../models/Partner.php";
 
 $db = new Database();
