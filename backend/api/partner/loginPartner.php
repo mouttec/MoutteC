@@ -23,6 +23,6 @@ if (!empty($partnerExists)) {
 		echo json_encode('Mauvais mot de passe');
 	}
 } else {
-	echo json_encode('Le partner n\'existe pas);
+	echo json_encode('Le partner n\'existe pas');
 	http_response_code(404);	
 }
