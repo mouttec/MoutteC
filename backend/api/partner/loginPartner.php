@@ -18,7 +18,7 @@ echo json_encode($partnerExists);
 
 //Si un partner existe avec cet username et que le password matche
 if (!empty($partnerExists)) {
-	if (password_verify($password, $partnerExists->mixedPassword)) {
+	if (password_verify($password, $partnerExists['mixedPassword'])) {
 		echo json_encode($partnerExists);
 	} else {
 		echo json_encode('Mauvais mot de passe');
