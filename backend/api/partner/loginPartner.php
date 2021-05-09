@@ -18,11 +18,10 @@ $partnerExists = $partner->searchPartnerByUsername($partner);
 //Si un partner existe avec cet username et que le password matche
 if (!empty($partnerExists)) {
 	if (password_verify($password, $partnerExists['mixedPassword'])) {
-		echo json_encode($partnerExists);
+		echo json_encode($partnerExists['iPartner']);
 	} else {
-		echo json_encode('Mauvais mot de passe');
+		echo json_encode('Le mot de passe est erroné');
 	}
 } else {
-	echo json_encode('Le partner n\'existe pas');
 	http_response_code(404);	
 }
