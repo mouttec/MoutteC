@@ -14,7 +14,6 @@ $partner->usernamePartner = $decodedData->usernamePartner;
 $password = htmlspecialchars($decodedData->password);
 
 $partnerExists = $partner->searchPartnerByUsername($partner);
-echo json_encode($partnerExists);
 
 //Si un partner existe avec cet username et que le password matche
 if (!empty($partnerExists)) {
