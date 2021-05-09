@@ -1,0 +1,17 @@
+<div class="row mt-5 mb-5 pt">
+  <div class="text-center col-12">
+    <h2>Liste des clients</h2>
+  </div>
+</div>
+<div class="container pb-5">
+  <div class="row">
+    <h3 class="col-4">Entrer le nom du client</h3>
+    <input class="col-5 mr-5" type="text">
+    <button class="col-2">Valider</button>
+  </div>
+
+</div>
+
+<div class="container pb-5" style="max-width: 90%;">
+  <app-customer *ngFor="let customer of customers; let i = index" [indexOfCustomer]="i" [idCustomer]="customer.idCustomer" [firstNameCustomer]="customer.firstNameCustomer" [lastNameCustomer]="customer.lastNameCustomer" [dateOfBirthdayCustomer]="customer.dateOfBirthdayCustomer" [phoneCustomer]="customer.phoneCustomer" [mailCustomer]="customer.mailCustomer" [password]="customer.password" [idPartner]="customer.idPartner" [dateCustomer]="customer.dateCustomer"></app-customer>
+</div>

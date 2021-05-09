@@ -1,225 +1,286 @@
 <?php
-class Bokking {
-    // Propriétés privées de connexion à la DB
+class Booking {
+
     private $conn;
     private $table = "bookings";
-    // Propriétés publiques de l'objet Post
+
     public $idBooking;
     public $idCustomer;
     public $idPartner;
-    public $hoursBooking;
-    public $dateBooking;
+    public $hoursForth;
+    public $dateForth;
     public $statusBooking;
+    public $formulaBooking;
+    public $dateBack;
+    public $hoursBack;
     public $idCar;
-    public $idAddressTakingCare;
-    public $idAddressReturn;
-    // Constructeur : quand on instancie l'objet, on lui passe la connexion à la DB
-    public function __construct($db) {
+    public $idForthAddress;
+    public $idBackAddress;
+    public $idAgency;
+    public $originBooking;
+
+    public function __construct($db) 
+    {
         $this->conn = $db;
     }
-    // Récupérer la liste des posts
-    public function readBooking() {
-        // création de la requête
-        $query = "
-            SELECT *
-            FROM "
-            . $this->table . " 
-            ORDER BY
-            dateManager DESC";
-        // préparation de la requête
-        $stmt = $this->conn->prepare($query);
-        // exécution de la requête
-        $stmt->execute();
-        // on retourne le résultat
-        return $stmt;
-    }
-    // Récupérer un post
-    public function readSingleBooking() {
-        // création de la requête
-        $query = "
-        SELECT *
-        FROM "
-        . $this->table . " 
-        WHERE idBooking = :idBooking
-        LIMIT 0,1";
-        // préparation de la requête
-        $stmt = $this->conn->prepare($query);
-        // tableau associatif qui lie :id à l'id reçue en paramètre
-        $params = ["idBooking" => $this->idBooking];
-        // excécution de la requête
-        if($stmt->execute($params)) {
-            // on récupère le résultat et on le stocke dans une variable (type: array)
-            $row = $stmt->fetch();
-    
-            return $row;
-        }
-        return false;
-    }
 
-    public function readBookingFunctionPartner() {
-        // création de la requête
-        $query = "
-        SELECT *
-        FROM bookings, partners
-        WHERE idPartner.bookings = idPartner.partners";
-        // préparation de la requête
-        $stmt = $this->conn->prepare($query);
-        // tableau associatif qui lie :id à l'id reçue en paramètre
-        $params = ["idBooking" => $this->idBooking];
-        // excécution de la requête
-        if($stmt->execute($params)) {
-            // on récupère le résultat et on le stocke dans une variable (type: array)
-            $row = $stmt->fetch();
-    
-            return $row;
-        }
-        return false;
-    }
-
-    public function readBookingFunctionCustomer() {
-        // création de la requête
-        $query = "
-        SELECT *
-        FROM bookings, customers
-        WHERE idCustomer.bookings = idCustomer.customers";
-        // préparation de la requête
-        $stmt = $this->conn->prepare($query);
-        // tableau associatif qui lie :id à l'id reçue en paramètre
-        $params = ["idBooking" => $this->idBooking];
-        // excécution de la requête
-        if($stmt->execute($params)) {
-            // on récupère le résultat et on le stocke dans une variable (type: array)
-            $row = $stmt->fetch();
-    
-            return $row;
-        }
-        return false;
-    }
-    // Créer un post
-    public function createBooking() {
-        // On crée la requête
+    public function createBooking() 
+    {
         $query = "
             INSERT INTO "
             . $this->table .
             " SET
             idCustomer = :idCustomer,
             idPartner = :idPartner,
-            hoursBooking = :hoursBooking,
-            dateBooking = :dateBooking,
-            statusBooking = :statusBooking,        
+            hoursForth = :hoursForth,
+            dateForth = :dateForth,
+            statusBooking = :statusBooking,
+            formulaBooking = :formulaBooking,
+            dateBack = :dateBack,
+            hoursBack = :hoursBack,        
             idCar = :idCar,
-            idAddressTakingCare = :idAddressTakingCare,
-            idAddressReturn = :idAddresReturn
-        ";
-        // on prépare la requête
+            idForthAddress = :idForthAddress,
+            idBackAddress = :idBackAddress,
+            idAgency = :idAgency,
+            distanceForth = :distanceForth,
+            durationForth = :durationForth,
+            distanceBack = :distanceBack,
+            durationBack = :durationBack,
+            originBooking = :originBooking
+            ";
         $stmt = $this->conn->prepare($query);
-        // On nettoie et sécurise les inputs
-        // référence strip_tags(): https://www.php.net/manual/en/function.strip-tags.php
-        // référence htmlspecialchars() : https://www.php.net/manual/en/function.htmlspecialchars.php 
-        $this->idCustomer = htmlspecialchars(strip_tags($this->idCustomer));
-        $this->idPartner = htmlspecialchars(strip_tags($this->idPartner));
-        $this->hoursBooking = htmlspecialchars(strip_tags($this->hoursBooking));
-        $this->dateBooking = htmlspecialchars(strip_tags($this->dateBooking));
-        $this->statusBooking = htmlspecialchars(strip_tags($this->statusBooking));
-        $this->idCar = htmlspecialchars(strip_tags($this->idCar));
-        $this->idAddressTakingCare = htmlspecialchars(strip_tags($this->idAddressTakingCare));
-        $this->idAddressReturn = htmlspecialchars(strip_tags($this->idAddressReturn));
-        // tableau associatif pour lier les paramètres reçus à la requête
+
         $params = [
-            "idCustomer" => $this->idCustomer,
-            "idPartner" => $this->idPartner,
-            "hoursBooking" => $this->hoursBooking,
-            "dateBooking" => $this->dateBooking,
-            "statusBooking" => $this->statusBooking,
-            "idCar" => $this->idCar,
-            "idAddressTakingCare" => $this->idAddressTakingCare,
-            "idAddressReturn" => $this->idAddressReturn
+            "idCustomer" => htmlspecialchars(strip_tags($this->idCustomer)),
+            "idPartner" => htmlspecialchars(strip_tags($this->idPartner)),
+            "hoursForth" => htmlspecialchars(strip_tags($this->hoursForth)),
+            "dateForth" => htmlspecialchars(strip_tags($this->dateForth)),
+            // "statusBooking" => htmlspecialchars(strip_tags($this->statusBooking)),
+            "statusBooking" => "Validée",
+            "formulaBooking" => htmlspecialchars(strip_tags($this->formulaBooking)),
+            "dateBack" => htmlspecialchars(strip_tags($this->dateBack)),
+            "hoursBack" => htmlspecialchars(strip_tags($this->hoursBack)),
+            "idCar" => htmlspecialchars(strip_tags($this->idCar)),
+            "idForthAddress" => htmlspecialchars(strip_tags($this->idForthAddress)),
+            "idBackAddress" => htmlspecialchars(strip_tags($this->idBackAddress)),
+            "idAgency" => htmlspecialchars(strip_tags($this->idAgency)),
+            "distanceForth" => htmlspecialchars(strip_tags($this->distanceForth)),
+            "durationForth" => htmlspecialchars(strip_tags($this->durationForth)),
+            "distanceBack" => htmlspecialchars(strip_tags($this->distanceBack)),
+            "durationBack" => htmlspecialchars(strip_tags($this->durationBack)),
+            "originBooking" => htmlspecialchars(strip_tags($this->originBooking))
         ];
-        // on exécute la requête et on vérifie si elle s'est bien déroulée 
+
         if($stmt->execute($params)) {
-            // Dans ce cas on retourne true
             return true;
         }
-        // sinon on retourne false
         return false;
     }
-        // Modifier un post
-        public function updateBooking($idBooking) {
-            // On crée la requête
-            $query = "
-                UPDATE "
-                . $this->table .
-                " SET
-                idCustomer = :idCustomer,
-                idPartner = :idPartner,
-                hoursBooking = :hoursBooking,
-                dateBooking = :dateBooking,
-                statusBooking = :statusBooking,        
-                idCar = :idCar,
-                idAddressTakingCare = :idAddressTakingCare,
-                idAddressReturn = :idAddresReturn
-                WHERE
-                idBooking = :idBooking       
-            ";
-    
-            // on prépare la requête
-            $stmt = $this->conn->prepare($query);
-   
-            // on nettoie et sécurise les inputs
-            $this->idCustomer = htmlspecialchars(strip_tags($this->idCustomer));
-            $this->idPartner = htmlspecialchars(strip_tags($this->idPartner));
-            $this->hoursBooking = htmlspecialchars(strip_tags($this->hoursBooking));
-            $this->dateBooking = htmlspecialchars(strip_tags($this->dateBooking));
-            $this->statusBooking = htmlspecialchars(strip_tags($this->statusBooking));
-            $this->idCar = htmlspecialchars(strip_tags($this->idCar));
-            $this->idAddressTakingCare = htmlspecialchars(strip_tags($this->idAddressTakingCare));
-            $this->idAddressReturn = htmlspecialchars(strip_tags($this->idAddressReturn));
-            $this->idBooking = htmlspecialchars(strip_tags($idBooking));
-    var_dump($this->hoursBooking);
-            // tableau associatif pour lier les paramètres reçus à la requête
-            $params = [
-                "idCustomer" => $this->idCustomer,
-                "idPartner" => $this->idPartner,
-                "hoursBooking" => $this->hoursBooking,
-                "dateBooking" => $this->dateBooking,
-                "statusBooking" => $this->statusBooking,
-                "idCar" => $this->idCar,
-                "idAddressTakingCare" => $this->idAddressTakingCare,
-                "idAddressReturn" => $this->idAddressReturn
-            ];
-    
-            // on exécute la requête et on vérifie si elle s'est bien déroulée
-            if($stmt->execute($params)) {
-    
-                // dans ce cas on retourne true
-                return true;
-            }
-    
-            // sinon on retourne false
-    
-            return false;
+
+    public function listBookings() 
+    {
+        $query = "
+            SELECT *
+            FROM "
+            . $this->table . " 
+            ORDER BY
+            idBooking DESC";
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->execute();
+        return $stmt;
+    }
+
+    // public function prepareCalendar() 
+    // {
+    //     $query = "
+    //         SELECT *
+    //         FROM "
+    //         . $this->table . "
+    //         WHERE ((dateForth >= :startDate AND dateForth <= :endDate) OR (dateBack >= :startDate AND dateBack <= :endDate))";
+    //     $stmt = $this->conn->prepare($query);
+
+    //     $params = [
+    //         "startDate" => date('d/m/Y'),
+    //         "endDate" => date('d/m/Y', strtotime('+60 days'))
+    //     ];
+
+    //     if ($stmt->execute($params)) {
+    //         return $stmt;
+    //     }
+    //     return false;
+    // }
+
+    public function searchBookingById() 
+    {
+        $query = "
+        SELECT *
+        FROM "
+        . $this->table . " 
+        WHERE idBooking = :idBooking";
+        $stmt = $this->conn->prepare($query);
+
+        $params = ["idBooking" => htmlspecialchars(strip_tags($this->idBooking))];
+
+        if($stmt->execute($params)) {
+            $row = $stmt->fetch();
+            return $row;
         }
-        public function deleteBooking() {
-            // On crée la requête
-            $query = "
-                DELETE
-                FROM " . $this->table .
-                " WHERE idBooking = :idBooking
-            ";
-            // on prépare la requête
-            $stmt = $this->conn->prepare($query);
-            // on nettoie et sécurise l'input
-            $this->idBooking = htmlspecialchars(strip_tags($this->idBooking));
-            // tableau associatif pour lier les paramètres reçus à la requête
-            $params = ["idBooking" => $this->idBooking];
-            // on exécute la requête et on vérifie si elle s'est bien déroulée
-            if($stmt->execute($params)) {
-                // dans ce cas on retourne true
-                return true;
-            }
-            // sinon on retourne false
-            return false;
-            
+        return false;
+    }
+
+    public function searchBookingsByPartner() 
+    {
+        $query = "
+        SELECT *
+        FROM bookings
+        WHERE idPartner = :idPartner";
+        $stmt = $this->conn->prepare($query);
+
+        $params = ["idPartner" => htmlspecialchars(strip_tags($this->idPartner))];
+
+        if($stmt->execute($params)) {
+            return $stmt;
         }
-    
+        return false;
+    }
+
+    public function searchBookingsByCustomer() 
+    {
+        $query = "
+        SELECT *
+        FROM bookings
+        WHERE idCustomer = :idCustomer
+        ORDER BY dateForth";
+        $stmt = $this->conn->prepare($query);
+
+        $params = ["idCustomer" => htmlspecialchars(strip_tags($this->idCustomer))];
+
+        if($stmt->execute($params)) {
+            return $stmt;
+        }
+        return false;
+    }
+
+    public function searchBookingsByAgency() 
+    {
+        $query = "
+        SELECT *
+        FROM bookings
+        WHERE idAgency = :idAgency";
+        $stmt = $this->conn->prepare($query);
+
+        $params = ["idAgency" => htmlspecialchars(strip_tags($this->idAgency))];
+
+        if($stmt->execute($params)) {
+            return $stmt;
+        }
+        return false;
+    }
+
+    public function searchBookingsByDay() 
+    {
+        $query = "
+        SELECT *
+        FROM bookings
+        WHERE dateForth = :dateForth
+        ORDER BY hoursForth ASC";
+        $stmt = $this->conn->prepare($query);
+
+        $params = ["dateForth" => htmlspecialchars(strip_tags($this->dateForth))];
+
+        if($stmt->execute($params)) {
+            return $stmt;
+        }
+        return false;
+    }
+ 
+    public function updateBooking() 
+    {
+        $query = "
+            UPDATE "
+            . $this->table .
+            " SET
+            idPartner = :idPartner,
+            hoursForth = :hoursForth,
+            dateForth = :dateForth,
+            formulaBooking = :formulaBooking,
+            dateBack = :dateBack,
+            hoursBack = :dateBack,
+            idCar = :idCar,
+            idForthAddress = :idForthAddress,
+            idBackAddress = :idBackAddress,
+            idAgency = :idAgency,
+            originBooking = :originBooking
+            WHERE
+            idBooking = :idBooking       
+        ";
+        $stmt = $this->conn->prepare($query);
+
+        $params = [
+            "idPartner" => htmlspecialchars(strip_tags($this->idPartner)),
+            "hoursForth" => htmlspecialchars(strip_tags($this->hoursForth)),
+            "dateForth" => htmlspecialchars(strip_tags($this->dateForth)),
+            "formulaBooking" => htmlspecialchars(strip_tags($this->formulaBooking)),
+            "dateBack" => htmlspecialchars(strip_tags($this->dateBack)),
+            "hoursBack" => htmlspecialchars(strip_tags($this->hoursBack)),
+            "idCar" => htmlspecialchars(strip_tags($this->idCar)),
+            "idForthAddress" => htmlspecialchars(strip_tags($this->idForthAddress)),
+            "idBackAddress" => htmlspecialchars(strip_tags($this->idBackAddress)),
+            "idAgency" => htmlspecialchars(strip_tags($this->idAgency)),
+            "idBooking" => htmlspecialchars(strip_tags($this->idBooking)),
+            "originBooking" => htmlspecialchars(strip_tags($this->originBooking))
+        ];
+
+        if($stmt->execute($params)) {
+            return true;
+        }
+        return false;
+    }
+
+    public function updateBookingStatus() 
+    {
+        $query = "
+            UPDATE "
+            . $this->table .
+            " SET
+            statusBooking = :statusBooking,
+            WHERE
+            idBooking = :idBooking       
+        ";
+        $stmt = $this->conn->prepare($query);
+
+        $params = [
+            "statusBooking" => htmlspecialchars(strip_tags($this->statusBooking)),
+            "idBooking" => htmlspecialchars(strip_tags($this->idBooking))
+        ];
+
+        if($stmt->execute($params)) {
+            return true;
+        }
+        return false;        
+    }
+
+    public function cancelBooking() 
+    {
+        $query = "
+            UPDATE "
+            . $this->table .
+            " SET
+            statusBooking = :statusBooking,
+            WHERE
+            idBooking = :idBooking       
+        ";
+        $stmt = $this->conn->prepare($query);
+
+        $params = [
+            "statusBooking" => 'cancelled',
+            "idBooking" => htmlspecialchars(strip_tags($this->idBooking))
+        ];
+
+        if($stmt->execute($params)) {
+            return true;
+        }
+        return false; 
+    }
 }

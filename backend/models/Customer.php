@@ -1,175 +1,333 @@
 <?php
 class Customer {
-    // Propriétés privées de connexion à la DB
     private $conn;
     private $table = "customers";
-    // Propriétés publiques de l'objet Post
+
     public $idCustomer;
     public $firstNameCustomer;
     public $lastNameCustomer;
+    public $dateOfBirthdayCustomer;
     public $phoneCustomer;
     public $mailCustomer;
-    public $passwordCustomer;
+    public $statusCustomer;
+    public $mixedPassword;
     public $idPartner;
     public $dateCustomer;
+    public $idBillingAddress;
 
-    // Constructeur : quand on instancie l'objet, on lui passe la connexion à la DB
-    public function __construct($db) {
+    public function __construct($db) 
+    {
         $this->conn = $db;
     }
 
-    // Récupérer la liste des clients
-    public function readCustomer() {
-        // création de la requête
-        $query = "
-            SELECT *
-            FROM "
-            . $this->table . " 
-            ORDER BY
-            firstNameCustomer ASC";
-        // préparation de la requête
-        $stmt = $this->conn->prepare($query);
-        // exécution de la requête
-        $stmt->execute();
-        // on retourne le résultat
-        return $stmt;
-    }
-
-    // Récupérer un client
-    public function readSingleCustomer() {
-        // création de la requête
-        $query = "
-        SELECT *
-        FROM "
-        . $this->table . " 
-        WHERE idCustomer = :idCustomer
-        LIMIT 0,1";
-        // préparation de la requête
-        $stmt = $this->conn->prepare($query);
-        // tableau associatif qui lie :id à l'id reçue en paramètre
-        $params = ["idCustomer" => $this->idCustomer];
-        // excécution de la requête
-        if($stmt->execute($params)) {
-            // on récupère le résultat et on le stocke dans une variable (type: array)
-            $row = $stmt->fetch();
-    
-            return $row;
-        }
-        return false;
-    }
-
-    // Créer un client
-    public function createCustomer() {
-        // On crée la requête
+    public function createCustomer() 
+    {
         $query = "
             INSERT INTO "
             . $this->table .
             " SET
             firstNameCustomer = :firstNameCustomer,
             lastNameCustomer = :lastNameCustomer,
+            dateOfBirthdayCustomer = :dateOfBirthdayCustomer,
             phoneCustomer = :phoneCustomer, 
             mailCustomer = :mailCustomer,
-            passwordCustomer = :passwordCustomer
+            statusCustomer = :statusCustomer,
+            mixedPassword = :mixedPassword
         ";
-        // on prépare la requête
         $stmt = $this->conn->prepare($query);
-        // On nettoie et sécurise les inputs
-        // référence strip_tags(): https://www.php.net/manual/en/function.strip-tags.php
-        // référence htmlspecialchars() : https://www.php.net/manual/en/function.htmlspecialchars.php 
-        $this->firstNameCustomer = htmlspecialchars(strip_tags($this->firstNameCustomer));
-        $this->lastNameCustomer = htmlspecialchars(strip_tags($this->lastNameCustomer));
-        $this->phoneCustomer = htmlspecialchars(strip_tags($this->phoneCustomer));
-        $this->mailCustomer = htmlspecialchars(strip_tags($this->mailCustomer));
-        $this->passwordCustomer = htmlspecialchars(strip_tags($this->passwordCustomer));
-        // tableau associatif pour lier les paramètres reçus à la requête
+
         $params = [
-            "firstNameCustomer" => $this->firstNameCustomer,
-            "lastNameCustomer" => $this->lastNameCustomer,
-            "phoneCustomer" => $this->phoneCustomer,
-            "mailCustomer" => $this->mailCustomer,
-            "passwordCustomer" => $this->passwordCustomer
+            "firstNameCustomer" => htmlspecialchars(strip_tags($this->firstNameCustomer)),
+            "lastNameCustomer" => htmlspecialchars(strip_tags($this->lastNameCustomer)),
+            "dateOfBirthdayCustomer" => htmlspecialchars(strip_tags($this->dateOfBirthdayCustomer)),
+            "phoneCustomer" => htmlspecialchars(strip_tags($this->phoneCustomer)),
+            "mailCustomer" => htmlspecialchars(strip_tags($this->mailCustomer)),
+            "statusCustomer" => htmlspecialchars(strip_tags($this->statusCustomer)),
+            "mixedPassword" => password_hash($this->mixedPassword, PASSWORD_DEFAULT)
         ];
-        // on exécute la requête et on vérifie si elle s'est bien déroulée 
-        if($stmt->execute($params)) {
-            // Dans ce cas on retourne true
-            return true;
+
+        if ($stmt->execute($params)) {
+            $query = "SELECT max(idCustomer) FROM ". $this->table;
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+            $row = $stmt->fetch();
+            return $row;
         }
-        // sinon on retourne false
         return false;
     }
 
-    // Modifier un client
-    public function updateCustomer($idCustomer) {
-    // On crée la requête
-    $query = "
-        UPDATE "
-        . $this->table .
-        " SET
-        firstNameCustomer = :firstNameCustomer,
-        lastNameCustomer = :lastNameCustomer,
-        phoneCustomer = :phoneCustomer,    
-        mailCustomer = :mailCustomer,
-        passwordCustomer = :passwordCustomer,
-        idPartner = :idPartner
-        WHERE
-        idCustomer = :idCustomer       
-    ";
+    public function listCustomers() 
+    {
+        $query = "
+            SELECT *
+            FROM "
+            . $this->table . " 
+            ORDER BY
+            idCustomer ASC";
+        $stmt = $this->conn->prepare($query);
 
-    // on prépare la requête
-    $stmt = $this->conn->prepare($query);
-
-    // on nettoie et sécurise les inputs
-    $this->firstNameCustomer = htmlspecialchars(strip_tags($this->firstNameCustomer));
-    $this->lastNameCustomer = htmlspecialchars(strip_tags($this->lastNameCustomer));
-    $this->phoneCustomer = htmlspecialchars(strip_tags($this->phoneCustomer));
-    $this->mailCustomer = htmlspecialchars(strip_tags($this->mailCustomer));
-    $this->passwordCustomer = htmlspecialchars(strip_tags($this->passwordCustomer));
-    $this->idPartner = htmlspecialchars(strip_tags($this->idPartner));
-    $this->idCustomer = htmlspecialchars(strip_tags($idCustomer));
-var_dump($this->firstNameCustomer);
-    // tableau associatif pour lier les paramètres reçus à la requête
-    $params = [
-        "firstNameCustomer" => $this->firstNameCustomer,
-        "lastNameCustomer" => $this->lastNameCustomer,
-        "phoneCustomer" => $this->phoneCustomer,
-        "mailCustomer" => $this->mailCustomer,
-        "passwordCustomer" => $this->passwordCustomer,
-        "idPartner" => $this->idPartner,
-        "idCustomer" => $this->idCustomer
-    ];
-
-    // on exécute la requête et on vérifie si elle s'est bien déroulée
-    if($stmt->execute($params)) {
-
-        // dans ce cas on retourne true
-        return true;
+        if ($stmt->execute()) {
+            return $stmt;
+        }
+        return false;
     }
 
-    // sinon on retourne false
+    public function searchCustomersByPartner() 
+    {
+        $query = "
+            SELECT *
+            FROM "
+            . $this->table . " 
+            WHERE idPartner = :idPartner";
+        $stmt = $this->conn->prepare($query);
 
-    return false;
-}
-public function deleteCustomer() {
-    // On crée la requête
-    $query = "
-        DELETE
-        FROM " . $this->table .
-        " WHERE idCustomer = :idCustomer
-    ";
-    // on prépare la requête
-    $stmt = $this->conn->prepare($query);
-    // on nettoie et sécurise l'input
-    // $this->idCustomer = htmlspecialchars(strip_tags($this->idCustomer));
-    // tableau associatif pour lier les paramètres reçus à la requête
-    $params = ["idCustomer" => $this->idCustomer];
-    // on exécute la requête et on vérifie si elle s'est bien déroulée
-    if($stmt->execute($params)) {
-        // dans ce cas on retourne true
-        return true;
-    }
-    // sinon on retourne false
-    return false;
-    
+        $params = ["idPartner" => $this->idPartner];
+
+        if($stmt->execute($params)) {
+            return $stmt;
+        }
+        return false;
     }
 
+    public function searchCustomerByEmail() 
+    {
+        $query = "
+        SELECT *
+        FROM "
+        . $this->table . " 
+        WHERE mailCustomer = :mailCustomer
+        LIMIT 0,1";
+        $stmt = $this->conn->prepare($query);
+
+        $params = ["mailCustomer" => htmlspecialchars(strip_tags($this->mailCustomer))];
+
+        if($stmt->execute($params)) {
+            $row = $stmt->fetch();
+            return $row;
+        }
+        return false;
+    }
+
+    public function searchCustomerById() 
+    {
+        $query = "
+            SELECT *
+            FROM "
+            . $this->table . " 
+            WHERE idCustomer = :idCustomer";
+        $stmt = $this->conn->prepare($query);
+
+        $params = ["idCustomer" => htmlspecialchars(strip_tags($this->idCustomer))];
+
+        if($stmt->execute($params)) {
+            $row = $stmt->fetch();
+            return $row;
+        }
+        return false;
+    }
+
+    public function searchCustomerByNames() 
+    {
+        $query = "
+            SELECT *
+            FROM "
+            .   $this->table . 
+            " WHERE (lastNameCustomer = :lastNameCustomer AND firstNameCustomer = :firstNameCustomer)";
+        $stmt = $this->conn->prepare($query);
+
+        $params = [
+            "lastNameCustomer" => htmlspecialchars(strip_tags($this->lastNameCustomer)),
+            "firstNameCustomer" => htmlspecialchars(strip_tags($this->firstNameCustomer))
+        ];
+
+        if($stmt->execute($params)) {
+            $row = $stmt->fetch();
+            return $row;
+        }
+        return false;
+    }
+
+    public function searchCustomersByFirstName() 
+    {
+        $query = "
+            SELECT *
+            FROM "
+            .   $this->table . 
+            " WHERE firstNameCustomer = :firstNameCustomer
+            ORDER BY idCustomer";
+        $stmt = $this->conn->prepare($query);
+
+        $params = ["firstNameCustomer" => htmlspecialchars(strip_tags($this->firstNameCustomer))];
+
+        if ($stmt->execute($params)) {
+            return $stmt;
+        }
+        return false;
+    }
+
+    public function updateCustomer() 
+    {
+        $query = "
+            UPDATE "
+            . $this->table .
+            " SET
+            firstNameCustomer = :firstNameCustomer,
+            lastNameCustomer = :lastNameCustomer,
+            dateOfBirthdayCustomer = :dateOfBirthdayCustomer,
+            phoneCustomer = :phoneCustomer,
+            mailCustomer = :mailCustomer
+            WHERE
+            idCustomer = :idCustomer       
+        ";
+        $stmt = $this->conn->prepare($query);
+
+        $params = [
+            "firstNameCustomer" => htmlspecialchars(strip_tags($this->firstNameCustomer)),
+            "lastNameCustomer" => htmlspecialchars(strip_tags($this->lastNameCustomer)),
+            "dateOfBirthdayCustomer" => htmlspecialchars(strip_tags($this->dateOfBirthdayCustomer)),
+            "phoneCustomer" => htmlspecialchars(strip_tags($this->phoneCustomer)),
+            "mailCustomer" => htmlspecialchars(strip_tags($this->mailCustomer)),
+            "idCustomer" => htmlspecialchars(strip_tags($this->idCustomer))
+        ];
+
+        if($stmt->execute($params)) {
+            return true;
+        }
+        return false;
+    }
+
+    public function updateStatusCustomer() 
+    {
+        $query = "
+            UPDATE "
+            . $this->table .
+            " SET
+            statusCustomer = :statusCustomer
+            WHERE
+            idCustomer = :idCustomer       
+        ";
+        $stmt = $this->conn->prepare($query);
+
+        $params = [
+            "statusCustomer" => htmlspecialchars(strip_tags($this->statusCustomer)),
+            "idCustomer" => htmlspecialchars(strip_tags($this->idCustomer))
+        ];
+
+        if($stmt->execute($params)) {
+            return true;
+        }
+        return false;
+    }
+
+    public function bindPartnerToCustomer() 
+    {
+        $query = "
+            UPDATE "
+            . $this->table .
+            " SET
+            idPartner = :idPartner
+            WHERE
+            idCustomer = :idCustomer       
+        ";
+        $stmt = $this->conn->prepare($query);
+
+        $params = [
+            "idPartner" => htmlspecialchars(strip_tags($this->idPartner)),
+            "idCustomer" => htmlspecialchars(strip_tags($this->idCustomer))
+        ];
+
+        if($stmt->execute($params)) {
+            return true;
+        }
+        return false;
+    }
+
+    public function bindBillingAddress() 
+    {
+        $query = "
+            UPDATE "
+            . $this->table .
+            " SET
+            idBillingAddress = :idBillingAddress
+            WHERE
+            idCustomer = :idCustomer       
+        ";
+        $stmt = $this->conn->prepare($query);
+
+        $params = [
+            "idBillingAddress" => htmlspecialchars(strip_tags($this->idBillingAddress)),
+            "idCustomer" => htmlspecialchars(strip_tags($this->idCustomer))
+        ];
+
+        if($stmt->execute($params)) {
+            return true;
+        }
+        return false;
+    }
+
+    public function updatePasswordCustomer() 
+    {
+        $query = "
+            UPDATE "
+            . $this->table .
+            " SET
+            mixedPassword = :mixedPassword
+            WHERE
+            idCustomer = :idCustomer       
+        ";
+        $stmt = $this->conn->prepare($query);
+
+        $params = [
+            "mixedPassword" => password_hash($this->mixedPassword, PASSWORD_DEFAULT),
+            "idCustomer" => htmlspecialchars(strip_tags($this->idCustomer))
+        ];
+
+        if($stmt->execute($params)) {
+            return true;
+        }
+        return false;
+    }
+
+    public function deactivateCustomer() 
+    {
+       $query = "
+            UPDATE "
+            . $this->table .
+            " SET
+            statusCustomer = :statusCustomer
+            WHERE
+            idCustomer = :idCustomer       
+        ";
+        $stmt = $this->conn->prepare($query);
+
+        $params = [
+            "statusCustomer" => "Inactif",
+            "idCustomer" => htmlspecialchars(strip_tags($this->idCustomer))
+        ];
+
+        if($stmt->execute($params)) {
+            return true;
+        }
+        return false;
+    }
+
+    public function sendNewPasswordEmail() 
+    {
+        $messageContent = [
+                'name'              => htmlspecialchars(strip_tags($this->lastNameCustomer)).' '.htmlspecialchars(strip_tags($this->firstNameCustomer)),
+                'mailCustomer'      => htmlspecialchars(strip_tags($this->mailCustomer)),
+                'confirmationCode'  => $this->mixedPassword,
+                'id'                => $this->idCustomer
+                    ];
+        $mailContent = '<p>Bonjour '. $messageContent['name'] .' !<br />Nous vous invitons à confirmer votre compte client chez MoutteC en créant votre mot de passe en cliquant sur 
+                        <a href="https://mouttec.com/confirmAccount?key='.$messageContent['confirmationCode'].'">ce lien</a>"<br /><br />
+                        En cas de problème, copiez et collez ce lien dans votre navigateur préféré : <br />
+                        https://mouttec.com/confirmAccount?id='.$messageContent['id'].'&key='.$messageContent['confirmationCode'].'<br /><br />
+                        Toute l\'équipe de <a href="https://mouttec.com">MoutteC</a> vous remercie de votre confiance !<br />';
+        $customerHeaders =  'Reply-To: contact@mouttec.com' . "\r\n" .
+                            'X-Mailer: PHP/' . phpversion() . "\r\n" .
+                            'MIME-Version: 1.0' . "\r\n" . 
+                            'Content-Type: text/html; charset=UTF-8' . "\r\n";
+        mail($messageContent['mailCustomer'], 'Création d\'un nouveau mot de passe sur MoutteC', $mailContent, $customerHeaders);
+    }
 }

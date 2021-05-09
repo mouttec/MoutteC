@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: "Megante";
+  src: url("src/assets/police/Megante/Megante.woff") format("woff"),
+  url("src/assets/police/Megante/Megante.ttf") format("ttf"),
+  url("src/assets/police/Megante/Megante.otf") format('otf');
+}
+
+@font-face {
+  font-family: "Quantify";
+  src: url("src/assets/police/Quantify/Quantify.ttf") format("ttf"),
+  url("src/assets/police/Quantify/Quantify.otf") format("otf");
+}
+
+@import "../node_modules/angular-calendar/css/angular-calendar.css";

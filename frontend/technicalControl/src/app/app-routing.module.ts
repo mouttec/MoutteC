@@ -6,8 +6,8 @@ import { SingleBookingComponent } from './list-booking-view/single-booking/singl
 import { MyProfilComponent } from './/my-profil/my-profil.component';
 
 const routes: Routes = [
-  { path: 'booking', component: ListBookingViewComponent },
-  { path: 'booking/:idBooking', component: SingleBookingComponent },
+  { path: 'list-rdv', component: ListBookingViewComponent },
+  { path: 'list-rdv/:idBooking', component: SingleBookingComponent },
   { path: ':idPartner', component: MyProfilComponent },
   { path: '', component: AuthComponent }
 ];

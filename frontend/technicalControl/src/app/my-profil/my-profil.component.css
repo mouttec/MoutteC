@@ -17,7 +17,7 @@ p, a, button {
 }
 
 span {
-  color: #A7A7A7;
+  color: #6a6a6a;
 }
 
 button {
@@ -52,5 +52,5 @@ img {
 }
 
 .colInfoLeft {
-  border-right: solid 2px #6A6A6A;
+  border-right: solid 2px #a7a7a7;
 }

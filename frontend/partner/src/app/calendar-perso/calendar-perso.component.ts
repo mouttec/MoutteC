@@ -10,7 +10,13 @@ import { Router } from '@angular/router';
 import { CalendarService } from '../services/calendar.service';
 import { Subscription } from 'rxjs';
 import { Observable } from 'rxjs';
-import { Event } from 'src/app/models/calendar.model';
+
+const colors: any = {
+  grey: {
+    primary: '#6A6A6A',
+    secondary: '#A7A7A7',
+  }
+};
 
 registerLocaleData(localeFr);
 
@@ -46,31 +52,48 @@ export class CalendarPersoComponent implements OnInit {
     event: CalendarEvent;
   };
 
-  events: Event[];
+  // events: CalendarEvent[] = [
+  //   {
+  //     id: 1,
+  //     title: 'test1',
+  //     start: new Date('2021-05-07 14:00:00'),
+  //     end: new Date('2021-05-07 14:30:00'),
+  //     color: colors.grey
+  //     // draggable: true,
+  //     // resizable: {
+  //     //   beforeStart: true,
+  //     //   afterEnd: true
+  //     // }
+  //   },
+  //   {
+  //     id: 2,
+  //     title: 'test2',
+  //     start: new Date('2021-05-06 07:30:00'),
+  //     end: new Date('2021-05-06 08:15:00'),
+  //     color: colors.grey
+  //     // draggable: true,
+  //     // resizable: {
+  //     //   beforeStart: true,
+  //     //   afterEnd: true
+  //     // }
+  //   },
+  //   {
+  //     id: 3,
+  //     title: 'test3',
+  //     start: new Date('2021-05-06 12:00:00'),
+  //     end: new Date('2021-05-06 12:30:00'),
+  //     color: colors.grey
+  //     // draggable: true,
+  //     // resizable: {
+  //     //   beforeStart: true,
+  //     //   afterEnd: true
+  //     // }
+  //   }
+  // ];
+  events: CalendarEvent[];
   eventSubscription: Subscription;
 
-
-  // actions: CalendarEventAction[] = [
-  //   {
-  //     label: '<i class="fas fa-fw fa-pencil-alt"></i>',
-  //     a11yLabel: 'Edit',
-  //     onClick: ({ event }: { event: CalendarEvent }): void => {
-  //       // this.handleEvent('Edited', event);
-  //     },
-  //   },
-  //   {
-  //     label: '<i class="fas fa-fw fa-trash-alt"></i>',
-  //     a11yLabel: 'Delete',
-  //     onClick: ({ event }: { event: CalendarEvent }): void => {
-  //       this.events = this.events.filter((iEvent) => iEvent !== event);
-  //       // this.handleEvent('Deleted', event);
-  //     },
-  //   },
-  // ];
-
   refresh: Subject<any> = new Subject();
-
-
 
   locale: string = 'fr';
 
@@ -85,6 +108,12 @@ export class CalendarPersoComponent implements OnInit {
   constructor(private modal: NgbModal, private router: Router, private calendarService: CalendarService) { }
 
   ngOnInit(): void {
+    this.eventSubscription = this.calendarService.eventsSubject.subscribe(
+      (events: any []) => {
+        this.events = events;
+      }
+    );
+    this.calendarService.readListEvent();
   }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {

@@ -1,11 +1,14 @@
 import { CustomDateFormatter } from './custom-date-formatter.provider';
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ViewEncapsulation, ChangeDetectorRef } from '@angular/core';
-import { isSameDay, isSameMonth } from 'date-fns';
-import { Subject } from 'rxjs';
+import { isSameDay, isSameMonth, startOfMonth, endOfMonth, startOfWeek, endOfWeek, startOfDay, endOfDay, format } from 'date-fns';
 import { CalendarDateFormatter, CalendarEvent, CalendarEventAction, CalendarView, CalendarWeekViewBeforeRenderEvent, CalendarDayViewBeforeRenderEvent, DAYS_OF_WEEK } from 'angular-calendar';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import localeFr from '@angular/common/locales/fr';
 import { registerLocaleData } from '@angular/common';
+import { map } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { CalendarService } from '../services/calendar.service';
 
 const colors: any = {
   grey: {
@@ -15,6 +18,7 @@ const colors: any = {
 };
 
 registerLocaleData(localeFr);
+
 
 @Component({
   selector: 'app-planning',
@@ -42,89 +46,7 @@ export class PlanningComponent implements OnInit {
 
   viewDate: Date = new Date();
 
-  modalData: {
-    action: string;
-    event: CalendarEvent;
-  };
-
-  actions: CalendarEventAction[] = [
-    {
-      label: '<i class="fas fa-fw fa-pencil-alt"></i>',
-      a11yLabel: 'Edit',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        // this.handleEvent('Edited', event);
-      },
-    },
-    {
-      label: '<i class="fas fa-fw fa-trash-alt"></i>',
-      a11yLabel: 'Delete',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.events = this.events.filter((iEvent) => iEvent !== event);
-        // this.handleEvent('Deleted', event);
-      },
-    },
-  ];
-
-  refresh: Subject<any> = new Subject();
-
-  events: CalendarEvent[] = [
-    {
-      title: '',
-      start: new Date('2021-04-26 14:00:00'),
-      end: new Date('2021-04-26 14:30:00'),
-      color: colors.grey
-      // draggable: true,
-      // resizable: {
-      //   beforeStart: true,
-      //   afterEnd: true
-      // }
-    },
-    {
-      title: '',
-      start: new Date('2021-04-28 07:30:00'),
-      end: new Date('2021-04-28 08:15:00'),
-      color: colors.grey
-      // draggable: true,
-      // resizable: {
-      //   beforeStart: true,
-      //   afterEnd: true
-      // }
-    },
-    {
-      title: '',
-      start: new Date('2021-04-27 12:00:00'),
-      end: new Date('2021-04-27 12:30:00'),
-      color: colors.grey
-      // draggable: true,
-      // resizable: {
-      //   beforeStart: true,
-      //   afterEnd: true
-      // }
-    },
-    {
-      title: '',
-      start: new Date('2021-04-28 08:30:00'),
-      end: new Date('2021-04-28 09:30:00'),
-      color: colors.grey
-      // draggable: true,
-      // resizable: {
-      //   beforeStart: true,
-      //   afterEnd: true
-      // }
-    },
-    {
-      title: '',
-      start: new Date('2021-04-27 15:15:00'),
-      end: new Date('2021-04-27 15:45:00'),
-      color: colors.grey
-      // draggable: true,
-      // resizable: {
-      //   beforeStart: true,
-      //   afterEnd: true
-      // }
-    }
-
-  ];
+  events: Observable<CalendarEvent<{ event: CalendarEvent }>[]>;
 
   locale: string = 'fr';
 
@@ -135,11 +57,16 @@ export class PlanningComponent implements OnInit {
     this.view = CalendarView.Day;
   }
 
-  constructor(private modal: NgbModal, private cdr: ChangeDetectorRef) { }
+  constructor(private modal: NgbModal, private cdr: ChangeDetectorRef, private calendarService: CalendarService) { }
 
   ngOnInit(): void {
-    console.log(this.events);
+    this.fetchEvents();
   }
+
+  fetchEvents() {
+    this.events = this.calendarService.readListEvent();
+  }
+
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {

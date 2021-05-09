@@ -71,18 +71,18 @@
       <mwl-calendar-month-view
         *ngSwitchCase="CalendarView.Month"
         [viewDate]="viewDate"
-        [events]="events"
-        [refresh]="refresh"
+        [events]="fetchEvents()"
         [locale]="locale"
         [excludeDays]="excludeDays"
         (dayClicked)="changeDay($event.day.date)"
+        (viewDateChange)="fetchEvents()"
+        (viewChange)="fetchEvents()"
       >
       </mwl-calendar-month-view>
       <mwl-calendar-week-view
         *ngSwitchCase="CalendarView.Week"
         [viewDate]="viewDate"
-        [events]="events"
-        [refresh]="refresh"
+        [events]="fetchEvents()"
         [excludeDays]="excludeDays"
         [locale]="locale"
         [dayStartHour]="7"
@@ -95,13 +95,14 @@
         (beforeViewRender)="beforeWeekViewRender3($event)"
         (beforeViewRender)="beforeWeekViewRender4($event)"
         (beforeViewRender)="beforeWeekViewRender5($event)"
+        (viewDateChange)="fetchEvents()"
+        (viewChange)="fetchEvents()"
       >
       </mwl-calendar-week-view>
       <mwl-calendar-day-view
         *ngSwitchCase="CalendarView.Day"
         [viewDate]="viewDate"
-        [events]="events"
-        [refresh]="refresh"
+        [events]="fetchEvents()"
         [locale]="locale"
         [dayStartHour]="7"
         [dayStartMinute]="00"
@@ -112,6 +113,8 @@
         (beforeViewRender)="beforeWeekViewRender3($event)"
         (beforeViewRender)="beforeWeekViewRender4($event)"
         (beforeViewRender)="beforeWeekViewRender5($event)"
+        (viewDateChange)="fetchEvents()"
+        (viewChange)="fetchEvents()"
       >
       </mwl-calendar-day-view>
     </div>
