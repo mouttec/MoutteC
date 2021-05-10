@@ -72,7 +72,8 @@ if ((isset($_GET['idContract'])) || (isset($_GET['idBooking']))) {
                 "idPickupAddress" => $idPickupAddress,
                 "idReturnAddress" => $idReturnAddress,
                 "idTeammatePickup" => $idTeammatePickup,
-                "$idTeammateReturn" => $idTeammateReturn
+                "idTeammateReturn" => $idTeammateReturn,
+                "additionnalFees" => $additionnalFees
             ];
             array_push($contracts_array, $contract_item);
         }

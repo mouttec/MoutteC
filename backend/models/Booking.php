@@ -116,8 +116,7 @@ class Booking {
         SELECT *
         FROM "
         . $this->table . " 
-        WHERE idBooking = :idBooking
-        LIMIT 0,1";
+        WHERE idBooking = :idBooking";
         $stmt = $this->conn->prepare($query);
 
         $params = ["idBooking" => htmlspecialchars(strip_tags($this->idBooking))];

@@ -19,6 +19,7 @@ class Contract
     public $idReturnAddress;
     public $idTeammatePickup;
     public $idTeammateReturn;
+    public $additionnalFees;
 
     public function __construct($db) 
     {
@@ -171,7 +172,7 @@ class Contract
         FROM "
         . $this->table . " 
         WHERE idContract = :idContract
-        LIMIT 0,1";
+        ";
         $stmt = $this->conn->prepare($query);
         
         $params = ["idContract" => htmlspecialchars(strip_tags($this->idContract))];
@@ -237,6 +238,27 @@ class Contract
 
         $params = [
             "urlReturnInventory" => htmlspecialchars(strip_tags($this->urlReturnInventory)),
+            "idContract" => htmlspecialchars(strip_tags($this->idContract))
+        ];
+
+        if ($stmt->execute($params)) {
+            return true;
+        }
+        return false;
+    }
+
+    public function addFee() 
+    {
+        $query = "
+            UPDATE "
+            . $this->table .
+            " SET
+            additionnalFees = :additionnalFees
+            WHERE idContract = :idContract";
+        $stmt = $this->conn->prepare($query);   
+
+        $params = [
+            "additionnalFees" => htmlspecialchars(strip_tags($this->additionnalFees)),
             "idContract" => htmlspecialchars(strip_tags($this->idContract))
         ];
 
