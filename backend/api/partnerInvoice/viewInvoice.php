@@ -4,11 +4,11 @@ header("Access-Control-Allow-Methods: POST");
 header("Content-Type: application/json");
 header("Access-Control-Allow-Headers: Access-Control-Allow-Headers, Access-Control-Allow-Methods, Content-Type, Authorization, X-Requested-With");
 include_once "../../config/Database.php";
-include_once "../../models/CustomerInvoice";
-include_once "../../models/Customer.php";
+include_once "../../models/PartnerInvoice";
+include_once "../../models/Partner.php";
 include_once "../../models/Booking.php";
+include_once "../../models/Customer.php";
 include_once "../../models/Contract.php";
-include_once "../../models/Address.php";
 include_once "../../models/Price.php";
 include_once "../../models/Car.php";
 
@@ -18,16 +18,17 @@ class PDF extends FPDF
 {
 	public function Header()
 	{
+	    // Logo
 	    $this->Image('../assets/logo.png',10,6,30);
 	    $this->SetFont('Arial','B',15);
 	    $this->Cell(80);
 	    $this->Cell(30,10,'Facture',1,0,'C');
 	    $this->Ln(0);
 	    $this->Cell(70);
-	    $this->Cell(30,10,'N° : '. $thisCustomerInvoice['invoiceNumber'],1,0,'C');
+	    $this->Cell(30,10,'N° : '. $thisPartnerInvoice['invoiceNumber'],1,0,'C');
 	    $this->Ln(0);
 	    $this->Cell(70);
-	    $this->Cell(30,10,'Date : '. $thisCustomerInvoice['invoiceDate'],1,0,'C');
+	    $this->Cell(30,10,'Date : '. $thisPartnerInvoice['invoiceDate'],1,0,'C');
 	    $this->Ln(20);
 	}
 
@@ -43,35 +44,33 @@ class PDF extends FPDF
 	}
 
 	function invoiceInfo() {
-		$thisCustomerName = $thisCustomer->lastNameCustomer ." ". $thisCustomer->firstNameCustomer;
-		$thisAddressStreet = $thisCustomerBillingAddress->numberAddressBilling.', '.$thisCustomerBillingAddress->typeAddressBilling.' '.$thisCustomerBillingAddress->nameAddressBilling;
-		$thisAddressZipCity = $thisCustomerBillingAddress->zipAddressBilling.' '.$thisCustomerBillingAddress->cityAddressBilling;
+		$thisAddressStreet = $thisPartner['numberAddressBilling'].', '.$thisPartner['typeAddressBilling'].' '.$thisPartner['nameAddressBilling'];
+		$thisAddressZipCity = $thisPartner['zipAddressBilling'].' '.$thisPartner['cityAddressBilling'];
 		$this->SetFont('Arial','B',12);
 		$this->Cell(20);
 		$this->Cell(80,0,'MoutteC',0,0,'L');
 		$this->SetFont('Arial','',12);
-		$this->Cell(80,0,$thisCustomerName,0,1,'L');
+		$this->Cell(80,0,$thisPartner['namePartner'],0,1,'L');
 		$this->Cell(20);
 		$this->Cell(80,0,'3 avenue Sainte Euphémie',0,0,'L');
 		$this->Cell(80,0,$thisAddressStreet,0,1,'L');
 		$this->Cell(20);
 		$this->Cell(80,0,'13380 Plan de Cuques',0,0,'L');
-		if (!empty($thisCustomerBillingAddress->addressStreetComplement)) {
-			$this->Cell(80,0,$thisCustomerBillingAddress->addressStreetComplement,0,1,'L');
+		if (!empty($thisPartner['addressStreetComplement'])) {
+			$this->Cell(80,0,$thisPartner['addressStreetComplement'],0,1,'L');
+			$this->Cell(20);
+			$this->Cell(80,0,'contact@mouttec.com',0,0,'L');
+			$this->Cell(80,0,$thisAddressZipCity,0,1,'L');
+			$this->Cell(20);
+			$this->Cell(80,0,'06.09.31.44.22',0,0,'L');
+			$this->Cell(80,0, $thisPartner['phonePartner'],0,1,'L');
 		} else {
 			$this->Cell(80,0,$thisAddressZipCity,0,1,'L');
-		}
-		$this->Cell(20);
-		$this->Cell(80,0,'contact@mouttec.com',0,0,'L');
-		if (!empty($thisCustomerBillingAddress->addressStreetComplement)) {
-			$this->Cell(80,0,$thisAddressZipCity,0,1,'L');
-		} else {
-			$this->Cell(80, 0, $thisCustomer->phoneCustomer,0,1,'L');
-		}
-		$this->Cell(20);
-		$this->Cell(80,0,'06.09.31.44.22',0,0,'L');
-		if (!empty($thisCustomerBillingAddress->addressStreetComplement)) {
-			$this->Cell(80, 0, $thisCustomer->phoneCustomer,0,1,'L');
+			$this->Cell(20);
+			$this->Cell(80,0,'contact@mouttec.com',0,0,'L');
+			$this->Cell(80,0, $thisPartner['phonePartner'],0,1,'L');
+			$this->Cell(20);
+			$this->Cell(80,0,'06.09.31.44.22',0,0,'L');
 		}
 		$this->Ln(20);
 	}
@@ -134,9 +133,7 @@ class PDF extends FPDF
 			$ttc = $prices_array[key($charges)]['montant'];
 			$tva = $ttc/(100+$tvaPercentage)*$tvaPercentage;
 			$ht = $ttc-$tva;
-			// $totalTvaAmount += $tva;
 			$totalTtcAmount += $ttc;
-			// $totalHtAmount += $ht;
 			//Description
 	        $this->Cell($w[0],10,$prices_array[key($charges)]['description'],1,0,'L',$fill);
 	        //Prix HT
@@ -167,7 +164,7 @@ class PDF extends FPDF
 		$this->Cell(80);
 		$this->Cell(40, 10,"Total TTC : ",1,0,'L');
 		$this->Cell(0,0,$totalTtcAmount,1,0,'R');
-		$this->SetFont('', 'B', '14');
+		$this->SetFont('', 'B', 14);
 		$this->Cell(40, 10,"Net à payer : ",1,0,'L', true);
 		$this->Cell(0,0,$totalTtcAmount,1,0,'R', true);
 	}
@@ -175,26 +172,24 @@ class PDF extends FPDF
 
 $db = new Database();
 $conn = $db->connect();
-$customerInvoice = new CustomerInvoice($conn);
+$partnerInvoice = new PartnerInvoice($conn);
+$partner = new Partner($conn);
 $customer = new Customer($conn);
 $booking = new Booking($conn);
 $contract = new Contract($conn);
-$address = new Address($conn);
 $price = new Price($conn);
 $car = new Car($conn);
 
 $decodedData = json_decode(file_get_contents("php://input"));
-$customerInvoice->idInvoice = $decodedData->idInvoice;
+$partnerInvoice->idInvoice = $decodedData->idInvoice;
 
-$thisCustomerInvoice = $customerInvoice->searchInvoiceById($customerInvoice);
-$booking->idBooking = $thisCustomerInvoice['idBooking'];
+$thisPartnerInvoice = $partnerInvoice->searchInvoiceById($partnerInvoice);
+$booking->idBooking = $thisPartnerInvoice['idBooking'];
 $thisBooking = $booking->searchBookingById($booking);
-$contract->idContract = $thisCustomerInvoice['idContract'];
+$contract->idContract = $thisPartnerInvoice['idContract'];
 $thisContract = $contract->searchContractByBooking($contract);
-$customer->idCustomer = $thisCustomerInvoice['idCustomer'];
-$thisCustomer = $customer->searchCustomerById($customer);
-$address->idAddress = $thisCustomer['idBillingAddress'];
-$thisCustomerBillingAddress = $address->searchAddressById($address);
+$partner->idCustomer = $thisPartnerInvoice['idCustomer'];
+$thisPartner = $partner->searchCustomerById($partner);
 $car->idCar = $thisBooking['idCar'];
 $thisCar = $car->searchCarById($car);
 

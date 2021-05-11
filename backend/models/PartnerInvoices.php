@@ -1,8 +1,8 @@
 <?php
-class CustomerInvoice 
+class PartnerInvoices 
 {
     private $conn;
-    private $table = "customerInvoices";
+    private $table = "partnerInvoices";
 
     public $idInvoice;
     public $invoiceNumber;
@@ -28,7 +28,7 @@ class CustomerInvoice
             " SET
             invoiceNumber = :invoiceNumber,
             invoiceLines = :invoiceLines,
-            amountInvoice = :amountInvoice
+            amountInvoice = :amountInvoice;
             idPartner = :idPartner,
             idCustomer = :idCustomer,
             idBooking = :idBooking,
@@ -44,7 +44,7 @@ class CustomerInvoice
             "idPartner" => htmlspecialchars(strip_tags($this->idPartner)),
             "idCustomer" => htmlspecialchars(strip_tags($this->idCustomer)),
             "idBooking" => htmlspecialchars(strip_tags($this->idBooking)),
-            "idContract" => htmlspecialchars(strip_tags($this->idContract))
+            "idContract" => htmlspecialchars(strip_tags($this->idContract)),
             "idCar" => htmlspecialchars(strip_tags($this->idCar))
         ];
 
@@ -54,8 +54,7 @@ class CustomerInvoice
         return false;
     }
 
-    public function listCustomerInvoices() 
-    {
+    public function listInvoices() {
         $query = "
             SELECT *
             FROM "
@@ -67,60 +66,63 @@ class CustomerInvoice
         if ($stmt->execute()) {
             return $stmt;
         }
-        return false;
+        return false;        
     }
 
-    public function listCustomerInvoicesByPartner() 
+    public function listInvoicesByPartner() 
     {
         $query = "
-        SELECT *
-        FROM "
-        . $this->table . " 
-        WHERE idPartner = :idPartner
-        ";
+            SELECT *
+            FROM "
+            . $this->table . " 
+            WHERE idPartner = :idPartner
+            ORDER BY
+            invoiceDate ASC";
         $stmt = $this->conn->prepare($query);
 
         $params = ["idPartner" => htmlspecialchars(strip_tags($this->idPartner))];
 
+        if ($stmt->execute($params)) {
+            return $stmt;
+        }
+        return false;
+    }
+
+    public function listInvoicesByMonth() 
+    {
+        $query = "
+        SELECT *
+        FROM "
+        . $this->table . " 
+        WHERE invoiceDate = :invoiceDate
+        ";
+        $stmt = $this->conn->prepare($query);
+
+        $params = ["invoiceDate" => htmlspecialchars(strip_tags($this->invoiceDate))];
+
         if($stmt->execute($params)) {
             return $stmt;
         }
         return false;
     }
 
-    public function listInvoicesByCustomer() 
+    public function listInvoicesByPartnerAndMonth() 
     {
         $query = "
         SELECT *
         FROM "
         . $this->table . " 
-        WHERE idCustomer = :idCustomer
+        WHERE (idPartner = :idPartner AND invoiceDate = :invoiceDate)
         ";
         $stmt = $this->conn->prepare($query);
 
-        $params = ["idCustomer" => htmlspecialchars(strip_tags($this->idCustomer))];
+        $params = [
+            "idPartner" => htmlspecialchars(strip_tags($this->idPartner));
+            "invoiceDate" => htmlspecialchars(strip_tags($this->invoiceDate))
+        ];
 
         if($stmt->execute($params)) {
             return $stmt;
-        }
-        return false;
-    }
-
-    public function searchInvoiceByBooking() 
-    {
-        $query = "
-        SELECT *
-        FROM "
-        . $this->table . " 
-        WHERE idBooking = :idBooking
-        ";
-        $stmt = $this->conn->prepare($query);
-
-        $params = ["idBooking" => htmlspecialchars(strip_tags($this->idBooking))];
-
-        if($stmt->execute($params)) {
-            $row = $stmt->fetch();    
-            return $row;
         }
         return false;
     }
@@ -140,25 +142,6 @@ class CustomerInvoice
         if($stmt->execute($params)) {
             $row = $stmt->fetch();    
             return $row;
-        }
-        return false;
-    }
-
-    public function listInvoicesByDate()
-    {
-        $query = "
-            SELECT *
-            FROM "
-            . $this->table . " 
-            WHERE
-            invoiceDate = :invoiceDate
-            ORDER BY invoiceDate ASC";
-        $stmt = $this->conn->prepare($query);
-
-        $params = ["invoiceDate" => htmlspecialchars(strip_tags($this->invoiceDate))];
-
-        if ($stmt->execute($params)) {
-            return $stmt;
         }
         return false;
     }

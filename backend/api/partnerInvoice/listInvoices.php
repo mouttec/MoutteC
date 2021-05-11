@@ -3,32 +3,28 @@ header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 header("Access-Control-Allow-Methods: POST");
 include_once "../../config/Database.php";
-include_once "../../models/CustomerInvoices.php";
+include_once "../../models/PartnerInvoices.php";
 
 $db = new Database();
 $conn = $db->connect();
-$customerInvoice = new CustomerInvoice($conn);
+$partnerInvoice = new PartnerInvoice($conn);
 
 $decodedData = json_decode(file_get_contents("php://input"));
 
-if (isset($decodedData->idBooking)) {
-    $customerInvoice->idBooking = $decodedData->idBooking;
-    $result = $customerInvoice->searchInvoiceByBooking($customerInvoice);
-} else if (isset($decodedData->idInvoice)) {
-    $customerInvoice->idInvoice = $decodedData->idInvoice;
-    $result = $custo->searchInvoiceById($customerInvoice);
+if (isset($decodedData->idInvoice)) {
+    $partnerInvoice->idInvoice = $decodedData->idInvoice;
+    $result = $custo->searchInvoiceById($partnerInvoice);
 } else {
-    if (isset($decodedData->idPartner)) {
-        $customerInvoice->idPartner = $decodedData->idPartner;
-        $invoices = $customerInvoice->listCustomerInvoicesByPartner($customerInvoice);
-    } elseif (isset($decodedData->idCustomer)) {
-        $customerInvoice->idCustomer = $decodedData->idCustomer;
-        $invoices = $customerInvoice->listInvoicesByCustomer($customerInvoice);
-    } elseif ((isset($decodedData->invoiceDate))) {
-        $customerInvoice->invoiceDate = $decodedData->invoiceDate;
-        $invoices = $customerInvoice->listInvoicesByDate($customerInvoice);
+    $partnerInvoice->idPartner = $decodedData->idPartner;
+    $partnerInvoice->invoiceDate = $decodedData->invoiceDate;
+    if ((isset($decodedData->idPartner)) && (isset($decodedData->invoiceDate))) {
+        $invoices = $partnerInvoice->listInvoicesByPartnerAndMonth($partnerInvoice);
+    } elseif (isset($decodedData->invoiceDate)) {
+        $invoices = $partnerInvoice->listInvoicesByMonth($partnerInvoice);        
+    } elseif (isset($decodedData->idPartner)) {
+        $invoices = $partnerInvoice->listInvoicesPartner($partnerInvoice);        
     } else {
-        $invoices = $customerInvoice->listCustomerInvoices();
+        $invoices = $partnerInvoice->listInvoices();
     }
     $counter = $invoices->rowCount();
     if ($counter > 0) {
