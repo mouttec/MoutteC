@@ -11,6 +11,7 @@ $conn = $db->connect();
 $partner = new Partner($conn);
 
 $decodedData = json_decode(file_get_contents("php://input"));
+echo json_encode($decodedData);
 
 $partner->namePartner = $decodedData->namePartner;
 $partner->numberAddressPartner = $decodedData->numberAddressPartner;

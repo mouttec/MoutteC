@@ -54,7 +54,8 @@ class PartnerInvoices
         return false;
     }
 
-    public function listInvoices() {
+    public function listInvoices() 
+    {
         $query = "
             SELECT *
             FROM "
