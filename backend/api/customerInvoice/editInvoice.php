@@ -6,8 +6,8 @@ header("Access-Control-Allow-Headers: Access-Control-Allow-Headers, Access-Contr
 include_once "../../config/Database.php";
 include_once "../../models/CustomerInvoices.php";
 include_once "../../models/Contract.php";
-include_once "../../model/Prices.php"
-include_once "../../model/Booking.php"
+include_once "../../model/Prices.php";
+include_once "../../model/Booking.php";
 
 $db = new Database();
 $conn = $db->connect();
