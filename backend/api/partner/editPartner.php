@@ -8,12 +8,12 @@ include_once "../../config/Database.php";
 
 $db = new Database();
 $conn = $db->connect();
-$partner = new Partner($conn);
+// $partner = new Partner($conn);
 
 $decodedData = json_decode(file_get_contents("php://input"));
 
 echo json_encode($decodedData);
-
+/*
 $partner->namePartner = $decodedData->namePartner;
 $partner->numberAddressPartner = $decodedData->numberAddressPartner;
 $partner->typeAddressPartner = $decodedData->typeAddressPartner;
@@ -54,3 +54,4 @@ if ($result) {
 } else {
     echo json_encode([ "message" => "Le Partner n'a pas pu être édité..." ]);
 }
+*/
