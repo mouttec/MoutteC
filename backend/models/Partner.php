@@ -28,6 +28,7 @@ class Partner
     public $cityAddressBilling;
     public $datePartner;
     public $idAgency;
+    public $typeBilling;
 
     public function __construct($db) 
     {
@@ -61,7 +62,8 @@ class Partner
             complementAddressBilling = :complementAddressBilling,
             zipAddressBilling = :zipAddressBilling,
             cityAddressBilling = :cityAddressBilling,
-            idAgency = :idAgency
+            idAgency = :idAgency,
+            typeBilling = :typeBilling
         ";
         $stmt = $this->conn->prepare($query);
 
@@ -88,6 +90,7 @@ class Partner
             "zipAddressBilling" => htmlspecialchars(strip_tags($this->zipAddressBilling)),
             "cityAddressBilling" => htmlspecialchars(strip_tags($this->cityAddressBilling)),
             "idAgency" => htmlspecialchars(strip_tags($this->idAgency))
+            "typeBilling" => htmlspecialchars(strip_tags($this->typeBilling))
         ];
 
         if ($stmt->execute($params)) {
@@ -180,6 +183,7 @@ class Partner
             zipAddressPartner = :zipAddressPartner,
             cityAddressPartner = :cityAddressPartner,
             phonePartner = :phonePartner,
+            statusPartner = :statusPartner,
             typePartner = :typePartner,
             mailPartner = :mailPartner,        
             nameBilling = :nameBilling,
@@ -191,8 +195,9 @@ class Partner
             zipAddressBilling = :zipAddressBilling,
             cityAddressBilling = :cityAddressBilling,
             idAgency = :idAgency
+            typeBilling = :typeBilling
             WHERE
-            usernamePartner = :usernamePartner
+            idPartner = :idPartner
         ";
         $stmt = $this->conn->prepare($query);
         $params = [
@@ -204,6 +209,7 @@ class Partner
             "zipAddressPartner" => htmlspecialchars(strip_tags($this->zipAddressPartner)),
             "cityAddressPartner" => htmlspecialchars(strip_tags($this->cityAddressPartner)),
             "phonePartner" => htmlspecialchars(strip_tags($this->phonePartner)),
+            "statusPartner" => htmlspecialchars(strip_tags($this->statusPartner)),
             "typePartner" => htmlspecialchars(strip_tags($this->typePartner)), 
             "mailPartner" => htmlspecialchars(strip_tags($this->mailPartner)),
             "nameBilling" => htmlspecialchars(strip_tags($this->nameBilling)),
@@ -215,7 +221,8 @@ class Partner
             "zipAddressBilling" => htmlspecialchars(strip_tags($this->zipAddressBilling)),
             "cityAddressBilling" => htmlspecialchars(strip_tags($this->cityAddressBilling)),
             "idAgency" => htmlspecialchars(strip_tags($this->idAgency)),
-            "usernamePartner" => htmlspecialchars(strip_tags($this->usernamePartner))
+            "typeBilling" => htmlspecialchars(strip_tags($this->typeBilling)),
+            "idPartner" => htmlspecialchars(strip_tags($this->idPartner))
         ];
 
         if ($stmt->execute($params)) {
@@ -253,12 +260,12 @@ class Partner
             " SET
             statusPartner = :statusPartner
             WHERE
-            usernamePartner = :usernamePartner       
+            idPartner = :idPartner       
         ";
         $stmt = $this->conn->prepare($query);
         $params = [
             "statusPartner" => "Partenaire",
-            "usernamePartner" => htmlspecialchars(strip_tags($this->usernamePartner)),
+            "idPartner" => htmlspecialchars(strip_tags($this->idPartner)),
         ];
         if ($stmt->execute($params)) {
             return true;

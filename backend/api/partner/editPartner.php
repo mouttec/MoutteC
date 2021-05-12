@@ -13,6 +13,7 @@ $partner = new Partner($conn);
 $decodedData = json_decode(file_get_contents("php://input"));
 echo json_encode($decodedData);
 
+$partner->usernamePartner = $decodedData->usernamePartner;
 $partner->namePartner = $decodedData->namePartner;
 $partner->numberAddressPartner = $decodedData->numberAddressPartner;
 $partner->typeAddressPartner = $decodedData->typeAddressPartner;
@@ -23,6 +24,7 @@ $partner->cityAddressPartner = $decodedData->cityAddressPartner;
 $partner->phonePartner = $decodedData->phonePartner;
 $partner->typePartner = $decodedData->typePartner;
 $partner->mailPartner = $decodedData->mailPartner;
+$partner->statusPartner = $decodedData->statusPartner;
 $partner->nameBilling = $decodedData->nameBilling;
 $partner->siretPartner = $decodedData->siretPartner;
 $partner->numberAddressBilling = $decodedData->numberAddressBilling;
@@ -32,15 +34,11 @@ $partner->complementAddressBilling = $decodedData->complementAddressBilling;
 $partner->zipAddressBilling = $decodedData->zipAddressBilling;
 $partner->cityAddressBilling = $decodedData->cityAddressBilling;
 $partner->idAgency = $decodedData->idAgency;
+$partner->typeBilling = $decodedData->typeBilling;
 
-if (isset($decodedData->usernamePartner)) {
-	$partner->usernamePartner = $decodedData->usernamePartner;
-	if (isset($decodedData->statusPartner)) {
-		$partner->statusPartner = $decodedData->statusPartner;
-		$result = $partner->activatePartner($partner);
-	} else {
-    	$result = $partner->updatePartner($partner);
-	}
+if (isset($decodedData->idPartner)) {
+	$partner->idPartner = $decodedData->idPartner;
+	$result = $partner->updatePartner($partner);
 } else {
 	if (isset($decodedData->password)) {
 		$partner->mixedPassword = $decodedData->password;

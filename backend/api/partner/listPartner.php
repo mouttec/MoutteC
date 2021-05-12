@@ -46,7 +46,8 @@ if (isset($_GET['idPartner'])) {
 	            "complementAddressBilling" => $complementAddressBilling,
 	            "zipAddressBilling" => $zipAddressBilling,
 	            "cityAddressBilling" => $cityAddressBilling,
-	            "idAgency" => $idAgency
+	            "idAgency" => $idAgency,
+	            "typeBilling" => $typeBilling
     		];
     		array_push($partners_array, $partner_item);
     	}
