@@ -11,7 +11,6 @@ $conn = $db->connect();
 $partner = new Partner($conn);
 
 $decodedData = json_decode(file_get_contents("php://input"));
-echo json_encode($decodedData);
 
 $partner->usernamePartner = $decodedData->usernamePartner;
 $partner->namePartner = $decodedData->namePartner;
@@ -40,10 +39,8 @@ if (isset($decodedData->idPartner)) {
 	$partner->idPartner = $decodedData->idPartner;
 	$result = $partner->updatePartner($partner);
 } else {
-	if (isset($decodedData->password)) {
-		$partner->mixedPassword = $decodedData->password;
-	    $result = $partner->createPartner($partner);
-	}
+	$partner->mixedPassword = $decodedData->password;
+    $result = $partner->createPartner($partner);
 }
 
 if ($result) {
