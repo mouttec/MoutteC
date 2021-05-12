@@ -23,5 +23,5 @@ if (!empty($partnerExists)) {
 		echo json_encode('Le mot de passe est erroné');
 	}
 } else {
-	http_response_code(404);	
+	echo json_encode('Le partnenaire n\'existe pas');
 }

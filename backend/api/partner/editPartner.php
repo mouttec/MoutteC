@@ -4,13 +4,14 @@ header("Access-Control-Allow-Methods: POST");
 header("Content-Type: application/json");
 header("Access-Control-Allow-Headers: Access-Control-Allow-Headers, Access-Control-Allow-Methods, Content-Type, Authorization, X-Requested-With");
 include_once "../../config/Database.php";
-include_once "../../models/Partner.php";
+// include_once "../../models/Partner.php";
 
 $db = new Database();
 $conn = $db->connect();
 $partner = new Partner($conn);
 
 $decodedData = json_decode(file_get_contents("php://input"));
+
 echo json_encode($decodedData);
 
 $partner->namePartner = $decodedData->namePartner;
