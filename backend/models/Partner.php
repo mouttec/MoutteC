@@ -89,7 +89,7 @@ class Partner
             "complementAddressBilling" => htmlspecialchars(strip_tags($this->complementAddressBilling)),
             "zipAddressBilling" => htmlspecialchars(strip_tags($this->zipAddressBilling)),
             "cityAddressBilling" => htmlspecialchars(strip_tags($this->cityAddressBilling)),
-            "idAgency" => htmlspecialchars(strip_tags($this->idAgency))
+            "idAgency" => htmlspecialchars(strip_tags($this->idAgency)),
             "typeBilling" => htmlspecialchars(strip_tags($this->typeBilling))
         ];
 
