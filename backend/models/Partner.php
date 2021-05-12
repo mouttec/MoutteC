@@ -134,7 +134,8 @@ class Partner
         return false;
     }
 
-    public function searchPartnerById() {
+    public function searchPartnerById() 
+    {
         $query = "
         SELECT *
         FROM "
@@ -151,7 +152,8 @@ class Partner
         return false;
     }
 
-    public function searchPartnerByUsername() {
+    public function searchPartnerByUsername() 
+    {
         $query = "
             SELECT *
             FROM "
@@ -175,6 +177,7 @@ class Partner
             UPDATE "
             . $this->table .
             " SET
+            usernamePartner = :usernamePartner,
             namePartner = :namePartner,
             numberAddressPartner = :numberAddressPartner,
             typeAddressPartner = :typeAddressPartner,
@@ -201,6 +204,7 @@ class Partner
         ";
         $stmt = $this->conn->prepare($query);
         $params = [
+            "usernamePartner" => htmlspecialchars(strip_tags($this->usernamePartner)),
             "namePartner" => htmlspecialchars(strip_tags($this->namePartner)),
             "numberAddressPartner" => htmlspecialchars(strip_tags($this->numberAddressPartner)),
             "typeAddressPartner" => htmlspecialchars(strip_tags($this->typeAddressPartner)),
@@ -265,7 +269,7 @@ class Partner
         $stmt = $this->conn->prepare($query);
         $params = [
             "statusPartner" => "Partenaire",
-            "idPartner" => htmlspecialchars(strip_tags($this->idPartner)),
+            "idPartner" => htmlspecialchars(strip_tags($this->idPartner))
         ];
         if ($stmt->execute($params)) {
             return true;
