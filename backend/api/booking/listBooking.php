@@ -4,14 +4,23 @@ header("Content-Type: application/json");
 header("Access-Control-Allow-Methods: GET");
 include_once "../../config/Database.php";
 include_once "../../models/Booking.php";
+include_once "../../models/Customer.php";
+include_once "../../models/Car.php";
 
 $db = new Database();
 $conn = $db->connect();
 $booking = new Booking($conn);
+$customer = new Customer($conn);
 
 if (isset($_GET['idBooking'])) {
     $booking->idBooking = $_GET['idBooking'];
-    $result = $booking->searchBookingById();
+    $thisBooking = $booking->searchBookingById();
+    $customer->idCustomer = $thisBooking['idCustomer'];
+    $thisCustomer = $customer->searchCustomerById($customer);
+    $car->idCar = $thisBooking['idCar'];
+    $thisCar = $car->searchCarById($car);
+    $result = array();
+    array_push($result, $thisBooking, $thisCustomer, $thisCar);
 } else {
     if (isset($_GET['idPartner'])) {
         $booking->idPartner = $_GET['idPartner'];
@@ -48,6 +57,11 @@ if (isset($_GET['idBooking'])) {
                  "idReturnAddress" => $idReturnAddress,
                  "idAgency" => $idAgency
             ];
+            $customer->idCustomer = $idCustomer;
+            $thisCustomer = $customer->searchCustomerById($customer);
+            $car->idCar = $idCar;
+            $thisCar = $car->searchCarById($car);
+            array_push($booking_item, $thisCustomer, $thisCar);
             array_push($bookings_array, $booking_item);
         }
         $result = $bookings_array;
