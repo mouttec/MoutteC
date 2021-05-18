@@ -82,8 +82,7 @@ class Teammate {
         SELECT *
         FROM "
         . $this->table . " 
-        WHERE idTeammate = :idTeammate
-        LIMIT 0,1";
+        WHERE idTeammate = :idTeammate";
         $stmt = $this->conn->prepare($query);
 
         $params = ["idTeammate" => htmlspecialchars(strip_tags($this->idTeammate))];
@@ -95,14 +94,47 @@ class Teammate {
         return false;
     }
 
+    public function searchTeammatesByJob() 
+    {
+        $query = "
+        SELECT *
+        FROM "
+        . $this->table . " 
+        WHERE jobTeammate = :jobTeammate";
+        $stmt = $this->conn->prepare($query);
+
+        $params = ["jobTeammate" => htmlspecialchars(strip_tags($this->jobTeammate))];
+
+        if ($stmt->execute($params)) {
+            return $stmt;
+        }
+        return false;
+    }
+
+    public function searchTeammatesByAgency() 
+    {
+        $query = "
+        SELECT *
+        FROM "
+        . $this->table . " 
+        WHERE idAgency = :idAgency";
+        $stmt = $this->conn->prepare($query);
+
+        $params = ["idAgency" => htmlspecialchars(strip_tags($this->idAgency))];
+
+        if ($stmt->execute($params)) {
+            return $stmt;
+        }
+        return false;
+    }
+
     public function searchTeammateByUsername() 
     {
         $query = "
         SELECT *
         FROM "
         . $this->table . " 
-        WHERE usernameTeammate = :usernameTeammate
-        LIMIT 0,1";
+        WHERE usernameTeammate = :usernameTeammate";
         $stmt = $this->conn->prepare($query);
 
         $params = ["usernameTeammate" => htmlspecialchars(strip_tags($this->usernameTeammate))];

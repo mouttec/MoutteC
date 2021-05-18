@@ -77,8 +77,7 @@ class Agency {
         SELECT *
         FROM "
         . $this->table . " 
-        WHERE idAgency = :idAgency
-        LIMIT 0,1";
+        WHERE idAgency = :idAgency";
         
         $stmt = $this->conn->prepare($query);
         $params = ["idAgency" => htmlspecialchars(strip_tags($this->idAgency))];
