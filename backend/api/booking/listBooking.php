@@ -11,6 +11,7 @@ $db = new Database();
 $conn = $db->connect();
 $booking = new Booking($conn);
 $customer = new Customer($conn);
+$car = new Car($conn);
 
 if (isset($_GET['idBooking'])) {
     $booking->idBooking = $_GET['idBooking'];
