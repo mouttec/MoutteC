@@ -2,7 +2,7 @@
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 header("Access-Control-Allow-Methods: POST");
-include_once("database.php");
+include_once("../../config/Database.php");
 include_once "../../models/Partner.php";
 
 $db = new Database();
@@ -16,9 +16,12 @@ $password = htmlspecialchars($decodedData->password);
 $partnerExists = $partner->searchPartnerByUsername($partner);
 
 //Si un partner existe avec cet username et que le password matche
-if ((!empty($partnerExists)) && 
-	(password_verify($password, $partnerExists->mixedPassword))) {
-		echo json_encode($partnerExists);
+if (!empty($partnerExists)) {
+	if (password_verify($password, $partnerExists['mixedPassword'])) {
+		echo json_encode($partnerExists['iPartner']);
+	} else {
+		echo json_encode('Le mot de passe est erroné');
+	}
 } else {
-	http_response_code(404);	
+	echo json_encode('Le partnenaire n\'existe pas');
 }

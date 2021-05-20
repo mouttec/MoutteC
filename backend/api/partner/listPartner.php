@@ -28,25 +28,16 @@ if (isset($_GET['idPartner'])) {
 				"idPartner" => $idPartner,
 	            "usernamePartner" => $usernamePartner,
 	            "namePartner" => $namePartner,
-	            "numberAddressPartner" => $numberAddressPartner,
-	            "typeAddressPartner" => $typeAddressPartner,
-	            "nameAddressPartner" => $nameAddressPartner,
-	            "complementAddressPartner" => $complementAddressPartner,
-	            "zipAddressPartner" => $zipAddressPartner,
-	            "cityAddressPartner" => $cityAddressPartner,
+	            "addressPartner" => $addressPartner,
 	            "phonePartner" => $phonePartner,
 	            "statusPartner" => $statusPartner,
 	            "typePartner" => $typePartner,
 	            "mailPartner" => $mailPartner,        
 	            "nameBilling" => $nameBilling,
 	            "siretPartner" => $siretPartner,
-	            "numberAddressBilling" => $numberAddressBilling,
-	            "typeAddressBilling" => $typeAddressBilling,
-	            "nameAddressBilling" => $nameAddressBilling,
-	            "complementAddressBilling" => $complementAddressBilling,
-	            "zipAddressBilling" => $zipAddressBilling,
-	            "cityAddressBilling" => $cityAddressBilling,
-	            "idAgency" => $idAgency
+	            "addrerssBilling" => $addressBilling,
+	            "idAgency" => $idAgency,
+	            "typeBilling" => $typeBilling
     		];
     		array_push($partners_array, $partner_item);
     	}

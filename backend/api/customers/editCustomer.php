@@ -13,6 +13,7 @@ $customer = new Customer($conn);
 
 $decodedData = json_decode(file_get_contents("php://input"));
 
+$customer->idBillingAddress = $decodedData->idBillingAddress;
 $customer->firstNameCustomer = $decodedData->firstNameCustomer;
 $customer->lastNameCustomer = $decodedData->lastNameCustomer;
 $customer->dateOfBirthdayCustomer = $decodedData->dateOfBirthdayCustomer;

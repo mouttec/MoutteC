@@ -68,12 +68,7 @@ if (empty($decodedData->idCar)) {
 if (!empty($decodedData->addressStreetNumber)) {
     //adresse aller = domicile client > partenaire
     $address->idCustomer = $thisCustomer->idCustomer;
-    $address->addressStreetNumber = $decodedData->addressStreetNumber;
-    $address->addressStreetType = $decodedData->addressStreetType;
-    $address->addressStreetName = $decodedData->addressStreetName;
-    $address->addressStreetComplement = $decodedData->addressStreetComplement;
-    $address->addressZip = $decodedData->addressZip;
-    $address->addressCity = $decodedData->addressCity;
+    $address->address = $decodedData->address;
     $address->createAddress($address);
     $addressForthId = $address->searchAddressId($address);
 }
@@ -81,12 +76,15 @@ if (!empty($decodedData->addressStreetNumber)) {
 if (!empty($decodedData->addressBackStreetNumber)) {
     //adresse retour = partenaire > domicile client
     $address->idCustomer = $thisCustomer->idCustomer;
-    $address->addressStreetNumber = $decodedData->addressBackStreetNumber;
-    $address->addressStreetType = $decodedData->addressBackStreetType;
-    $address->addressStreetName = $decodedData->addressBackStreetName;
-    $address->addressStreetComplement = $decodedData->addressBackStreetComplement;
-    $address->addressZip = $decodedData->addressBackZip;
-    $address->addressCity = $decodedData->addressBackCity;
+    $address->address = $decodedData->address;
+    $address->createAddress($address);
+    $addressBackId = $address->searchAddressId($address);
+}
+
+if (!empty($decodedData->addressBilling)) {
+    //adresse retour = partenaire > domicile client
+    $address->idCustomer = $thisCustomer->idCustomer;
+    $address->address = $decodedData->address;
     $address->createAddress($address);
     $addressBackId = $address->searchAddressId($address);
 }

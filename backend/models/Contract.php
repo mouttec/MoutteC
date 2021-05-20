@@ -10,15 +10,16 @@ class Contract
     public $idCustomer;
     public $idPartner;
     public $idAgency;
-    public $urlCustomerForthInventory;
-    public $urlPartnerForthInventory;
-    public $urlPartnerBackInventory;
-    public $urlCustomerBackInventory;
+    public $urlPickupInventory;
+    public $urlArrivalInventory;
+    public $urlDepartureInventory;
+    public $urlReturnInventory;
     public $dateContract;
-    public $idForthAddress;
-    public $idBackAddress;
-    public $idTeammateForth;
-    public $idTeammateBack;
+    public $idPickupAddress;
+    public $idReturnAddress;
+    public $idTeammatePickup;
+    public $idTeammateReturn;
+    public $additionnalFees;
 
     public function __construct($db) 
     {
@@ -36,10 +37,10 @@ class Contract
             idCustomer = :idCustomer,
             idPartner = :idPartner,
             idAgency = :idAgency,
-            urlForthInventory = :urlForthInventory,
-            idForthAddress = :idForthAddress,
+            urlPickupInventory = :urlPickupInventory,
+            idPickupAddress = :idPickupAddress,
             idReturnAddress = :idReturnAddress,
-            idTeammateForth = :idTeammateForth
+            idTeammatePickup = :idTeammatePickup
         ";
         $stmt = $this->conn->prepare($query);
 
@@ -49,10 +50,10 @@ class Contract
             "idCustomer" => htmlspecialchars(strip_tags($this->idCustomer)),
             "idPartner" => htmlspecialchars(strip_tags($this->idPartner)),
             "idAgency" => htmlspecialchars(strip_tags($this->idAgency)),
-            "urlCustomerForthInventory" => htmlspecialchars(strip_tags($this->urlCustomerForthInventory)),
-            "idForthAddress" => htmlspecialchars(strip_tags($this->idForthAddress)),
+            "urlPickupInventory" => htmlspecialchars(strip_tags($this->urlPickupInventory)),
+            "idPickupAddress" => htmlspecialchars(strip_tags($this->idPickupAddress)),
             "idReturnAddress" => htmlspecialchars(strip_tags($this->idReturnAddress)),
-            "idTeammateForth" => htmlspecialchars(strip_tags($this->idTeammateForth))
+            "idTeammatePickup" => htmlspecialchars(strip_tags($this->idTeammatePickup))
         ];
 
         if ($stmt->execute($params)) {
@@ -128,7 +129,7 @@ class Contract
         return false;    
     }
 
-    public function searchContractsByAgency() 
+    public function searchContractByAgency() 
     {
         $query = "
         SELECT *
@@ -171,7 +172,7 @@ class Contract
         FROM "
         . $this->table . " 
         WHERE idContract = :idContract
-        LIMIT 0,1";
+        ";
         $stmt = $this->conn->prepare($query);
         
         $params = ["idContract" => htmlspecialchars(strip_tags($this->idContract))];
@@ -183,18 +184,18 @@ class Contract
         return false;
     }
 
-    public function addPartnerForthInventory() 
+    public function addArrivalInventory() 
     {
         $query = "
             UPDATE "
             . $this->table .
             " SET
-            urlPartnerForthInventory = :urlPartnerForthInventory
+            urlArrivalInventory = :urlArrivalInventory
             WHERE idContract = :idContract";
         $stmt = $this->conn->prepare($query);
 
         $params = [
-            "urlPartnerForthInventory" => htmlspecialchars(strip_tags($this->urlPartnerForthInventory)),
+            "urlArrivalInventory" => htmlspecialchars(strip_tags($this->urlArrivalInventory)),
             "idContract" => htmlspecialchars(strip_tags($this->idContract))
         ];
         if ($stmt->execute($params)) {
@@ -203,20 +204,20 @@ class Contract
         return false;
     }
 
-    public function addPartnerBackInventory() 
+    public function addDepartureInventory() 
     {
         $query = "
             UPDATE "
             . $this->table .
             " SET
-            idTeammateBack = :idTeammateBack,            
-            urlPartnerBacklInventory = :urlPartnerBackInventory
+            idTeammateReturn = :idTeammateReturn,            
+            urlDeparturelInventory = :urlDepartureInventory
             WHERE idContract = :idContract";
         $stmt = $this->conn->prepare($query);
 
         $params = [
-            "idTeammateBack" => htmlspecialchars(strip_tags($this->idTeammateBack)),
-            "urlPartnerBackInventory" => htmlspecialchars(strip_tags($this->urlPartnerBackInventory)),
+            "idTeammateReturn" => htmlspecialchars(strip_tags($this->idTeammateReturn)),
+            "urlDepartureInventory" => htmlspecialchars(strip_tags($this->urlDepartureInventory)),
             "idContract" => htmlspecialchars(strip_tags($this->idContract))
         ];
         if ($stmt->execute($params)) {
@@ -225,18 +226,39 @@ class Contract
         return false;
     }
 
-    public function addCustomerBackInventory() 
+    public function addReturnInventory() 
     {
         $query = "
             UPDATE "
             . $this->table .
             " SET
-            urlCustomerBackInventory = :urlCustomerBackInventory
+            urlReturnInventory = :urlReturnInventory
             WHERE idContract = :idContract";
         $stmt = $this->conn->prepare($query);   
 
         $params = [
-            "urlCustomerBackInventory" => htmlspecialchars(strip_tags($this->urlCustomerBackInventory)),
+            "urlReturnInventory" => htmlspecialchars(strip_tags($this->urlReturnInventory)),
+            "idContract" => htmlspecialchars(strip_tags($this->idContract))
+        ];
+
+        if ($stmt->execute($params)) {
+            return true;
+        }
+        return false;
+    }
+
+    public function addFee() 
+    {
+        $query = "
+            UPDATE "
+            . $this->table .
+            " SET
+            additionnalFees = :additionnalFees
+            WHERE idContract = :idContract";
+        $stmt = $this->conn->prepare($query);   
+
+        $params = [
+            "additionnalFees" => htmlspecialchars(strip_tags($this->additionnalFees)),
             "idContract" => htmlspecialchars(strip_tags($this->idContract))
         ];
 

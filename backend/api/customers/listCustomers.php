@@ -26,6 +26,7 @@ if (isset($_GET['idCustomer'])) {
             extract($row);
             $customer_item = [
                  "idCustomer" => $idCustomer,
+                 "idBillingAddress" => $idBillingAddress,
                  "firstNameCustomer" => $firstNameCustomer,
                  "lastNameCustomer" => $lastNameCustomer,
                  "dateOfBirthdayCustomer" => $dateOfBirthdayCustomer,

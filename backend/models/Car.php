@@ -41,7 +41,8 @@ class Car
             "modelCar" => htmlspecialchars(strip_tags($this->modelCar)),
             "dateOfCirculationCar" => htmlspecialchars(strip_tags($this->dateOfCirculationCar)),
             "motorizationCar" => htmlspecialchars(strip_tags($this->motorizationCar)),
-            "urlGrayCard" => htmlspecialchars(strip_tags($this->urlGrayCard))
+            "urlGrayCard" => "adresseServeur/" . htmlspecialchars(strip_tags($this->urlGrayCard))
+
         ];
 
         if($stmt->execute($params)) {
@@ -139,7 +140,7 @@ class Car
             "modelCar" => htmlspecialchars(strip_tags($this->modelCar)),
             "dateOfCirculationCar" => htmlspecialchars(strip_tags($this->dateOfCirculationCar)),
             "motorizationCar" => htmlspecialchars(strip_tags($this->motorizationCar)),
-            "urlGrayCard" => htmlspecialchars(strip_tags($this->urlGrayCard)),
+            "urlGrayCard" => "adresseServeur/" . htmlspecialchars(strip_tags($this->urlGrayCard)),
             "idCar" => htmlspecialchars(strip_tags($this->idCar))
         ];
 

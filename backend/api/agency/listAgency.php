@@ -22,12 +22,7 @@ if (isset($_GET['idAgency'])) {
     		$agency_item = [
     			"idAgency" => $idAgency,
 	            "nameAgency" => $nameAgency,
-	            "numberAddressAgency" => $numberAddressAgency,
-	            "typeAddressAgency" => $typeAddressAgency,
-	            "nameAddressAgency" => $nameAddressAgency,
-	            "complementAddressAgency" => $complementAddressAgency,
-	            "zipAddressAgency" => $zipAddressAgency,
-	            "cityAddressAgency" => $cityAddressAgency,
+	            "addressAgency" => $addressAgency,
 	            "phoneAgency" => $phoneAgency,
 	            "mailAgency" => $mailAgency,
 	            "statusAgency" => $statusAgency

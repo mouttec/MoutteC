@@ -5,12 +5,7 @@ class Agency {
 
     public $idAgency;
     public $nameAgency;
-    public $numberAddressAgency;
-    public $typeAddressAgency;
-    public $nameAddressAgency;
-    public $complementAddressAgency;
-    public $zipAddressAgency;
-    public $cityAddressAgency;
+    public $addressAgency;
     public $phoneAgency;
     public $mailAgency;
     public $statusAgency;
@@ -96,12 +91,7 @@ class Agency {
             . $this->table .
             " SET
             nameAgency = :nameAgency,
-            numberAddressAgency = :numberAddressAgency,
-            typeAddressAgency = :typeAddressAgency,
-            nameAddressAgency = :nameAddressAgency,
-            complementAddressAgency = :complementAddressAgency,
-            zipAddressAgency = :zipAddressAgency,
-            cityAddressAgency = :cityAddressAgency,
+            addressAgency = :addressAgency,
             phoneAgency = :phoneAgency,
             mailAgency = :mailAgency,
             WHERE
@@ -111,12 +101,7 @@ class Agency {
         $stmt = $this->conn->prepare($query);
         $params = [
             "nameAgency" => htmlspecialchars(strip_tags($this->nameAgency)),
-            "numberAddressAgency" => htmlspecialchars(strip_tags($this->numberAddressAgency)),
-            "typeAddressAgency" => htmlspecialchars(strip_tags($this->typeAddressAgency)),
-            "nameAddressAgency" => htmlspecialchars(strip_tags($this->nameAddressAgency)),
-            "complementAddressAgency" => htmlspecialchars(strip_tags($this->complementAddressAgency)),
-            "zipAddressAgency" => htmlspecialchars(strip_tags($this->zipAddressAgency)),
-            "cityAddressAgency" => htmlspecialchars(strip_tags($this->cityAddressAgency)),
+            "addressAgency" => htmlspecialchars(strip_tags($this->addressAgency)),
             "phoneAgency" => htmlspecialchars(strip_tags($this->phoneAgency)),
             "mailAgency" => htmlspecialchars(strip_tags($this->mailAgency)),
             "idAgency" => htmlspecialchars(strip_tags($this->idAgency))

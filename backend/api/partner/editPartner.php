@@ -12,39 +12,25 @@ $partner = new Partner($conn);
 
 $decodedData = json_decode(file_get_contents("php://input"));
 
+$partner->usernamePartner = $decodedData->usernamePartner;
 $partner->namePartner = $decodedData->namePartner;
-$partner->numberAddressPartner = $decodedData->numberAddressPartner;
-$partner->typeAddressPartner = $decodedData->typeAddressPartner;
-$partner->nameAddressPartner = $decodedData->nameAddressPartner;
-$partner->complementAddressPartner = $decodedData->complementAddressPartner;
-$partner->zipAddressPartner = $decodedData->zipAddressPartner;
-$partner->cityAddressPartner = $decodedData->cityAddressPartner;
+$partner->addressPartner = $decodedData->addressPartner;
 $partner->phonePartner = $decodedData->phonePartner;
 $partner->typePartner = $decodedData->typePartner;
 $partner->mailPartner = $decodedData->mailPartner;
+$partner->statusPartner = $decodedData->statusPartner;
 $partner->nameBilling = $decodedData->nameBilling;
 $partner->siretPartner = $decodedData->siretPartner;
-$partner->numberAddressBilling = $decodedData->numberAddressBilling;
-$partner->typeAddressBilling = $decodedData->typeAddressBilling;
-$partner->nameAddressBilling = $decodedData->nameAddressBilling;
-$partner->complementAddressBilling = $decodedData->complementAddressBilling;
-$partner->zipAddressBilling = $decodedData->zipAddressBilling;
-$partner->cityAddressBilling = $decodedData->cityAddressBilling;
+$partner->addressBilling = $decodedData->addressBilling;
 $partner->idAgency = $decodedData->idAgency;
+$partner->typeBilling = $decodedData->typeBilling;
 
-if (isset($decodedData->usernamePartner)) {
-	$partner->usernamePartner = $decodedData->usernamePartner;
-	if (isset($decodedData->statusPartner)) {
-		$partner->statusPartner = $decodedData->statusPartner;
-		$result = $partner->activatePartner($partner);
-	} else {
-    	$result = $partner->updatePartner($partner);
-	}
+if (isset($decodedData->idPartner)) {
+	$partner->idPartner = $decodedData->idPartner;
+	$result = $partner->updatePartner($partner);
 } else {
-	if (isset($decodedData->password)) {
-		$partner->mixedPassword = $decodedData->password;
-	    $result = $partner->createPartner($partner);
-	}
+	$partner->mixedPassword = $decodedData->password;
+    $result = $partner->createPartner($partner);
 }
 
 if ($result) {

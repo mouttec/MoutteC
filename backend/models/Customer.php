@@ -4,6 +4,7 @@ class Customer {
     private $table = "customers";
 
     public $idCustomer;
+    public $idBillingAddress;
     public $firstNameCustomer;
     public $lastNameCustomer;
     public $dateOfBirthdayCustomer;
@@ -13,7 +14,6 @@ class Customer {
     public $mixedPassword;
     public $idPartner;
     public $dateCustomer;
-    public $idBillingAddress;
 
     public function __construct($db) 
     {
@@ -26,6 +26,7 @@ class Customer {
             INSERT INTO "
             . $this->table .
             " SET
+            idBillingAddress = :idBillingAddress,
             firstNameCustomer = :firstNameCustomer,
             lastNameCustomer = :lastNameCustomer,
             dateOfBirthdayCustomer = :dateOfBirthdayCustomer,
@@ -37,21 +38,18 @@ class Customer {
         $stmt = $this->conn->prepare($query);
 
         $params = [
+            "idBillingAddress" => htmlspecialchars(strip_tags($this->idBillingAddress)),
             "firstNameCustomer" => htmlspecialchars(strip_tags($this->firstNameCustomer)),
             "lastNameCustomer" => htmlspecialchars(strip_tags($this->lastNameCustomer)),
             "dateOfBirthdayCustomer" => htmlspecialchars(strip_tags($this->dateOfBirthdayCustomer)),
             "phoneCustomer" => htmlspecialchars(strip_tags($this->phoneCustomer)),
             "mailCustomer" => htmlspecialchars(strip_tags($this->mailCustomer)),
-            "statusCustomer" => htmlspecialchars(strip_tags($this->statusCustomer)),
+            "statusCustomer" => "Actif",
             "mixedPassword" => password_hash($this->mixedPassword, PASSWORD_DEFAULT)
         ];
 
         if ($stmt->execute($params)) {
-            $query = "SELECT max(idCustomer) FROM ". $this->table;
-            $stmt = $this->conn->prepare($query);
-            $stmt->execute();
-            $row = $stmt->fetch();
-            return $row;
+            return true;
         }
         return false;
     }
@@ -111,10 +109,11 @@ class Customer {
     public function searchCustomerById() 
     {
         $query = "
-            SELECT *
-            FROM "
-            . $this->table . " 
-            WHERE idCustomer = :idCustomer";
+        SELECT *
+        FROM "
+        . $this->table . " 
+        WHERE idCustomer = :idCustomer
+        LIMIT 0,1";
         $stmt = $this->conn->prepare($query);
 
         $params = ["idCustomer" => htmlspecialchars(strip_tags($this->idCustomer))];
@@ -131,33 +130,14 @@ class Customer {
         $query = "
             SELECT *
             FROM "
-            .   $this->table . 
-            " WHERE (lastNameCustomer = :lastNameCustomer AND firstNameCustomer = :firstNameCustomer)";
+            . $this->table . " 
+            WHERE (lastNameCustomer = :lastNameCustomer AND firstNameCustomer = :firstNameCustomer)";
         $stmt = $this->conn->prepare($query);
 
         $params = [
             "lastNameCustomer" => htmlspecialchars(strip_tags($this->lastNameCustomer)),
             "firstNameCustomer" => htmlspecialchars(strip_tags($this->firstNameCustomer))
         ];
-
-        if($stmt->execute($params)) {
-            $row = $stmt->fetch();
-            return $row;
-        }
-        return false;
-    }
-
-    public function searchCustomersByLastname() 
-    {
-        $query = "
-            SELECT *
-            FROM "
-            .   $this->table . 
-            " WHERE lastNameCustomer = :lastNameCustomer
-            ORDER BY idCustomer";
-        $stmt = $this->conn->prepare($query);
-
-        $params = ["lastNameCustomer" => htmlspecialchars(strip_tags($this->lastNameCustomer))];
 
         if ($stmt->execute($params)) {
             return $stmt;
@@ -171,6 +151,7 @@ class Customer {
             UPDATE "
             . $this->table .
             " SET
+            idBillingAddress = :idBillingAddress,
             firstNameCustomer = :firstNameCustomer,
             lastNameCustomer = :lastNameCustomer,
             dateOfBirthdayCustomer = :dateOfBirthdayCustomer,
@@ -182,6 +163,7 @@ class Customer {
         $stmt = $this->conn->prepare($query);
 
         $params = [
+            "idBillingAddress" => htmlspecialchars(strip_tags($this->idBillingAddress)),
             "firstNameCustomer" => htmlspecialchars(strip_tags($this->firstNameCustomer)),
             "lastNameCustomer" => htmlspecialchars(strip_tags($this->lastNameCustomer)),
             "dateOfBirthdayCustomer" => htmlspecialchars(strip_tags($this->dateOfBirthdayCustomer)),
@@ -242,29 +224,6 @@ class Customer {
         return false;
     }
 
-    public function bindBillingAddress() 
-    {
-        $query = "
-            UPDATE "
-            . $this->table .
-            " SET
-            idBillingAddress = :idBillingAddress
-            WHERE
-            idCustomer = :idCustomer       
-        ";
-        $stmt = $this->conn->prepare($query);
-
-        $params = [
-            "idBillingAddress" => htmlspecialchars(strip_tags($this->idBillingAddress)),
-            "idCustomer" => htmlspecialchars(strip_tags($this->idCustomer))
-        ];
-
-        if($stmt->execute($params)) {
-            return true;
-        }
-        return false;
-    }
-
     public function updatePasswordCustomer() 
     {
         $query = "
@@ -309,25 +268,5 @@ class Customer {
             return true;
         }
         return false;
-    }
-
-    public function sendNewPasswordEmail() 
-    {
-        $messageContent = [
-                'name'              => htmlspecialchars(strip_tags($this->lastNameCustomer)).' '.htmlspecialchars(strip_tags($this->firstNameCustomer)),
-                'mailCustomer'      => htmlspecialchars(strip_tags($this->mailCustomer)),
-                'confirmationCode'  => $this->mixedPassword,
-                'id'                => $this->idCustomer
-                    ];
-        $mailContent = '<p>Bonjour '. $messageContent['name'] .' !<br />Nous vous invitons à confirmer votre compte client chez MoutteC en créant votre mot de passe en cliquant sur 
-                        <a href="https://mouttec.com/confirmAccount?key='.$messageContent['confirmationCode'].'">ce lien</a>"<br /><br />
-                        En cas de problème, copiez et collez ce lien dans votre navigateur préféré : <br />
-                        https://mouttec.com/confirmAccount?id='.$messageContent['id'].'&key='.$messageContent['confirmationCode'].'<br /><br />
-                        Toute l\'équipe de <a href="https://mouttec.com">MoutteC</a> vous remercie de votre confiance !<br />';
-        $customerHeaders =  'Reply-To: contact@mouttec.com' . "\r\n" .
-                            'X-Mailer: PHP/' . phpversion() . "\r\n" .
-                            'MIME-Version: 1.0' . "\r\n" . 
-                            'Content-Type: text/html; charset=UTF-8' . "\r\n";
-        mail($messageContent['mailCustomer'], 'Création d\'un nouveau mot de passe sur MoutteC', $mailContent, $customerHeaders);
     }
 }
