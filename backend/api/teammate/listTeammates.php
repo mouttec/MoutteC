@@ -4,21 +4,29 @@ header("Content-Type: application/json");
 header("Access-Control-Allow-Methods: GET");
 include_once "../../config/Database.php";
 include_once "../../models/Teammate.php";
+include_once "../../models/Agency.php";
 
 $db = new Database();
 $conn = $db->connect();
 $teammate = new Teammate($conn);
+$agency = new Agency($conn);
 
 if (isset($_GET['idTeammate'])) {
 	$teammate->idTeammate = $_GET['idTeammate'];
-	$result = $teammate->searchTeammateById($teammate);
+	$thisTeammate = $teammate->searchTeammateById($teammate);
+	$agency->idAgency = $thisTeammate['idAgency'];
+	$thisAgency = $agency->searchAgency($agency);
+	$result = array();
+	array_push($result, $thisTeammate, $thisAgency);
 } else {
-	$teammates = $teammate->listTeammates();
 	if (isset($_GET['idAgency'])) {
-		$criteria = $_GET['idAgency'];
-	}
-	if (isset($_GET['jobTeammate'])) {
-		$criteria = $_GET['jobTeammate'];
+		$teammate->idAgency = $_GET['idAgency'];
+		$teammates = $teamate->searchTeammatesByAgency($teammate);
+	} else if (isset($_GET['jobTeammate'])) {
+		$teammate->jobTeammate = $_GET['jobTeammate'];
+		$teammates = $teammate->searchTeammatesByJob($teammate);
+	} else {
+		$teammates = $teammate->listTeammates();		
 	}
 	$counter = $teammates->rowCount();
 	if ($counter > 0) {
@@ -37,13 +45,10 @@ if (isset($_GET['idTeammate'])) {
 				"idAgency" => $idAgency,
 				"superAdmin" => $superAdmin
 			];
-			if ((isset($_GET['idAgency'])) && ($_GET['idAgency'] == $idAgency)) {
-				array_push($teammates_array, $teammate_item);				
-			} else if ((isset($_GET['jobTeammate'])) && ($_GET['jobTeammate'] == $jobTeammate)) {
-				array_push($teammates_array, $teammate_item);
-			} else if ((!isset($_GET['idAgency'])) && (!isset($_GET['jobTeammate']))) {
-				array_push($teammates_array, $teammate_item);
-			}
+			$agency->idAgency = $idAgency;
+			$thisAgency = $agency->searchAgency($agency);
+			array_push($teammate_item, $thisAgency);
+			array_push($teammates_array, $teammate_item);
 		}
 		$result = $teammates_array;
 	}

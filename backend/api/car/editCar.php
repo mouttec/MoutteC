@@ -18,6 +18,9 @@ $car->brandCar = $decodedData->brandCar;
 $car->modelCar = $decodedData->modelCar;
 $car->dateOfCirculationCar = $decodedData->dateOfCirculationCar;
 $car->motorizationCar = $decodedData->motorizationCar;
+$filenameCar = $decodedData->filenameCar;
+$car->urlGrayCard = $car->idCustomer."/". $filenameCar;
+
 $car->urlGrayCard = $decodedData->urlGrayCard;
 
 if(!empty($decodedData->idCar)) {

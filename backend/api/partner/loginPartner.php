@@ -2,7 +2,7 @@
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 header("Access-Control-Allow-Methods: POST");
-include_once "../../config/Database.php";
+include_once("database.php");
 include_once "../../models/Partner.php";
 
 $db = new Database();
@@ -18,8 +18,7 @@ $partnerExists = $partner->searchPartnerByUsername($partner);
 //Si un partner existe avec cet username et que le password matche
 if ((!empty($partnerExists)) && 
 	(password_verify($password, $partnerExists->mixedPassword))) {
-		echo json_encode(['connecté']);
+		echo json_encode($partnerExists);
 } else {
-	echo json_encode([$partner->mixedPassword]);
 	http_response_code(404);	
 }

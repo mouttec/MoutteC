@@ -17,16 +17,16 @@ $videos = $video->searchContractVideos($video);
 $nbVideos = $videos->rowCount();
 switch ($nbVideos) {
     case 1:
-        $video_type = "PartnerForth";
+        $video_type = "garageArrival";
         break;
     case 2:
-        $video_type = "PartnerBack";
+        $video_type = "garageDeparture";
         break;
     case 3:
-        $video_type = "CustomerBack";
+        $video_type = "customerReturn";
         break;        
     default:
-        $video_type = "CustomerForth";
+        $video_type = "customerPickup";
         break;
 }
 $video->videoType = $video_type;

@@ -14,7 +14,7 @@ include_once "../../models/Partner"
 $db = new Database();
 $conn = $db->connect();
 $monthlyPayments = new MonthlyPayment($conn);
-$dailyPayment = new DailyPayments($conn);
+$dailyPayment = new DailyPayment($conn);
 $customer = new Customer($conn);
 $booking = new Booking($conn);
 $partner = new Partner($conn);
@@ -48,106 +48,15 @@ if ($counter > 0) {
     	}
     }
 }
-/*
-$payments_array[
-	current([
-		idDailyPayment
-		thisPartner [
-			"idPartner" => $idPartner,
-            "usernamePartner" => $usernamePartner,
-            "namePartner" => $namePartner,
-            "numberAddressPartner" => $numberAddressPartner,
-            "typeAddressPartner" => $typeAddressPartner,
-            "nameAddressPartner" => $nameAddressPartner,
-            "complementAddressPartner" => $complementAddressPartner,
-            "zipAddressPartner" => $zipAddressPartner,
-            "cityAddressPartner" => $cityAddressPartner,
-            "phonePartner" => $phonePartner,
-            "statusPartner" => $statusPartner,
-            "typePartner" => $typePartner,
-            "mailPartner" => $mailPartner,        
-            "nameBilling" => $nameBilling,
-            "siretPartner" => $siretPartner,
-            "numberAddressBilling" => $numberAddressBilling,
-            "typeAddressBilling" => $typeAddressBilling,
-            "nameAddressBilling" => $nameAddressBilling,
-            "complementAddressBilling" => $complementAddressBilling,
-            "zipAddressBilling" => $zipAddressBilling,
-            "cityAddressBilling" => $cityAddressBilling,
-            "idAgency" => $idAgency
-		]
-		priceDailyPayment
-		thisBooking [
-	        "idBooking" => $idBooking,
-	        "idCustomer" => $idCustomer,
-	        "idPartner" => $idPartner,
-	        "statusBooking" => $statusBooking,
-	        "formulaBooking" => $formulaBooking,
-	        "idCar" => $idCar,
-	        "idAgency" => $idAgency,
-	        "dateForth" => $dateForth,
-	        "hoursForth" => $hoursForth,
-	        "idForthAddress" => $idForthAddress,
-	        "distanceForth" => $distanceForth,
-	        "durationForth" => $durationForth,
-     		"idBackAddress" => $idBackAddress,
-	        "dateBack" => $dateBack,
-	        "hoursBack" => $hoursBack,
-	        "distanceBack" => $distanceBack,
-	        "durationBack" => $durationBack,
-	        "originBooking" => $originBooking,
-		]
-		thisCustomer [
-	        "idCustomer" => $idCustomer,
-	        "firstNameCustomer" => $firstNameCustomer,
-	        "lastNameCustomer" => $lastNameCustomer,
-	        "dateOfBirthdayCustomer" => $dateOfBirthdayCustomer,
-	        "phoneCustomer" => $phoneCustomer,
-	        "mailCustomer" => $mailCustomer
-		]
-	])
-]
-$invoiceLines[]
-*/
+
 $invoiceLines = array();
 $i = 1;
 for ($p = 0; $p < count($payments_array); $p++) {
 	if ((current($payments_array)['thisPartner']['idPartner'] != $actualPartnerId) && ($p > 0)) {
-		//PDF
-		//$pdfFileName = $actualPartnerId.'_'.$monthConcerned.$yearConcerned;
-		//$namePartner = current($payments_array)['thisPartner']['namePartner'];
-		//$streetAddressBilling = current($payments_array)['thisPartner']['numberAddressBilling'].', '.current($payments_array)['thisPartner']['typeAddressBilling'].current($payments_array)['thisPartner']['nameAddressBilling'];
-		// $complementAddressBilling = current($payments_array)['thisPartner']['complementAddressBilling'];
-		// $cityAddressBilling = current($payments_array)['thisPartner']['zipAddressBilling'].' '.strtoupper(current($payments_array)['thisPartner']['cityAddressBilling']);
-		// $vatPercentage = 20;
-		// $vatAmount = $invoiceAmount / (100+$vatPercentage) * $vatPercentage;
-		// $subtotalInvoiceAmount = $invoiceAmount - $vatAmount;
-		// $outfdf = fdf_create();
-		//Informations du partner
-		// fdf_set_value($outfdf, 'namePartner', $namePartner);
-		// fdf_set_value($outfdf, 'streetAddressBilling', $streetAddressBilling);
-		// if (!empty($complementAddressBilling))
-		// 	fdf_set_value($outfdf, 'complementAddressBilling', $complementAddressBilling);
-		// }
-		// fdf_set_value($outfdf, 'cityAddressBilling', $cityAddressBilling);
-		// //Lignes de facturation
-		// for ($i = 0; $i < count($prestaLine); $i++) {
-		// 	fdf_set_value($outfdf, 'invoiceLine'.$i.'PaymentId', $prestaLine[$i]['paymentId']);
-		// 	fdf_set_value($outfdf, 'invoiceLine'.$i.'CustomerName', $prestaLine[$i]['customerName']);
-		// 	fdf_set_value($outfdf, 'invoiceLine'.$i.'Date', $prestaLine[$i]['date']);
-		// 	fdf_set_value($outfdf, 'invoiceLine'.$i.'Formula', $prestaLine[$i]['formula']);
-		// 	fdf_set_value($outfdf, 'invoiceLine'.$i.'PriceDailyPayment', $prestaLine[$i]['priceDailyPayment']);
-		// }
-		// fdf_set_value($outfdf, 'subtotalInvoiceAmount', $subtotalInvoiceAmount);
-		// fdf_set_value($outfdf, 'VAT20', $vatAmount);
-		// fdf_set_value($outfdf, 'totalInvoiceAmount', $invoiceAmount);
-		//BDD
 		$monthlyPayment->idPartner = $actualPartnerId;
-		$monthlyPayment->partnerKey = $actualPartnerKey;
 		$monthlyPayment->statusMonthlyPayment = 'En attente';
 		$monthlyPayment->dateMonthlyPayment = $monthConcerned.$yearConcerned;
 		$monthlyPayment->invoiceNumber = $monthConcerned.$yearConcerned.$actualPartnerId.'-'.$i;
-		//$monthlyPayment->urlMonthlyPayment = "serverPath/".$yearConcerned."/".$monthConcerned."/".$monthlyPayment->idPartner.'/'.$pdfFileName;
 		$monthlyPayment->invoiceLines = $invoiceLines;
 		$monthlyPayment->invoiceAmount = $invoiceAmount;
 		$monthlyPayment->createMonthlyPayment($monthlyPayment);
@@ -158,7 +67,6 @@ for ($p = 0; $p < count($payments_array); $p++) {
 		$i++;
 	}
 	$actualPartner = current($payments_array)['thisPartner']['idPartner'];
-	$actualPartnerKey = current($payments_array)['thisPartner']['partnerKey'];
 	$invoiceAmount += current($payments_array)['priceDailyPayment'];
 	if (!empty(current($payments_array)['thisBooking']['dateForth'])) {
 		$prestaDate = current($payments_array)['thisBooking']['dateForth'];

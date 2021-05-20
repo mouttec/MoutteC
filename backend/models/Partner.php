@@ -28,7 +28,7 @@ class Partner
     public $cityAddressBilling;
     public $datePartner;
     public $idAgency;
-    public $partnerKey;
+    public $partnerKey
 
     public function __construct($db) 
     {
@@ -143,23 +143,6 @@ class Partner
         $stmt = $this->conn->prepare($query);
 
         $params = ["idPartner" => htmlspecialchars(strip_tags($this->idPartner))];
-        
-        if ($stmt->execute($params)) {
-            $row = $stmt->fetch();    
-            return $row;
-        }
-        return false;
-    }
-
-    public function searchPartnerByKey() {
-        $query = "
-        SELECT *
-        FROM "
-        . $this->table . " 
-        WHERE partnerKey = :partnerKey";
-        $stmt = $this->conn->prepare($query);
-
-        $params = ["partnerKey" => htmlspecialchars(strip_tags($this->partnerKey))];
         
         if ($stmt->execute($params)) {
             $row = $stmt->fetch();    

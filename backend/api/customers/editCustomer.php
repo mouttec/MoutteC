@@ -6,12 +6,10 @@ header("Content-Type: application/json");
 header("Access-Control-Allow-Headers: Access-Control-Allow-Headers, Access-Control-Allow-Methods, Content-Type, Authorization, X-Requested-With");
 include_once "../../config/Database.php";
 include_once "../../models/Customer.php";
-include_once "../../models/Address.php";
 
 $db = new Database();
 $conn = $db->connect();
 $customer = new Customer($conn);
-$address = new Address($conn);
 
 $decodedData = json_decode(file_get_contents("php://input"));
 
@@ -20,12 +18,6 @@ $customer->lastNameCustomer = $decodedData->lastNameCustomer;
 $customer->dateOfBirthdayCustomer = $decodedData->dateOfBirthdayCustomer;
 $customer->phoneCustomer = $decodedData->phoneCustomer;
 $customer->mailCustomer = $decodedData->mailCustomer;
-$address->addressStreetNumber = $decodedData->addressStreetNumber;
-$address->addressStreetType = $decodedData->addressStreetType;
-$address->addressStreetName = $decodedData->addressStreetName;
-$address->addressStreetComplement = $decodedData->addressStreetComplement;
-$address->addressZip = $decodedData->addressZip;
-$address->addressCity = $decodedData->addressCity;
 
 if (isset($decodedData->idCustomer)) {
     $customer->idCustomer = $decodedData->idCustomer;
@@ -49,22 +41,14 @@ if (isset($decodedData->idCustomer)) {
 			$randomStr .= $chars[rand(0, $maxLength - 1)];
  		}
  		$customer->mixedPassword = $randomStr;
+ 		//Envoi d'un mail au client pour son mot de passe 
+ 		// $randomStr est une chaîne de caractère aléatoire qui va être utilisée comme mot de passe temporaire, elle sera envoyée en get dans le lien
 	}
-    $customerResponse = $customer->createCustomer($customer);
-    $customer->idCustomer = $customerResponse["max(idCustomer)"];
-    if (isset($randomStr)) {
-    	$customer->sendNewPasswordEmail($customer);
-    }
+    $result = $customer->createCustomer($customer);
     if (isset($decodedData->idPartner)) {
     	$customer->idPartner = $decodedData->idPartner;
     	$customer->bindPartnerToCustomer($customer);
     }
-    $address->idCustomer = $customer->idCustomer;
-    $addressResponse = $address->createAddress($address);
-    echo json_encode($addressResponse["max(idAddress)"]);
-    $customer->idBillingAddress = $addressResponse["max(idAddress)"];
-    $customer->bindBillingAddress($customer);
-    $result = true;
 }
 
 if ($result) {

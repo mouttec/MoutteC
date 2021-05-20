@@ -14,19 +14,19 @@ $decodedData = json_decode(file_get_contents("php://input"));
 
 $contract->idContract = $decodedData->idContract;
 $thisContract = $contract->searchContractById($contract);
-if(!empty($thisContract->urlPartnerBackInventory)) {
+if(!empty($thisContract->urlDepartureInventory)) {
     //étape de la restitution au client
-    $thisContract->urlCustomerBack = $decodedData->urlVideo;
-    $result = $thisContract->addCustomerBackInventory($thisContract);
-} elseif ((!empty($thisContract->urlPartnerForthInventory)) || (is_null($thisContract->idPForthAddress))) {
+    $thisContract->urlReturnInventory = $decodedData->urlVideo;
+    $result = $thisContract->addReturnInventory($thisContract);
+} elseif (!empty($thisContract->urlArrivalInventory)) {
     //étape de la récupération au garage
-    $thisContract->idTeammateBack = $decodedData->idTeammateBack;
-    $thisContract->urlPartnerBackInventory = $decodedData->urlVideo;
-    $result = $thisContract->addPartnerBackInventory($thisContract);
-} elseif (!empty($thisContract->urlCustomerForthInventory)) {
+    $thisContract->idTeammateReturn = $decodedData->idTeammateReturn;
+    $thisContract->urlDepartureInventory = $decodedData->urlVideo;
+    $result = $thisContract->addDepartureInventory($thisContract);
+} elseif (!empty($thisContract->urlPickupInventory)) {
     //étape du dépôt au garage
-    $thisContract->urlPartnerForthInventory = $decodedData->urlVideo;
-    $result = $thisContract->addPartnerForthInventory($thisContract);
+    $thisContract->urlArrivalInventory = $decodedData->urlVideo;
+    $result = $thisContract->addArrivalInventory($thisContract);
 }
 
 

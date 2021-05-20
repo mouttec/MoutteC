@@ -147,17 +147,17 @@ class Customer {
         return false;
     }
 
-    public function searchCustomersByFirstName() 
+    public function searchCustomersByLastname() 
     {
         $query = "
             SELECT *
             FROM "
             .   $this->table . 
-            " WHERE firstNameCustomer = :firstNameCustomer
+            " WHERE lastNameCustomer = :lastNameCustomer
             ORDER BY idCustomer";
         $stmt = $this->conn->prepare($query);
 
-        $params = ["firstNameCustomer" => htmlspecialchars(strip_tags($this->firstNameCustomer))];
+        $params = ["lastNameCustomer" => htmlspecialchars(strip_tags($this->lastNameCustomer))];
 
         if ($stmt->execute($params)) {
             return $stmt;

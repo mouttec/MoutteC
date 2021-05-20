@@ -11,18 +11,20 @@ include_once "../../models/Address.php";
 
 $db = new Database();
 $conn = $db->connect();
+$booking = new Booking($conn);
+$customer = new Customer($conn);
+$car = new Car($conn);
+$address = new Address($conn);
 
 $decodedData = json_decode(file_get_contents("php://input"));
 
-$customer = new Customer($conn);
-if (!isset($decodedData->idCustomer)) {
+if (empty($decodedData->idCustomer)) {
     $customer->firstNameCustomer = $decodedData->firstNameCustomer;
     $customer->lastNameCustomer = $decodedData->lastNameCustomer;
     $customer->phoneCustomer = $decodedData->phoneCustomer;
-    $customer->statusCustomer = "Client créé par un partenaire";
     if (isset($decodedData->mailCustomer)) {
         $customer->mailCustomer = $decodedData->mailCustomer;
-    } else {
+    } else {        
         $customer->mailCustomer = "Non renseigné";
     }
     if (isset($decodedData->dateOfBirthdayCustomer)) {
@@ -30,27 +32,26 @@ if (!isset($decodedData->idCustomer)) {
     } else {
         $customer->dateOfBirthdayCustomer = "Non renseigné";
     }
-    //Création du mot de passe temporaire
     $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $maxLength = strlen($chars);
     $randomStr = '';
-    for ($i = 0; $i < 50; $i++) {
+    for ($i = 0; $i < 30; $i++) {
         $randomStr .= $chars[rand(0, $maxLength - 1)];
     }
     $customer->mixedPassword = $randomStr;
     $customer->createCustomer($customer);
-    $thisCustomer = $customer->searchCustomerByNames($customer);
-    extract($thisCustomer);
-    $thisCustomerId = $idCustomer;
+    //idCustomer créée
+    $thisCustomer = new Customer($conn);
+    $thisCustomer->firstNameCustomer = $decodedData->firstNameCustomer;
+    $thisCustomer->lastNameCustomer = $decodedData->lastNameCustomer;
+    $thisCustomer = $thisCustomer->searchCustomerByNames($thisCustomer);
 } else {
     $customer->idCustomer = $decodedData->idCustomer;
     $thisCustomer = $customer->searchCustomerById($customer);
-    $thisCustomerId = $thisCustomer->idCustomer;
 }
 
-$car = new Car($conn);
-if (!isset($decodedData->idCar)) {
-    $car->idCustomer = $thisCustomerId;
+if (empty($decodedData->idCar)) {
+    $car->idCustomer = $thisCustomer->idCustomer;
     $car->licensePlateCar = $decodedData->licensePlateCar;
     $car->brandCar = $decodedData->brandCar;
     $car->modelCar = $decodedData->modelCar;
@@ -58,64 +59,54 @@ if (!isset($decodedData->idCar)) {
     $car->motorizationCar = $decodedData->motorizationCar;
     $car->createCar($car);
     $thisCar = $car->searchCarByPlate($car);
-    extract($thisCar);
-    $thisCarId = $idCar;
+    //$thisCar->idCar créé
 } else {
     $car->idCar = $decodedData->idCar;
     $thisCar = $car->searchCarById($car);
-    $thisCarId = $thisCar->idCar;
 }
 
-$address = new Address($conn);
-if (!empty($decodedData->addressForthStreetName)) {
+if (!empty($decodedData->addressStreetNumber)) {
     //adresse aller = domicile client > partenaire
-    $address->idCustomer = $thisCustomerId;
-    $address->addressStreetNumber = $decodedData->addressForthStreetNumber;
-    $address->addressStreetName = $decodedData->addressForthStreetName;
-    $address->addressStreetType = $decodedData->addressForthStreetType;
-    $address->addressStreetComplement = $decodedData->addressForthStreetComplement;    
-    $address->addressZip = $decodedData->addressForthZip;
-    $address->addressCity = $decodedData->addressForthCity;
+    $address->idCustomer = $thisCustomer->idCustomer;
+    $address->addressStreetNumber = $decodedData->addressStreetNumber;
+    $address->addressStreetType = $decodedData->addressStreetType;
+    $address->addressStreetName = $decodedData->addressStreetName;
+    $address->addressStreetComplement = $decodedData->addressStreetComplement;
+    $address->addressZip = $decodedData->addressZip;
+    $address->addressCity = $decodedData->addressCity;
     $address->createAddress($address);
-    $addressForth = $address->searchAddressByDetails($address);
-    extract($addressForth);
-    $addressForthId = $idAddress;
+    $addressForthId = $address->searchAddressId($address);
 }
 
-if (!empty($decodedData->addressBackStreetName)) {
+if (!empty($decodedData->addressBackStreetNumber)) {
     //adresse retour = partenaire > domicile client
-    $address->idCustomer = $thisCustomerId;
+    $address->idCustomer = $thisCustomer->idCustomer;
     $address->addressStreetNumber = $decodedData->addressBackStreetNumber;
-    $address->addressStreetName = $decodedData->addressBackStreetName;
     $address->addressStreetType = $decodedData->addressBackStreetType;
-    $address->addressBackStreetComplement = $decodedData->addressBackStreetComplement;    
+    $address->addressStreetName = $decodedData->addressBackStreetName;
+    $address->addressStreetComplement = $decodedData->addressBackStreetComplement;
     $address->addressZip = $decodedData->addressBackZip;
     $address->addressCity = $decodedData->addressBackCity;
     $address->createAddress($address);
-    $addressBack = $address->searchAddressByDetails($address);
-    extract($addressBack);
-    $addressBackId = $idAddress;
+    $addressBackId = $address->searchAddressId($address);
 }
 
-$booking = new Booking($conn);
-
-$booking->idCustomer = $thisCustomerId;
+$booking->idCustomer = $thisCustomer->idCustomer;
 $booking->idPartner = $decodedData->idPartner;
-$booking->hoursForth = $decodedData->hoursForth;
-$booking->dateForth = $decodedData->dateForth;
+$booking->hoursBooking = $decodedData->hoursBooking;
+$booking->dateBooking = $decodedData->dateBooking;
 $booking->formulaBooking = $decodedData->formulaBooking;
 $booking->statusBooking = $decodedData->statusBooking;
-$booking->dateBack = $decodedData->dateBack;
-$booking->hoursBack = $decodedData->hoursBack;
-$booking->idCar = $thisCarId;
-$booking->idForthAddress = $addressForthId;
-$booking->idBackAddress = $addressBackId;
+$booking->dateReturn = $decodedData->dateReturn;
+$booking->hoursReturn = $decodedData->hoursReturn;
+$booking->idCar = $thisCar->idCar;
+$booking->idPickupAddress = $addressForthId;
+$booking->idReturnAddress = $addressBackId;
 $booking->idAgency = $decodedData->idAgency;
 $booking->distanceForth = $decodedData->distanceForth;
 $booking->durationForth = $decodedData->durationForth;
 $booking->distanceBack = $decodedData->distanceBack;
 $booking->durationBack = $decodedData->durationBack;
-$bookng->originBooking = "partner";
 
 $result = $booking->createBooking($booking);
 

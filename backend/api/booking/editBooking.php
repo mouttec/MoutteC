@@ -14,20 +14,19 @@ $decodedData = json_decode(file_get_contents("php://input"));
 
 $booking->idCustomer = $decodedData->idCustomer;
 $booking->idPartner = $decodedData->idPartner;
-$booking->hoursBooking = $decodedData->hoursForth;
-$booking->dateBooking = $decodedData->dateForth;
+$booking->hoursBooking = $decodedData->hoursBooking;
+$booking->dateBooking = $decodedData->dateBooking;
 $booking->formulaBooking = $decodedData->formulaBooking;
-$booking->dateReturn = $decodedData->dateBack;
-$booking->hoursReturn = $decodedData->hoursBack;
+$booking->dateReturn = $decodedData->dateReturn;
+$booking->hoursReturn = $decodedData->hoursReturn;
 $booking->idCar = $decodedData->idCar;
-$booking->idPickupAddress = $decodedData->idForthAddress;
-$booking->idReturnAddress = $decodedData->idBackAddress;
+$booking->idPickupAddress = $decodedData->idPickupAddress;
+$booking->idReturnAddress = $decodedData->idReturnAddress;
 $booking->idAgency = $decodedData->idAgency;
 $booking->distanceForth = $decodedData->distanceForth;
 $booking->durationForth = $decodedData->durationForth;
 $booking->distanceBack = $decodedData->distanceBack;
 $booking->durationBack = $decodedData->durationBack;
-$booking->originBooking = $decodedData->originBooking;
 
 
 if (!empty($decodedData->idBooking)) {
