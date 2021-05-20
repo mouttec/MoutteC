@@ -60,31 +60,5 @@ export class CalendarComponent implements OnInit {
       );
     }
 
-  dayClicked({
-    date,
-    events,
-  }: {
-    date: Date;
-    events: CalendarEvent<{ film: Booking }>[];
-  }): void {
-    if (isSameMonth(date, this.viewDate)) {
-      if (
-        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
-        events.length === 0
-      ) {
-        this.activeDayIsOpen = false;
-      } else {
-        this.activeDayIsOpen = true;
-        this.viewDate = date;
-      }
-    }
-  }
-
-  eventClicked(event: CalendarEvent<{ film: Booking }>): void {
-    window.open(
-      `https://www.themoviedb.org/movie/${event.meta.film.id}`,
-      '_blank'
-    );
-  }
 
 }

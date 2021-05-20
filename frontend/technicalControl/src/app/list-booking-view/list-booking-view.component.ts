@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { BookingService } from '../services/booking.service';
+import { Booking } from 'src/app/models/bookings.model';
 
 @Component({
   selector: 'app-list-booking-view',
@@ -16,12 +17,12 @@ export class ListBookingViewComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.bookingSubscription = this.bookingService.bookingSubject.subscribe(
-      (bookings: any[]) => {
+      (bookings: Booking[]) => {
         this.bookings = bookings;
         console.log(this.bookings);
       }
     );
-    this.bookingService.emitBookingSubject();
+    this.bookingService.readListBooking();
   }
 
   ngOnDestroy(): void {

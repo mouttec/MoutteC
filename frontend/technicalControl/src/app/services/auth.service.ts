@@ -9,17 +9,17 @@ import { HttpClient } from '@angular/common/http';
 export class AuthService {
 
   redirectUrl: string;
-  baseUrl = 'http://localhost:8888/CAM/backend/api';
+  baseUrl = 'http://localhost:8888/MoutteCAPI/backend/api/partner/listPartner.php';
   @Output() getLoggedInName: EventEmitter<any> = new EventEmitter();
 
   constructor(private httpClient: HttpClient) { }
 
-  public userlogin(usernameTeammate: any, password: any): any {
-    return this.httpClient.post<any>(this.baseUrl + '/login.php', { usernameTeammate, password})
-    .pipe(map(Teammate  => {
-      this.setToken(Teammate[0].usernameTeammate);
+  public userlogin(usernamePartner: any, password: any): any {
+    return this.httpClient.post<any>(this.baseUrl, { usernamePartner, password})
+    .pipe(map(Partner => {
+      this.setToken(Partner[0].usernamePartner);
       this.getLoggedInName.emit(true);
-      return Teammate;
+      return Partner;
     }));
   }
     // token

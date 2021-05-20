@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject } from 'rxjs/Subject';
 import { Booking } from '../models/bookings.model';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,62 +10,26 @@ import { Booking } from '../models/bookings.model';
 export class BookingService {
 
   bookingSubject = new Subject<any[]>();
+  PHP_API_SERVER = 'http://localhost:8888/MoutteC/backend/api/booking/listBooking.php';
+  private bookings: Booking[];
 
-  private bookings: Booking[] = [
-    {
-      firstNameCustomer: "Test1 firstName",
-      lastNameCustomer: "Test1 lastName",
-      phoneCustomer: "00000000",
-      mailCustomer: "test1@test.com",
-      dateOfBirthdayCustomer: "dd/mm/yyyy",
-      licensePlateCar: "aa-000-aa",
-      brandCar: "marque",
-      modelCar: "model",
-      dateOfCirculationCar: "01/01/01",
-      motorizationCar: "4cv",
-      dateForth: "20/04/2021",
-      hoursForth: "10:00",
-      urlGrayCard: '../../assets/carteGrise/1.png',
-      idBooking: 1
-    },
-    {
-      firstNameCustomer: "Test2 firstName",
-      lastNameCustomer: "Test2 lastName",
-      phoneCustomer: "00000000",
-      mailCustomer: "test2@test.com",
-      dateOfBirthdayCustomer: "dd/mm/yyyy",
-      licensePlateCar: "bb-000-bb",
-      brandCar: "marque",
-      modelCar: "model",
-      dateOfCirculationCar: "01/01/01",
-      motorizationCar: "4cv",
-      dateForth: "21/04/2021",
-      hoursForth: "10:00",
-      urlGrayCard: '../../assets/carteGrise/2.png',
-      idBooking: 2
-    },
-    {
-      firstNameCustomer: "Test3 firstName",
-      lastNameCustomer: "Test3 lastName",
-      phoneCustomer: "00000000",
-      mailCustomer: "test3@test.com",
-      dateOfBirthdayCustomer: "dd/mm/yyyy",
-      licensePlateCar: "cc-000-cc",
-      brandCar: "marque",
-      modelCar: "model",
-      dateOfCirculationCar: "01/01/01",
-      motorizationCar: "4cv",
-      dateForth: "22/04/2021",
-      hoursForth: "10:00",
-      urlGrayCard: '../../assets/carteGrise/3.png',
-      idBooking: 3
-    }
-  ];
-
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
 
   emitBookingSubject(): void {
-    this.bookingSubject.next(this.bookings.slice());
+    this.bookingSubject.next(this.bookings);
+  }
+
+  readListBooking(): Observable<Booking[]>{
+    this.httpClient.get<Booking[]>(`${this.PHP_API_SERVER}`).subscribe(
+      (reponse) => {
+        this.bookings = reponse;
+        this.emitBookingSubject();
+      },
+      (error) => {
+        console.log('erreur de sauvegarde' + error);
+      }
+    );
+    return this.httpClient.get<Booking[]>(`${this.PHP_API_SERVER}`);
   }
 
   getbookingById(idBooking: number): any {
