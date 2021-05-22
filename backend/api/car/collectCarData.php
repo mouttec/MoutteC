@@ -70,7 +70,7 @@ if (empty($carData[0])) {
         $car->idCustomer = $decodedData->idCustomer;
         $car->brandCar = $carData['brandCar'];
         $car->modelCar = $carData['modelCar'];
-        $car->dateOfCirculationCar = str_replace('-', '',$carData['dateOfCirculationCar']['jour'].'/'.$carData['dateOfCirculationCar']['mois'].'/'.$carData['dateOfCirculationCar']['annee']);
+        $car->dateOfCirculationCar = str_replace('-', '',$carData['dateOfCirculationCar']->jour.'/'.$carData['dateOfCirculationCar']->mois.'/'.$carData['dateOfCirculationCar']->annee);
         $car->colorCar = $carData['colorCar'];
         $car->versionCar = $carData['versionCar'];
         $car->motorizationCar = $carData['motorizationCar'];
