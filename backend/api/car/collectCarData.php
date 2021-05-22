@@ -24,7 +24,7 @@ if (is_numeric(substr($carPlate, 0, 1))) {
     $carPlate = substr($carPlate, strlen($numString)-4);
     //$numString correspond à la chaîne numérique au début de la plaque, ici avec 4 chiffres
     $numString = substr($numString, -4, 4);
-    $alphaString = ""	;
+    $alphaString = "";
     for ($i = 0; $i < 3; $i++) {
         if (!is_numeric($carPlate[$i])) {
             //$alphaString est la chaîne de lettres
@@ -70,7 +70,7 @@ if (empty($carData[0])) {
         $car->idCustomer = $decodedData->idCustomer;
         $car->brandCar = $carData['brandCar'];
         $car->modelCar = $carData['modelCar'];
-        $car->dateOfCirculationCar = $carData['dateOfCirculationCar'];
+        $car->dateOfCirculationCar = str_replace('-', '',$carData['dateOfCirculationCar']['jour'].'/'.$carData['dateOfCirculationCar']['mois'].'/'.$carData['dateOfCirculationCar']['annee']);
         $car->colorCar = $carData['colorCar'];
         $car->versionCar = $carData['versionCar'];
         $car->motorizationCar = $carData['motorizationCar'];
