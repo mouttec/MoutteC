@@ -29,8 +29,7 @@ class Car
             brandCar = :brandCar,
             modelCar = :modelCar,
             dateOfCirculationCar = :dateOfCirculationCar,
-            motorizationCar = :motorizationCar,
-            urlGrayCard = :urlGrayCard
+            motorizationCar = :motorizationCar
         ";
         $stmt = $this->conn->prepare($query);
 
@@ -40,8 +39,7 @@ class Car
             "brandCar" => htmlspecialchars(strip_tags($this->brandCar)),
             "modelCar" => htmlspecialchars(strip_tags($this->modelCar)),
             "dateOfCirculationCar" => htmlspecialchars(strip_tags($this->dateOfCirculationCar)),
-            "motorizationCar" => htmlspecialchars(strip_tags($this->motorizationCar)),
-            "urlGrayCard" => htmlspecialchars(strip_tags($this->urlGrayCard))
+            "motorizationCar" => htmlspecialchars(strip_tags($this->motorizationCar))
         ];
 
         if($stmt->execute($params)) {
